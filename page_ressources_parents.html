@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide parents — Orientation en 3e · Collège Guy Môquet</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18)}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:#EEEDFE;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:680px;margin:2rem auto;padding:1.75rem}
+  .hero{background:#EEEDFE;border:1.5px solid #7F77DD;border-radius:var(--radius);padding:1.25rem;margin-bottom:.75rem}
+  .hero-title{font-size:19px;font-weight:600;color:#3C3489;margin-bottom:.4rem}
+  .hero-sub{font-size:13px;color:#534AB7;line-height:1.6}
+  .section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .section-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:.75rem}
+  .timeline{display:flex;flex-direction:column}
+  .tl-item{display:flex;gap:12px;padding-bottom:16px}
+  .tl-item:last-child{padding-bottom:0}
+  .tl-left{display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0}
+  .tl-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:#fff}
+  .tl-line{width:2px;flex:1;background:var(--border);margin-top:4px}
+  .tl-item:last-child .tl-line{display:none}
+  .tl-content{flex:1;padding-top:4px}
+  .tl-date{font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
+  .tl-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+  .tl-desc{font-size:12px;color:var(--text2);line-height:1.5}
+  .discussion-box{background:#E1F5EE;border:0.5px solid #9FE1CB;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .discussion-title{font-size:13px;font-weight:600;color:#085041;margin-bottom:.6rem}
+  .discussion-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .d-item{background:rgba(255,255,255,.6);border-radius:var(--radius-sm);padding:8px 10px;font-size:12px;color:#0F6E56;line-height:1.4;display:flex;gap:6px}
+  .alerte-box{background:#FAEEDA;border:0.5px solid #FAC775;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .alerte-title{font-size:13px;font-weight:600;color:#633806;margin-bottom:.6rem}
+  .a-item{display:flex;gap:8px;font-size:13px;color:#854F0B;line-height:1.4;margin-bottom:6px}
+  .a-item:last-child{margin-bottom:0}
+  .faq-item{border-bottom:0.5px solid var(--border);padding-bottom:.75rem;margin-bottom:.75rem}
+  .faq-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .faq-q{font-size:14px;font-weight:500;color:var(--text);margin-bottom:.4rem;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;user-select:none}
+  .faq-arrow{font-size:16px;color:var(--text2);flex-shrink:0;transition:transform .2s;display:inline-block}
+  .faq-arrow.open{transform:rotate(180deg)}
+  .faq-a{font-size:13px;color:var(--text2);line-height:1.6;display:none;padding-top:2px}
+  .faq-a.open{display:block}
+  .contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .contact-card{background:var(--bg2);border-radius:var(--radius-sm);padding:.75rem 1rem}
+  .contact-role{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+  .contact-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+  .contact-info{font-size:12px;color:var(--text2);line-height:1.4}
+  .ressources-list{display:flex;flex-direction:column;gap:8px}
+  .r-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg2)}
+  .r-icon{font-size:20px;width:28px;text-align:center;flex-shrink:0}
+  .r-name{font-size:13px;font-weight:600;color:var(--text)}
+  .r-desc{font-size:11px;color:var(--text2);margin-top:1px}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.discussion-grid,.contacts-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}.faq-a{display:block!important}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">👨‍👩‍👧</div>
+    <div>
+      <div class="header-title">Guide parents — Orientation en 3e</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="hero">
+    <div class="hero-title">👨‍👩‍👧 Guide pour les parents — Orientation en 3e</div>
+    <div class="hero-sub">Votre enfant est en classe de 3e au collège Guy Môquet de Gennevilliers. Cette page vous accompagne tout au long de l'année pour comprendre les enjeux, suivre les étapes clés et soutenir votre enfant dans ses choix d'orientation.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📅 Le calendrier de l'année — ce que vous devez savoir</div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#7F77DD">S</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-date">Septembre – Octobre</div><div class="tl-title">Réunion parents-professeurs</div><div class="tl-desc">Rencontrez le professeur principal. C'est le moment d'échanger sur le profil de votre enfant et d'entamer la réflexion sur l'orientation.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#1D9E75">D</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-date">Décembre</div><div class="tl-title">DNB blanc + rencontre mi-semestre</div><div class="tl-desc">Premier bilan scolaire. Votre enfant passe un DNB blanc — l'occasion de repérer les points à renforcer avant les examens.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#BA7517">J</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-date">Janvier</div><div class="tl-title">Vœux provisoires sur EduConnect + entretien d'orientation</div><div class="tl-desc">Votre enfant saisit ses premiers vœux. Connectez-vous ensemble sur EduConnect pour valider les choix. Un entretien avec le PP est organisé.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#D85A30">F</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-date">16 – 20 Février</div><div class="tl-title">Stage de découverte professionnelle</div><div class="tl-desc">Votre enfant passe une semaine en entreprise. Soutenez-le dans ses démarches et discutez de son expérience chaque soir.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#7F77DD">M</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-date">Mars – Avril</div><div class="tl-title">Portes ouvertes des lycées</div><div class="tl-desc">Visitez les lycées ensemble. C'est indispensable pour que votre enfant se projette dans son futur établissement.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#1D9E75">M</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-date">Mai</div><div class="tl-title">Vœux définitifs sur EduConnect</div><div class="tl-desc">Les choix sont confirmés. Vérifiez ensemble que les vœux correspondent aux décisions du conseil de classe.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#D85A30">J</div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-date">25 – 26 Juin</div><div class="tl-title">Épreuves du DNB</div><div class="tl-desc">Français, Maths, Histoire-Géo, Sciences et oral. Une moyenne de 10/20 est requise pour l'obtention du diplôme.</div></div></div>
+      <div class="tl-item"><div class="tl-left"><div class="tl-dot" style="background:#888780">J</div></div><div class="tl-content"><div class="tl-date">Début Juillet</div><div class="tl-title">Notification d'affectation</div><div class="tl-desc">Votre enfant reçoit son affectation. Inscrivez-le rapidement dans son futur établissement.</div></div></div>
+    </div>
+  </div>
+
+  <div class="discussion-box">
+    <div class="discussion-title">💬 Questions à poser à votre enfant tout au long de l'année</div>
+    <div class="discussion-grid">
+      <div class="d-item">💬 Qu'est-ce qui te plaît vraiment à l'école en ce moment ?</div>
+      <div class="d-item">💬 Quel métier tu imagines faire plus tard, même vaguement ?</div>
+      <div class="d-item">💬 Comment s'est passé ton stage ? Tu t'es vu(e) dans ce métier ?</div>
+      <div class="d-item">💬 Tu as besoin d'aide pour réviser ou pour tes démarches ?</div>
+      <div class="d-item">💬 Qu'est-ce qui te fait peur dans le passage au lycée ?</div>
+      <div class="d-item">💬 Comment on peut t'aider à la maison pour ton orientation ?</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">❓ Questions fréquentes des parents</div>
+    <div id="faq"></div>
+  </div>
+
+  <div class="alerte-box">
+    <div class="alerte-title">⚠️ Points de vigilance pour les parents</div>
+    <div class="a-item">⚠️ Ne choisissez pas la voie de votre enfant à sa place — guidez, écoutez, mais laissez-le exprimer ses envies.</div>
+    <div class="a-item">⚠️ Le bac général n'est pas toujours le meilleur choix. La voie pro ou le CAP peuvent être de vraies réussites.</div>
+    <div class="a-item">⚠️ Attention aux délais sur EduConnect — les vœux provisoires (janvier) et définitifs (mai) ont des dates limites strictes.</div>
+    <div class="a-item">⚠️ Si vous n'avez pas internet à la maison, contactez la vie scolaire — des solutions existent.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📞 Vos contacts au collège</div>
+    <div class="contacts-grid">
+      <div class="contact-card"><div class="contact-role">Professeur principal</div><div class="contact-name">M. Hassini</div><div class="contact-info">Via le carnet de correspondance ou l'ENT</div></div>
+      <div class="contact-card"><div class="contact-role">Psychologue EN</div><div class="contact-name">Mme Lemoigne</div><div class="contact-info">RDV via la vie scolaire</div></div>
+      <div class="contact-card"><div class="contact-role">CPE / Vie scolaire</div><div class="contact-name">Collège Guy Môquet</div><div class="contact-info">Pour tout rendez-vous et information</div></div>
+      <div class="contact-card"><div class="contact-role">CIO Gennevilliers</div><div class="contact-name">60 rue Georges Corète</div><div class="contact-info">Tél : 01 47 92 79 68<br>Lun–Ven 9h–17h</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔗 Ressources utiles en ligne</div>
+    <div class="ressources-list">
+      <div class="r-item"><span class="r-icon">🎓</span><div><div class="r-name">ONISEP — onisep.fr</div><div class="r-desc">Formations, métiers et parcours après la 3e — site officiel</div></div></div>
+      <div class="r-item"><span class="r-icon">🖥</span><div><div class="r-name">EduConnect — educonnect.education.gouv.fr</div><div class="r-desc">Pour saisir les vœux, accéder au livret scolaire et à l'ENT</div></div></div>
+      <div class="r-item"><span class="r-icon">🏫</span><div><div class="r-name">Portes ouvertes — ac-versailles.fr/jpo</div><div class="r-desc">Dates des journées portes ouvertes des lycées de l'académie</div></div></div>
+      <div class="r-item"><span class="r-icon">🔍</span><div><div class="r-name">Formations pro — bv.ac-versailles.fr</div><div class="r-desc">Recherche de formations professionnelles et CAP disponibles</div></div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+</div>
+
+<script>
+const FAQS=[
+  {q:"Mon enfant ne sait pas encore ce qu'il veut faire — est-ce grave ?",a:"Pas du tout. La majorité des élèves de 3e n'ont pas de projet précis, et c'est tout à fait normal à 14-15 ans. La voie générale et technologique (2GT) est justement faite pour ça : elle laisse du temps pour se décider. L'essentiel est que votre enfant soit dans une voie qui lui correspond."},
+  {q:"Quelle est la différence entre la voie générale, la voie pro et le CAP ?",a:"La voie générale prépare à des études longues (université, grandes écoles). La voie professionnelle forme à un métier précis en 3 ans, avec des périodes en entreprise. Le CAP forme à un métier précis en 2 ans, avec beaucoup de pratique. Toutes ces voies ont des passerelles : on peut changer de parcours selon les résultats."},
+  {q:"Mon enfant veut un lycée hors secteur — c'est possible ?",a:"Oui, via une demande de dérogation. Elle peut être accordée si votre enfant est boursier, en situation de handicap, ou si le lycée est plus proche de votre domicile. Ces demandes doivent être justifiées et validées par la direction académique."},
+  {q:"Comment se connecter à EduConnect pour les vœux ?",a:"Rendez-vous sur educonnect.education.gouv.fr. Munissez-vous du numéro de téléphone portable enregistré à l'école. Sélectionnez le profil 'Représentant légal'. Contactez la vie scolaire en cas de difficulté technique."},
+  {q:"Mon enfant a de bonnes notes — doit-il forcément aller en voie générale ?",a:"Pas nécessairement. L'orientation doit avant tout correspondre aux envies de votre enfant. Un élève brillant qui choisit un bac pro dans un domaine qui le passionne réussira mieux qu'un élève contraint dans une voie qui ne lui convient pas."},
+  {q:"Que faire si nous ne sommes pas d'accord avec la décision du conseil de classe ?",a:"Vous pouvez faire un recours auprès du chef d'établissement dans les 3 jours suivant la notification. Une commission d'appel peut être saisie si le désaccord persiste. Parlez-en d'abord avec le professeur principal."},
+];
+
+const faqEl=document.getElementById('faq');
+FAQS.forEach((f,i)=>{
+  const div=document.createElement('div');
+  div.className='faq-item';
+  div.innerHTML=`<div class="faq-q" onclick="tog(${i})"><span>${f.q}</span><span class="faq-arrow" id="arr${i}">▾</span></div><div class="faq-a" id="fa${i}">${f.a}</div>`;
+  faqEl.appendChild(div);
+});
+
+function tog(i){
+  const a=document.getElementById('fa'+i);
+  const arr=document.getElementById('arr'+i);
+  const open=a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(el=>el.classList.remove('open'));
+  document.querySelectorAll('.faq-arrow').forEach(el=>el.classList.remove('open'));
+  if(!open){a.classList.add('open');arr.classList.add('open');}
+}
+</script>
+</body>
+</html>

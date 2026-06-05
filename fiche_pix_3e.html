@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIX — Certification numérique 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--blue:#2563EB;--blue-l:#EFF6FF;--blue-m:#BFDBFE;--blue-d:#1E3A8A}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--blue-l:#1e3a5f;--blue-m:#2563eb}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:640px;margin:2rem auto;padding:1.75rem}
+  .fiche-header{background:var(--blue-l);border:1.5px solid var(--blue);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:center;gap:12px}
+  .fiche-title{font-size:17px;font-weight:600;color:var(--blue-d);margin-bottom:4px}
+  .fiche-date{font-size:12px;color:#1D4ED8;background:var(--blue-m);padding:3px 10px;border-radius:10px;display:inline-block}
+  .section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .section-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:.75rem}
+  .domaines-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.75rem}
+  .domaine-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px}
+  .domaine-num{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+  .domaine-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+  .domaine-desc{font-size:11px;color:var(--text2);line-height:1.4}
+  .progress-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:4px}
+  .progress-bar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:.75rem}
+  .progress-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s}
+  .checklist{display:flex;flex-direction:column;gap:8px}
+  .check-item{display:flex;align-items:flex-start;gap:10px;padding:6px 8px;border-radius:var(--radius-sm)}
+  .check-item input{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--blue);cursor:pointer}
+  .check-item label{font-size:14px;color:var(--text);cursor:pointer;line-height:1.4}
+  .check-item input:checked+label{color:var(--text3);text-decoration:line-through}
+  .etapes-list{display:flex;flex-direction:column;gap:8px}
+  .etape{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);background:var(--bg2);border:0.5px solid var(--border)}
+  .etape-dot{width:24px;height:24px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .etape-text{font-size:13px;color:var(--text);line-height:1.4}
+  .etape-sub{font-size:11px;color:var(--text2);margin-top:2px}
+  .liens-list{display:flex;flex-direction:column;gap:8px}
+  .lien-item{display:flex;align-items:center;gap:12px;padding:8px 12px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg2);text-decoration:none;transition:border-color .15s}
+  .lien-item:hover{border-color:var(--blue)}
+  .lien-icon{font-size:18px;flex-shrink:0}
+  .lien-name{font-size:13px;font-weight:600;color:var(--text)}
+  .lien-desc{font-size:11px;color:var(--text2)}
+  .lien-url{font-size:11px;color:var(--blue);margin-top:1px}
+  .score-box{background:var(--blue-l);border:1.5px solid var(--blue);border-radius:var(--radius-sm);padding:1rem;text-align:center;margin-bottom:.75rem}
+  .score-val{font-size:28px;font-weight:700;color:var(--blue-d)}
+  .score-label{font-size:12px;color:#1D4ED8;margin-top:2px}
+  .conseil-box{background:var(--bg2);border-left:3px solid var(--blue);padding:.75rem 1rem;margin-bottom:.75rem}
+  .conseil-box p{font-size:13px;color:var(--text2);line-height:1.6}
+  .famille-box{background:var(--blue-l);border:0.5px solid var(--blue-m);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .famille-title{font-size:13px;font-weight:600;color:var(--blue-d);margin-bottom:.6rem}
+  .q-item{display:flex;gap:8px;font-size:13px;color:#1D4ED8;line-height:1.5;margin-bottom:5px}
+  .q-item::before{content:'?';font-weight:700;color:var(--blue);flex-shrink:0}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.domaines-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">💻</div>
+    <div>
+      <div class="header-title">PIX — Certification numérique</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="fiche-header">
+    <span style="font-size:28px;flex-shrink:0">💻</span>
+    <div>
+      <div class="fiche-title">PIX — Ma certification numérique</div>
+      <span class="fiche-date">📅 À valider avant la fin de la 3e</span>
+    </div>
+  </div>
+
+  <div class="score-box">
+    <div class="score-val">5</div>
+    <div class="score-label">domaines de compétences numériques à maîtriser</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📚 Les 5 domaines de compétences PIX</div>
+    <div class="domaines-grid">
+      <div class="domaine-card">
+        <div class="domaine-num">Domaine 1</div>
+        <div class="domaine-name">Informations & données</div>
+        <div class="domaine-desc">Rechercher, évaluer et gérer des données et des informations numériques</div>
+      </div>
+      <div class="domaine-card">
+        <div class="domaine-num">Domaine 2</div>
+        <div class="domaine-name">Communication & collaboration</div>
+        <div class="domaine-desc">Communiquer, collaborer et partager via les outils numériques</div>
+      </div>
+      <div class="domaine-card">
+        <div class="domaine-num">Domaine 3</div>
+        <div class="domaine-name">Création de contenu</div>
+        <div class="domaine-desc">Créer des contenus numériques, coder et programmer</div>
+      </div>
+      <div class="domaine-card">
+        <div class="domaine-num">Domaine 4</div>
+        <div class="domaine-name">Protection & sécurité</div>
+        <div class="domaine-desc">Protéger les données, la vie privée et l'environnement numérique</div>
+      </div>
+      <div class="domaine-card" style="grid-column:1/-1">
+        <div class="domaine-num">Domaine 5</div>
+        <div class="domaine-name">Environnement numérique</div>
+        <div class="domaine-desc">Résoudre des problèmes techniques, configurer et utiliser des outils numériques</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🗓 Comment ça se passe en 3e ?</div>
+    <div class="etapes-list">
+      <div class="etape"><div class="etape-dot">1</div><div><div class="etape-text">Crée ton compte sur pix.fr avec ton adresse email scolaire</div><div class="etape-sub">Ton enseignant peut aussi te donner un accès via l'ENT</div></div></div>
+      <div class="etape"><div class="etape-dot">2</div><div><div class="etape-text">Entraîne-toi en ligne — les exercices sont gratuits et accessibles à tout moment</div><div class="etape-sub">Chaque exercice te donne un score et t'explique les réponses</div></div></div>
+      <div class="etape"><div class="etape-dot">3</div><div><div class="etape-text">La certification officielle a lieu en mai ou juin, en classe</div><div class="etape-sub">Elle est organisée par ton établissement — tu n'as rien à inscrire toi-même</div></div></div>
+      <div class="etape"><div class="etape-dot">4</div><div><div class="etape-text">Tu reçois ton attestation PIX après l'épreuve</div><div class="etape-sub">Elle est mentionnée dans ton dossier scolaire et utile pour l'orientation</div></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Ma checklist PIX</div>
+    <div class="progress-top"><span>Ma progression</span><span id="pix-pct">0 / 6</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="pix-bar" style="width:0%"></div></div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox" id="p1" onchange="upd('pix-bar','pix-pct',6)"><label for="p1">J'ai créé mon compte sur pix.fr</label></div>
+      <div class="check-item"><input type="checkbox" id="p2" onchange="upd('pix-bar','pix-pct',6)"><label for="p2">J'ai fait les exercices du domaine 1 — Informations & données</label></div>
+      <div class="check-item"><input type="checkbox" id="p3" onchange="upd('pix-bar','pix-pct',6)"><label for="p3">J'ai fait les exercices du domaine 2 — Communication & collaboration</label></div>
+      <div class="check-item"><input type="checkbox" id="p4" onchange="upd('pix-bar','pix-pct',6)"><label for="p4">J'ai fait les exercices des domaines 3, 4 et 5</label></div>
+      <div class="check-item"><input type="checkbox" id="p5" onchange="upd('pix-bar','pix-pct',6)"><label for="p5">J'ai passé la certification officielle en classe</label></div>
+      <div class="check-item"><input type="checkbox" id="p6" onchange="upd('pix-bar','pix-pct',6)"><label for="p6">J'ai reçu mon attestation PIX</label></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔗 Liens utiles PIX</div>
+    <div class="liens-list">
+      <a class="lien-item" href="https://pix.fr" target="_blank" rel="noopener">
+        <span class="lien-icon">🌐</span>
+        <div><div class="lien-name">PIX — Site officiel</div><div class="lien-desc">Crée ton compte et entraîne-toi gratuitement</div><div class="lien-url">pix.fr</div></div>
+      </a>
+      <a class="lien-item" href="https://pix.fr/se-connecter/eleve" target="_blank" rel="noopener">
+        <span class="lien-icon">👤</span>
+        <div><div class="lien-name">Connexion élève</div><div class="lien-desc">Accède à ton espace personnel via l'ENT ou ton code</div><div class="lien-url">pix.fr/se-connecter/eleve</div></div>
+      </a>
+      <a class="lien-item" href="https://app.pix.fr/assessments" target="_blank" rel="noopener">
+        <span class="lien-icon">🎯</span>
+        <div><div class="lien-name">Mes entraînements</div><div class="lien-desc">Lance tes exercices par domaine de compétence</div><div class="lien-url">app.pix.fr</div></div>
+      </a>
+    </div>
+  </div>
+
+  <div class="famille-box">
+    <div class="famille-title">👨‍👩‍👧 À discuter en famille</div>
+    <div class="q-item">As-tu créé ton compte PIX et commencé les entraînements ?</div>
+    <div class="q-item">As-tu besoin d'aide pour accéder à un ordinateur pour t'entraîner ?</div>
+    <div class="q-item">Sais-tu quand la certification officielle aura lieu dans ton collège ?</div>
+  </div>
+
+  <div class="conseil-box">
+    <p>💡 <strong>Conseil du PP :</strong> PIX n'est pas une épreuve à bachoter — c'est une certification qui évalue ce que tu sais vraiment faire avec le numérique. Le meilleur moyen de progresser est de s'entraîner régulièrement sur le site, 15 minutes par semaine suffisent. Plus tu t'entraînes tôt, plus tu seras à l'aise le jour J !</p>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+</div>
+
+<script>
+function upd(barId, pctId, total){
+  const boxes = document.querySelectorAll('.checklist input');
+  const n = [...boxes].filter(b=>b.checked).length;
+  document.getElementById(pctId).textContent = n + ' / ' + total;
+  document.getElementById(barId).style.width = Math.round(n/total*100) + '%';
+}
+</script>
+</body>
+</html>

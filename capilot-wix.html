@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAPilot — Coach numérique pour collégiens</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0E0D0B;
+  --ink2:#5A5955;
+  --ink3:#9A9890;
+  --paper:#FAFAF7;
+  --paper2:#F2F1EC;
+  --paper3:#E8E6E0;
+  --blue:#1A4FBF;
+  --blue-l:#E8EEFB;
+  --teal:#0D6E56;
+  --teal-l:#E0F4EE;
+  --amber:#B5620A;
+  --amber-l:#FDF0E0;
+  --border:rgba(0,0,0,0.08);
+}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+
+/* HERO */
+.hero{
+  background:var(--ink);
+  padding:4rem 2rem 3rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.hero-inner{max-width:720px;margin:0 auto;position:relative;z-index:1}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.07);border:0.5px solid rgba(255,255,255,.15);
+  border-radius:20px;padding:5px 14px;
+  font-size:12px;color:rgba(255,255,255,.6);letter-spacing:.06em;
+  margin-bottom:1.5rem;
+}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:#4A8AFF;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero-logo{display:flex;align-items:center;gap:14px;margin-bottom:1.25rem}
+.logo-sq{
+  width:52px;height:52px;border-radius:14px;
+  background:#0A0F1E;border:0.5px solid rgba(74,138,255,.3);
+  flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;
+}
+.hero-wordmark{font-size:42px;font-weight:600;color:#fff;letter-spacing:-.02em;line-height:1}
+.hero-wordmark span{color:#4A8AFF;font-weight:300}
+.hero-tagline{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(22px,4vw,34px);
+  color:#fff;font-weight:400;
+  line-height:1.25;margin-bottom:1rem;
+  max-width:540px;
+}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:480px;line-height:1.7;margin-bottom:2rem}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero{
+  padding:13px 24px;border-radius:10px;font-size:14px;font-weight:500;
+  font-family:inherit;cursor:pointer;text-decoration:none;display:inline-block;
+  transition:opacity .15s;
+}
+.btn-hero:hover{opacity:.85}
+.btn-primary{background:#4A8AFF;color:#fff;border:none}
+.btn-secondary{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:0.5px solid rgba(255,255,255,.15)}
+.hero-stats{
+  display:flex;gap:2rem;flex-wrap:wrap;
+  margin-top:3rem;padding-top:2rem;
+  border-top:0.5px solid rgba(255,255,255,.08);
+}
+.hs{text-align:left}
+.hs-n{font-size:24px;font-weight:600;color:#fff}
+.hs-l{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
+
+/* CONSTAT */
+.section{max-width:720px;margin:0 auto;padding:3.5rem 2rem}
+.section-eyebrow{font-size:11px;font-weight:500;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-bottom:1rem}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,32px);color:var(--ink);font-weight:400;line-height:1.25;margin-bottom:1rem}
+.section-body{font-size:15px;color:var(--ink2);line-height:1.8}
+.quote-block{
+  border-left:3px solid var(--blue);
+  padding:.75rem 1.25rem;
+  margin:1.5rem 0;
+  background:var(--blue-l);
+  border-radius:0 8px 8px 0;
+}
+.quote-text{font-size:15px;font-weight:500;color:var(--blue);line-height:1.6}
+.quote-src{font-size:12px;color:var(--ink3);margin-top:4px}
+
+/* PILIERS */
+.pillars-bg{background:var(--paper2);padding:3.5rem 2rem}
+.pillars-inner{max-width:720px;margin:0 auto}
+.pillars-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:2rem}
+.pillar{
+  background:var(--paper);border:0.5px solid var(--border);
+  border-radius:12px;padding:1.25rem;
+  transition:border-color .15s;
+}
+.pillar:hover{border-color:rgba(26,79,191,.3)}
+.pillar-icon{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:.75rem;font-size:18px;
+}
+.pillar-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.pillar-desc{font-size:12px;color:var(--ink2);line-height:1.6}
+
+/* COMMENT ÇA MARCHE */
+.steps-bg{background:var(--paper);padding:3.5rem 2rem}
+.steps-inner{max-width:720px;margin:0 auto}
+.steps-list{margin-top:2rem;display:flex;flex-direction:column;gap:0}
+.step-item{display:flex;gap:1.25rem;padding:1.25rem 0;border-bottom:0.5px solid var(--border)}
+.step-item:last-child{border-bottom:none}
+.step-num{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:500;flex-shrink:0;margin-top:2px;
+}
+.step-title{font-size:15px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.step-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+.step-tag{
+  display:inline-block;font-size:11px;padding:2px 8px;
+  border-radius:20px;margin-top:6px;font-weight:500;
+}
+
+/* POUR QUI */
+.audience-bg{background:var(--ink);padding:3.5rem 2rem}
+.audience-inner{max-width:720px;margin:0 auto}
+.audience-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,30px);color:#fff;font-weight:400;margin-bottom:.5rem}
+.audience-sub{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:2rem}
+.audience-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.audience-card{
+  background:rgba(255,255,255,.05);border:0.5px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:1.25rem;
+}
+.aud-icon{font-size:24px;margin-bottom:.75rem}
+.aud-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:4px}
+.aud-desc{font-size:12px;color:rgba(255,255,255,.45);line-height:1.6}
+
+/* SECURITE */
+.secu-bg{background:var(--teal-l);padding:2.5rem 2rem;border-top:0.5px solid rgba(13,110,86,.15);border-bottom:0.5px solid rgba(13,110,86,.15)}
+.secu-inner{max-width:720px;margin:0 auto}
+.secu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:1.25rem}
+.secu-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--teal)}
+.secu-check{font-size:15px;flex-shrink:0;margin-top:1px}
+
+/* CTA FINAL */
+.cta-bg{background:var(--paper2);padding:4rem 2rem;text-align:center}
+.cta-inner{max-width:520px;margin:0 auto}
+.cta-title{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.5vw,34px);color:var(--ink);font-weight:400;margin-bottom:.75rem;line-height:1.25}
+.cta-sub{font-size:14px;color:var(--ink2);margin-bottom:2rem;line-height:1.7}
+.cta-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-cta-p{padding:14px 28px;border-radius:10px;background:var(--ink);color:var(--paper);font-size:14px;font-weight:500;font-family:inherit;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:opacity .15s}
+.btn-cta-p:hover{opacity:.85}
+.btn-cta-s{padding:14px 28px;border-radius:10px;background:transparent;color:var(--ink);font-size:14px;font-weight:500;font-family:inherit;border:0.5px solid var(--border);cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s}
+.btn-cta-s:hover{background:var(--paper3)}
+.cta-note{font-size:12px;color:var(--ink3);margin-top:1rem}
+
+/* FOOTER */
+.page-footer{background:var(--ink);padding:1.5rem 2rem;text-align:center;font-size:12px;color:rgba(255,255,255,.3)}
+
+@media(max-width:520px){
+  .hero{padding:2.5rem 1.25rem 2rem}
+  .section{padding:2.5rem 1.25rem}
+  .pillars-bg,.steps-bg,.audience-bg,.secu-bg,.cta-bg{padding:2.5rem 1.25rem}
+  .hero-wordmark{font-size:32px}
+  .hero-stats{gap:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="hero-dot"></span>
+      Né au collège Guy Môquet · Gennevilliers · 2026
+    </div>
+    <div class="hero-logo">
+      <div class="logo-sq">
+        <svg viewBox="0 0 52 52" width="52" height="52" xmlns="http://www.w3.org/2000/svg">
+          <rect width="52" height="52" fill="#0A0F1E"/>
+          <circle cx="26" cy="26" r="16" fill="none" stroke="#1A4FBF" stroke-width="0.7" opacity="0.5"/>
+          <circle cx="26" cy="26" r="10" fill="none" stroke="#1A4FBF" stroke-width="0.5" opacity="0.3"/>
+          <line x1="10" y1="26" x2="42" y2="26" stroke="#1A4FBF" stroke-width="0.6" opacity="0.4"/>
+          <line x1="26" y1="10" x2="26" y2="42" stroke="#1A4FBF" stroke-width="0.6" opacity="0.4"/>
+          <line x1="26" y1="26" x2="38" y2="14" stroke="#4A8AFF" stroke-width="1.6" stroke-linecap="round"/>
+          <polygon points="38,14 32,15 37,20" fill="#4A8AFF"/>
+          <circle cx="26" cy="26" r="2.5" fill="#ffffff"/>
+          <circle cx="26" cy="26" r="1" fill="#0A0F1E"/>
+          <circle cx="26" cy="12" r="1.8" fill="#4A8AFF" opacity="0.9"/>
+        </svg>
+      </div>
+      <div class="hero-wordmark">CAP<span>ilot</span></div>
+    </div>
+    <div class="hero-tagline">Le coach numérique qui transforme chaque collégien en pilote de son avenir.</div>
+    <div class="hero-sub">Une plateforme interactive, ludique et sécurisée — conçue par un professeur principal de 3e pour tous les collégiens de France.</div>
+    <div class="hero-actions">
+      <a class="btn-hero btn-primary" href="https://cap3e-2026.netlify.app/capilot-wix.html" target="_blank">Essayer la démo →</a>
+      <a class="btn-hero btn-secondary" href="#comment">En savoir plus</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">3,2M</div><div class="hs-l">collégiens ciblés</div></div>
+      <div class="hs"><div class="hs-n">9 piliers</div><div class="hs-l">d'autonomie</div></div>
+      <div class="hs"><div class="hs-n">100%</div><div class="hs-l">gratuit pour les élèves</div></div>
+      <div class="hs"><div class="hs-n">0</div><div class="hs-l">données personnelles</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONSTAT -->
+<div class="section">
+  <div class="section-eyebrow">Le constat de terrain</div>
+  <div class="section-title">10 ans de classe de 3e. Un même problème, chaque année.</div>
+  <div class="section-body">
+    Après dix ans en tant que professeur principal au collège Guy Môquet de Gennevilliers, j'ai observé un problème récurrent chez une grande partie des collégiens : ils manquent d'autonomie, respectent difficilement les échéances, et s'appuient excessivement sur leurs parents pour gérer leur orientation scolaire.
+  </div>
+  <div class="quote-block">
+    <div class="quote-text">« Ils remettent leurs dossiers en retard, manquent d'anticipation sur leur orientation, et attendent que leurs parents gèrent tout à leur place. »</div>
+    <div class="quote-src">M. Hassini — Professeur principal, Collège Guy Môquet</div>
+  </div>
+  <div class="section-body">
+    CAPilot n'est pas un agenda. Ce n'est pas une appli scolaire de plus. C'est un <strong>coach numérique intelligent</strong> qui accompagne progressivement chaque élève vers l'autonomie — de manière ludique, subtile et motivante.
+  </div>
+</div>
+
+<!-- PILIERS -->
+<div class="pillars-bg">
+  <div class="pillars-inner">
+    <div class="section-eyebrow">Les 9 piliers</div>
+    <div class="section-title">Une approche complète de l'autonomie</div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#E8EEFB">📅</div>
+        <div class="pillar-title">Gestion des échéances</div>
+        <div class="pillar-desc">Deadlines scolaires et administratives visualisées, fractionnées, anticipées</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#E0F4EE">🧭</div>
+        <div class="pillar-title">Autonomie progressive</div>
+        <div class="pillar-desc">Micro-missions quotidiennes, licences d'autonomie débloquées par les comportements</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#FDF0E0">🎯</div>
+        <div class="pillar-title">Orientation active</div>
+        <div class="pillar-desc">Exploration des métiers, simulations immersives, capsules vidéo de professionnels</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#E8EEFB">🏆</div>
+        <div class="pillar-title">Gamification avancée</div>
+        <div class="pillar-desc">XP, niveaux, badges, défis collectifs — l'élève monte en niveau, pas en note</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#E0F4EE">🤖</div>
+        <div class="pillar-title">IA conversationnelle</div>
+        <div class="pillar-desc">PILO, le co-pilote personnel qui connaît l'élève et anticipe ses besoins</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#FDF0E0">🔥</div>
+        <div class="pillar-title">Engagement quotidien</div>
+        <div class="pillar-desc">Check-in de 2 minutes, streaks, rituels de progression — jamais ennuyeux</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#E8EEFB">👨‍👩‍👧</div>
+        <div class="pillar-title">Familles impliquées</div>
+        <div class="pillar-desc">Dashboard parent en lecture seule — informés sans être gestionnaires</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#E0F4EE">📊</div>
+        <div class="pillar-title">Suivi enseignants</div>
+        <div class="pillar-desc">Alertes précoces, indicateurs d'autonomie, exports pour les conseils de classe</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon" style="background:#FDF0E0">🎓</div>
+        <div class="pillar-title">Passeport numérique</div>
+        <div class="pillar-desc">Compétences acquises, métiers explorés — un document valorisable au lycée</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMENT ÇA MARCHE -->
+<div class="steps-bg" id="comment">
+  <div class="steps-inner">
+    <div class="section-eyebrow">Comment ça marche</div>
+    <div class="section-title">Simple pour l'élève. Puissant pour le prof.</div>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Le professeur génère un code classe</div>
+          <div class="step-desc">En un clic, le prof principal crée un code unique pour sa classe. Il le distribue aux élèves à la rentrée — sur papier, par Pronote, comme il veut.</div>
+          <span class="step-tag" style="background:#E8EEFB;color:#1A4FBF">30 secondes</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">L'élève crée son profil en 2 minutes</div>
+          <div class="step-desc">Code classe → pseudo → avatar → centres d'intérêt. Aucun email, aucun compte parent requis. PILO l'accueille personnellement et lui confie sa première mission.</div>
+          <span class="step-tag" style="background:#E0F4EE;color:#0D6E56">Zéro donnée personnelle</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Le check-in quotidien de 2 minutes</div>
+          <div class="step-desc">Chaque jour, PILO accueille l'élève, prend sa température, lui rappelle ses échéances, lui confie une mission et explore avec lui un univers professionnel. L'élève gagne des XP et monte de niveau.</div>
+          <span class="step-tag" style="background:#FDF0E0;color:#B5620A">Ludique et adaptatif</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Le prof voit tout en un coup d'œil</div>
+          <div class="step-desc">Son tableau de bord affiche les alertes prioritaires, les indicateurs d'autonomie par élève, les deadlines collectives et génère les exports pour les conseils de classe.</div>
+          <span class="step-tag" style="background:#E8EEFB;color:#1A4FBF">Tableau de bord dédié</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POUR QUI -->
+<div class="audience-bg">
+  <div class="audience-inner">
+    <div class="audience-title">Pour tous les collégiens de France</div>
+    <div class="audience-sub">Pas seulement pour les élèves de Guy Môquet. CAPilot est conçu pour être déployé dans n'importe quel collège, par n'importe quel professeur principal.</div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="aud-icon">🧑‍🎓</div>
+        <div class="aud-title">Les élèves de 3e</div>
+        <div class="aud-desc">Un coach personnel ludique qui les aide à s'organiser et à explorer leur avenir sans pression</div>
+      </div>
+      <div class="audience-card">
+        <div class="aud-icon">👨‍🏫</div>
+        <div class="aud-title">Les profs principaux</div>
+        <div class="aud-desc">Un outil de suivi clair, des alertes précoces et des exports prêts pour les conseils de classe</div>
+      </div>
+      <div class="audience-card">
+        <div class="aud-icon">👨‍👩‍👧</div>
+        <div class="aud-title">Les familles</div>
+        <div class="aud-desc">Informées des grandes tendances sans être gestionnaires — l'autonomie reste à l'élève</div>
+      </div>
+      <div class="audience-card">
+        <div class="aud-icon">🏫</div>
+        <div class="aud-title">Les établissements</div>
+        <div class="aud-desc">Un projet pilote reproductible, compatible RGPD, sans infrastructure lourde</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SÉCURITÉ -->
+<div class="secu-bg">
+  <div class="secu-inner">
+    <div class="section-eyebrow" style="color:var(--teal)">Sécurité & confidentialité</div>
+    <div class="section-title" style="color:var(--teal)">Conçu pour des mineurs, dès le départ.</div>
+    <div class="secu-grid">
+      <div class="secu-item"><span class="secu-check">✓</span>Aucun email ni mot de passe pour les élèves</div>
+      <div class="secu-item"><span class="secu-check">✓</span>Aucune donnée personnelle collectée</div>
+      <div class="secu-item"><span class="secu-check">✓</span>Accès par code classe uniquement</div>
+      <div class="secu-item"><span class="secu-check">✓</span>Conformité RGPD dès le départ</div>
+      <div class="secu-item"><span class="secu-check">✓</span>Hébergement France — données sécurisées</div>
+      <div class="secu-item"><span class="secu-check">✓</span>Pas de messagerie entre élèves</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-bg">
+  <div class="cta-inner">
+    <div class="cta-title">Prêt à essayer CAPilot avec ta classe ?</div>
+    <div class="cta-sub">Accède à la démo interactive dès maintenant. Aucune inscription requise — entre le code <strong>CAP3BA</strong> pour tester comme un élève.</div>
+    <div class="cta-actions">
+      <a class="btn-cta-p" href="https://cap3e-2026.netlify.app/capilot-wix.html" target="_blank">Essayer la démo →</a>
+      <a class="btn-cta-s" href="mailto:hassinicap3e@gmail.com">Contacter M. Hassini</a>
+    </div>
+    <div class="cta-note">Projet développé au collège Guy Môquet, Gennevilliers · Île-de-France<br>Pour les établissements intéressés : hassinicap3e@gmail.com</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  © A. Hassini — CAPilot · Collège Guy Môquet, Gennevilliers · 2026<br>
+  Reproduction et diffusion interdites sans autorisation de l'auteur.
+</div>
+
+</body>
+</html>

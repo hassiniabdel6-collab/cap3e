@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur de lettre de motivation — Stage 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--blue:#378ADD;--blue-l:#E6F1FB;--blue-m:#B5D4F4;--blue-d:#0C447C}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--blue-l:#0c2440;--blue-m:#1a3d6b}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--blue-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:680px;margin:2rem auto;padding:1.75rem}
+  .tool-header{background:var(--blue-l);border:1.5px solid var(--blue);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:center;gap:12px}
+  .tool-title{font-size:17px;font-weight:600;color:var(--blue-d);margin-bottom:4px}
+  .tool-sub{font-size:12px;color:#185FA5}
+  .section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .section-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:.75rem}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:.5rem}
+  .form-group{display:flex;flex-direction:column;gap:4px}
+  .form-group.full{grid-column:1/-1}
+  .form-label{font-size:12px;color:var(--text2);font-weight:600}
+  .form-input{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:8px 10px;font-size:14px;font-family:inherit;color:var(--text);background:var(--bg2)}
+  .form-input:focus{outline:none;border-color:var(--blue)}
+  .btn-gen{width:100%;padding:12px;border-radius:var(--radius-sm);border:none;background:var(--blue);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:.5rem;transition:background .15s}
+  .btn-gen:hover{background:var(--blue-d)}
+  .lettre-box{background:var(--bg2);border:0.5px solid var(--border2);border-radius:var(--radius);padding:1.5rem;font-size:14px;line-height:1.9;color:var(--text);white-space:pre-wrap;font-family:'Georgia',serif;display:none}
+  .lettre-box.show{display:block}
+  .lettre-actions{display:flex;gap:10px;margin-top:.75rem;flex-wrap:wrap}
+  .btn-sec{padding:8px 18px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:transparent;cursor:pointer;font-size:13px;color:var(--text);font-family:inherit}
+  .btn-sec:hover{background:var(--bg2)}
+  .btn-sec.ok{color:#1D9E75;border-color:#1D9E75}
+  .warn-box{background:var(--bg2);border-radius:var(--radius-sm);padding:.75rem 1rem;font-size:12px;color:var(--text2);line-height:1.5;margin-top:.75rem}
+  .conseils-list{display:flex;flex-direction:column;gap:8px}
+  .conseil-item{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);background:var(--bg2);font-size:13px;color:var(--text);line-height:1.4}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
+  .tabs{display:flex;gap:8px;margin-bottom:.75rem;flex-wrap:wrap}
+  .tab{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;transition:all .15s}
+  .tab.on{background:var(--blue);border-color:var(--blue-d);color:#fff}
+  .ex-box{background:var(--bg2);border-radius:var(--radius-sm);padding:1rem;font-size:13px;line-height:1.7;color:var(--text);font-family:'Georgia',serif}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.form-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}.tool-header,.section:not(#lettre-section){display:none}#lettre-section{display:block!important}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">✉️</div>
+    <div>
+      <div class="header-title">Générateur de lettre de motivation</div>
+      <div class="header-sub">Stage de découverte professionnelle · 3e · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="tool-header">
+    <span style="font-size:28px;flex-shrink:0">✉️</span>
+    <div>
+      <div class="tool-title">Générateur de lettre de motivation</div>
+      <div class="tool-sub">Remplis le formulaire · Ta lettre est générée automatiquement</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👤 Tes informations</div>
+    <div class="form-grid">
+      <div class="form-group"><label class="form-label">Prénom</label><input class="form-input" type="text" id="prenom" placeholder="Ex : Yassin"></div>
+      <div class="form-group"><label class="form-label">Nom</label><input class="form-input" type="text" id="nom" placeholder="Ex : Benali"></div>
+      <div class="form-group"><label class="form-label">Adresse</label><input class="form-input" type="text" id="adresse" placeholder="Ex : 12 rue de la Paix"></div>
+      <div class="form-group"><label class="form-label">Code postal et ville</label><input class="form-input" type="text" id="ville" placeholder="Ex : 92230 Gennevilliers"></div>
+      <div class="form-group"><label class="form-label">Téléphone</label><input class="form-input" type="text" id="tel" placeholder="Ex : 06 12 34 56 78"></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="text" id="email" placeholder="Ex : y.benali@gmail.com"></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🏢 L'entreprise</div>
+    <div class="form-grid">
+      <div class="form-group full"><label class="form-label">Nom de l'entreprise</label><input class="form-input" type="text" id="entreprise" placeholder="Ex : Cabinet médical Dr Martin"></div>
+      <div class="form-group"><label class="form-label">Nom du/de la responsable</label><input class="form-input" type="text" id="responsable" placeholder="Ex : Madame Martin"></div>
+      <div class="form-group"><label class="form-label">Adresse de l'entreprise</label><input class="form-input" type="text" id="adr" placeholder="Ex : 5 avenue Pasteur, Asnières"></div>
+      <div class="form-group full"><label class="form-label">Secteur d'activité</label>
+        <select class="form-input" id="secteur">
+          <option value="">— Choisir —</option>
+          <option value="sante">Santé et social</option>
+          <option value="commerce">Commerce et vente</option>
+          <option value="informatique">Informatique et numérique</option>
+          <option value="cuisine">Cuisine et restauration</option>
+          <option value="batiment">Bâtiment et travaux publics</option>
+          <option value="mecanique">Mécanique et automobile</option>
+          <option value="coiffure">Coiffure et esthétique</option>
+          <option value="education">Éducation et petite enfance</option>
+          <option value="administration">Administration et gestion</option>
+          <option value="autre">Autre domaine</option>
+        </select>
+      </div>
+      <div class="form-group full"><label class="form-label">Ce qui t'attire dans ce domaine</label><input class="form-input" type="text" id="motivation" placeholder="Ex : j'aime aider les gens, je suis passionné(e) par…"></div>
+    </div>
+    <button class="btn-gen" onclick="generer()">Générer ma lettre →</button>
+  </div>
+
+  <div class="section" id="lettre-section" style="display:none">
+    <div class="section-title">📄 Ta lettre de motivation</div>
+    <div class="lettre-box show" id="lettre-out"></div>
+    <div class="lettre-actions">
+      <button class="btn-sec" id="btn-copy" onclick="copier()">📋 Copier la lettre</button>
+      <button class="btn-sec" onclick="window.print()">🖨 Imprimer</button>
+      <button class="btn-sec" onclick="generer()">↺ Régénérer</button>
+    </div>
+    <div class="warn-box">⚠️ <strong>Important :</strong> Cette lettre est un point de départ. Relis-la, adapte-la et corrige les fautes avant d'envoyer. N'envoie jamais la même lettre à deux entreprises différentes sans l'adapter.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">💡 Conseils pour une bonne lettre</div>
+    <div class="conseils-list">
+      <div class="conseil-item"><div class="dot"></div>Une lettre = une entreprise. Adapte chaque lettre au secteur et à l'entreprise.</div>
+      <div class="conseil-item"><div class="dot"></div>Sois bref et précis — 3 paragraphes suffisent. Pas besoin de remplir une page entière.</div>
+      <div class="conseil-item"><div class="dot"></div>Mets en avant tes qualités : sérieux(se), curieux(se), ponctuel(le), motivé(e).</div>
+      <div class="conseil-item"><div class="dot"></div>Relis attentivement avant d'envoyer — une faute laisse une mauvaise impression.</div>
+      <div class="conseil-item"><div class="dot"></div>Envoie par email avec un objet clair : "Demande de stage de découverte — Prénom Nom".</div>
+      <div class="conseil-item"><div class="dot"></div>Joins ton CV à l'email. Un CV soigné renforce ta candidature.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👀 Exemples d'accroche par secteur</div>
+    <div class="tabs">
+      <button class="tab on" onclick="showEx('sante',this)">Santé</button>
+      <button class="tab" onclick="showEx('commerce',this)">Commerce</button>
+      <button class="tab" onclick="showEx('cuisine',this)">Cuisine</button>
+      <button class="tab" onclick="showEx('numerique',this)">Numérique</button>
+    </div>
+    <div class="ex-box" id="ex-box"></div>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+</div>
+
+<script>
+const MOT={sante:"l'aide aux personnes, le travail en équipe soignante et la relation humaine",commerce:"la relation client, la gestion d'une activité commerciale et le dynamisme du secteur",informatique:"la résolution de problèmes techniques, le développement d'outils numériques",cuisine:"la créativité culinaire, la rigueur du travail en cuisine et la satisfaction de bien faire",batiment:"le travail concret, la transformation des espaces et les métiers manuels spécialisés",mecanique:"le fonctionnement des moteurs, la précision technique et le diagnostic de pannes",coiffure:"la relation avec les clients, la créativité et l'art de mettre en valeur les personnes",education:"l'accompagnement des enfants, la patience et la transmission des savoirs",administration:"l'organisation, la gestion rigoureuse des dossiers et le travail en équipe",autre:"les aspects concrets et humains de ce secteur"};
+
+const EX={sante:"Élève de 3e au collège Guy Môquet de Gennevilliers, je suis particulièrement attiré(e) par les métiers de la santé et du soin aux personnes. La relation d'aide, l'écoute et le contact humain sont des valeurs qui me tiennent à cœur. Ce stage serait pour moi une première occasion de découvrir concrètement votre environnement professionnel.",commerce:"Élève de 3e au collège Guy Môquet de Gennevilliers, le monde du commerce et de la relation client m'attire depuis longtemps. J'aime le contact avec les autres, je suis à l'aise à l'oral et j'ai le sens du service. Ce stage me permettrait de découvrir les réalités de votre métier et de confirmer mon projet d'orientation.",cuisine:"Élève de 3e au collège Guy Môquet de Gennevilliers, je suis passionné(e) par l'univers de la cuisine et de la restauration. Créatif(ve), patient(e) et rigoureux(se), je souhaite découvrir ce secteur de l'intérieur. Réaliser ce stage au sein de votre établissement serait une expérience précieuse pour construire mon projet professionnel.",numerique:"Élève de 3e au collège Guy Môquet de Gennevilliers, le domaine du numérique et de l'informatique me passionne. Curieux(se) et à l'aise avec les outils technologiques, je souhaite découvrir comment ces compétences s'appliquent dans un contexte professionnel réel."};
+
+function val(id){return document.getElementById(id).value.trim();}
+
+function generer(){
+  const prenom=val('prenom')||'Prénom';
+  const nom=val('nom')||'Nom';
+  const adresse=val('adresse')||'Votre adresse';
+  const ville=val('ville')||'92230 Gennevilliers';
+  const tel=val('tel')||'Votre téléphone';
+  const email=val('email')||'Votre email';
+  const entreprise=val('entreprise')||'Votre entreprise';
+  const responsable=val('responsable')||'Madame, Monsieur';
+  const adr=val('adr')||"Adresse de l'entreprise";
+  const secteur=document.getElementById('secteur').value;
+  const motivation=val('motivation')||(MOT[secteur]||'votre secteur d\'activité');
+  const date=new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'});
+
+  const lettre=`${prenom} ${nom}
+${adresse}
+${ville}
+${tel} · ${email}
+
+${entreprise}
+À l'attention de ${responsable}
+${adr}
+
+Gennevilliers, le ${date}
+
+Objet : Demande de stage de découverte professionnelle du 16 au 20 février 2026
+
+${responsable},
+
+Élève de 3e au collège Guy Môquet de Gennevilliers, je dois effectuer dans le cadre de ma scolarité un stage de découverte professionnelle d'une semaine, du 16 au 20 février 2026.
+
+Particulièrement intéressé(e) par ${motivation}, je souhaiterais réaliser ce stage au sein de votre structure. Cette expérience me permettrait de découvrir concrètement votre environnement de travail, de rencontrer des professionnels passionnés et d'enrichir ma réflexion sur mon futur parcours scolaire et professionnel.
+
+Sérieux(se), motivé(e) et curieux(se), je saurai observer avec attention, poser les bonnes questions et contribuer aux petites tâches qui pourraient m'être confiées. Je suis disponible pour un entretien si vous le souhaitez.
+
+Je me tiens à votre disposition pour tout renseignement complémentaire et vous remercie par avance de l'attention portée à ma demande.
+
+Veuillez agréer, ${responsable}, l'expression de mes salutations respectueuses.
+
+${prenom} ${nom}`;
+
+  document.getElementById('lettre-out').textContent=lettre;
+  document.getElementById('lettre-section').style.display='block';
+  document.getElementById('lettre-section').scrollIntoView({behavior:'smooth',block:'start'});
+  const btn=document.getElementById('btn-copy');
+  btn.textContent='📋 Copier la lettre';
+  btn.classList.remove('ok');
+}
+
+function copier(){
+  const txt=document.getElementById('lettre-out').textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=document.getElementById('btn-copy');
+    btn.textContent='✓ Copié !';
+    btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copier la lettre';btn.classList.remove('ok');},2500);
+  });
+}
+
+function showEx(key,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('ex-box').textContent=EX[key]||'';
+}
+
+showEx('sante',document.querySelector('.tab.on'));
+</script>
+</body>
+</html>

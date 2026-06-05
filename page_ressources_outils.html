@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ressources & Outils — Cap 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--purple:#7F77DD;--purple-l:#EEEDFE;--purple-d:#3C3489}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--purple-l:#2a2660}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--purple-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card-main{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:720px;margin:2rem auto;padding:1.75rem}
+  .hero{background:var(--purple-l);border:1.5px solid var(--purple);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1.25rem}
+  .hero-title{font-size:17px;font-weight:600;color:var(--purple-d);margin-bottom:4px}
+  .hero-sub{font-size:13px;color:#534AB7;line-height:1.5}
+  .search-wrap{position:relative;margin-bottom:1rem}
+  .search-wrap input{width:100%;padding:10px 12px 10px 38px;border:0.5px solid var(--border2);border-radius:var(--radius);font-size:14px;font-family:inherit;background:var(--bg2);color:var(--text)}
+  .search-wrap input:focus{outline:none;border-color:var(--purple)}
+  .search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--text3)}
+  .filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+  .filter-btn{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;transition:all .15s}
+  .filter-btn.on{background:var(--purple);border-color:#534AB7;color:#fff}
+  .count{font-size:12px;color:var(--text3);margin-bottom:.75rem}
+  .cat-title{font-size:12px;font-weight:600;color:var(--text2);margin:1.25rem 0 .6rem;text-transform:uppercase;letter-spacing:.4px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:.5rem}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;text-decoration:none;display:block;transition:border-color .15s}
+  .card:hover{border-color:var(--purple)}
+  .card-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .card-icon{font-size:18px;color:var(--text2);flex-shrink:0}
+  .card-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;margin-left:auto}
+  .b-site{background:#EEEDFE;color:#3C3489}
+  .b-app{background:#E1F5EE;color:#085041}
+  .b-video{background:#FAEEDA;color:#633806}
+  .b-outil{background:#E6F1FB;color:#0C447C}
+  .card-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+  .card-desc{font-size:12px;color:var(--text2);line-height:1.4}
+  .card-url{font-size:11px;color:var(--purple);margin-top:5px}
+  .empty{text-align:center;padding:2rem;font-size:14px;color:var(--text2)}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.card-main{margin:1rem .5rem;padding:1.25rem}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">🔗</div>
+    <div>
+      <div class="header-title">Ressources & Outils</div>
+      <div class="header-sub">Cap 3e — Collège Guy Môquet, Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card-main">
+  <div class="hero">
+    <div class="hero-title">🔗 Ressources & Outils pour les élèves de 3e</div>
+    <div class="hero-sub">Sites, applications et vidéos sélectionnés par ton professeur principal. Clique sur une carte pour accéder à la ressource.</div>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search" placeholder="Rechercher une ressource..." oninput="render()">
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn on" onclick="filt('all',this)">Tout voir</button>
+    <button class="filter-btn" onclick="filt('orientation',this)">🎯 Orientation</button>
+    <button class="filter-btn" onclick="filt('revision',this)">📚 Révisions</button>
+    <button class="filter-btn" onclick="filt('bienetre',this)">💚 Bien-être</button>
+    <button class="filter-btn" onclick="filt('citoyennete',this)">🏛 Citoyenneté</button>
+    <button class="filter-btn" onclick="filt('viescolaire',this)">🏫 Vie scolaire</button>
+    <button class="filter-btn" onclick="filt('app',this)">📱 Applications</button>
+  </div>
+
+  <div class="count" id="count"></div>
+  <div id="results"></div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+</div>
+
+<script>
+const DATA=[
+  {cat:'orientation',name:'Imagine ton futur',desc:'Quiz métiers et témoignages vidéo de professionnels — très apprécié des collégiens',url:'https://imaginetonfutur.com',type:'site'},
+  {cat:'orientation',name:'Mon orientation en ligne',desc:'Chat gratuit avec des conseillers orientation de l\'Éducation nationale',url:'https://www.monorientationenligne.fr',type:'site'},
+  {cat:'orientation',name:'ONISEP',desc:'Formations, métiers et parcours après la 3e — site officiel',url:'https://www.onisep.fr',type:'site'},
+  {cat:'orientation',name:'La Bonne Alternance',desc:'Trouver des entreprises pour l\'apprentissage près de chez toi',url:'https://labonnealternance.apprentissage.beta.gouv.fr',type:'site'},
+  {cat:'orientation',name:'Parcoursup',desc:'Découvre dès la 3e ce qui existe après le lycée',url:'https://www.parcoursup.gouv.fr',type:'site'},
+  {cat:'orientation',name:'Jobready',desc:'Simulations d\'entretien et préparation au monde du travail pour les jeunes',url:'https://www.jobready.fr',type:'app'},
+  {cat:'revision',name:'Khan Academy',desc:'Maths, physique, histoire — exercices interactifs gratuits, niveau collège complet',url:'https://fr.khanacademy.org',type:'site'},
+  {cat:'revision',name:'Lumni Collège',desc:'Vidéos pédagogiques par matière produites par France Télévisions — gratuit',url:'https://www.lumni.fr/college',type:'video'},
+  {cat:'revision',name:'Kartable',desc:'Fiches de révision et exercices interactifs niveau 3e — interface moderne',url:'https://www.kartable.fr',type:'site'},
+  {cat:'revision',name:'Annales Brevet',desc:'Sujets corrigés des DNB des années précédentes — incontournable',url:'https://www.annales.com/brevet',type:'site'},
+  {cat:'revision',name:'Quizlet',desc:'Flashcards pour réviser vocabulaire, dates, formules — gratuit',url:'https://quizlet.com',type:'app'},
+  {cat:'revision',name:'Photomath',desc:'Résolution de problèmes maths en photo avec explication des étapes',url:'https://photomath.com',type:'app'},
+  {cat:'revision',name:'GeoGebra',desc:'Constructions géométriques et graphiques en maths — gratuit',url:'https://www.geogebra.org',type:'app'},
+  {cat:'revision',name:'C\'est pas sorcier',desc:'Vidéos pédagogiques sur tous les thèmes du programme collège — YouTube',url:'https://www.youtube.com/@cestpassorcier',type:'video'},
+  {cat:'bienetre',name:'Fil Santé Jeunes',desc:'Santé mentale, confiance en soi, gestion du stress pour les 12-25 ans',url:'https://www.filsantejeunes.com',type:'site'},
+  {cat:'bienetre',name:'Petit Bambou',desc:'Méditation guidée, version gratuite disponible — idéal avant le DNB',url:'https://www.petitbambou.com',type:'app'},
+  {cat:'bienetre',name:'Respirelax',desc:'Cohérence cardiaque — technique de respiration 3-6-5 pour gérer l\'anxiété',url:'https://www.respirelax.fr',type:'app'},
+  {cat:'bienetre',name:'Forest',desc:'Application anti-téléphone pour rester concentré pendant les révisions',url:'https://www.forestapp.cc',type:'app'},
+  {cat:'citoyennete',name:'Educivisme',desc:'Rôle des délégués, CVL, élections scolaires — ressources citoyenneté',url:'https://www.educivisme.fr',type:'site'},
+  {cat:'citoyennete',name:'Vie-publique.fr',desc:'Fiches sur la démocratie, les institutions, les droits citoyens — parfait pour l\'EMC et l\'oral DNB',url:'https://www.vie-publique.fr',type:'site'},
+  {cat:'citoyennete',name:'1jour1actu',desc:'Actualité expliquée aux jeunes — fake news, IA, environnement',url:'https://www.1jour1actu.com',type:'site'},
+  {cat:'citoyennete',name:'Non au harcèlement',desc:'Site officiel contre le harcèlement — numéro 3020',url:'https://www.nonauharcelement.education.gouv.fr',type:'site'},
+  {cat:'viescolaire',name:'Respect Zone',desc:'Contre le cyberharcèlement — ressources interactives pour les jeunes',url:'https://www.respectzone.org',type:'site'},
+  {cat:'viescolaire',name:'e-Enfance',desc:'Protection des jeunes sur internet — numéro 3018 pour les victimes',url:'https://www.e-enfance.org',type:'site'},
+  {cat:'viescolaire',name:'ClassDojo',desc:'Suivi de la vie de classe et communication école-famille',url:'https://www.classdojo.com',type:'app'},
+  {cat:'app',name:'Notion',desc:'Organisation perso et fiches de révision — gratuit pour les élèves',url:'https://www.notion.so',type:'app'},
+  {cat:'app',name:'Todoist',desc:'Gestion des devoirs et agenda — simple et efficace',url:'https://todoist.com',type:'app'},
+  {cat:'app',name:'Padlet',desc:'Travail collaboratif en classe — mur d\'idées interactif',url:'https://padlet.com',type:'outil'},
+  {cat:'app',name:'Wooclap',desc:'Quiz en temps réel en classe — idéal pour les révisions collectives',url:'https://www.wooclap.com',type:'outil'},
+  {cat:'app',name:'Anki',desc:'Système de répétition espacée pour mémoriser durablement',url:'https://apps.ankiweb.net',type:'app'},
+];
+
+const CATS={orientation:'🎯 Orientation & métiers',revision:'📚 Révisions & DNB',bienetre:'💚 Bien-être & estime de soi',citoyennete:'🏛 Citoyenneté & vie démocratique',viescolaire:'🏫 Vie scolaire & comportements',app:'📱 Applications utiles'};
+const BADGE={site:{cls:'b-site',label:'Site'},app:{cls:'b-app',label:'App'},video:{cls:'b-video',label:'Vidéo'},outil:{cls:'b-outil',label:'Outil'}};
+let af='all';
+
+function filt(f,btn){
+  af=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  render();
+}
+
+function render(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const filtered=DATA.filter(d=>{
+    const mc=af==='all'||d.cat===af;
+    const mq=!q||d.name.toLowerCase().includes(q)||d.desc.toLowerCase().includes(q);
+    return mc&&mq;
+  });
+  document.getElementById('count').textContent=filtered.length+' ressource'+(filtered.length>1?'s':'')+' trouvée'+(filtered.length>1?'s':'');
+  if(!filtered.length){document.getElementById('results').innerHTML='<div class="empty">Aucune ressource trouvée.</div>';return;}
+  const byCat={};
+  filtered.forEach(d=>{if(!byCat[d.cat])byCat[d.cat]=[];byCat[d.cat].push(d);});
+  let html='';
+  Object.keys(byCat).forEach(cat=>{
+    if(af==='all')html+=`<div class="cat-title">${CATS[cat]}</div>`;
+    html+='<div class="cards">';
+    byCat[cat].forEach(d=>{
+      const b=BADGE[d.type]||BADGE.site;
+      html+=`<a class="card" href="${d.url}" target="_blank" rel="noopener">
+        <div class="card-top"><span class="card-icon">🔗</span><span class="card-badge ${b.cls}">${b.label}</span></div>
+        <div class="card-name">${d.name}</div>
+        <div class="card-desc">${d.desc}</div>
+        <div class="card-url">${d.url.replace('https://','')}</div>
+      </a>`;
+    });
+    html+='</div>';
+  });
+  document.getElementById('results').innerHTML=html;
+}
+render();
+</script>
+</body>
+</html>

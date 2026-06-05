@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le DNB — Fiche de préparation 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--teal:#1D9E75;--teal-l:#E1F5EE;--teal-m:#9FE1CB;--teal-d:#085041}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--teal-l:#0d3326;--teal-m:#1a5c42}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:640px;margin:2rem auto;padding:1.75rem}
+  .fiche-header{background:var(--teal-l);border:1.5px solid var(--teal);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:center;gap:12px}
+  .fiche-title{font-size:17px;font-weight:600;color:var(--teal-d);margin-bottom:4px}
+  .fiche-date{font-size:12px;color:#0F6E56;background:var(--teal-m);padding:3px 10px;border-radius:10px;display:inline-block}
+  .section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .section-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:.75rem}
+  .col-header{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;padding:0 10px;display:grid;grid-template-columns:1fr 60px 60px;gap:8px;margin-bottom:4px}
+  .epreuve-row{display:grid;grid-template-columns:1fr 60px 60px;gap:8px;align-items:center;padding:8px 10px;border-radius:var(--radius-sm);border:0.5px solid var(--border);background:var(--bg2);margin-bottom:6px}
+  .epreuve-row.hl{background:var(--teal-l);border-color:var(--teal-m)}
+  .epreuve-name{font-size:13px;font-weight:500;color:var(--text)}
+  .epreuve-detail{font-size:11px;color:var(--text2);margin-top:1px}
+  .epreuve-coef{font-size:13px;font-weight:600;color:var(--teal-d);text-align:center}
+  .epreuve-duree{font-size:12px;color:var(--text2);text-align:center}
+  .recap-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:.75rem}
+  .recap-card{background:var(--bg2);border-radius:var(--radius-sm);padding:10px;text-align:center}
+  .recap-val{font-size:20px;font-weight:600;color:var(--text);margin-bottom:2px}
+  .recap-label{font-size:11px;color:var(--text2)}
+  .recap-card.green{background:var(--teal-l)}
+  .recap-card.green .recap-val{color:var(--teal-d)}
+  .sim-row{display:flex;gap:10px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+  .sim-label{font-size:13px;color:var(--text);min-width:130px}
+  .sim-input{width:70px;padding:6px 8px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;text-align:center;background:var(--bg2);color:var(--text)}
+  .sim-coef{font-size:12px;color:var(--text2)}
+  .sim-result{border-radius:var(--radius-sm);padding:10px 14px;display:flex;align-items:baseline;gap:8px;margin-top:.5rem;display:none}
+  .sim-result.pass{background:var(--teal-l);border:0.5px solid var(--teal-m)}
+  .sim-result.fail{background:#FCEBEB;border:0.5px solid #F09595}
+  .sim-val{font-size:22px;font-weight:600}
+  .sim-result.pass .sim-val{color:var(--teal-d)}
+  .sim-result.fail .sim-val{color:#A32D2D}
+  .sim-msg{font-size:13px}
+  .sim-result.pass .sim-msg{color:#0F6E56}
+  .sim-result.fail .sim-msg{color:#791F1F}
+  .oral-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .oral-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px;cursor:pointer;transition:background .15s}
+  .oral-item:hover{background:var(--teal-l);border-color:var(--teal-m)}
+  .oral-item.sel{background:var(--teal-l);border-color:var(--teal);border-width:1.5px}
+  .oral-num{font-size:10px;color:var(--text3);margin-bottom:2px}
+  .oral-text{font-size:12px;color:var(--text);line-height:1.35}
+  .oral-item.sel .oral-text{color:var(--teal-d);font-weight:500}
+  .progress-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:4px}
+  .progress-bar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:.75rem}
+  .progress-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .3s}
+  .checklist{display:flex;flex-direction:column;gap:8px}
+  .check-item{display:flex;align-items:flex-start;gap:10px;padding:6px 8px;border-radius:var(--radius-sm)}
+  .check-item input{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--teal);cursor:pointer}
+  .check-item label{font-size:14px;color:var(--text);cursor:pointer;line-height:1.4}
+  .check-item input:checked+label{color:var(--text3);text-decoration:line-through}
+  .write-label{font-size:12px;color:var(--text2);margin-bottom:4px;display:block;margin-top:.75rem}
+  textarea{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:10px 12px;font-size:14px;font-family:inherit;color:var(--text);background:var(--bg2);resize:vertical;min-height:65px;line-height:1.5}
+  textarea:focus{outline:none;border-color:var(--teal)}
+  .famille-box{background:var(--teal-l);border:0.5px solid var(--teal-m);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .famille-title{font-size:13px;font-weight:600;color:var(--teal-d);margin-bottom:.6rem}
+  .q-item{display:flex;gap:8px;font-size:13px;color:#0F6E56;line-height:1.5;margin-bottom:5px}
+  .q-item::before{content:'?';font-weight:700;color:var(--teal);flex-shrink:0}
+  .conseil-box{background:var(--bg2);border-left:3px solid #7F77DD;padding:.75rem 1rem;margin-bottom:.75rem;border-radius:0}
+  .conseil-box p{font-size:13px;color:var(--text2);line-height:1.6}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.oral-grid{grid-template-columns:1fr}.recap-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">🎓</div>
+    <div>
+      <div class="header-title">Le Diplôme National du Brevet (DNB)</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="fiche-header">
+    <span style="font-size:28px;flex-shrink:0">🎓</span>
+    <div>
+      <div class="fiche-title">Le Diplôme National du Brevet (DNB)</div>
+      <span class="fiche-date">📅 25 – 26 juin 2026</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📊 Les épreuves en un coup d'œil</div>
+    <div class="col-header"><span>Épreuve</span><span style="text-align:center">Coef.</span><span style="text-align:center">Durée</span></div>
+    <div class="epreuve-row hl"><div><div class="epreuve-name">Français</div><div class="epreuve-detail">Compréhension, grammaire, dictée, rédaction</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">3h</div></div>
+    <div class="epreuve-row hl"><div><div class="epreuve-name">Mathématiques</div><div class="epreuve-detail">Exercices, raisonnement, algorithmique</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">2h</div></div>
+    <div class="epreuve-row"><div><div class="epreuve-name">Histoire-Géographie + EMC</div><div class="epreuve-detail">Analyse de docs, repères, valeurs citoyennes</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">2h</div></div>
+    <div class="epreuve-row"><div><div class="epreuve-name">Sciences (2 sur 3)</div><div class="epreuve-detail">SVT, Physique-Chimie ou Technologie</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">1h</div></div>
+    <div class="epreuve-row hl"><div><div class="epreuve-name">Oral — soutenance de projet</div><div class="epreuve-detail">5 min exposé + 10 min entretien avec le jury</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">15 min</div></div>
+  </div>
+
+  <div class="recap-grid">
+    <div class="recap-card green"><div class="recap-val">60%</div><div class="recap-label">Épreuves finales</div></div>
+    <div class="recap-card"><div class="recap-val">40%</div><div class="recap-label">Contrôle continu</div></div>
+    <div class="recap-card green"><div class="recap-val">10/20</div><div class="recap-label">Moyenne requise</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🧮 Simule ta note du brevet</div>
+    <div class="sim-row"><span class="sim-label">Français</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-fr" oninput="calc()"><span class="sim-coef">× 2</span></div>
+    <div class="sim-row"><span class="sim-label">Mathématiques</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-ma" oninput="calc()"><span class="sim-coef">× 2</span></div>
+    <div class="sim-row"><span class="sim-label">Histoire-Géo</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-hi" oninput="calc()"><span class="sim-coef">× 2</span></div>
+    <div class="sim-row"><span class="sim-label">Sciences</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-sc" oninput="calc()"><span class="sim-coef">× 2</span></div>
+    <div class="sim-row"><span class="sim-label">Oral</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-or" oninput="calc()"><span class="sim-coef">× 2</span></div>
+    <div class="sim-row"><span class="sim-label">Contrôle continu</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-cc" oninput="calc()"><span class="sim-coef">moyenne annuelle</span></div>
+    <div id="sim-result" class="sim-result"><span class="sim-val" id="sim-val"></span><span class="sim-msg" id="sim-msg"></span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🎤 Mon sujet d'oral — je choisis</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:.75rem">Clique sur le sujet qui t'inspire le plus</div>
+    <div class="oral-grid">
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 1</div><div class="oral-text">En quoi la prolifération des fake news a changé notre manière de nous informer ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 2</div><div class="oral-text">En quoi les sciences peuvent-elles aider à résoudre une enquête criminelle ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 3</div><div class="oral-text">Quels sont les apports de l'Antiquité au fil des siècles ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 4</div><div class="oral-text">En quoi les arts et la société s'influencent-ils mutuellement ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 5</div><div class="oral-text">Le sport nous rend-il meilleur ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 6</div><div class="oral-text">En quoi mon histoire m'a-t-elle aidé à affiner mes choix d'orientation ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 7</div><div class="oral-text">Quel est l'impact de mon hygiène de vie sur ma santé ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 8</div><div class="oral-text">Lutter contre les discriminations : l'égalité homme-femme est-elle acquise ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 9</div><div class="oral-text">Dans quelles mesures ma pratique artistique m'a-t-elle permis de consolider mes compétences scolaires ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 10</div><div class="oral-text">Le greenwashing : une réponse adaptée aux enjeux environnementaux ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 11</div><div class="oral-text">L'intelligence artificielle est-elle au service de l'humanité ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 12</div><div class="oral-text">En quoi l'avenir est-il une source d'inspiration ?</div></div>
+    </div>
+    <span class="write-label">Mon sujet choisi et pourquoi</span>
+    <textarea rows="2" placeholder="Ce sujet me parle parce que…"></textarea>
+    <span class="write-label">Mon plan en 3 parties</span>
+    <textarea rows="3" placeholder="I. …&#10;II. …&#10;III. …"></textarea>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Ma checklist de préparation</div>
+    <div class="progress-top"><span>Ma progression</span><span id="dnb-pct">0 / 7</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="dnb-bar" style="width:0%"></div></div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox" id="d1" onchange="upd()"><label for="d1">J'ai révisé les fiches de français (grammaire, dictée)</label></div>
+      <div class="check-item"><input type="checkbox" id="d2" onchange="upd()"><label for="d2">J'ai revu mes formules et exercices de maths</label></div>
+      <div class="check-item"><input type="checkbox" id="d3" onchange="upd()"><label for="d3">J'ai travaillé mes repères en histoire-géographie</label></div>
+      <div class="check-item"><input type="checkbox" id="d4" onchange="upd()"><label for="d4">J'ai choisi mon sujet d'oral et construit mon plan</label></div>
+      <div class="check-item"><input type="checkbox" id="d5" onchange="upd()"><label for="d5">Je me suis entraîné(e) à l'oral devant quelqu'un</label></div>
+      <div class="check-item"><input type="checkbox" id="d6" onchange="upd()"><label for="d6">J'ai fait le DNB blanc et analysé mes erreurs</label></div>
+      <div class="check-item"><input type="checkbox" id="d7" onchange="upd()"><label for="d7">Je connais les dates et le lieu des épreuves</label></div>
+    </div>
+  </div>
+
+  <div class="famille-box">
+    <div class="famille-title">👨‍👩‍👧 À discuter en famille</div>
+    <div class="q-item">Comment t'organises-tu pour réviser ? As-tu besoin d'aide ?</div>
+    <div class="q-item">Sur quel sujet d'oral tu travailles et pourquoi tu l'as choisi ?</div>
+    <div class="q-item">Y a-t-il des matières où tu te sens moins à l'aise ?</div>
+    <div class="q-item">Comment peut-on t'aider à la maison pendant les révisions ?</div>
+  </div>
+
+  <div class="conseil-box">
+    <p>💡 <strong>Conseil du PP :</strong> Le DNB se prépare tout au long de l'année, pas seulement en juin. Chaque devoir compte dans le contrôle continu (40% de la note finale). Pour l'oral, choisis un sujet qui te touche vraiment — tu parleras avec bien plus de conviction !</p>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+</div>
+
+<script>
+function calc(){
+  const ids=['s-fr','s-ma','s-hi','s-sc','s-or'];
+  const vals=ids.map(id=>{const v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:v});
+  const cc=parseFloat(document.getElementById('s-cc').value);
+  const filled=vals.filter(v=>v!==null);
+  const res=document.getElementById('sim-result');
+  if(filled.length<2&&isNaN(cc)){res.style.display='none';return;}
+  let tot=0,coef=0;
+  vals.forEach(v=>{if(v!==null){tot+=v*2;coef+=2;}});
+  if(!isNaN(cc)){tot+=cc*8;coef+=8;}
+  const moy=tot/coef;
+  res.style.display='flex';
+  const pass=moy>=10;
+  res.className='sim-result '+(pass?'pass':'fail');
+  document.getElementById('sim-val').textContent=moy.toFixed(1)+'/20';
+  document.getElementById('sim-msg').textContent=pass?'Brevet obtenu si cette moyenne est confirmée !':'En dessous de 10/20 — encore un effort !';
+}
+function sel(el){document.querySelectorAll('.oral-item').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
+function upd(){
+  const boxes=document.querySelectorAll('.checklist input');
+  const n=[...boxes].filter(b=>b.checked).length;
+  document.getElementById('dnb-pct').textContent=n+' / '+boxes.length;
+  document.getElementById('dnb-bar').style.width=Math.round(n/boxes.length*100)+'%';
+}
+</script>
+</body>
+</html>

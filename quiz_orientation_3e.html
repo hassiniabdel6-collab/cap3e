@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz d'orientation — Après la 3e</title>
+<style>
+  /* === DROITS D'AUTEUR === */
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers */
+  /* Tous droits réservés. Reproduction interdite sans autorisation. */
+
+  :root {
+    --purple: #7F77DD;
+    --purple-light: #EEEDFE;
+    --purple-mid: #CECBF6;
+    --purple-dark: #3C3489;
+    --teal: #1D9E75;
+    --teal-light: #E1F5EE;
+    --teal-mid: #9FE1CB;
+    --teal-dark: #085041;
+    --amber: #BA7517;
+    --amber-light: #FAEEDA;
+    --amber-mid: #FAC775;
+    --amber-dark: #633806;
+    --bg: #ffffff;
+    --bg2: #f8f7f4;
+    --bg3: #f0efe9;
+    --text: #1a1a18;
+    --text2: #5f5e5a;
+    --text3: #888780;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1917;
+      --bg2: #222220;
+      --bg3: #2a2a27;
+      --text: #e8e6de;
+      --text2: #a8a79f;
+      --text3: #6f6e68;
+      --border: rgba(255,255,255,0.1);
+      --border2: rgba(255,255,255,0.18);
+      --purple-light: #2a2660;
+      --purple-mid: #3d3880;
+      --teal-light: #0d3326;
+      --teal-mid: #1a5c42;
+      --amber-light: #2e1f08;
+      --amber-mid: #6b4010;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg2);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0 3rem;
+  }
+
+  /* Header */
+  .header {
+    width: 100%;
+    background: var(--bg);
+    border-bottom: 0.5px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .header-left { display: flex; align-items: center; gap: 10px; }
+  .header-logo {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--purple-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .header-title { font-size: 15px; font-weight: 600; color: var(--text); }
+  .header-sub { font-size: 12px; color: var(--text2); }
+  .header-credit {
+    font-size: 11px; color: var(--text3);
+    text-align: right; line-height: 1.4;
+  }
+
+  /* Card container */
+  .card {
+    background: var(--bg);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 640px;
+    margin: 2rem 1rem 0;
+    padding: 2rem;
+  }
+
+  /* Progress */
+  .progress-wrap { margin-bottom: 1.75rem; }
+  .progress-top {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text3); margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 4px; background: var(--bg3);
+    border-radius: 2px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: var(--purple);
+    border-radius: 2px; transition: width 0.4s ease;
+  }
+
+  /* Question */
+  .question {
+    font-size: 19px; font-weight: 600;
+    line-height: 1.45; color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Choices */
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px;
+    border: 0.5px solid var(--border2);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    background: var(--bg);
+    user-select: none;
+  }
+  .choice:hover { background: var(--bg2); border-color: var(--purple); transform: translateX(2px); }
+  .choice.selected { background: var(--purple-light); border-color: var(--purple); }
+  .choice-emoji {
+    font-size: 22px; width: 34px; text-align: center;
+    flex-shrink: 0; filter: grayscale(0.3);
+  }
+  .choice.selected .choice-emoji { filter: none; }
+  .choice-text {
+    font-size: 15px; line-height: 1.35; color: var(--text);
+  }
+  .choice.selected .choice-text { color: var(--purple-dark); font-weight: 500; }
+
+  /* Nav */
+  .nav {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-top: 1.75rem;
+    gap: 10px;
+  }
+  .btn {
+    padding: 10px 22px; border-radius: var(--radius-sm);
+    border: 0.5px solid var(--border2);
+    background: transparent; cursor: pointer;
+    font-size: 14px; font-weight: 500; color: var(--text);
+    transition: background 0.15s, transform 0.1s;
+    font-family: inherit;
+  }
+  .btn:hover { background: var(--bg2); }
+  .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.3; cursor: default; transform: none; }
+  .btn-primary {
+    background: var(--purple); border-color: var(--purple-dark);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--purple-dark); }
+  .btn-primary:disabled { background: var(--purple); opacity: 0.3; }
+
+  /* Intro screen */
+  .intro-icon { font-size: 48px; margin-bottom: 1rem; display: block; }
+  .intro-title { font-size: 24px; font-weight: 700; margin-bottom: .5rem; }
+  .intro-sub { font-size: 15px; color: var(--text2); margin-bottom: 1.5rem; line-height: 1.6; }
+  .intro-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.75rem; }
+  .tag {
+    padding: 5px 12px; border-radius: 20px;
+    font-size: 12px; font-weight: 500;
+    background: var(--bg3); color: var(--text2);
+  }
+
+  /* Result */
+  .result-banner {
+    border-radius: var(--radius-sm); padding: 1.5rem;
+    text-align: center; margin-bottom: 1.5rem;
+    border: 1.5px solid;
+  }
+  .result-badge {
+    display: inline-block; padding: 4px 14px;
+    border-radius: 20px; font-size: 12px; font-weight: 600;
+    margin-bottom: .75rem; letter-spacing: 0.5px;
+  }
+  .result-title { font-size: 21px; font-weight: 700; margin-bottom: .4rem; }
+  .result-sub { font-size: 14px; opacity: 0.85; }
+
+  .section-label {
+    font-size: 12px; font-weight: 600; color: var(--text3);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin: 1.25rem 0 .6rem;
+  }
+
+  /* Score bars */
+  .score-item { margin-bottom: 12px; }
+  .score-header {
+    display: flex; justify-content: space-between;
+    font-size: 14px; margin-bottom: 4px; font-weight: 500;
+  }
+  .score-pct { font-size: 13px; color: var(--text2); }
+  .score-bar { height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
+
+  /* Traits */
+  .traits { display: flex; flex-wrap: wrap; gap: 8px; }
+  .trait {
+    padding: 5px 13px; border-radius: 20px;
+    font-size: 13px; font-weight: 500;
+    background: var(--bg3); color: var(--text2);
+  }
+
+  /* Pistes */
+  .piste {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px;
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px; margin-bottom: 8px;
+  }
+  .piste-icon { font-size: 20px; flex-shrink: 0; }
+
+  /* Next steps */
+  .next-box {
+    background: var(--bg2); border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem; margin: 1.25rem 0;
+    border-left: 3px solid var(--purple); border-radius: 0;
+  }
+  .next-box p { font-size: 14px; line-height: 1.6; color: var(--text2); }
+
+  /* Family encadré */
+  .famille-box {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+  }
+  .famille-title { font-size: 13px; font-weight: 600; margin-bottom: .5rem; color: var(--text); }
+  .famille-list { font-size: 13px; color: var(--text2); line-height: 1.8; }
+
+  /* Footer credit */
+  .footer-credit {
+    text-align: center; font-size: 11px; color: var(--text3);
+    margin-top: 1.5rem; padding-top: 1rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .divider { height: 0.5px; background: var(--border); margin: 1.25rem 0; }
+
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem; }
+
+  @media (max-width: 480px) {
+    .card { margin: 1rem 0.5rem 0; padding: 1.25rem; }
+    .question { font-size: 16px; }
+    .choice-text { font-size: 14px; }
+    .result-title { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">🎯</div>
+    <div>
+      <div class="header-title">Mon orientation après la 3e</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <!-- INTRO -->
+  <div id="intro-screen">
+    <span class="intro-icon">🧭</span>
+    <div class="intro-title">Quel est ton profil d'orientation ?</div>
+    <div class="intro-sub">
+      Réponds honnêtement à 9 questions courtes sur tes goûts, ta façon de travailler et tes projets.<br>
+      On te propose ensuite la voie qui te correspond le mieux.
+    </div>
+    <div class="intro-tags">
+      <span class="tag">⏱ 3 minutes</span>
+      <span class="tag">9 questions</span>
+      <span class="tag">Aucune bonne ou mauvaise réponse</span>
+      <span class="tag">Résultat immédiat</span>
+    </div>
+    <button class="btn btn-primary" onclick="startQuiz()" style="width:100%;padding:14px;font-size:16px;">
+      Commencer le quiz →
+    </button>
+    <div class="footer-credit">
+      © A. Hassini — Collège Guy Môquet, Gennevilliers | Édition 2026-2027<br>
+      Reproduction et diffusion interdites sans autorisation de l'auteur.
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz-screen" style="display:none">
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <span id="step-label">Question 1 sur 9</span>
+        <span id="step-pct">11%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress" style="width:11%"></div>
+      </div>
+    </div>
+    <div class="question" id="question-text"></div>
+    <div class="choices" id="choices"></div>
+    <div class="nav">
+      <button class="btn" id="btn-prev" onclick="prevQ()">← Retour</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQ()" disabled>Suivant →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result-screen" style="display:none">
+    <div class="result-banner" id="result-banner"></div>
+
+    <div class="section-label">Tes scores par voie</div>
+    <div id="score-bars"></div>
+
+    <div class="section-label">Tes traits dominants</div>
+    <div class="traits" id="traits"></div>
+
+    <div class="section-label">Pistes à explorer</div>
+    <div id="pistes"></div>
+
+    <div class="next-box" id="next-box"></div>
+
+    <div id="famille-box-wrap"></div>
+
+    <div class="divider"></div>
+    <div class="result-actions">
+      <button class="btn" onclick="restart()">↺ Recommencer</button>
+      <button class="btn" onclick="window.print()">🖨 Imprimer mon résultat</button>
+    </div>
+
+    <div class="footer-credit">
+      © A. Hassini — Collège Guy Môquet, Gennevilliers | Édition 2026-2027<br>
+      Reproduction et diffusion interdites sans autorisation de l'auteur.
+    </div>
+  </div>
+
+</div>
+
+<script>
+const Q = [
+  {
+    text: "Quand tu imagines ta future journée de travail idéale, tu te vois plutôt...",
+    choices: [
+      {emoji:"💻", label:"Analyser, réfléchir, résoudre des problèmes complexes", scores:{GT:3,Pro:0,CAP:0}},
+      {emoji:"🔧", label:"Créer, fabriquer, travailler avec tes mains", scores:{GT:0,Pro:1,CAP:3}},
+      {emoji:"🤝", label:"Aider, conseiller, être en contact avec les gens", scores:{GT:1,Pro:2,CAP:2}},
+      {emoji:"📋", label:"Gérer, organiser, coordonner une activité", scores:{GT:1,Pro:3,CAP:1}},
+    ]
+  },
+  {
+    text: "En cours, ce qui te plaît le plus c'est...",
+    choices: [
+      {emoji:"📚", label:"Les matières générales : maths, français, sciences...", scores:{GT:3,Pro:0,CAP:0}},
+      {emoji:"🛠", label:"Les ateliers, la techno, les projets pratiques", scores:{GT:0,Pro:1,CAP:3}},
+      {emoji:"🎤", label:"Les exposés, les débats, l'oral", scores:{GT:2,Pro:1,CAP:1}},
+      {emoji:"🌍", label:"Voir à quoi ça sert concrètement dans la vraie vie", scores:{GT:0,Pro:3,CAP:2}},
+    ]
+  },
+  {
+    text: "Après le lycée, tu te projettes plutôt...",
+    choices: [
+      {emoji:"🎓", label:"À l'université ou en école (études longues)", scores:{GT:3,Pro:0,CAP:0}},
+      {emoji:"📜", label:"En BTS ou formation courte après le bac", scores:{GT:1,Pro:3,CAP:0}},
+      {emoji:"💼", label:"Directement dans le monde du travail", scores:{GT:0,Pro:1,CAP:3}},
+      {emoji:"🤔", label:"Je ne sais pas encore, j'ai besoin de temps", scores:{GT:2,Pro:1,CAP:0}},
+    ]
+  },
+  {
+    text: "Face à un problème difficile, tu as tendance à...",
+    choices: [
+      {emoji:"🔍", label:"Chercher, lire, analyser jusqu'à trouver la solution", scores:{GT:3,Pro:0,CAP:0}},
+      {emoji:"✋", label:"Essayer directement, quitte à recommencer", scores:{GT:0,Pro:1,CAP:3}},
+      {emoji:"💬", label:"Demander de l'aide à quelqu'un de plus expérimenté", scores:{GT:0,Pro:2,CAP:2}},
+      {emoji:"📝", label:"Décomposer le problème étape par étape", scores:{GT:2,Pro:3,CAP:1}},
+    ]
+  },
+  {
+    text: "Tes matières préférées sont plutôt...",
+    choices: [
+      {emoji:"🔢", label:"Maths, physique, sciences", scores:{GT:3,Pro:1,CAP:0}},
+      {emoji:"✍️", label:"Français, langues, histoire", scores:{GT:3,Pro:0,CAP:0}},
+      {emoji:"💰", label:"Économie, gestion, commerce", scores:{GT:1,Pro:3,CAP:1}},
+      {emoji:"🎨", label:"Technologie, arts plastiques, EPS", scores:{GT:0,Pro:2,CAP:3}},
+    ]
+  },
+  {
+    text: "Pendant ton temps libre, tu préfères...",
+    choices: [
+      {emoji:"🎮", label:"Créer, coder, dessiner, composer", scores:{GT:1,Pro:2,CAP:3}},
+      {emoji:"⚽", label:"Faire du sport ou des activités manuelles", scores:{GT:0,Pro:1,CAP:3}},
+      {emoji:"📖", label:"Lire, regarder des documentaires, apprendre", scores:{GT:3,Pro:0,CAP:0}},
+      {emoji:"👥", label:"Organiser des sorties, être avec les autres", scores:{GT:1,Pro:3,CAP:1}},
+    ]
+  },
+  {
+    text: "Quand on te confie une tâche, tu aimes surtout...",
+    choices: [
+      {emoji:"🧩", label:"Comprendre la théorie avant de commencer", scores:{GT:3,Pro:0,CAP:0}},
+      {emoji:"⭐", label:"Qu'on te laisse de l'autonomie pour la faire à ta façon", scores:{GT:1,Pro:2,CAP:3}},
+      {emoji:"👫", label:"Travailler en équipe avec des camarades", scores:{GT:1,Pro:3,CAP:2}},
+      {emoji:"⚡", label:"Avoir un résultat concret et rapide", scores:{GT:0,Pro:2,CAP:3}},
+    ]
+  },
+  {
+    text: "Pour toi, réussir dans ta vie professionnelle c'est...",
+    choices: [
+      {emoji:"🏆", label:"Avoir un métier reconnu et bien payé", scores:{GT:3,Pro:1,CAP:0}},
+      {emoji:"❤️", label:"Exercer un métier qui te passionne vraiment", scores:{GT:1,Pro:2,CAP:3}},
+      {emoji:"🚀", label:"Créer ta propre entreprise un jour", scores:{GT:1,Pro:3,CAP:2}},
+      {emoji:"🏘", label:"Être utile aux autres et à la société", scores:{GT:2,Pro:2,CAP:1}},
+    ]
+  },
+  {
+    text: "Ton stage de 3e, tu aimerais le faire dans...",
+    choices: [
+      {emoji:"🏥", label:"Un hôpital, une école, un bureau d'études", scores:{GT:3,Pro:1,CAP:0}},
+      {emoji:"🏪", label:"Un commerce, une agence, une entreprise de services", scores:{GT:1,Pro:3,CAP:1}},
+      {emoji:"👨‍🍳", label:"Un restaurant, un salon, un atelier artisanal", scores:{GT:0,Pro:1,CAP:3}},
+      {emoji:"🏭", label:"Une usine, un chantier, un garage", scores:{GT:0,Pro:2,CAP:3}},
+    ]
+  },
+];
+
+const PROFILES = {
+  GT: {
+    label:"Voie générale et technologique",
+    badge:"Générale / Techno",
+    color: "#EEEDFE", borderColor:"#7F77DD", textColor:"#3C3489", badgeBg:"#CECBF6",
+    barColor:"#7F77DD",
+    title:"Tu as le profil Générale & Technologique",
+    sub:"Tu aimes réfléchir, apprendre, et tu te projettes dans des études longues.",
+    traits:["Curieux(se)","À l'aise à l'écrit","Logique","Autonome","Tourné(e) vers l'avenir"],
+    pistes:[
+      {emoji:"🔬", label:"Sciences & technologies (STI2D, STL)"},
+      {emoji:"📊", label:"Économie & gestion (STMG)"},
+      {emoji:"❤️‍🩹", label:"Santé & social (ST2S)"},
+    ],
+    next:"En 2GT, tu découvres les matières sans te spécialiser tout de suite. Tu choisis ton bac (général ou techno) en fin d'année. Si tu habites à Gennevilliers, ton lycée de secteur est le lycée Galilée.",
+    famille:"Si tu hésites encore, la Seconde @venir (lycée René Auffray, Clichy) est une 2GT avec un accompagnement renforcé pour construire ton projet d'orientation.",
+  },
+  Pro: {
+    label:"Voie professionnelle",
+    badge:"Bac Professionnel",
+    color:"#E1F5EE", borderColor:"#1D9E75", textColor:"#085041", badgeBg:"#9FE1CB",
+    barColor:"#1D9E75",
+    title:"Tu as le profil Bac Professionnel",
+    sub:"Tu aimes apprendre en faisant, alterner cours et pratique, voir des résultats concrets.",
+    traits:["Concret(e)","Organisé(e)","Dynamique","Esprit d'équipe","Pragmatique"],
+    pistes:[
+      {emoji:"🛒", label:"Commerce & relation client"},
+      {emoji:"💻", label:"Numérique & transitions énergétiques"},
+      {emoji:"🏗", label:"Construction, industrie, logistique"},
+    ],
+    next:"En Seconde Pro, tu rejoins une famille de métiers et tu choisis ta spécialité en fin d'année. Pas de sectorisation : tu postules aux lycées de ton choix. Tu peux changer de voie avant la Toussaint si tu te rends compte que ce n'est pas fait pour toi.",
+    famille:"Il existe 14 familles de métiers en Seconde Pro. Renseigne-toi sur bv.ac-versailles.fr pour trouver les formations disponibles près de chez toi.",
+  },
+  CAP: {
+    label:"CAP",
+    badge:"CAP",
+    color:"#FAEEDA", borderColor:"#BA7517", textColor:"#633806", badgeBg:"#FAC775",
+    barColor:"#BA7517",
+    title:"Tu as le profil CAP",
+    sub:"Tu veux entrer rapidement dans un métier précis et apprendre surtout par la pratique.",
+    traits:["Manuel(le)","Patient(e)","Précis(e)","Passionné(e)","Ancré(e) dans le concret"],
+    pistes:[
+      {emoji:"👨‍🍳", label:"Cuisine, boulangerie, pâtisserie"},
+      {emoji:"✂️", label:"Coiffure, esthétique, bien-être"},
+      {emoji:"🚗", label:"Mécanique, carrosserie, bâtiment"},
+    ],
+    next:"Le CAP se prépare en 2 ans dans un métier précis. Choisis une spécialité qui te motive vraiment — tu réussiras mieux. Attention : certaines spécialités sont très demandées, pense à prévoir des vœux de sécurisation. Tu pourras ensuite continuer en bac pro si tu le souhaites.",
+    famille:"Tu peux formuler jusqu'à 15 vœux (10 dans l'académie, 5 hors académie). 1 vœu = 1 établissement + 1 formation. Discutes-en avec ton professeur principal.",
+  },
+};
+
+let current = 0;
+let answers = Array(Q.length).fill(null);
+
+function startQuiz() {
+  document.getElementById('intro-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  render();
+}
+
+function render() {
+  const q = Q[current];
+  const pct = Math.round(((current + 1) / Q.length) * 100);
+  document.getElementById('step-label').textContent = `Question ${current + 1} sur ${Q.length}`;
+  document.getElementById('step-pct').textContent = pct + '%';
+  document.getElementById('progress').style.width = pct + '%';
+  document.getElementById('question-text').textContent = q.text;
+
+  const c = document.getElementById('choices');
+  c.innerHTML = '';
+  q.choices.forEach((ch, i) => {
+    const div = document.createElement('div');
+    div.className = 'choice' + (answers[current] === i ? ' selected' : '');
+    div.innerHTML = `<span class="choice-emoji">${ch.emoji}</span><span class="choice-text">${ch.label}</span>`;
+    div.onclick = () => select(i);
+    c.appendChild(div);
+  });
+
+  document.getElementById('btn-prev').disabled = current === 0;
+  document.getElementById('btn-next').disabled = answers[current] === null;
+  document.getElementById('btn-next').textContent = current === Q.length - 1 ? 'Voir mon profil ✓' : 'Suivant →';
+}
+
+function select(i) {
+  answers[current] = i;
+  document.querySelectorAll('.choice').forEach((el, idx) => el.classList.toggle('selected', idx === i));
+  document.getElementById('btn-next').disabled = false;
+}
+
+function nextQ() {
+  if (answers[current] === null) return;
+  if (current < Q.length - 1) { current++; render(); }
+  else showResult();
+}
+
+function prevQ() {
+  if (current > 0) { current--; render(); }
+}
+
+function showResult() {
+  const scores = { GT: 0, Pro: 0, CAP: 0 };
+  answers.forEach((a, qi) => {
+    if (a !== null) {
+      const s = Q[qi].choices[a].scores;
+      Object.keys(s).forEach(k => scores[k] += s[k]);
+    }
+  });
+  const total = Object.values(scores).reduce((a, b) => a + b, 0) || 1;
+  const winner = Object.keys(scores).reduce((a, b) => scores[a] >= scores[b] ? a : b);
+  const p = PROFILES[winner];
+
+  document.getElementById('quiz-screen').style.display = 'none';
+  document.getElementById('result-screen').style.display = 'block';
+
+  // Banner
+  document.getElementById('result-banner').style.cssText =
+    `background:${p.color};border-color:${p.borderColor}`;
+  document.getElementById('result-banner').innerHTML = `
+    <div class="result-badge" style="background:${p.badgeBg};color:${p.textColor}">${p.badge}</div>
+    <div class="result-title" style="color:${p.textColor}">${p.title}</div>
+    <div class="result-sub" style="color:${p.textColor}">${p.sub}</div>
+  `;
+
+  // Score bars
+  const sb = document.getElementById('score-bars');
+  sb.innerHTML = '';
+  const labels = { GT: 'Générale & Techno', Pro: 'Bac Professionnel', CAP: 'CAP' };
+  const colors = { GT: '#7F77DD', Pro: '#1D9E75', CAP: '#BA7517' };
+  ['GT','Pro','CAP'].forEach(k => {
+    const pct = Math.round(scores[k] / total * 100);
+    sb.innerHTML += `
+      <div class="score-item">
+        <div class="score-header">
+          <span>${labels[k]}</span>
+          <span class="score-pct">${pct}%</span>
+        </div>
+        <div class="score-bar">
+          <div class="score-fill" style="width:${pct}%;background:${colors[k]}"></div>
+        </div>
+      </div>`;
+  });
+
+  // Traits
+  document.getElementById('traits').innerHTML =
+    p.traits.map(t => `<span class="trait">${t}</span>`).join('');
+
+  // Pistes
+  document.getElementById('pistes').innerHTML =
+    p.pistes.map(f => `
+      <div class="piste">
+        <span class="piste-icon">${f.emoji}</span>
+        <span>${f.label}</span>
+      </div>`).join('');
+
+  // Next
+  document.getElementById('next-box').innerHTML =
+    `<p><strong>👉 Et maintenant ?</strong><br>${p.next}</p>`;
+
+  // Famille
+  document.getElementById('famille-box-wrap').innerHTML = `
+    <div class="famille-box">
+      <div class="famille-title">💡 Bon à savoir</div>
+      <div class="famille-list">${p.famille}</div>
+    </div>`;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restart() {
+  current = 0;
+  answers = Array(Q.length).fill(null);
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('intro-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>

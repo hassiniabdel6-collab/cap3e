@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon stage de découverte — 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--amber:#BA7517;--amber-light:#FAEEDA;--amber-mid:#FAC775;--amber-dark:#633806}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--amber-light:#2e1f08;--amber-mid:#6b4010}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--amber-light);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:640px;margin:2rem auto;padding:1.75rem}
+  .fiche-header{background:var(--amber-light);border:1.5px solid var(--amber);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:1rem;display:flex;align-items:center;gap:12px}
+  .fiche-icon{font-size:28px;flex-shrink:0}
+  .fiche-title{font-size:17px;font-weight:600;color:var(--amber-dark);margin-bottom:4px}
+  .fiche-date{font-size:12px;color:#854F0B;background:var(--amber-mid);padding:3px 10px;border-radius:10px;display:inline-block}
+  .section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .section-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:.75rem;display:flex;align-items:center;gap:6px}
+  .progress-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:4px}
+  .progress-bar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:.75rem}
+  .progress-fill{height:100%;background:var(--amber);border-radius:3px;transition:width .3s}
+  .checklist{display:flex;flex-direction:column;gap:8px}
+  .check-item{display:flex;align-items:flex-start;gap:10px;padding:6px 8px;border-radius:var(--radius-sm)}
+  .check-item input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--amber);cursor:pointer}
+  .check-item label{font-size:14px;color:var(--text);cursor:pointer;line-height:1.4}
+  .check-item input:checked+label{color:var(--text3);text-decoration:line-through}
+  .write-label{font-size:12px;color:var(--text2);margin-bottom:4px;display:block;margin-top:.75rem}
+  .write-label:first-child{margin-top:0}
+  textarea{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:10px 12px;font-size:14px;font-family:inherit;color:var(--text);background:var(--bg2);resize:vertical;min-height:70px;line-height:1.5}
+  textarea:focus{outline:none;border-color:var(--amber)}
+  .famille-box{background:var(--amber-light);border:0.5px solid #EF9F27;border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .famille-title{font-size:13px;font-weight:600;color:var(--amber-dark);margin-bottom:.6rem}
+  .question-item{display:flex;gap:8px;font-size:13px;color:#854F0B;line-height:1.5;margin-bottom:5px}
+  .question-item::before{content:'?';font-weight:700;color:var(--amber);flex-shrink:0}
+  .rapport-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:.5rem}
+  .rapport-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px}
+  .rapport-num{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.3px;margin-bottom:2px}
+  .rapport-label{font-size:13px;color:var(--text)}
+  .conseil-box{background:var(--bg2);border-left:3px solid #7F77DD;padding:.75rem 1rem;margin-bottom:.75rem}
+  .conseil-box p{font-size:13px;color:var(--text2);line-height:1.6}
+  .stars{display:flex;gap:8px;margin-top:.5rem;cursor:pointer}
+  .star{font-size:24px;opacity:.25;transition:opacity .15s}
+  .star.active{opacity:1}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.rapport-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">🏢</div>
+    <div>
+      <div class="header-title">Mon stage de découverte professionnelle</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="fiche-header">
+    <span class="fiche-icon">🏢</span>
+    <div>
+      <div class="fiche-title">Mon stage de découverte professionnelle</div>
+      <span class="fiche-date">📅 16 – 20 février 2026</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Avant le stage — ma checklist</div>
+    <div class="progress-top"><span>Ma progression</span><span id="check-pct">0 / 6</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="check-progress" style="width:0%"></div></div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox" id="c1" onchange="updateProgress()"><label for="c1">J'ai choisi un domaine qui m'intéresse vraiment</label></div>
+      <div class="check-item"><input type="checkbox" id="c2" onchange="updateProgress()"><label for="c2">J'ai rédigé mon CV et ma lettre de motivation</label></div>
+      <div class="check-item"><input type="checkbox" id="c3" onchange="updateProgress()"><label for="c3">J'ai trouvé une entreprise et obtenu un accord</label></div>
+      <div class="check-item"><input type="checkbox" id="c4" onchange="updateProgress()"><label for="c4">La convention de stage est signée par tous</label></div>
+      <div class="check-item"><input type="checkbox" id="c5" onchange="updateProgress()"><label for="c5">Je connais les horaires et le lieu du stage</label></div>
+      <div class="check-item"><input type="checkbox" id="c6" onchange="updateProgress()"><label for="c6">J'ai préparé mes questions pour les professionnels</label></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✏️ Mon entreprise</div>
+    <span class="write-label">Nom de l'entreprise et secteur d'activité</span>
+    <textarea rows="2" placeholder="Ex : Garage Renault Gennevilliers — secteur automobile…"></textarea>
+    <span class="write-label">Pourquoi j'ai choisi cette entreprise</span>
+    <textarea rows="2" placeholder="Ce qui m'a attiré dans ce métier ou ce secteur…"></textarea>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👀 Pendant le stage — ce que j'observe</div>
+    <span class="write-label">Les tâches que j'ai effectuées</span>
+    <textarea rows="3" placeholder="Jour par jour, note ce que tu fais, ce que tu vois, ce que tu apprends…"></textarea>
+    <span class="write-label">Ce qui m'a surpris ou étonné</span>
+    <textarea rows="2" placeholder="Une découverte, une rencontre, quelque chose d'inattendu…"></textarea>
+    <span class="write-label">Mon ressenti global sur ce stage</span>
+    <div class="stars" id="stars">
+      <span class="star" onclick="setStars(1)">⭐</span>
+      <span class="star" onclick="setStars(2)">⭐</span>
+      <span class="star" onclick="setStars(3)">⭐</span>
+      <span class="star" onclick="setStars(4)">⭐</span>
+      <span class="star" onclick="setStars(5)">⭐</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🎯 Ce que ce stage m'apporte pour mon orientation</div>
+    <span class="write-label">Est-ce que ce métier me plaît toujours ? Pourquoi ?</span>
+    <textarea rows="2" placeholder="Sois honnête — il n'y a pas de bonne ou mauvaise réponse…"></textarea>
+    <span class="write-label">Ce que j'ai envie d'explorer ensuite</span>
+    <textarea rows="2" placeholder="Un autre métier, une formation, une question à poser au PP…"></textarea>
+  </div>
+
+  <div class="famille-box">
+    <div class="famille-title">👨‍👩‍👧 À discuter en famille</div>
+    <div class="question-item">Qu'est-ce que tu as aimé ou pas aimé dans ce stage ?</div>
+    <div class="question-item">Est-ce que ce secteur correspond à ce que tu imaginais ?</div>
+    <div class="question-item">Qu'est-ce que tu aimerais faire comme métier maintenant ?</div>
+    <div class="question-item">De quoi as-tu besoin pour avancer dans ton projet ?</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📄 Mon rapport de stage — structure à suivre</div>
+    <div class="rapport-grid">
+      <div class="rapport-item"><div class="rapport-num">Introduction</div><div class="rapport-label">Pourquoi ce choix, mes démarches</div></div>
+      <div class="rapport-item"><div class="rapport-num">Partie I</div><div class="rapport-label">Présentation de l'entreprise</div></div>
+      <div class="rapport-item"><div class="rapport-num">Partie II</div><div class="rapport-label">Journal de bord des 5 jours</div></div>
+      <div class="rapport-item"><div class="rapport-num">Partie III</div><div class="rapport-label">Fiche métier détaillée</div></div>
+      <div class="rapport-item"><div class="rapport-num">Partie IV</div><div class="rapport-label">Bilan personnel & orientation</div></div>
+      <div class="rapport-item"><div class="rapport-num">Minimum requis</div><div class="rapport-label">7 000 caractères · rendu par mail</div></div>
+    </div>
+  </div>
+
+  <div class="conseil-box">
+    <p>💡 <strong>Conseil du PP :</strong> Le stage n'est pas juste une semaine à passer. C'est une vraie chance de tester un métier avant de choisir ta voie. Pose des questions, observe tout, et note ce que tu ressens — même si c'est pour dire que ce n'est pas fait pour toi. C'est une information précieuse !</p>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+
+</div>
+
+<script>
+function updateProgress(){
+  const boxes=document.querySelectorAll('.checklist input[type=checkbox]');
+  const checked=[...boxes].filter(b=>b.checked).length;
+  document.getElementById('check-pct').textContent=checked+' / '+boxes.length;
+  document.getElementById('check-progress').style.width=Math.round(checked/boxes.length*100)+'%';
+}
+function setStars(n){
+  document.querySelectorAll('.star').forEach((s,i)=>s.classList.toggle('active',i<n));
+}
+</script>
+</body>
+</html>

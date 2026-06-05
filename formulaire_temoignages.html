@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Témoignages anciens élèves — Cap 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--purple:#7F77DD;--purple-l:#EEEDFE;--purple-m:#CECBF6;--purple-d:#3C3489}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--purple-l:#2a2660;--purple-m:#3d3880}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--purple-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:600px;margin:2rem auto;padding:1.75rem}
+  .intro-box{background:var(--purple-l);border:0.5px solid #AFA9EC;border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+  .intro-top{font-size:15px;font-weight:600;color:var(--purple-d);margin-bottom:.6rem}
+  .intro-text{font-size:13px;color:#534AB7;line-height:1.7;margin-bottom:.75rem}
+  .intro-quote{font-size:14px;font-weight:600;color:var(--purple-d);border-left:3px solid var(--purple);padding-left:.75rem;margin:.75rem 0;line-height:1.5;border-radius:0}
+  .intro-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:.75rem}
+  .intro-tag{font-size:12px;padding:4px 12px;border-radius:20px;background:var(--purple-m);color:var(--purple-d);font-weight:500}
+  .progress-bar{height:3px;background:var(--bg3);border-radius:2px;margin-bottom:2rem}
+  .progress-fill{height:3px;background:var(--purple);border-radius:2px;transition:width .4s}
+  .step{display:none}
+  .step.active{display:block}
+  .step-label{font-size:12px;color:var(--text3);margin-bottom:.4rem}
+  .step-title{font-size:19px;font-weight:600;color:var(--text);margin-bottom:.25rem}
+  .step-sub{font-size:13px;color:var(--text2);margin-bottom:1.25rem;line-height:1.5}
+  .field{margin-bottom:1.1rem}
+  .field label{display:block;font-size:13px;color:var(--text2);margin-bottom:5px;font-weight:600}
+  .field input,.field textarea{width:100%;padding:10px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--bg2);color:var(--text)}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--purple)}
+  .field textarea{resize:none;line-height:1.6}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px}
+  .opt-btn{padding:10px 12px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg2);cursor:pointer;font-size:12px;font-family:inherit;color:var(--text);text-align:left;transition:all .15s;display:flex;align-items:center;gap:8px;line-height:1.3}
+  .opt-btn:hover{border-color:var(--purple)}
+  .opt-btn.sel{border-color:var(--purple);background:var(--purple-l);color:var(--purple-d);font-weight:600}
+  .opt-btn svg{width:16px;height:16px;flex-shrink:0;color:var(--text2)}
+  .opt-btn.sel svg{color:var(--purple)}
+  .stars-row{display:flex;gap:10px;margin-top:6px}
+  .star-btn{font-size:26px;cursor:pointer;opacity:.25;transition:opacity .15s;background:none;border:none;padding:0;line-height:1}
+  .star-btn.lit{opacity:1}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+  .chip{padding:6px 13px;border:0.5px solid var(--border2);border-radius:20px;font-size:12px;cursor:pointer;background:var(--bg2);color:var(--text2);font-family:inherit;transition:all .15s}
+  .chip.sel{background:var(--purple-l);border-color:var(--purple);color:var(--purple-d);font-weight:600}
+  .nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem}
+  .btn{padding:10px 22px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:transparent;cursor:pointer;font-size:14px;font-family:inherit;color:var(--text);transition:background .15s}
+  .btn:hover{background:var(--bg2)}
+  .btn-primary{background:var(--purple);border-color:#534AB7;color:#fff}
+  .btn-primary:hover{background:#534AB7}
+  .char-count{font-size:11px;color:var(--text3);text-align:right;margin-top:3px}
+  .req{color:#D85A30;margin-left:2px}
+  .success-box{text-align:center;padding:2rem 1rem}
+  .success-icon{font-size:52px;margin-bottom:1rem}
+  .success-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:.5rem}
+  .success-sub{font-size:13px;color:var(--text2);line-height:1.8}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.grid2{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">🎓</div>
+    <div>
+      <div class="header-title">Témoignages anciens élèves</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · Cap 3e</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="intro-box">
+    <div class="intro-top">🎓 Tu es passé(e) par le collège Guy Môquet ?</div>
+    <div class="intro-text">Aujourd'hui, tu poursuis des études, une formation ou tu exerces un métier ? Partage ton parcours et adresse un message aux élèves de 3e qui se posent encore des questions sur leur avenir. Ton expérience peut les aider à mieux comprendre les possibilités qui s'offrent à eux, à gagner en confiance et à oser croire en leurs projets.</div>
+    <div class="intro-quote">Chaque parcours a de la valeur. Chaque réussite mérite d'être partagée.</div>
+    <div class="intro-tags">
+      <span class="intro-tag">⏱️ 2 minutes seulement</span>
+      <span class="intro-tag">📝 4 étapes simples</span>
+      <span class="intro-tag">👨‍🏫 Relu par M. Hassini</span>
+      <span class="intro-tag">🌟 Publication sur Cap 3e</span>
+    </div>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:25%"></div></div>
+
+  <!-- ÉTAPE 1 -->
+  <div class="step active" id="s1">
+    <div class="step-label">Étape 1 sur 4</div>
+    <div class="step-title">Qui es-tu ?</div>
+    <div class="step-sub">Quelques infos pour te présenter aux élèves actuels.</div>
+    <div class="field">
+      <label>Prénom et nom <span class="req">*</span></label>
+      <input type="text" id="nom" placeholder="Ex : Yassin Benali">
+    </div>
+    <div class="field">
+      <label>Ta situation actuelle <span class="req">*</span></label>
+      <div class="grid2" id="sit-grid">
+        <button class="opt-btn" onclick="selSit(this,'travail')">💼 En activité professionnelle</button>
+        <button class="opt-btn" onclick="selSit(this,'etudes')">🎓 En grandes études</button>
+        <button class="opt-btn" onclick="selSit(this,'creation')">🚀 Entrepreneur / créateur</button>
+        <button class="opt-btn" onclick="selSit(this,'autre')">⋯ Autre situation</button>
+      </div>
+    </div>
+    <div class="field">
+      <label id="metier-label">Ton métier ou ta formation <span class="req">*</span></label>
+      <input type="text" id="metier" placeholder="Ex : Technicien aéronautique, Master de droit, Infirmière...">
+    </div>
+    <div class="field">
+      <label>Année approximative de ta 3e à Guy Môquet</label>
+      <input type="text" id="annee" placeholder="Ex : 2015, 2010, 2005...">
+    </div>
+    <div class="nav">
+      <span></span>
+      <button class="btn btn-primary" onclick="next(1)">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 2 -->
+  <div class="step" id="s2">
+    <div class="step-label">Étape 2 sur 4</div>
+    <div class="step-title">Ton parcours</div>
+    <div class="step-sub">Quelle voie as-tu choisie après la 3e ?</div>
+    <div class="field">
+      <label>Ta voie après la 3e <span class="req">*</span></label>
+      <div class="grid2" id="voies">
+        <button class="opt-btn" onclick="selVoie(this,'GT')">📘 Bac général</button>
+        <button class="opt-btn" onclick="selVoie(this,'Techno')">🔧 Bac technologique</button>
+        <button class="opt-btn" onclick="selVoie(this,'Pro')">🛠 Bac professionnel</button>
+        <button class="opt-btn" onclick="selVoie(this,'CAP')">📜 CAP</button>
+        <button class="opt-btn" onclick="selVoie(this,'Apprentissage')">🏭 Apprentissage / alternance</button>
+        <button class="opt-btn" onclick="selVoie(this,'Autre')">⋯ Autre parcours</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>En quelques mots, ton parcours depuis la 3e</label>
+      <textarea id="parcours" rows="3" placeholder="Ex : Bac pro maintenance, BTS, puis embauché dans une entreprise aéronautique à 22 ans..." oninput="count('parcours','cp',200)"></textarea>
+      <div class="char-count" id="cp">0 / 200</div>
+    </div>
+    <div class="nav">
+      <button class="btn" onclick="prev(2)">← Retour</button>
+      <button class="btn btn-primary" onclick="next(2)">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 3 -->
+  <div class="step" id="s3">
+    <div class="step-label">Étape 3 sur 4</div>
+    <div class="step-title">Ton message</div>
+    <div class="step-sub">Ce que tu aurais aimé qu'on te dise à 14 ans.</div>
+    <div class="field">
+      <label>Ton conseil aux élèves de 3e <span class="req">*</span></label>
+      <textarea id="conseil" rows="4" placeholder="Parle-leur directement — de ta voie, de tes erreurs, de ce qui t'a aidé, de ce qu'ils ne savent pas encore..." oninput="count('conseil','cc',300)"></textarea>
+      <div class="char-count" id="cc">0 / 300</div>
+    </div>
+    <div class="field">
+      <label>Les thèmes de ton message (jusqu'à 3)</label>
+      <div class="chips">
+        <button class="chip" onclick="selChip(this)">Il n'y a pas de sous-métiers</button>
+        <button class="chip" onclick="selChip(this)">Suivre sa passion</button>
+        <button class="chip" onclick="selChip(this)">La voie pro, c'est bien</button>
+        <button class="chip" onclick="selChip(this)">Les grandes études, ça paye</button>
+        <button class="chip" onclick="selChip(this)">Les reconversions sont possibles</button>
+        <button class="chip" onclick="selChip(this)">Croire en soi</button>
+        <button class="chip" onclick="selChip(this)">Travailler dur ça paye</button>
+        <button class="chip" onclick="selChip(this)">Ne pas écouter les décourageurs</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Ta satisfaction sur ton parcours</label>
+      <div class="stars-row">
+        <button class="star-btn" onclick="setStars(1)" aria-label="1 étoile">⭐</button>
+        <button class="star-btn" onclick="setStars(2)" aria-label="2 étoiles">⭐</button>
+        <button class="star-btn" onclick="setStars(3)" aria-label="3 étoiles">⭐</button>
+        <button class="star-btn" onclick="setStars(4)" aria-label="4 étoiles">⭐</button>
+        <button class="star-btn" onclick="setStars(5)" aria-label="5 étoiles">⭐</button>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn" onclick="prev(3)">← Retour</button>
+      <button class="btn btn-primary" onclick="next(3)">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 4 -->
+  <div class="step" id="s4">
+    <div class="step-label">Étape 4 sur 4</div>
+    <div class="step-title">Dernière étape</div>
+    <div class="step-sub">Pour que M. Hassini puisse te contacter avant publication.</div>
+    <div class="field">
+      <label>Ton email <span class="req">*</span></label>
+      <input type="email" id="email" placeholder="ton.email@exemple.com">
+    </div>
+    <div class="field">
+      <label>Accord de publication <span class="req">*</span></label>
+      <div class="grid2" id="accord-grid">
+        <button class="opt-btn" onclick="selAccord(this,'oui')">✅ Oui, avec mon prénom et métier</button>
+        <button class="opt-btn" onclick="selAccord(this,'anon')">👁 Oui, en anonyme</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Une photo (optionnel)</label>
+      <input type="text" id="photo" placeholder="Lien LinkedIn, Google Drive ou laisse vide">
+    </div>
+    <div class="nav">
+      <button class="btn" onclick="prev(4)">← Retour</button>
+      <button class="btn btn-primary" onclick="submit()">Envoyer mon témoignage →</button>
+    </div>
+  </div>
+
+  <!-- SUCCÈS -->
+  <div class="step" id="success">
+    <div class="success-box">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">Merci pour ton témoignage !</div>
+      <div class="success-sub">Ton témoignage a bien été reçu. Dans l'attente de sa validation, il sera relu et publié prochainement sur la page Témoignages de Cap 3e.<br><br>Ton parcours va inspirer les élèves de 3e de Guy Môquet — merci de contribuer à ce beau projet.<br><br>Des questions ? Écris à <strong>hassinicap3e@gmail.com</strong></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+
+</div>
+
+<script>
+let voie='',accord='',sit='',nstars=0;
+
+function selSit(btn,val){
+  sit=val;
+  document.querySelectorAll('#sit-grid .opt-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  const labels={travail:'Ton métier actuel',etudes:'Ta formation ou école actuelle',creation:'Ton activité ou projet',autre:'Ta situation en quelques mots'};
+  const ph={travail:'Ex : Technicien aéronautique, Infirmière, Chef cuisinier...',etudes:'Ex : Master de droit à Paris 1, École d\'ingénieur, BTS informatique...',creation:'Ex : Fondateur d\'une startup, Auto-entrepreneur dans la restauration...',autre:'Ex : En formation, En reconversion professionnelle...'};
+  document.getElementById('metier-label').innerHTML=labels[val]+' <span class="req">*</span>';
+  document.getElementById('metier').placeholder=ph[val];
+}
+
+function selVoie(btn,val){
+  voie=val;
+  document.querySelectorAll('#voies .opt-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+function selAccord(btn,val){
+  accord=val;
+  document.querySelectorAll('#accord-grid .opt-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+
+function selChip(btn){
+  const sel=document.querySelectorAll('.chip.sel').length;
+  if(!btn.classList.contains('sel')&&sel>=3)return;
+  btn.classList.toggle('sel');
+}
+
+function setStars(n){
+  nstars=n;
+  document.querySelectorAll('.star-btn').forEach((b,i)=>b.classList.toggle('lit',i<n));
+}
+
+function count(id,cid,max){
+  const v=document.getElementById(id).value;
+  if(v.length>max)document.getElementById(id).value=v.substring(0,max);
+  document.getElementById(cid).textContent=Math.min(v.length,max)+' / '+max;
+}
+
+function next(step){
+  if(step===1){
+    if(!document.getElementById('nom').value.trim()){alert('Merci de renseigner ton prénom et nom.');return;}
+    if(!sit){alert('Merci de choisir ta situation actuelle.');return;}
+    if(!document.getElementById('metier').value.trim()){alert('Merci de renseigner ton métier ou ta formation.');return;}
+  }
+  if(step===2&&!voie){alert('Merci de choisir ta voie après la 3e.');return;}
+  if(step===3&&!document.getElementById('conseil').value.trim()){alert('Merci d\'écrire ton conseil.');return;}
+  document.getElementById('s'+step).classList.remove('active');
+  document.getElementById('s'+(step+1)).classList.add('active');
+  document.getElementById('prog').style.width=(((step+1)/4)*100)+'%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function prev(step){
+  document.getElementById('s'+step).classList.remove('active');
+  document.getElementById('s'+(step-1)).classList.add('active');
+  document.getElementById('prog').style.width=(((step-1)/4)*100)+'%';
+}
+
+async function submit(){
+  const emailVal=document.getElementById('email').value.trim();
+  if(!emailVal){alert('Merci de renseigner ton adresse email.');return;}
+  if(!accord){alert('Merci de choisir ton accord de publication.\n\nClique sur \"Oui, avec mon prénom et métier\" ou \"Oui, en anonyme\".');return;}
+
+  const chips=[...document.querySelectorAll('.chip.sel')].map(c=>c.textContent).join(', ');
+
+  const fd=new FormData();
+  fd.append('Prénom et nom', document.getElementById('nom').value);
+  fd.append('Situation', sit);
+  fd.append('Métier ou formation', document.getElementById('metier').value);
+  fd.append('Année de 3e à Guy Môquet', document.getElementById('annee').value);
+  fd.append('Voie après la 3e', voie);
+  fd.append('Parcours depuis la 3e', document.getElementById('parcours').value);
+  fd.append('Conseil aux élèves', document.getElementById('conseil').value);
+  fd.append('Thèmes du message', chips);
+  fd.append('Satisfaction', nstars+' étoile(s) sur 5');
+  fd.append('email', document.getElementById('email').value);
+  fd.append('Accord de publication', accord==='oui'?'Oui — avec prénom et métier':'Oui — en anonyme');
+  fd.append('Lien photo', document.getElementById('photo').value||'Non renseigné');
+
+  try {
+    const res=await fetch('https://formspree.io/f/xlgvkaod',{
+      method:'POST',
+      headers:{'Accept':'application/json'},
+      body:fd
+    });
+    if(res.ok){
+      document.getElementById('s4').classList.remove('active');
+      document.getElementById('success').classList.add('active');
+      document.getElementById('prog').style.width='100%';
+    } else {
+      const d=await res.json();
+      alert('Erreur lors de l\'envoi. Réessaie ou écris à hassinicap3e@gmail.com\n'+(d.errors?d.errors.map(e=>e.message).join(', '):''));
+    }
+  } catch(e){
+    alert('Problème de connexion. Vérifie ta connexion internet et réessaie, ou écris directement à hassinicap3e@gmail.com');
+  }
+}
+</script>
+</body>
+</html>

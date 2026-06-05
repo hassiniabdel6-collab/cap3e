@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mes vœux d'orientation — 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--purple:#7F77DD;--purple-l:#EEEDFE;--purple-m:#CECBF6;--purple-d:#3C3489}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--purple-l:#2a2660;--purple-m:#3d3880}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--purple-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:640px;margin:2rem auto;padding:1.75rem}
+  .fiche-header{background:var(--purple-l);border:1.5px solid var(--purple);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:center;gap:12px}
+  .fiche-title{font-size:17px;font-weight:600;color:var(--purple-d);margin-bottom:4px}
+  .fiche-date{font-size:12px;color:#534AB7;background:var(--purple-m);padding:3px 10px;border-radius:10px;display:inline-block}
+  .section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .section-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:.75rem}
+  .rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+  .rule-card{background:var(--bg2);border-radius:var(--radius-sm);padding:8px 10px;text-align:center}
+  .rule-val{font-size:18px;font-weight:600;color:var(--purple-d)}
+  .rule-label{font-size:11px;color:var(--text2);margin-top:2px}
+  .tip-box{background:var(--bg2);border-radius:var(--radius-sm);padding:.75rem 1rem;font-size:13px;color:var(--text2);line-height:1.5}
+  .plan-card{border-radius:var(--radius);border:1.5px solid;padding:1rem 1.25rem;margin-bottom:.75rem}
+  .plan-card.a{background:#E1F5EE;border-color:#1D9E75}
+  .plan-card.b{background:var(--purple-l);border-color:var(--purple)}
+  .plan-card.c{background:#FAEEDA;border-color:#BA7517}
+  .plan-label{font-size:13px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .plan-card.a .plan-label{color:#085041}
+  .plan-card.b .plan-label{color:var(--purple-d)}
+  .plan-card.c .plan-label{color:#633806}
+  .plan-badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:700}
+  .plan-card.a .plan-badge{background:#9FE1CB;color:#085041}
+  .plan-card.b .plan-badge{background:var(--purple-m);color:var(--purple-d)}
+  .plan-card.c .plan-badge{background:#FAC775;color:#633806}
+  .write-label{font-size:12px;color:var(--text2);margin-bottom:2px;display:block;margin-top:.6rem}
+  textarea{width:100%;border:0.5px solid var(--border2);border-radius:var(--radius-sm);padding:10px 12px;font-size:14px;font-family:inherit;color:var(--text);background:rgba(255,255,255,.55);resize:vertical;min-height:55px;line-height:1.5}
+  textarea:focus{outline:none;border-color:var(--purple)}
+  .voeux-table{width:100%;border-collapse:collapse;font-size:13px}
+  .voeux-table th{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.3px;padding:6px 8px;border-bottom:0.5px solid var(--border);text-align:left}
+  .voeux-table td{padding:6px 8px;border-bottom:0.5px solid var(--border);vertical-align:middle}
+  .voeux-table tr:last-child td{border-bottom:none}
+  .vnum{font-size:11px;font-weight:700;color:var(--text3);text-align:center;width:28px}
+  .vinput{width:100%;border:0.5px solid var(--border2);border-radius:6px;padding:5px 8px;font-size:13px;font-family:inherit;background:var(--bg2);color:var(--text)}
+  .vinput:focus{outline:none;border-color:var(--purple)}
+  select.vsel{width:100%;border:0.5px solid var(--border2);border-radius:6px;padding:4px;font-size:12px;font-family:inherit;background:var(--bg2);color:var(--text)}
+  .etapes-list{display:flex;flex-direction:column;gap:8px}
+  .etape{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:var(--radius-sm);background:var(--bg2);border:0.5px solid var(--border)}
+  .etape-dot{width:22px;height:22px;border-radius:50%;background:var(--purple);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .etape-text{font-size:13px;color:var(--text);line-height:1.4}
+  .etape-date{font-size:11px;color:var(--text2);margin-top:2px}
+  .progress-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:4px}
+  .progress-bar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:.75rem}
+  .progress-fill{height:100%;background:var(--purple);border-radius:3px;transition:width .3s}
+  .checklist{display:flex;flex-direction:column;gap:8px}
+  .check-item{display:flex;align-items:flex-start;gap:10px;padding:6px 8px;border-radius:var(--radius-sm)}
+  .check-item input{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--purple);cursor:pointer}
+  .check-item label{font-size:14px;color:var(--text);cursor:pointer;line-height:1.4}
+  .check-item input:checked+label{color:var(--text3);text-decoration:line-through}
+  .famille-box{background:var(--purple-l);border:0.5px solid var(--purple-m);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .famille-title{font-size:13px;font-weight:600;color:var(--purple-d);margin-bottom:.6rem}
+  .q-item{display:flex;gap:8px;font-size:13px;color:#534AB7;line-height:1.5;margin-bottom:5px}
+  .q-item::before{content:'?';font-weight:700;color:var(--purple);flex-shrink:0}
+  .conseil-box{background:var(--bg2);border-left:3px solid #1D9E75;padding:.75rem 1rem;margin-bottom:.75rem;border-radius:0}
+  .conseil-box p{font-size:13px;color:var(--text2);line-height:1.6}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.rules-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">📋</div>
+    <div>
+      <div class="header-title">Mes vœux d'orientation</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="fiche-header">
+    <span style="font-size:28px;flex-shrink:0">📋</span>
+    <div>
+      <div class="fiche-title">Mes vœux d'orientation — Plan A, B, C</div>
+      <span class="fiche-date">📅 Provisoires : janvier · Définitifs : mai</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">ℹ️ Les règles à connaître</div>
+    <div class="rules-grid">
+      <div class="rule-card"><div class="rule-val">15</div><div class="rule-label">vœux maximum au total</div></div>
+      <div class="rule-card"><div class="rule-val">10</div><div class="rule-label">dans l'académie</div></div>
+      <div class="rule-card"><div class="rule-val">5</div><div class="rule-label">hors académie</div></div>
+      <div class="rule-card"><div class="rule-val">1</div><div class="rule-label">établissement + formation par vœu</div></div>
+    </div>
+    <div class="tip-box">Les vœux doivent être <strong>conformes à la décision du conseil de classe</strong>. L'affectation dépend de ton dossier, du nombre de places disponibles et de ton secteur géographique.</div>
+  </div>
+
+  <div class="plan-card a">
+    <div class="plan-label"><span class="plan-badge">Plan A</span> Mon premier choix — ce que je veux vraiment</div>
+    <span class="write-label">La voie et la formation souhaitées</span>
+    <textarea rows="2" placeholder="Ex : 2nde GT au lycée Galilée · Seconde Pro Commerce · CAP Cuisine…"></textarea>
+    <span class="write-label">Pourquoi ce choix ?</span>
+    <textarea rows="2" placeholder="Ce qui me motive dans cette voie, ce que j'imagine faire après…"></textarea>
+    <span class="write-label">Est-ce que mon niveau scolaire correspond ?</span>
+    <textarea rows="1" placeholder="Sois honnête avec toi-même…"></textarea>
+  </div>
+
+  <div class="plan-card b">
+    <div class="plan-label"><span class="plan-badge">Plan B</span> Une autre option qui me plaît aussi</div>
+    <span class="write-label">La voie et la formation souhaitées</span>
+    <textarea rows="2" placeholder="Une alternative sérieuse, pas juste un repli…"></textarea>
+    <span class="write-label">Pourquoi ce choix ?</span>
+    <textarea rows="2" placeholder="Ce qui m'attire dans cette voie également…"></textarea>
+  </div>
+
+  <div class="plan-card c">
+    <div class="plan-label"><span class="plan-badge">Plan C</span> Mon vœu de sécurisation</div>
+    <span class="write-label">La voie et la formation souhaitées</span>
+    <textarea rows="2" placeholder="Un choix réaliste, qui me convient aussi même si c'est mon 3e choix…"></textarea>
+    <span class="write-label">Pourquoi ce choix peut me convenir ?</span>
+    <textarea rows="2" placeholder="Ce n'est pas ma préférence, mais voilà pourquoi ça peut fonctionner pour moi…"></textarea>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🖥 Mes vœux sur EduConnect — à saisir</div>
+    <table class="voeux-table">
+      <thead><tr><th>N°</th><th>Établissement</th><th>Formation</th><th style="width:80px">Priorité</th></tr></thead>
+      <tbody id="voeux-body"></tbody>
+    </table>
+    <div style="margin-top:.75rem;font-size:12px;color:var(--text2)">
+      💡 Saisis tes vœux sur <strong>EduConnect</strong> : educonnect.education.gouv.fr
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">📅 Les étapes clés</div>
+    <div class="etapes-list">
+      <div class="etape"><div class="etape-dot">1</div><div><div class="etape-text">Entretien avec le professeur principal</div><div class="etape-date">Septembre – Octobre</div></div></div>
+      <div class="etape"><div class="etape-dot">2</div><div><div class="etape-text">Saisie des vœux provisoires sur EduConnect</div><div class="etape-date">Janvier</div></div></div>
+      <div class="etape"><div class="etape-dot">3</div><div><div class="etape-text">Conseil de classe — avis d'orientation</div><div class="etape-date">Janvier – Mars</div></div></div>
+      <div class="etape"><div class="etape-dot">4</div><div><div class="etape-text">Visites des lycées (portes ouvertes)</div><div class="etape-date">Janvier – Mars</div></div></div>
+      <div class="etape"><div class="etape-dot">5</div><div><div class="etape-text">Saisie des vœux définitifs sur EduConnect</div><div class="etape-date">Mai</div></div></div>
+      <div class="etape"><div class="etape-dot">6</div><div><div class="etape-text">Notification d'affectation définitive</div><div class="etape-date">Début juillet</div></div></div>
+      <div class="etape"><div class="etape-dot">7</div><div><div class="etape-text">Inscription dans mon futur établissement</div><div class="etape-date">Juillet</div></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">✅ Ma checklist</div>
+    <div class="progress-top"><span>Ma progression</span><span id="vp">0 / 6</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="vbar" style="width:0%"></div></div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox" id="v1" onchange="upd()"><label for="v1">J'ai discuté de mon orientation avec mon PP</label></div>
+      <div class="check-item"><input type="checkbox" id="v2" onchange="upd()"><label for="v2">J'ai visité au moins un lycée en portes ouvertes</label></div>
+      <div class="check-item"><input type="checkbox" id="v3" onchange="upd()"><label for="v3">J'ai consulté les formations sur ONISEP ou l'académie</label></div>
+      <div class="check-item"><input type="checkbox" id="v4" onchange="upd()"><label for="v4">J'ai défini mon Plan A, B et C avec mes parents</label></div>
+      <div class="check-item"><input type="checkbox" id="v5" onchange="upd()"><label for="v5">J'ai saisi mes vœux provisoires sur EduConnect</label></div>
+      <div class="check-item"><input type="checkbox" id="v6" onchange="upd()"><label for="v6">J'ai saisi mes vœux définitifs sur EduConnect</label></div>
+    </div>
+  </div>
+
+  <div class="famille-box">
+    <div class="famille-title">👨‍👩‍👧 À discuter en famille</div>
+    <div class="q-item">Quels sont mes vrais points forts et ce qui me motive ?</div>
+    <div class="q-item">La voie que je choisis correspond-elle à ce que j'imagine faire plus tard ?</div>
+    <div class="q-item">Est-ce que le lycée envisagé est accessible depuis la maison ?</div>
+    <div class="q-item">Si le Plan A ne fonctionne pas, comment on réagit ensemble ?</div>
+  </div>
+
+  <div class="conseil-box">
+    <p>💡 <strong>Conseil du PP :</strong> Un vœu réfléchi vaut mieux que 15 vœux au hasard. Prends le temps de visiter les lycées, de parler avec des élèves qui y sont déjà, et de te poser la vraie question : dans 3 ans, où est-ce que je me vois ? Ton Plan C n'est pas un échec — c'est une stratégie !</p>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+</div>
+
+<script>
+(function(){
+  const body=document.getElementById('voeux-body');
+  for(let i=1;i<=6;i++){
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td class="vnum">${i}</td><td><input class="vinput" type="text" placeholder="Nom du lycée…"></td><td><input class="vinput" type="text" placeholder="Formation / spécialité…"></td><td><select class="vsel"><option value="">—</option><option>⭐⭐⭐</option><option>⭐⭐</option><option>⭐</option></select></td>`;
+    body.appendChild(tr);
+  }
+})();
+function upd(){
+  const boxes=document.querySelectorAll('.checklist input');
+  const n=[...boxes].filter(b=>b.checked).length;
+  document.getElementById('vp').textContent=n+' / '+boxes.length;
+  document.getElementById('vbar').style.width=Math.round(n/boxes.length*100)+'%';
+}
+</script>
+</body>
+</html>

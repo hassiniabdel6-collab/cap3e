@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Générateur de CV — Stage 3e</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--amber:#BA7517;--amber-l:#FAEEDA;--amber-m:#FAC775;--amber-d:#633806}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--amber-l:#2e1f08;--amber-m:#6b4010}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--amber-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .container{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1100px;margin:2rem auto;padding:0 1rem}
+  .panel{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);padding:1.5rem}
+  .panel-title{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:0.5px solid var(--border)}
+  .field{margin-bottom:.9rem}
+  .field label{display:block;font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:600}
+  .field input,.field textarea,.field select{width:100%;padding:8px 10px;border:0.5px solid var(--border2);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;background:var(--bg2);color:var(--text)}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--amber)}
+  .field textarea{resize:none;line-height:1.5}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+  .chip{padding:4px 10px;border:0.5px solid var(--border2);border-radius:20px;font-size:11px;cursor:pointer;background:var(--bg2);color:var(--text2);font-family:inherit;transition:all .15s}
+  .chip.sel{background:var(--amber-l);border-color:var(--amber);color:var(--amber-d);font-weight:600}
+  .section-label{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin:.75rem 0 .4rem;padding-top:.75rem;border-top:0.5px solid var(--border)}
+  .btn-gen{width:100%;padding:11px;border-radius:var(--radius-sm);border:none;background:var(--amber);color:#fff;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:.75rem;transition:background .15s}
+  .btn-gen:hover{background:var(--amber-d)}
+  /* CV Preview */
+  .cv-preview{background:#fff;border:1px solid #ddd;border-radius:var(--radius-sm);min-height:500px;font-family:'Georgia',serif;display:none;overflow:hidden}
+  .cv-preview.show{display:block}
+  .cv-header-block{padding:1.25rem 1.5rem;color:#fff}
+  .cv-name{font-size:22px;font-weight:700;margin-bottom:3px}
+  .cv-title{font-size:13px;opacity:.9;margin-bottom:.75rem;font-style:italic}
+  .cv-coords{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;opacity:.85}
+  .cv-body{padding:1rem 1.5rem}
+  .cv-section{margin-bottom:1rem}
+  .cv-section-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding-bottom:4px;margin-bottom:.5rem;border-bottom:2px solid}
+  .cv-item{margin-bottom:.5rem}
+  .cv-item-title{font-size:13px;font-weight:700;color:#1a1a18}
+  .cv-item-sub{font-size:12px;color:#5f5e5a;margin-top:1px}
+  .cv-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.4rem}
+  .cv-tag{padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600}
+  .cv-accroche{font-size:12px;color:#3a3a38;line-height:1.6;font-style:italic;padding:.6rem .75rem;border-left:3px solid;border-radius:0}
+  .cv-actions{display:flex;gap:8px;margin-top:.75rem;flex-wrap:wrap}
+  .btn-sec{padding:8px 16px;border-radius:var(--radius-sm);border:0.5px solid var(--border2);background:transparent;cursor:pointer;font-size:12px;font-family:inherit;color:var(--text);transition:background .15s}
+  .btn-sec:hover{background:var(--bg2)}
+  .btn-sec.ok{color:var(--amber);border-color:var(--amber)}
+  .conseils{background:var(--amber-l);border:0.5px solid var(--amber-m);border-radius:var(--radius-sm);padding:.75rem 1rem;margin-top:.75rem}
+  .conseils p{font-size:12px;color:var(--amber-d);line-height:1.6}
+  .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:var(--text3);font-size:13px;gap:.5rem}
+  .empty-icon{font-size:36px;opacity:.4}
+  .theme-btns{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.75rem}
+  .theme-btn{padding:5px 12px;border-radius:20px;font-size:11px;cursor:pointer;border:1.5px solid transparent;font-family:inherit;font-weight:600;transition:all .15s;opacity:.6}
+  .theme-btn.active{opacity:1;border-color:rgba(0,0,0,.15)}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:700px){.container{grid-template-columns:1fr}.field-row{grid-template-columns:1fr}}
+  @media print{
+    body{background:white}
+    .header,.panel:first-child,.cv-actions,.conseils,.footer{display:none!important}
+    .container{grid-template-columns:1fr;margin:0;padding:0}
+    .panel{border:none;box-shadow:none;padding:0}
+    .cv-preview{display:block!important;border:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">📄</div>
+    <div>
+      <div class="header-title">Générateur de CV — Stage 3e</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="container">
+
+  <!-- FORMULAIRE -->
+  <div class="panel">
+    <div class="panel-title">📝 Remplis tes informations</div>
+
+    <div class="section-label">Identité</div>
+    <div class="field-row">
+      <div class="field"><label>Prénom</label><input type="text" id="prenom" placeholder="Ex : Yassin" oninput="gen()"></div>
+      <div class="field"><label>Nom</label><input type="text" id="nom" placeholder="Ex : Benali" oninput="gen()"></div>
+    </div>
+    <div class="field"><label>Ville</label><input type="text" id="ville" placeholder="Ex : Gennevilliers" oninput="gen()"></div>
+    <div class="field-row">
+      <div class="field"><label>Téléphone</label><input type="text" id="tel" placeholder="Ex : 06 12 34 56 78" oninput="gen()"></div>
+      <div class="field"><label>Email</label><input type="text" id="email" placeholder="Ex : y.benali@gmail.com" oninput="gen()"></div>
+    </div>
+
+    <div class="section-label">Stage recherché</div>
+    <div class="field"><label>Secteur / domaine du stage</label>
+      <select id="secteur" onchange="gen()">
+        <option value="">— Choisir —</option>
+        <option value="sante">Santé et social</option>
+        <option value="commerce">Commerce et vente</option>
+        <option value="informatique">Informatique et numérique</option>
+        <option value="cuisine">Cuisine et restauration</option>
+        <option value="batiment">Bâtiment et travaux publics</option>
+        <option value="mecanique">Mécanique et automobile</option>
+        <option value="coiffure">Coiffure et esthétique</option>
+        <option value="education">Éducation et petite enfance</option>
+        <option value="administration">Administration et gestion</option>
+        <option value="communication">Communication et médias</option>
+        <option value="sport">Sport et animation</option>
+        <option value="autre">Autre domaine</option>
+      </select>
+    </div>
+
+    <div class="section-label">Formation</div>
+    <div class="field"><label>Établissement</label><input type="text" id="etablissement" placeholder="Ex : Collège Guy Môquet, Gennevilliers" oninput="gen()" value="Collège Guy Môquet, Gennevilliers"></div>
+    <div class="field"><label>Classe</label><input type="text" id="classe" placeholder="Ex : 3e B" oninput="gen()" value="Classe de 3e"></div>
+    <div class="field"><label>Certifications (optionnel)</label>
+      <div class="chips" id="certifs">
+        <button class="chip" onclick="togChip(this)">PIX</button>
+        <button class="chip" onclick="togChip(this)">ASSR 2</button>
+        <button class="chip" onclick="togChip(this)">PSC1 (secourisme)</button>
+        <button class="chip" onclick="togChip(this)">Attestation scolaire</button>
+      </div>
+    </div>
+
+    <div class="section-label">Compétences</div>
+    <div class="field"><label>Compétences clés (clique pour sélectionner jusqu'à 5)</label>
+      <div class="chips" id="competences">
+        <button class="chip" onclick="togComp(this)">Communication</button>
+        <button class="chip" onclick="togComp(this)">Esprit d'équipe</button>
+        <button class="chip" onclick="togComp(this)">Organisation</button>
+        <button class="chip" onclick="togComp(this)">Créativité</button>
+        <button class="chip" onclick="togComp(this)">Rigueur</button>
+        <button class="chip" onclick="togComp(this)">Ponctualité</button>
+        <button class="chip" onclick="togComp(this)">Curiosité</button>
+        <button class="chip" onclick="togComp(this)">Autonomie</button>
+        <button class="chip" onclick="togComp(this)">Écoute</button>
+        <button class="chip" onclick="togComp(this)">Informatique</button>
+      </div>
+    </div>
+
+    <div class="section-label">Langues</div>
+    <div class="field-row">
+      <div class="field"><label>Langue 1</label>
+        <select id="lng1" onchange="gen()">
+          <option value="">—</option>
+          <option value="Anglais — Scolaire">Anglais</option>
+          <option value="Espagnol — Scolaire">Espagnol</option>
+          <option value="Arabe — Courant">Arabe</option>
+          <option value="Portugais — Courant">Portugais</option>
+          <option value="Français — Langue maternelle">Français LM</option>
+        </select>
+      </div>
+      <div class="field"><label>Langue 2</label>
+        <select id="lng2" onchange="gen()">
+          <option value="">—</option>
+          <option value="Anglais — Scolaire">Anglais</option>
+          <option value="Espagnol — Scolaire">Espagnol</option>
+          <option value="Arabe — Courant">Arabe</option>
+          <option value="Portugais — Courant">Portugais</option>
+          <option value="Français — Langue maternelle">Français LM</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="section-label">Centres d'intérêt</div>
+    <div class="field"><label>Tes loisirs (clique pour sélectionner)</label>
+      <div class="chips" id="loisirs">
+        <button class="chip" onclick="togLoisir(this)">Sport</button>
+        <button class="chip" onclick="togLoisir(this)">Musique</button>
+        <button class="chip" onclick="togLoisir(this)">Lecture</button>
+        <button class="chip" onclick="togLoisir(this)">Informatique</button>
+        <button class="chip" onclick="togLoisir(this)">Dessin / Art</button>
+        <button class="chip" onclick="togLoisir(this)">Cuisine</button>
+        <button class="chip" onclick="togLoisir(this)">Cinéma</button>
+        <button class="chip" onclick="togLoisir(this)">Voyage</button>
+        <button class="chip" onclick="togLoisir(this)">Bénévolat</button>
+        <button class="chip" onclick="togLoisir(this)">Jeux vidéo</button>
+      </div>
+    </div>
+
+    <button class="btn-gen" onclick="gen()">🔄 Mettre à jour mon CV</button>
+
+    <div class="conseils">
+      <p>💡 <strong>Conseils :</strong> Ton CV doit tenir sur une seule page · Mets en avant ta motivation et ta curiosité · Relis avant d'envoyer · Joins-le à ta lettre de motivation</p>
+    </div>
+  </div>
+
+  <!-- APERÇU CV -->
+  <div class="panel">
+    <div class="panel-title">👁 Aperçu de ton CV</div>
+
+    <div class="theme-btns">
+      <button class="theme-btn active" onclick="setTheme('#1D9E75','#085041',this)" style="background:#E1F5EE;color:#085041">🟢 Vert</button>
+      <button class="theme-btn" onclick="setTheme('#7F77DD','#3C3489',this)" style="background:#EEEDFE;color:#3C3489">🟣 Violet</button>
+      <button class="theme-btn" onclick="setTheme('#BA7517','#633806',this)" style="background:#FAEEDA;color:#633806">🟠 Orange</button>
+      <button class="theme-btn" onclick="setTheme('#1e3a5f','#0a1f38',this)" style="background:#e8f0f8;color:#0a1f38">🔵 Bleu</button>
+      <button class="theme-btn" onclick="setTheme('#7C3AED','#4C1D95',this)" style="background:#EDE9FE;color:#4C1D95">🪻 Indigo</button>
+    </div>
+
+    <div class="cv-preview show" id="cv-preview">
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">📄</div>
+        <div>Remplis le formulaire pour générer ton CV</div>
+      </div>
+      <div id="cv-content" style="display:none"></div>
+    </div>
+
+    <div class="cv-actions" id="cv-actions" style="display:none">
+      <button class="btn-sec" onclick="window.print()">🖨 Imprimer / Enregistrer en PDF</button>
+      <button class="btn-sec" id="btn-copy" onclick="copierCV()">📋 Copier le texte</button>
+    </div>
+
+    <div class="footer">
+      © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+      Reproduction et diffusion interdites sans autorisation de l'auteur.
+    </div>
+  </div>
+
+</div>
+
+<script>
+let theme = {main:'#1D9E75', dark:'#085041'};
+
+const SECTEURS = {
+  sante:{titre:'Stage de découverte en Santé & Social',accroche:'Élève de 3e, curieux(se) et attentionné(e), je souhaite découvrir les métiers du soin et de l\'accompagnement des personnes. Ce stage me permettra de mieux comprendre cet environnement professionnel et de confirmer mon projet d\'orientation.'},
+  commerce:{titre:'Stage de découverte en Commerce & Vente',accroche:'Élève de 3e, dynamique et à l\'aise à l\'oral, je souhaite découvrir le monde du commerce et de la relation client. Ce stage m\'aidera à confirmer mon attrait pour les métiers du secteur commercial.'},
+  informatique:{titre:'Stage de découverte en Informatique & Numérique',accroche:'Élève de 3e, passionné(e) par les technologies et le numérique, je souhaite découvrir les métiers de l\'informatique en milieu professionnel et enrichir mon projet d\'orientation.'},
+  cuisine:{titre:'Stage de découverte en Cuisine & Restauration',accroche:'Élève de 3e, créatif(ve) et rigoureux(se), je souhaite découvrir l\'univers de la cuisine et de la restauration. Ce stage me permettra de confirmer ma passion pour les métiers de bouche.'},
+  batiment:{titre:'Stage de découverte en Bâtiment & Travaux Publics',accroche:'Élève de 3e, manuel(le) et appliqué(e), je souhaite découvrir les métiers du bâtiment et comprendre les réalités du secteur de la construction.'},
+  mecanique:{titre:'Stage de découverte en Mécanique & Automobile',accroche:'Élève de 3e, passionné(e) par la mécanique et les moteurs, je souhaite découvrir ce secteur en milieu professionnel et observer les gestes du métier au quotidien.'},
+  coiffure:{titre:'Stage de découverte en Coiffure & Esthétique',accroche:'Élève de 3e, créatif(ve) et soucieux(se) du détail, je souhaite découvrir les métiers de la coiffure et du bien-être à travers ce stage d\'observation.'},
+  education:{titre:'Stage de découverte en Éducation & Petite Enfance',accroche:'Élève de 3e, patient(e) et à l\'écoute, je souhaite découvrir les métiers de l\'éducation et de l\'accompagnement des enfants lors de ce stage de découverte.'},
+  administration:{titre:'Stage de découverte en Administration & Gestion',accroche:'Élève de 3e, organisé(e) et rigoureux(se), je souhaite découvrir les métiers de l\'administration et de la gestion d\'entreprise lors de ce stage d\'observation.'},
+  communication:{titre:'Stage de découverte en Communication & Médias',accroche:'Élève de 3e, créatif(ve) et curieux(se), je souhaite découvrir les métiers de la communication et des médias et développer mes compétences dans ce domaine.'},
+  sport:{titre:'Stage de découverte en Sport & Animation',accroche:'Élève de 3e, sportif(ve) et dynamique, je souhaite découvrir les métiers de l\'animation et du sport en milieu professionnel lors de ce stage d\'observation.'},
+  autre:{titre:'Stage de découverte professionnelle',accroche:'Élève de 3e, motivé(e) et curieux(se), je souhaite découvrir le monde professionnel lors de ce stage d\'observation et enrichir ma réflexion sur mon projet d\'orientation.'}
+};
+
+function togChip(btn){btn.classList.toggle('sel');gen();}
+function togComp(btn){
+  const sel=document.querySelectorAll('#competences .chip.sel').length;
+  if(!btn.classList.contains('sel')&&sel>=5)return;
+  btn.classList.toggle('sel');gen();
+}
+function togLoisir(btn){btn.classList.toggle('sel');gen();}
+
+function setTheme(main,dark,btn){
+  theme={main,dark};
+  document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  gen();
+}
+
+function gen(){
+  const prenom=document.getElementById('prenom').value.trim()||'Prénom';
+  const nom=document.getElementById('nom').value.trim()||'Nom';
+  const ville=document.getElementById('ville').value.trim()||'Gennevilliers';
+  const tel=document.getElementById('tel').value.trim()||'Téléphone';
+  const email=document.getElementById('email').value.trim()||'Email';
+  const secteur=document.getElementById('secteur').value;
+  const etab=document.getElementById('etablissement').value.trim()||'Collège Guy Môquet, Gennevilliers';
+  const classe=document.getElementById('classe').value.trim()||'Classe de 3e';
+  const lng1=document.getElementById('lng1').value;
+  const lng2=document.getElementById('lng2').value;
+
+  const certifs=[...document.querySelectorAll('#certifs .chip.sel')].map(c=>c.textContent);
+  const comps=[...document.querySelectorAll('#competences .chip.sel')].map(c=>c.textContent);
+  const loisirs=[...document.querySelectorAll('#loisirs .chip.sel')].map(c=>c.textContent);
+
+  const s=SECTEURS[secteur]||SECTEURS.autre;
+
+  const empty=document.getElementById('empty-state');
+  const content=document.getElementById('cv-content');
+  empty.style.display='none';
+  content.style.display='block';
+  document.getElementById('cv-actions').style.display='flex';
+
+  let html=`
+    <div class="cv-header-block" style="background:${theme.main}">
+      <div class="cv-name">${prenom} ${nom.toUpperCase()}</div>
+      <div class="cv-title">${s.titre}</div>
+      <div class="cv-coords">
+        <span>📍 ${ville}</span>
+        <span>📞 ${tel}</span>
+        <span>✉️ ${email}</span>
+      </div>
+    </div>
+    <div class="cv-body">
+
+      <div class="cv-section">
+        <div class="cv-section-title" style="color:${theme.main};border-color:${theme.main}">Profil</div>
+        <div class="cv-accroche" style="border-color:${theme.main};color:#3a3a38">${s.accroche}</div>
+      </div>
+
+      <div class="cv-section">
+        <div class="cv-section-title" style="color:${theme.main};border-color:${theme.main}">Formation</div>
+        <div class="cv-item">
+          <div class="cv-item-title">${etab}</div>
+          <div class="cv-item-sub">${classe} · Année scolaire 2026-2027</div>
+          ${certifs.length>0?`<div class="cv-tags">${certifs.map(c=>`<span class="cv-tag" style="background:${theme.main}20;color:${theme.dark}">${c}</span>`).join('')}</div>`:''}
+        </div>
+      </div>`;
+
+  if(comps.length>0){
+    html+=`
+      <div class="cv-section">
+        <div class="cv-section-title" style="color:${theme.main};border-color:${theme.main}">Compétences</div>
+        <div class="cv-tags">${comps.map(c=>`<span class="cv-tag" style="background:${theme.main}20;color:${theme.dark}">${c}</span>`).join('')}</div>
+      </div>`;
+  }
+
+  if(lng1||lng2){
+    html+=`
+      <div class="cv-section">
+        <div class="cv-section-title" style="color:${theme.main};border-color:${theme.main}">Langues</div>`;
+    if(lng1)html+=`<div class="cv-item"><div class="cv-item-title">${lng1.split('—')[0].trim()}</div><div class="cv-item-sub">${lng1.split('—')[1]?.trim()||''}</div></div>`;
+    if(lng2)html+=`<div class="cv-item"><div class="cv-item-title">${lng2.split('—')[0].trim()}</div><div class="cv-item-sub">${lng2.split('—')[1]?.trim()||''}</div></div>`;
+    html+=`</div>`;
+  }
+
+  if(loisirs.length>0){
+    html+=`
+      <div class="cv-section">
+        <div class="cv-section-title" style="color:${theme.main};border-color:${theme.main}">Centres d'intérêt</div>
+        <div class="cv-tags">${loisirs.map(l=>`<span class="cv-tag" style="background:${theme.main}20;color:${theme.dark}">${l}</span>`).join('')}</div>
+      </div>`;
+  }
+
+  html+=`</div>`;
+  content.innerHTML=html;
+}
+
+function copierCV(){
+  const txt=document.getElementById('cv-content').innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=document.getElementById('btn-copy');
+    btn.textContent='✓ Copié !';
+    btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='📋 Copier le texte';btn.classList.remove('ok');},2500);
+  });
+}
+</script>
+</body>
+</html>

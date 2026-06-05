@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attentes Oral DNB — Collège Guy Môquet</title>
+<style>
+  /* © A. HASSINI — Collège Guy Môquet, Gennevilliers. Tous droits réservés. */
+  :root{--bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;--text:#1a1a18;--text2:#5f5e5a;--text3:#9a9890;--border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.18);--radius:12px;--radius-sm:8px;--teal:#1D9E75;--teal-l:#E1F5EE;--teal-m:#9FE1CB;--teal-d:#085041}
+  @media(prefers-color-scheme:dark){:root{--bg:#1a1917;--bg2:#222220;--bg3:#2a2a27;--text:#e8e6de;--text2:#a8a79f;--text3:#6f6e68;--border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);--teal-l:#0d3326;--teal-m:#1a5c42}}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;background:var(--bg2);color:var(--text);min-height:100vh;padding:0 0 3rem}
+  .header{width:100%;background:var(--bg);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between}
+  .header-left{display:flex;align-items:center;gap:10px}
+  .header-logo{width:36px;height:36px;border-radius:8px;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .header-title{font-size:15px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--text2)}
+  .header-credit{font-size:11px;color:var(--text3);text-align:right;line-height:1.4}
+  .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);box-shadow:0 2px 12px rgba(0,0,0,0.06);width:100%;max-width:680px;margin:2rem auto;padding:1.75rem}
+  .fiche-header{background:var(--teal-l);border:1.5px solid var(--teal);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem;display:flex;align-items:center;gap:12px}
+  .fiche-title{font-size:17px;font-weight:600;color:var(--teal-d);margin-bottom:4px}
+  .fiche-date{font-size:12px;color:#0F6E56;background:var(--teal-m);padding:3px 10px;border-radius:10px;display:inline-block}
+  .section{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;margin-bottom:.75rem}
+  .section-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:.75rem}
+  /* Tabs sujets */
+  .tabs-wrap{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1rem}
+  .tab-btn{padding:6px 12px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:0.5px solid var(--border2);background:transparent;color:var(--text2);font-family:inherit;transition:all .15s}
+  .tab-btn.active{background:var(--teal);border-color:var(--teal-d);color:#fff}
+  .sujet-panel{display:none}
+  .sujet-panel.show{display:block}
+  .sujet-header{background:var(--teal-l);border-radius:var(--radius-sm);padding:1rem;margin-bottom:.75rem}
+  .sujet-q{font-size:16px;font-weight:600;color:var(--teal-d);margin-bottom:4px}
+  .sujet-tag{font-size:11px;color:#0F6E56}
+  .attendu-list{display:flex;flex-direction:column;gap:8px;margin-bottom:.75rem}
+  .attendu-item{display:flex;gap:10px;padding:8px 10px;background:var(--bg2);border-radius:var(--radius-sm);font-size:13px;color:var(--text);line-height:1.4}
+  .attendu-item::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0}
+  .questions-list{display:flex;flex-direction:column;gap:8px}
+  .q-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;cursor:pointer}
+  .q-item-q{font-size:13px;font-weight:500;color:var(--text);display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .q-item-arrow{font-size:12px;color:var(--text3);flex-shrink:0;transition:transform .2s}
+  .q-item-arrow.open{transform:rotate(180deg)}
+  .q-item-r{font-size:12px;color:var(--text2);line-height:1.5;display:none;margin-top:6px;padding-top:6px;border-top:0.5px solid var(--border)}
+  .q-item-r.open{display:block}
+  .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:.75rem}
+  .plan-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px}
+  .plan-num{font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+  .plan-text{font-size:13px;color:var(--text);line-height:1.4}
+  .conseil-box{background:var(--bg2);border-left:3px solid var(--teal);padding:.75rem 1rem;margin-bottom:.75rem}
+  .conseil-box p{font-size:13px;color:var(--text2);line-height:1.6}
+  .checklist{display:flex;flex-direction:column;gap:8px}
+  .check-item{display:flex;align-items:flex-start;gap:10px;padding:6px 8px;border-radius:var(--radius-sm)}
+  .check-item input{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--teal);cursor:pointer}
+  .check-item label{font-size:14px;color:var(--text);cursor:pointer;line-height:1.4}
+  .check-item input:checked+label{color:var(--text3);text-decoration:line-through}
+  .progress-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:4px}
+  .progress-bar{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;margin-bottom:.75rem}
+  .progress-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .3s}
+  .footer{text-align:center;font-size:11px;color:var(--text3);margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+  @media(max-width:500px){.plan-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
+  @media print{body{background:white}.card{box-shadow:none}.sujet-panel{display:block!important}.q-item-r{display:block!important}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">🎤</div>
+    <div>
+      <div class="header-title">Attentes & préparation — Oral DNB</div>
+      <div class="header-sub">Collège Guy Môquet — Gennevilliers · 2026-2027</div>
+    </div>
+  </div>
+  <div class="header-credit">© A. Hassini<br>Tous droits réservés</div>
+</div>
+
+<div class="card">
+
+  <div class="fiche-header">
+    <span style="font-size:28px;flex-shrink:0">🎤</span>
+    <div>
+      <div class="fiche-title">Oral DNB — Ce que le jury attend</div>
+      <span class="fiche-date">📅 Épreuves : 9 juin 2026 · Exposé 5 min + Entretien 10 min</span>
+    </div>
+  </div>
+
+  <!-- Rappel format -->
+  <div class="section">
+    <div class="section-title">📋 Rappel du format</div>
+    <div class="plan-grid">
+      <div class="plan-card"><div class="plan-num">Exposé</div><div class="plan-text">5 minutes — présenter ton sujet avec un plan clair</div></div>
+      <div class="plan-card"><div class="plan-num">Entretien</div><div class="plan-text">10 minutes — répondre aux questions du jury</div></div>
+      <div class="plan-card"><div class="plan-num">En groupe</div><div class="plan-text">10 min d'exposé + 15 min d'entretien</div></div>
+      <div class="plan-card"><div class="plan-num">Coefficient</div><div class="plan-text">× 2 — chaque élève est évalué individuellement</div></div>
+    </div>
+  </div>
+
+  <!-- Sélecteur de sujets -->
+  <div class="section">
+    <div class="section-title">🎯 Clique sur ton sujet pour voir les attentes</div>
+    <div class="tabs-wrap">
+      <button class="tab-btn active" onclick="showSujet(0,this)">Mon histoire</button>
+      <button class="tab-btn" onclick="showSujet(1,this)">Sciences & enquête</button>
+      <button class="tab-btn" onclick="showSujet(2,this)">Antiquité</button>
+      <button class="tab-btn" onclick="showSujet(3,this)">Arts & société</button>
+      <button class="tab-btn" onclick="showSujet(4,this)">Intelligence artificielle</button>
+      <button class="tab-btn" onclick="showSujet(5,this)">Égalité H/F</button>
+      <button class="tab-btn" onclick="showSujet(6,this)">Fake news</button>
+      <button class="tab-btn" onclick="showSujet(7,this)">Sport</button>
+      <button class="tab-btn" onclick="showSujet(8,this)">Hygiène de vie</button>
+      <button class="tab-btn" onclick="showSujet(9,this)">Pratique artistique</button>
+      <button class="tab-btn" onclick="showSujet(10,this)">Greenwashing</button>
+      <button class="tab-btn" onclick="showSujet(11,this)">Avenir</button>
+    </div>
+    <div id="sujets-container"></div>
+  </div>
+
+  <!-- Checklist préparation -->
+  <div class="section">
+    <div class="section-title">✅ Ma checklist de préparation à l'oral</div>
+    <div class="progress-top"><span>Ma progression</span><span id="oral-pct">0 / 8</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="oral-bar" style="width:0%"></div></div>
+    <div class="checklist">
+      <div class="check-item"><input type="checkbox" id="o1" onchange="upd()"><label for="o1">J'ai choisi mon sujet et compris ce que le jury attend</label></div>
+      <div class="check-item"><input type="checkbox" id="o2" onchange="upd()"><label for="o2">J'ai construit mon plan en 3 parties</label></div>
+      <div class="check-item"><input type="checkbox" id="o3" onchange="upd()"><label for="o3">J'ai préparé une introduction et une conclusion claires</label></div>
+      <div class="check-item"><input type="checkbox" id="o4" onchange="upd()"><label for="o4">J'ai préparé des exemples concrets pour illustrer chaque partie</label></div>
+      <div class="check-item"><input type="checkbox" id="o5" onchange="upd()"><label for="o5">J'ai lu les questions d'entretien possibles et préparé mes réponses</label></div>
+      <div class="check-item"><input type="checkbox" id="o6" onchange="upd()"><label for="o6">Je me suis entraîné(e) à l'oral devant quelqu'un (famille, ami, prof)</label></div>
+      <div class="check-item"><input type="checkbox" id="o7" onchange="upd()"><label for="o7">Je sais chronomètrer mon exposé : 5 minutes exactement</label></div>
+      <div class="check-item"><input type="checkbox" id="o8" onchange="upd()"><label for="o8">Je connais la grille d'évaluation et ce que le jury note</label></div>
+    </div>
+  </div>
+
+  <div class="conseil-box">
+    <p>💡 <strong>Conseil du PP :</strong> Ne récite pas ton exposé par cœur — parle naturellement, regarde le jury, et montre que tu maîtrises ton sujet. Un élève qui hésite mais parle avec conviction est toujours mieux noté qu'un élève qui récite un texte appris. Choisis un sujet qui te touche vraiment : ça se voit et ça convainc !</p>
+  </div>
+
+  <div class="footer">
+    © A. Hassini — Collège Guy Môquet, Gennevilliers · Édition 2026-2027<br>
+    Reproduction et diffusion interdites sans autorisation de l'auteur.
+  </div>
+</div>
+
+<script>
+const SUJETS = [
+  {
+    q:"En quoi mon histoire m'a-t-elle aidé à affiner mes choix d'orientation ?",
+    tag:"Orientation & parcours personnel",
+    attendus:[
+      "Présenter son parcours personnel de façon structurée et argumentée",
+      "Expliquer comment ses goûts, matières préférées et points forts ont évolué",
+      "Parler de ses démarches concrètes : stage, recherches ONISEP, portes ouvertes, forum des métiers",
+      "Présenter un projet d'orientation ou de métier avec la voie scolaire envisagée",
+      "Montrer ce qu'on a appris sur soi-même grâce à cette réflexion"
+    ],
+    plan:[
+      {n:"Introduction",t:"Présenter le sujet et annoncer le plan — pourquoi ce choix ?"},
+      {n:"Partie 1",t:"Mon idée au départ — ce que j'aimais, ce que je pensais vouloir faire"},
+      {n:"Partie 2",t:"Ce qui a changé — les démarches, les découvertes, les rencontres"},
+      {n:"Partie 3",t:"Mon projet aujourd'hui — métier, parcours scolaire, compétences développées"},
+      {n:"Conclusion",t:"Ce que mon histoire m'a appris sur moi-même et mon avenir"}
+    ],
+    canva:"https://canva.link/mon-histoire-mon-orientation",
+    qr:[
+      {q:"Pourquoi as-tu choisi ce sujet ?",r:"Répondre sincèrement en lien avec ton vécu personnel."},
+      {q:"Comment ton idée de métier a-t-elle changé au fil de l'année ?",r:"Expliquer le cheminement : point de départ → découvertes → projet actuel."},
+      {q:"Qu'est-ce que ton stage t'a appris sur toi-même ?",r:"Parler de ce que tu as observé, aimé ou pas aimé, et ce que ça t'a révélé."},
+      {q:"Quelles compétences as-tu développées cette année ?",r:"Exemples : autonomie, travail en équipe, expression orale, organisation..."},
+      {q:"Si tu n'avais pas fait ce stage, serais-tu arrivé(e) à la même conclusion ?",r:"Réflexion ouverte sur l'importance des expériences concrètes."}
+    ]
+  },
+  {
+    q:"En quoi les sciences peuvent-elles aider à résoudre une enquête criminelle ?",
+    tag:"Sciences — EPI enquête Guy Môquet",
+    attendus:[
+      "Expliquer le scénario de l'enquête Guy Môquet en argumentant",
+      "Présenter au moins 1 indice en SVT et 1 indice en Physique-Chimie avec leurs conclusions",
+      "Donner un exemple concret d'une affaire résolue grâce aux sciences",
+      "Ouvrir sur les métiers scientifiques liés aux enquêtes ou sur une série/film/livre",
+      "Montrer la complémentarité des sciences dans une enquête moderne"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir la police scientifique et annoncer le plan"},
+      {n:"Partie 1",t:"L'enquête Guy Môquet — indices SVT et Physique-Chimie"},
+      {n:"Partie 2",t:"Les techniques scientifiques utilisées dans les vraies enquêtes (ADN, balistique, toxicologie...)"},
+      {n:"Partie 3",t:"Une affaire résolue grâce aux sciences + ouverture métiers/culture"},
+      {n:"Conclusion",t:"La science est indispensable mais ne remplace pas les enquêteurs humains"}
+    ],
+    qr:[
+      {q:"Qu'est-ce que la police scientifique ?",r:"Service spécialisé qui utilise des techniques scientifiques pour analyser les indices trouvés sur les scènes de crime."},
+      {q:"Quel rôle joue l'analyse ADN dans une enquête ?",r:"L'ADN permet d'identifier une personne de façon unique à partir de traces biologiques."},
+      {q:"Quelle est la différence entre médecine légale et toxicologie ?",r:"La médecine légale examine les corps (autopsies). La toxicologie recherche la présence de poisons ou drogues dans l'organisme."},
+      {q:"La technologie peut-elle remplacer les enquêteurs humains ?",r:"Non : la technologie aide, mais il faut des humains pour analyser, interroger et décider."},
+      {q:"L'usage de la généalogie génétique soulève-t-il des questions éthiques ?",r:"Oui : utilisation de données de personnes non concernées → questions sur vie privée et informations personnelles."}
+    ]
+  },
+  {
+    q:"Quels sont les apports de l'Antiquité au fil des siècles ?",
+    tag:"Histoire — Langues anciennes",
+    attendus:[
+      "Choisir plusieurs éléments tirés de différentes matières et faire des liens avec l'Antiquité",
+      "Faire des allers-retours entre connaissances antiques et éléments du présent",
+      "Organiser l'exposé en 2 ou 3 grands thèmes (maths, sciences, sport, droit, art...)",
+      "Montrer que l'élève a compris le lien entre Antiquité gréco-romaine et monde actuel",
+      "Bonus : citer des mots latins/grecs ou leur étymologie"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir l'Antiquité et annoncer les thèmes choisis"},
+      {n:"Thème 1",t:"Ex : L'influence dans les mathématiques et les sciences"},
+      {n:"Thème 2",t:"Ex : L'influence dans le droit et la démocratie"},
+      {n:"Thème 3",t:"Ex : L'influence dans les arts, l'architecture ou le sport"},
+      {n:"Conclusion",t:"L'Antiquité est omniprésente dans notre quotidien sans qu'on le sache"}
+    ],
+    qr:[
+      {q:"Peux-tu donner des exemples de mots scientifiques venus du latin ou grec ?",r:"Ex : biologie (bios = vie), thermomètre (thermos = chaud), aquarium (aqua = eau)..."},
+      {q:"Peux-tu citer une ou deux citations latines célèbres ?",r:"Ex : Veni, vidi, vici (Je suis venu, j'ai vu, j'ai vaincu) — Jules César. Carpe diem (Saisis le jour) — Horace."},
+      {q:"Quel lien entre Rome et la démocratie actuelle ?",r:"Le Sénat, la République, les lois, le droit civil... sont des héritages directs de Rome."},
+      {q:"Connais-tu des monuments actuels inspirés de l'Antiquité ?",r:"Ex : Le Panthéon à Paris, la colonne Vendôme, l'Arc de Triomphe inspiré des arcs romains."},
+      {q:"Qu'est-ce que l'Antiquité gréco-romaine ?",r:"Période allant environ de -800 à 476 après J.-C., couvrant la Grèce antique et l'Empire romain."}
+    ]
+  },
+  {
+    q:"En quoi les arts et la société s'influencent-ils mutuellement ?",
+    tag:"Arts — Culture — Société",
+    attendus:[
+      "Définir les termes : arts, société, influence",
+      "Montrer que la société influence les arts (thèmes, techniques, commandes...)",
+      "Montrer que les arts influencent la société (perception, engagement, transformation)",
+      "Illustrer avec des exemples concrets tirés de différentes disciplines",
+      "Montrer la réciprocité : les arts résistent aussi parfois à la société"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir arts, société, influence — annoncer le plan"},
+      {n:"Partie 1",t:"La société influence les arts — thèmes, conditions, techniques"},
+      {n:"Partie 2",t:"Les arts influencent la société — engagement, transformation, propagande"},
+      {n:"Partie 3",t:"La résistance réciproque — censure, contre-culture, artistes engagés"},
+      {n:"Conclusion",t:"Une relation vivante et permanente qui nous façonne"}
+    ],
+    qr:[
+      {q:"Comment la société inspire-t-elle les artistes ?",r:"Par les thèmes abordés, les événements historiques, les modes de vie... Ex : impressionnisme et la révolution industrielle."},
+      {q:"Comment les institutions utilisent-elles les arts ?",r:"Architecture officielle, hymnes, propagande... Ex : art sous les dictatures, monuments nationaux."},
+      {q:"Comment les arts questionnent-ils la société ?",r:"Engagement politique des artistes : Guernica de Picasso, Banksy, chants de résistance..."},
+      {q:"Comment la société contrôle-t-elle les arts ?",r:"Par la censure, la propagande, les normes esthétiques... Ex : jazz interdit en Allemagne nazie."},
+      {q:"Comment les techniques artistiques évoluent-elles avec la société ?",r:"Invention de la perspective, de la photographie, du cinéma, de l'IA générative..."}
+    ]
+  },
+  {
+    q:"L'intelligence artificielle est-elle au service de l'humanité ?",
+    tag:"Technologie — Société — Éthique",
+    attendus:[
+      "Définir l'intelligence artificielle et l'humanité",
+      "Présenter des arguments en faveur de l'IA avec exemples concrets (médecine, accessibilité, quotidien)",
+      "Présenter des arguments contre avec exemples (emplois, biais, vie privée, énergie)",
+      "Conclure en choisissant un point de vue nuancé et argumenté",
+      "Ouvrir sur une question de société ou une œuvre en lien"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir IA et humanité — poser la question"},
+      {n:"Partie 1",t:"L'IA au service de l'humanité — médecine, accessibilité, quotidien"},
+      {n:"Partie 2",t:"Les dangers et limites de l'IA — emplois, biais, énergie, liberté"},
+      {n:"Partie 3",t:"Les solutions — législation, éthique, éducation (AI Act, RGPD...)"},
+      {n:"Conclusion",t:"Point de vue personnel nuancé + ouverture sur l'avenir"}
+    ],
+    qr:[
+      {q:"Qu'est-ce que l'intelligence artificielle selon toi ?",r:"Technologie qui permet à des machines de réaliser des tâches habituellement réservées aux humains."},
+      {q:"Quel argument te semble le plus convaincant dans ton exposé ?",r:"Réponse personnelle argumentée avec un exemple précis."},
+      {q:"L'IA peut-elle prendre des décisions plus justes que les humains ?",r:"Elle peut être plus rapide et cohérente, mais elle reproduit les biais de ses données d'entraînement."},
+      {q:"Quels sont les impacts écologiques de l'IA ?",r:"Entraîner un modèle comme BERT = 300 000 kg de CO2. Les data centers consomment énormément d'électricité."},
+      {q:"Faut-il interdire certaines IA ? Lesquelles ?",r:"Exemple : reconnaissance faciale de masse, armes autonomes, deepfakes non consentis."}
+    ]
+  },
+  {
+    q:"Lutter contre les discriminations : l'égalité homme-femme est-elle acquise ?",
+    tag:"EMC — Parcours citoyen",
+    attendus:[
+      "Définir discrimination, féminisme, égalité homme-femme",
+      "Présenter l'histoire du droit des femmes en France (vote, travail, avortement...)",
+      "Montrer les inégalités persistantes (salaires, violences, représentation...)",
+      "Présenter les avancées et les combats en cours (MeToo, Constitution, MLF...)",
+      "Ouvrir sur une action possible à l'échelle individuelle ou collective"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir les termes et poser la question"},
+      {n:"Partie 1",t:"Des inégalités historiques profondes — Code civil 1804, luttes du XXe s."},
+      {n:"Partie 2",t:"Des avancées considérables — droit de vote (1944), travail, IVG, MeToo"},
+      {n:"Partie 3",t:"Des inégalités persistantes aujourd'hui — salaires, violences, représentation"},
+      {n:"Conclusion",t:"L'égalité n'est pas encore acquise — l'engagement individuel est nécessaire"}
+    ],
+    qr:[
+      {q:"À qui doit-on la loi qui légalise l'avortement en France ?",r:"Simone Veil — loi Veil de 1975. Le droit à l'avortement a été inscrit dans la Constitution le 8 mars 2024."},
+      {q:"Date de l'obtention du droit de vote des femmes en France ?",r:"1944 — sous le général de Gaulle."},
+      {q:"Quelles inégalités subsistent aujourd'hui ?",r:"Écart salarial de 23,5% (INSEE 2022), féminicides, harcèlement, sous-représentation politique..."},
+      {q:"Qu'est-ce que le mouvement MeToo ?",r:"Mouvement né en 2017 qui dénonce les violences sexuelles et le harcèlement, notamment en milieu professionnel."},
+      {q:"Que pourriez-vous proposer pour lutter contre les discriminations ?",r:"Réponse personnelle : éducation, sensibilisation, signalement, engagement associatif..."}
+    ]
+  },
+  {
+    q:"En quoi la prolifération des fake news a changé notre manière de nous informer ?",
+    tag:"Médias — Esprit critique — Numérique",
+    attendus:[
+      "Définir fake news et désinformation",
+      "Expliquer comment les fausses informations se propagent (réseaux sociaux, algorithmes)",
+      "Montrer les conséquences sur la société (confiance, démocratie, santé...)",
+      "Présenter des outils pour vérifier l'information (fact-checking, sources officielles)",
+      "Conclure sur l'importance de l'esprit critique"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir fake news — donner un exemple marquant"},
+      {n:"Partie 1",t:"Pourquoi les fake news se propagent-elles si facilement ?"},
+      {n:"Partie 2",t:"Quelles sont les conséquences sur la société ?"},
+      {n:"Partie 3",t:"Comment vérifier une information ? Outils et méthodes"},
+      {n:"Conclusion",t:"L'esprit critique est une compétence essentielle aujourd'hui"}
+    ],
+    qr:[
+      {q:"Comment reconnaître une fake news ?",r:"Vérifier la source, chercher d'autres articles sur le même sujet, consulter des sites de fact-checking."},
+      {q:"Pourquoi les fake news se propagent-elles si vite ?",r:"Les algorithmes des réseaux sociaux favorisent les contenus qui génèrent des réactions émotionnelles fortes."},
+      {q:"Quels sites permettent de vérifier une information ?",r:"AFP Factuel, CheckNews de Libération, Les Décodeurs du Monde, Snopes..."},
+      {q:"Quel rôle jouent les GAFAM dans la diffusion des fake news ?",r:"Leurs algorithmes amplifient les contenus viraux sans vérification — mais ils mettent en place des politiques de modération."},
+      {q:"Comment l'école peut-elle aider à lutter contre la désinformation ?",r:"En enseignant l'esprit critique, l'éducation aux médias et au numérique — compétences PIX notamment."}
+    ]
+  },
+  {
+    q:"Le sport nous rend-il meilleur ?",
+    tag:"Sport — Santé — Société — Valeurs",
+    attendus:[
+      "Définir ce que signifie 'être meilleur' — physiquement, moralement, socialement",
+      "Présenter les bienfaits du sport (santé, valeurs, dépassement de soi, lien social)",
+      "Présenter les dérives possibles (dopage, violence, compétition excessive)",
+      "Montrer la dimension sociale et citoyenne du sport",
+      "Conclure avec un point de vue personnel argumenté"
+    ],
+    plan:[
+      {n:"Introduction",t:"Poser la question — définir 'meilleur' sous différents angles"},
+      {n:"Partie 1",t:"Le sport améliore la santé et le bien-être physique et mental"},
+      {n:"Partie 2",t:"Le sport transmet des valeurs — dépassement, fair-play, solidarité"},
+      {n:"Partie 3",t:"Les limites et dérives du sport — dopage, violences, inégalités"},
+      {n:"Conclusion",t:"Le sport peut nous rendre meilleurs à condition d'être pratiqué avec éthique"}
+    ],
+    qr:[
+      {q:"En quoi le sport développe-t-il des valeurs ?",r:"Fair-play, respect des règles, solidarité, persévérance, dépassement de soi..."},
+      {q:"Quels sont les bienfaits du sport sur la santé mentale ?",r:"Réduit le stress, améliore l'humeur, favorise le sommeil, développe la confiance en soi."},
+      {q:"Comment le dopage est-il une trahison des valeurs sportives ?",r:"Il fausse les résultats, met en danger la santé, trahit le fair-play et l'égalité des chances."},
+      {q:"Quel lien entre sport et citoyenneté ?",r:"Le sport apprend les règles collectives, le respect de l'arbitre, l'acceptation de la défaite — valeurs civiques essentielles."},
+      {q:"Le sport est-il accessible à tous ?",r:"Non — inégalités d'accès liées au coût, à la géographie, au handicap ou au genre. Des politiques publiques tentent de réduire ces inégalités."}
+    ]
+  },
+  {
+    q:"Quel est l'impact de mon hygiène de vie sur ma santé ?",
+    tag:"Santé — SVT — Bien-être",
+    attendus:[
+      "Définir hygiène de vie et santé (OMS : bien-être physique, mental et social)",
+      "Présenter les facteurs d'une bonne hygiène de vie (alimentation, sommeil, activité physique, écrans...)",
+      "Expliquer les conséquences d'une mauvaise hygiène de vie",
+      "Faire le lien avec ses propres habitudes de façon personnelle et honnête",
+      "Ouvrir sur des conseils concrets et des ressources"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir santé et hygiène de vie — annoncer le plan"},
+      {n:"Partie 1",t:"Les piliers d'une bonne hygiène de vie — alimentation, sommeil, activité physique"},
+      {n:"Partie 2",t:"Les risques d'une mauvaise hygiène — sédentarité, carences, stress, addictions"},
+      {n:"Partie 3",t:"Mon hygiène de vie personnelle — bilan honnête et pistes d'amélioration"},
+      {n:"Conclusion",t:"Chaque geste compte — des petits changements font une grande différence"}
+    ],
+    qr:[
+      {q:"Combien d'heures de sommeil sont recommandées pour un adolescent ?",r:"Entre 8 et 10 heures par nuit selon l'OMS."},
+      {q:"Quels sont les effets des écrans sur la santé ?",r:"Perturbation du sommeil, sédentarité, fatigue oculaire, anxiété sociale..."},
+      {q:"Qu'est-ce que la sédentarité et pourquoi est-elle dangereuse ?",r:"Manque d'activité physique qui favorise l'obésité, les maladies cardiovasculaires, le diabète..."},
+      {q:"Quel lien entre alimentation et santé mentale ?",r:"Le microbiome intestinal influence l'humeur et les émotions — 'le deuxième cerveau'."},
+      {q:"Comment améliorer concrètement son hygiène de vie au quotidien ?",r:"30 min de marche par jour, réduire les écrans avant le coucher, manger des fruits et légumes, boire de l'eau..."}
+    ]
+  },
+  {
+    q:"Dans quelles mesures ma pratique artistique m'a-t-elle permis de consolider mes compétences scolaires ?",
+    tag:"Arts — Compétences transversales",
+    attendus:[
+      "Présenter sa pratique artistique personnelle (musique, danse, dessin, théâtre, écriture...)",
+      "Identifier les compétences développées : concentration, rigueur, créativité, mémoire, confiance...",
+      "Montrer comment ces compétences se transfèrent dans les disciplines scolaires",
+      "Illustrer avec des exemples concrets et personnels",
+      "Conclure sur la valeur des arts dans la formation globale de la personne"
+    ],
+    plan:[
+      {n:"Introduction",t:"Présenter sa pratique artistique — pourquoi ce sujet ?"},
+      {n:"Partie 1",t:"Les compétences développées par ma pratique artistique"},
+      {n:"Partie 2",t:"Comment ces compétences m'ont aidé(e) à l'école"},
+      {n:"Partie 3",t:"Les arts, une voie de réussite complémentaire aux disciplines scolaires"},
+      {n:"Conclusion",t:"Ce que les arts m'ont appris que l'école seule ne pouvait pas m'enseigner"}
+    ],
+    qr:[
+      {q:"Quelle est ta pratique artistique et depuis quand ?",r:"Réponse personnelle sincère et détaillée."},
+      {q:"Quelle compétence développée dans ta pratique t'a le plus aidé(e) à l'école ?",r:"Ex : la concentration en musique m'aide à me concentrer en maths..."},
+      {q:"Les arts doivent-ils avoir plus de place à l'école selon toi ?",r:"Réponse personnelle argumentée."},
+      {q:"Quel lien entre créativité et réussite scolaire ?",r:"La créativité développe la capacité à résoudre des problèmes de façon originale — utile dans toutes les matières."},
+      {q:"Les arts peuvent-ils aider des élèves en difficulté scolaire ?",r:"Oui — ils permettent de développer la confiance en soi, l'expression, et de trouver des voies d'accès au savoir différentes."}
+    ]
+  },
+  {
+    q:"Le greenwashing : une réponse adaptée aux enjeux environnementaux ?",
+    tag:"Environnement — Économie — Esprit critique",
+    attendus:[
+      "Définir le greenwashing avec des exemples concrets d'entreprises",
+      "Expliquer pourquoi les entreprises pratiquent le greenwashing",
+      "Montrer les conséquences négatives : tromperie des consommateurs, ralentissement des vraies actions",
+      "Présenter des solutions : labels officiels, réglementation, consommation critique",
+      "Conclure sur la responsabilité des entreprises et des consommateurs"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir greenwashing — donner un exemple marquant"},
+      {n:"Partie 1",t:"Pourquoi les entreprises font-elles du greenwashing ?"},
+      {n:"Partie 2",t:"Quelles sont les conséquences pour les consommateurs et la planète ?"},
+      {n:"Partie 3",t:"Comment s'en protéger ? Labels, réglementation, consommation critique"},
+      {n:"Conclusion",t:"Le greenwashing n'est pas une solution — il faut des actes réels"}
+    ],
+    qr:[
+      {q:"Peux-tu donner un exemple concret de greenwashing ?",r:"Ex : une marque de fast fashion qui se dit 'éco-responsable' tout en produisant des millions de vêtements par an."},
+      {q:"Quelle est la différence entre greenwashing et engagement écologique réel ?",r:"L'engagement réel implique des changements profonds dans les processus, pas seulement dans la communication."},
+      {q:"Quels labels certifient qu'un produit est vraiment écologique ?",r:"Ecolabel européen, Agriculture Biologique (AB), Fair Trade, NF Environnement..."},
+      {q:"Quel rôle peut jouer le consommateur face au greenwashing ?",r:"S'informer, vérifier les labels, préférer les entreprises transparentes, réduire sa consommation globale."},
+      {q:"La réglementation peut-elle stopper le greenwashing ?",r:"Oui — l'UE travaille sur une directive anti-greenwashing. En France, la DGCCRF peut sanctionner les publicités trompeuses."}
+    ]
+  },
+  {
+    q:"En quoi l'avenir est-il une source d'inspiration ?",
+    tag:"Philosophie — Arts — Sciences — Société",
+    attendus:[
+      "Définir ce que signifie 'l'avenir' et 's'inspirer'",
+      "Montrer comment l'avenir inspire les arts : science-fiction, utopies, prospective",
+      "Montrer comment l'avenir inspire les sciences et les innovations",
+      "Parler de son propre rapport à l'avenir — espoirs, craintes, projets",
+      "Conclure sur la tension entre espoir et incertitude comme moteur de créativité"
+    ],
+    plan:[
+      {n:"Introduction",t:"Définir avenir et inspiration — annoncer le plan"},
+      {n:"Partie 1",t:"L'avenir inspire les arts — SF, utopies, anticipation"},
+      {n:"Partie 2",t:"L'avenir inspire les sciences et l'innovation — énergie, médecine, espace"},
+      {n:"Partie 3",t:"Mon rapport personnel à l'avenir — projets, espoirs, engagements"},
+      {n:"Conclusion",t:"L'incertitude de l'avenir est ce qui nous pousse à imaginer et à agir"}
+    ],
+    qr:[
+      {q:"Quel auteur de science-fiction t'a inspiré(e) ? Pourquoi ?",r:"Réponse personnelle — Jules Verne, Asimov, Le Guin... ou un film/série."},
+      {q:"En quoi ton orientation est-elle liée à ta vision de l'avenir ?",r:"Lien entre le métier envisagé et les grands enjeux du futur (climat, technologie, santé...)."},
+      {q:"L'avenir fait-il peur ou donne-t-il de l'espoir selon toi ?",r:"Réponse nuancée — les deux à la fois : les défis sont réels mais l'innovation aussi."},
+      {q:"Comment la science-fiction influence-t-elle les vraies innovations ?",r:"Ex : Jules Verne a imaginé le sous-marin et l'homme sur la lune avant qu'ils existent."},
+      {q:"Quelle est ta vision de la société dans 20 ans ?",r:"Réponse personnelle argumentée — montrer sa capacité de projection et d'analyse."}
+    ]
+  }
+];
+
+let currentSujet = 0;
+
+function showSujet(idx, btn) {
+  currentSujet = idx;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSujet();
+}
+
+function renderSujet() {
+  const s = SUJETS[currentSujet];
+  let html = `<div class="sujet-panel show">
+    <div class="sujet-header">
+      <div class="sujet-q">${s.q}</div>
+      <div class="sujet-tag">🏷 ${s.tag}</div>
+    </div>
+    ${s.canva ? `<a href="${s.canva}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:#7F77DD;color:#fff;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;margin-bottom:.75rem">📊 Voir un exemple de présentation →</a>` : ''}
+    <div class="section-title" style="margin-bottom:.5rem">✅ Ce que le jury attend</div>
+    <div class="attendu-list">
+      ${s.attendus.map(a => `<div class="attendu-item">${a}</div>`).join('')}
+    </div>
+    <div class="section-title" style="margin:.75rem 0 .5rem">📋 Plan suggéré</div>
+    <div class="plan-grid">
+      ${s.plan.map(p => `<div class="plan-card"><div class="plan-num">${p.n}</div><div class="plan-text">${p.t}</div></div>`).join('')}
+    </div>
+    <div class="section-title" style="margin:.75rem 0 .5rem">❓ Questions d'entretien possibles</div>
+    <div class="questions-list">
+      ${s.qr.map((q, i) => `
+        <div class="q-item" onclick="toggleQ(this)">
+          <div class="q-item-q"><span>${q.q}</span><span class="q-item-arrow">▾</span></div>
+          <div class="q-item-r">👉 ${q.r}</div>
+        </div>`).join('')}
+    </div>
+  </div>`;
+  document.getElementById('sujets-container').innerHTML = html;
+}
+
+function toggleQ(el) {
+  const r = el.querySelector('.q-item-r');
+  const arr = el.querySelector('.q-item-arrow');
+  r.classList.toggle('open');
+  arr.classList.toggle('open');
+}
+
+function upd() {
+  const boxes = document.querySelectorAll('.checklist input');
+  const n = [...boxes].filter(b => b.checked).length;
+  document.getElementById('oral-pct').textContent = n + ' / ' + boxes.length;
+  document.getElementById('oral-bar').style.width = Math.round(n / boxes.length * 100) + '%';
+}
+
+renderSujet();
+</script>
+</body>
+</html>

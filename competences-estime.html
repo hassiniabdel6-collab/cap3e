@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Qui es-tu vraiment ? — Cap 3e</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#F7F6F2;--bg2:#EEECEA;--bg3:#E4E2DC;
+  --surface:#FFFFFF;--surface2:#F2F0EB;
+  --ink:#1A1816;--ink2:#5A5855;--ink3:#9A9890;
+  --blue:#1A4FBF;--blue-l:#EBF0FB;--blue-m:rgba(26,79,191,0.2);
+  --teal:#0D6E56;--teal-l:#E2F4EE;
+  --amber:#B5620A;--amber-l:#FDF0E0;
+  --red:#C13030;--red-l:#FCEAEA;
+  --purple:#5B3FA0;--purple-l:#EFEBFB;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --r:14px;--rs:8px;
+}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+
+/* HEADER */
+.header{background:var(--ink);padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:rgba(91,63,160,0.2)}
+.header::after{content:'';position:absolute;bottom:-20px;left:20%;width:100px;height:100px;border-radius:50%;background:rgba(26,79,191,0.15)}
+.header-badge{display:inline-block;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1rem;position:relative;z-index:1}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(24px,5vw,38px);font-weight:700;color:#fff;margin-bottom:.5rem;position:relative;z-index:1;letter-spacing:-.02em}
+.header-title span{color:#A78BFA}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.6;max-width:400px;margin:0 auto;position:relative;z-index:1}
+
+/* MAIN */
+.main{max-width:560px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+
+/* PAGES */
+.page{display:none}
+.page.on{display:block}
+
+/* INTRO */
+.intro-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem}
+.intro-icon{font-size:36px;margin-bottom:.75rem;display:block}
+.intro-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.intro-text{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:1rem}
+.intro-steps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.25rem}
+.intro-step{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;background:var(--bg2);font-size:12px;color:var(--ink2)}
+.btn{width:100%;padding:14px;border-radius:var(--r);font-size:15px;font-weight:500;font-family:inherit;border:none;cursor:pointer;transition:opacity .15s}
+.btn:hover{opacity:.9}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 6px 20px rgba(26,79,191,.25)}
+.btn-outline{background:transparent;color:var(--ink2);border:0.5px solid var(--border2);margin-top:8px}
+
+/* QUIZ */
+.quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+.quiz-num{font-size:12px;color:var(--ink3);font-family:'DM Sans',sans-serif}
+.prog-track{flex:1;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden;margin:0 12px}
+.prog-fill{height:100%;border-radius:2px;background:var(--purple);transition:width .4s ease}
+.quiz-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem}
+.quiz-emoji{font-size:32px;margin-bottom:.75rem;display:block}
+.quiz-q{font-family:'Syne',sans-serif;font-size:17px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:1.25rem}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:12px 14px;border-radius:var(--rs);border:1.5px solid var(--border2);background:var(--surface2);font-size:14px;color:var(--ink2);cursor:pointer;text-align:left;font-family:inherit;transition:all .15s;line-height:1.5}
+.quiz-opt:hover{border-color:var(--purple);background:var(--purple-l)}
+.quiz-opt.sel{border-color:var(--purple);background:var(--purple-l);color:var(--purple);font-weight:500}
+.btn-next{width:100%;padding:13px;border-radius:var(--r);background:var(--purple);color:#fff;font-size:14px;font-weight:500;font-family:inherit;border:none;cursor:pointer;margin-top:1rem}
+.btn-next:disabled{background:var(--bg3);color:var(--ink3);cursor:default}
+
+/* LOADING */
+.loading{text-align:center;padding:3rem 1.5rem}
+.loading-emoji{font-size:48px;animation:pulse 1.5s ease-in-out infinite;display:block;margin-bottom:1rem}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.loading-text{font-size:15px;color:var(--ink2);line-height:1.6}
+
+/* RESULTATS */
+.profil-card{border-radius:var(--r);padding:1.5rem;margin-bottom:1rem;position:relative;overflow:hidden}
+.profil-badge{display:inline-block;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem}
+.profil-emoji{font-size:48px;margin-bottom:.75rem;display:block}
+.profil-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:.5rem}
+.profil-desc{font-size:14px;line-height:1.7;margin-bottom:1rem}
+.profil-forces{margin-bottom:0}
+.profil-forces-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;opacity:.7}
+.force-item{display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:5px}
+.force-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+/* SCORES */
+.scores-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.score-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);padding:12px;text-align:center}
+.score-n{font-size:22px;font-weight:700;margin-bottom:2px}
+.score-l{font-size:11px;color:var(--ink3)}
+.score-bar{height:4px;border-radius:2px;background:var(--bg3);overflow:hidden;margin-top:6px}
+.score-fill{height:100%;border-radius:2px;transition:width .6s ease}
+
+/* EXERCICES */
+.ex-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.25rem;margin-bottom:10px}
+.ex-num{font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.ex-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:.5rem}
+.ex-desc{font-size:13px;color:var(--ink2);line-height:1.6;margin-bottom:.75rem}
+.ex-steps{display:flex;flex-direction:column;gap:6px}
+.ex-step{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2);line-height:1.5}
+.ex-step-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;flex-shrink:0;margin-top:1px}
+.ex-check{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:6px;border:0.5px solid var(--border2);background:var(--bg2);font-size:12px;color:var(--ink2);cursor:pointer;font-family:inherit;width:100%;margin-top:8px;transition:all .15s}
+.ex-check.done{background:var(--teal-l);border-color:rgba(13,110,86,.3);color:var(--teal)}
+
+/* PILO */
+.pilo-box{background:var(--ink);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem}
+.pilo-hd{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
+.pilo-av{width:32px;height:32px;border-radius:50%;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-size:16px}
+.pilo-name{font-size:12px;font-weight:500;color:#A78BFA}
+.pilo-msg{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.6;font-style:italic}
+
+/* SHARE */
+.share-row{display:flex;gap:8px;margin-top:1rem}
+.share-btn{flex:1;padding:10px;border-radius:var(--rs);border:0.5px solid var(--border2);background:var(--surface2);font-size:12px;font-weight:500;color:var(--ink2);cursor:pointer;font-family:inherit;transition:all .15s}
+.share-btn:hover{background:var(--bg3)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">Quiz interactif · 3e</div>
+  <div class="header-title">Qui es-tu <span>vraiment</span> ?</div>
+  <p class="header-sub">Decouvre tes points forts, apprends a mieux te connaitre et booste ta confiance pour ta 3e.</p>
+</div>
+
+<div class="main">
+
+  <!-- PAGE INTRO -->
+  <div class="page on" id="p-intro">
+    <div class="intro-card">
+      <span class="intro-icon">&#129504;</span>
+      <div class="intro-title">Un quiz pour mieux te connaitre</div>
+      <div class="intro-text">
+        En 3e, on te demande de choisir ton orientation, de passer le brevet, de t'organiser seul... C'est beaucoup ! Ce quiz te aide a identifier tes vraies forces et te donne des outils concrets pour gagner en confiance.
+      </div>
+      <div class="intro-steps">
+        <div class="intro-step">&#10024; 10 questions</div>
+        <div class="intro-step">&#128338; 3 minutes</div>
+        <div class="intro-step">&#127775; Profil personnalise</div>
+        <div class="intro-step">&#129328; Exercices pratiques</div>
+      </div>
+      <button class="btn btn-primary" onclick="startQuiz()">Decouvrir mon profil &#8594;</button>
+    </div>
+    <div style="font-size:12px;color:var(--ink3);text-align:center;padding:.5rem">Tes reponses sont anonymes et ne sont pas enregistrees.</div>
+  </div>
+
+  <!-- PAGE QUIZ -->
+  <div class="page" id="p-quiz">
+    <div class="quiz-header">
+      <span class="quiz-num" id="qnum">1 / 10</span>
+      <div class="prog-track"><div class="prog-fill" id="qprog" style="width:10%"></div></div>
+      <span class="quiz-num" id="qpct">10%</span>
+    </div>
+    <div class="quiz-card">
+      <span class="quiz-emoji" id="qemoji">&#128161;</span>
+      <div class="quiz-q" id="qq">Chargement...</div>
+      <div class="quiz-opts" id="qopts"></div>
+    </div>
+    <button class="btn-next" id="btnNext" disabled onclick="nextQ()">Suivant &#8594;</button>
+  </div>
+
+  <!-- PAGE LOADING -->
+  <div class="page" id="p-loading">
+    <div class="loading">
+      <span class="loading-emoji">&#129504;</span>
+      <div class="loading-text">PILO analyse ton profil...<br>On prepare tes resultats personnalises !</div>
+    </div>
+  </div>
+
+  <!-- PAGE RESULTATS -->
+  <div class="page" id="p-result">
+    <div class="profil-card" id="profilCard"></div>
+    <div class="scores-grid" id="scoresGrid"></div>
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg" id="piloMsg"></div>
+    </div>
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:600;color:var(--ink);margin-bottom:.75rem">Tes 3 exercices personnalises</div>
+    <div id="exercicesZone"></div>
+    <button class="btn btn-blue" onclick="restart()" style="margin-top:1rem">Refaire le quiz &#8594;</button>
+    <button class="btn btn-outline" onclick="window.print()">Imprimer mes resultats</button>
+  </div>
+
+</div>
+
+<script>
+// ── QUESTIONS ─────────────────────────────────────────────
+var QUESTIONS=[
+  {e:"&#128064;",q:"En cours, quand le prof pose une question que tu connais, tu...",opts:[
+    {t:"Leves la main sans hesiter",s:{conf:3,soc:2}},
+    {t:"Attends que quelqu'un d'autre reponde",s:{stress:2,conf:-1}},
+    {t:"Veux repondre mais tu as peur de te tromper",s:{stress:3,conf:-1}},
+    {t:"Ca depend du cours et du prof",s:{adapt:2}}
+  ]},
+  {e:"&#128561;",q:"Tu apprends que tu as une mauvaise note. Ta premiere reaction c'est...",opts:[
+    {t:"Tu te demandes ce que tu peux ameliorer",s:{resilience:3,conf:1}},
+    {t:"Tu te dis que tu es nul.le dans cette matiere",s:{conf:-2,stress:2}},
+    {t:"Tu es decu.e mais tu passes vite a autre chose",s:{resilience:2,adapt:1}},
+    {t:"Tu en parles a quelqu'un pour avoir de l'aide",s:{soc:3,resilience:1}}
+  ]},
+  {e:"&#129309;",q:"Dans un travail de groupe, tu es plutot...",opts:[
+    {t:"Celui ou celle qui organise et repartit les taches",s:{conf:2,lead:3}},
+    {t:"Celui ou celle qui execute sans prendre d'initiative",s:{conf:-1,stress:1}},
+    {t:"Celui ou celle qui propose des idees creatives",s:{creat:3,conf:1}},
+    {t:"Celui ou celle qui s'assure que tout le monde va bien",s:{soc:3,empat:2}}
+  ]},
+  {e:"&#128170;",q:"Quand tu dois faire quelque chose de difficile, tu...",opts:[
+    {t:"Te lances meme si c'est dur",s:{resilience:3,conf:2}},
+    {t:"Procrastines jusqu'a la derniere minute",s:{stress:2,conf:-1}},
+    {t:"Demandes de l'aide avant d'essayer",s:{soc:2,adapt:1}},
+    {t:"Divises la tache en petites etapes",s:{resilience:2,lead:2}}
+  ]},
+  {e:"&#127775;",q:"Ce que tes amis apprecient le plus chez toi, c'est...",opts:[
+    {t:"Ta loyaute et ton ecoute",s:{soc:3,empat:3}},
+    {t:"Ton humour et ta bonne humeur",s:{soc:2,adapt:2}},
+    {t:"Ton serieux et ta fiabilite",s:{lead:2,resilience:2}},
+    {t:"Ta creativite et ton originalite",s:{creat:3,conf:1}}
+  ]},
+  {e:"&#128203;",q:"Face a un examen comme le brevet, tu...",opts:[
+    {t:"Te prepares longtemps a l'avance avec un planning",s:{lead:3,resilience:2}},
+    {t:"Stresses beaucoup mais tu t'en sors",s:{stress:3,resilience:1}},
+    {t:"Revises a la derniere minute et ca marche quand meme",s:{adapt:3,conf:1}},
+    {t:"As du mal a te concentrer tellement tu stresses",s:{stress:3,conf:-2}}
+  ]},
+  {e:"&#128170;",q:"Quand tu fais une erreur devant tout le monde, tu...",opts:[
+    {t:"Assumes et fais avec le sourire",s:{conf:3,resilience:2}},
+    {t:"Voudrais disparaitre tellement tu as honte",s:{stress:3,conf:-2}},
+    {t:"Te justifies pour expliquer pourquoi ca s'est passe",s:{adapt:2,conf:-1}},
+    {t:"Ris de toi-meme pour desamorcer la situation",s:{soc:2,resilience:2,conf:1}}
+  ]},
+  {e:"&#128269;",q:"Pour ton orientation, tu...",opts:[
+    {t:"As deja une idee precise de ce que tu veux faire",s:{conf:3,lead:2}},
+    {t:"Explores plein de possibilites sans te decider",s:{creat:2,adapt:2}},
+    {t:"Es stresse.e par cette pression de choisir",s:{stress:3,conf:-1}},
+    {t:"T'appuies sur tes parents pour decider",s:{conf:-2,soc:1}}
+  ]},
+  {e:"&#128248;",q:"Si tu devais te decrire en un mot, ce serait...",opts:[
+    {t:"Courageux.se",s:{conf:3,resilience:2}},
+    {t:"Attentionne.e",s:{empat:3,soc:2}},
+    {t:"Curieux.se",s:{creat:3,adapt:2}},
+    {t:"Perfectionniste",s:{stress:2,lead:1,resilience:1}}
+  ]},
+  {e:"&#127919;",q:"Ce qui te rend le plus fier.e ou fiere de toi, c'est...",opts:[
+    {t:"Tes resultats scolaires",s:{lead:2,resilience:2}},
+    {t:"Tes relations avec les autres",s:{soc:3,empat:2}},
+    {t:"Ta creativite et tes projets personnels",s:{creat:3,conf:2}},
+    {t:"Ta capacite a rebondir apres les echecs",s:{resilience:3,conf:2}}
+  ]}
+];
+
+// ── PROFILS ───────────────────────────────────────────────
+var PROFILS={
+  leader:{
+    emoji:"&#127942;",
+    titre:"Le Leader Naturel",
+    badge:"Leader",
+    bg:"#EBF0FB",color:"#1A4FBF",
+    desc:"Tu as une vraie capacite a organiser, a prendre des initiatives et a entrainer les autres. En 3e, cette force est precieuse pour les travaux de groupe, le brevet et ton orientation. Tu n'as pas besoin d'attendre qu'on te dise quoi faire — tu le fais.",
+    forces:["Sens de l'organisation","Prise d'initiative","Fiabilite et serieux","Vision claire de tes objectifs"],
+    pilo:"Tu as tout ce qu'il faut pour reussir, et pas seulement a l'ecole. Cette capacite a organiser et a entrainer les autres, c'est exactement ce que les lycees et les employeurs recherchent. Fais-en une force consciente.",
+    exercices:["planifier","ancre","lettre"]
+  },
+  resilient:{
+    emoji:"&#128167;",
+    titre:"Le Resilient",
+    badge:"Resilient",
+    bg:"#E2F4EE",color:"#0D6E56",
+    desc:"Tu sais rebondir. Les echecs ne t'arretent pas — ils t'apprennent quelque chose. C'est une des qualites les plus importantes dans la vie, et tu l'as naturellement. Meme quand c'est dur, tu trouves un moyen de continuer.",
+    forces:["Capacite a rebondir apres les echecs","Perseverance","Gestion des difficultes","Apprentissage par l'experience"],
+    pilo:"La resilience c'est ce qui fait la difference entre ceux qui reussissent et ceux qui abandonnent. Tu l'as deja — maintenant il faut l'utiliser consciemment. Chaque difficulte est un entrainement.",
+    exercices:["journal","respiration","ancre"]
+  },
+  creatif:{
+    emoji:"&#127912;",
+    titre:"Le Createur",
+    badge:"Creatif",
+    bg:"#EFEBFB",color:"#5B3FA0",
+    desc:"Tu vois les choses differemment. La ou les autres voient des problemes, toi tu vois des solutions originales. Cette creativite est une force rare que beaucoup de metiers recherchent. Ne la cache pas — elle te distingue.",
+    forces:["Pensee originale et creatrice","Ouverture d'esprit","Capacite a innover","Vision unique des choses"],
+    pilo:"Ta creativite n'est pas un defaut — c'est une competence. Dans un monde ou tout le monde suit les memes chemins, ceux qui pensent differemment sont ceux qui font la difference. Assume-le.",
+    exercices:["mindmap","lettre","journal"]
+  },
+  empathique:{
+    emoji:"&#10084;&#65039;",
+    titre:"L'Empathique",
+    badge:"Empathique",
+    bg:"#FDF0E0",color:"#B5620A",
+    desc:"Tu sais ecouter, comprendre et aider les autres. Cette intelligence emotionnelle est une force immense — souvent sous-estimee a l'ecole mais essentielle dans la vie. Les gens autour de toi se sentent en securite avec toi.",
+    forces:["Intelligence emotionnelle","Ecoute et bienveillance","Sens du collectif","Capacite a federer"],
+    pilo:"L'empathie c'est une forme d'intelligence que les tests ne mesurent pas mais que la vie recompense. Tu as la capacite rare de comprendre les autres — c'est une force pour ton orientation et ta vie en general.",
+    exercices:["respiration","journal","lettre"]
+  }
+};
+
+// ── EXERCICES ─────────────────────────────────────────────
+var EXERCICES={
+  planifier:{
+    titre:"Le Planning des victoires",
+    desc:"Transforme tes objectifs en actions concretes pour cette semaine.",
+    steps:["Prends une feuille et ecris 3 choses que tu veux accomplir cette semaine","Pour chaque chose, ecris UNE action concrete que tu peux faire demain","Mets cette feuille bien en vue — sur ton bureau ou dans ton agenda"],
+    color:"#1A4FBF",bg:"#EBF0FB"
+  },
+  ancre:{
+    titre:"L'Ancre de confiance",
+    desc:"Quand tu doutes de toi, rappelle-toi de tes vraies forces.",
+    steps:["Ferme les yeux et pense a un moment ou tu etais vraiment fier.e de toi","Revois ce moment en detail — qu'est-ce que tu ressentais ?","Chaque fois que tu doutes, rappelle-toi de ce moment. C'est ton ancre."],
+    color:"#5B3FA0",bg:"#EFEBFB"
+  },
+  lettre:{
+    titre:"La Lettre a toi-meme",
+    desc:"Ecris une lettre a la version de toi dans 1 an.",
+    steps:["Prends 10 minutes dans un endroit calme","Ecris a ton futur toi : qu'est-ce que tu veux avoir accompli ? Qu'est-ce que tu veux lui dire ?","Garde cette lettre et relis-la dans 6 mois"],
+    color:"#0D6E56",bg:"#E2F4EE"
+  },
+  respiration:{
+    titre:"La Respiration 4-7-8",
+    desc:"Technique scientifiquement prouvee pour calmer le stress en 2 minutes.",
+    steps:["Inspire pendant 4 secondes par le nez","Retiens ta respiration pendant 7 secondes","Expire lentement pendant 8 secondes par la bouche","Repete 4 fois. Fais-le avant chaque examen ou situation stressante."],
+    color:"#B5620A",bg:"#FDF0E0"
+  },
+  journal:{
+    titre:"Le Journal des 3 victoires",
+    desc:"Chaque soir, note 3 choses positives de ta journee.",
+    steps:["Avant de dormir, prends 5 minutes","Ecris 3 choses qui se sont bien passees aujourd'hui (meme petites)","Fais-le pendant 21 jours — ca change vraiment la facon de voir les choses"],
+    color:"#C13030",bg:"#FCEAEA"
+  },
+  mindmap:{
+    titre:"La Carte de tes talents",
+    desc:"Visualise toutes tes forces sur une carte mentale.",
+    steps:["Sur une grande feuille, ecris ton prenom au centre","Autour, note tout ce que tu sais faire, ce que tu aimes, ce qu'on apprecie chez toi","Relie les elements entre eux — tu vas decouvrir des connexions surprenantes"],
+    color:"#5B3FA0",bg:"#EFEBFB"
+  }
+};
+
+// ── LOGIQUE QUIZ ──────────────────────────────────────────
+var cur=0;
+var scores={conf:0,stress:0,resilience:0,soc:0,lead:0,creat:0,empat:0,adapt:0};
+var answers=[];
+
+function startQuiz(){
+  showPage("p-quiz");
+  renderQ();
+}
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("on");});
+  document.getElementById(id).classList.add("on");
+  window.scrollTo(0,0);
+}
+
+function renderQ(){
+  var q=QUESTIONS[cur];
+  document.getElementById("qnum").textContent=(cur+1)+" / "+QUESTIONS.length;
+  document.getElementById("qprog").style.width=Math.round(((cur+1)/QUESTIONS.length)*100)+"%";
+  document.getElementById("qpct").textContent=Math.round(((cur+1)/QUESTIONS.length)*100)+"%";
+  document.getElementById("qemoji").innerHTML=q.e;
+  document.getElementById("qq").textContent=q.q;
+  var opts=document.getElementById("qopts");
+  opts.innerHTML="";
+  q.opts.forEach(function(opt,i){
+    var btn=document.createElement("button");
+    btn.className="quiz-opt";
+    btn.textContent=opt.t;
+    btn.onclick=function(){
+      document.querySelectorAll(".quiz-opt").forEach(function(b){b.classList.remove("sel");});
+      btn.classList.add("sel");
+      answers[cur]=i;
+      document.getElementById("btnNext").disabled=false;
+    };
+    opts.appendChild(btn);
+  });
+  document.getElementById("btnNext").disabled=true;
+  // Restaurer selection si deja repondu
+  if(answers[cur]!==undefined){
+    opts.children[answers[cur]].classList.add("sel");
+    document.getElementById("btnNext").disabled=false;
+  }
+}
+
+function nextQ(){
+  // Ajouter les scores de la reponse selectionnee
+  var selIdx=answers[cur];
+  var sel=QUESTIONS[cur].opts[selIdx];
+  Object.keys(sel.s).forEach(function(k){
+    if(scores[k]!==undefined) scores[k]+=sel.s[k];
+    else scores[k]=(scores[k]||0)+sel.s[k];
+  });
+
+  cur++;
+  if(cur>=QUESTIONS.length){
+    showResults();
+  } else {
+    renderQ();
+  }
+}
+
+function showResults(){
+  showPage("p-loading");
+  setTimeout(function(){
+    var profil=calcProfil();
+    renderResults(profil);
+    showPage("p-result");
+  },2000);
+}
+
+function calcProfil(){
+  // Determiner le profil dominant
+  var p={
+    leader: (scores.lead||0)*2+(scores.conf||0),
+    resilient: (scores.resilience||0)*2+(scores.adapt||0),
+    creatif: (scores.creat||0)*2+(scores.conf||0),
+    empathique: (scores.empat||0)*2+(scores.soc||0)
+  };
+  // Si stress elevé, booster resilient
+  if((scores.stress||0)>6) p.resilient+=2;
+  var best="leader";
+  Object.keys(p).forEach(function(k){if(p[k]>p[best])best=k;});
+  return best;
+}
+
+function renderResults(profilKey){
+  var pr=PROFILS[profilKey];
+
+  // Carte profil
+  var card=document.getElementById("profilCard");
+  var forcesHtml=pr.forces.map(function(f){
+    return '<div class="force-item"><div class="force-dot" style="background:'+pr.color+'"></div><span>'+f+'</span></div>';
+  }).join("");
+
+  card.style.background=pr.bg;
+  card.innerHTML=
+    '<div class="profil-badge" style="background:'+pr.color+';color:#fff">'+pr.badge+'</div>'+
+    '<span class="profil-emoji">'+pr.emoji+'</span>'+
+    '<div class="profil-title" style="color:'+pr.color+'">'+pr.titre+'</div>'+
+    '<div class="profil-desc" style="color:'+pr.color.replace('BF','80')+'">'+pr.desc+'</div>'+
+    '<div class="profil-forces">'+
+    '<div class="profil-forces-title" style="color:'+pr.color+'">Tes points forts</div>'+
+    forcesHtml+'</div>';
+
+  // Scores
+  var sg=document.getElementById("scoresGrid");
+  var scoreItems=[
+    {l:"Confiance",v:Math.min(Math.max((scores.conf||0)+5,0),10),c:"#1A4FBF"},
+    {l:"Resilience",v:Math.min((scores.resilience||0)*1.5,10),c:"#0D6E56"},
+    {l:"Creativite",v:Math.min((scores.creat||0)*1.5,10),c:"#5B3FA0"},
+    {l:"Intelligence sociale",v:Math.min((scores.soc||0)*1.2,10),c:"#B5620A"}
+  ];
+  sg.innerHTML=scoreItems.map(function(s){
+    var pct=Math.round((s.v/10)*100);
+    return '<div class="score-card">'+
+      '<div class="score-n" style="color:'+s.c+'">'+Math.round(s.v)+'/10</div>'+
+      '<div class="score-l">'+s.l+'</div>'+
+      '<div class="score-bar"><div class="score-fill" style="width:'+pct+'%;background:'+s.c+'"></div></div>'+
+      '</div>';
+  }).join("");
+
+  // PILO
+  document.getElementById("piloMsg").textContent=pr.pilo;
+
+  // Exercices
+  var ez=document.getElementById("exercicesZone");
+  ez.innerHTML="";
+  pr.exercices.forEach(function(exKey,idx){
+    var ex=EXERCICES[exKey];
+    var stepsHtml=ex.steps.map(function(s,i){
+      return '<div class="ex-step">'+
+        '<div class="ex-step-num" style="background:'+ex.bg+';color:'+ex.color+'">'+(i+1)+'</div>'+
+        '<span>'+s+'</span></div>';
+    }).join("");
+    var checkId="excheck_"+exKey;
+    var div=document.createElement("div");
+    div.className="ex-card";
+    div.innerHTML=
+      '<div class="ex-num">Exercice '+(idx+1)+' — '+ex.titre+'</div>'+
+      '<div class="ex-title" style="color:'+ex.color+'">'+ex.titre+'</div>'+
+      '<div class="ex-desc">'+ex.desc+'</div>'+
+      '<div class="ex-steps">'+stepsHtml+'</div>'+
+      '<button class="ex-check" id="'+checkId+'" onclick="checkEx(this)">'+
+      '<span>&#9675;</span> J\'ai fait cet exercice (+10 XP)</button>';
+    ez.appendChild(div);
+  });
+}
+
+function checkEx(btn){
+  if(btn.classList.contains("done"))return;
+  btn.classList.add("done");
+  btn.innerHTML='<span>&#10003;</span> Exercice complete ! Bravo !';
+}
+
+function restart(){
+  cur=0;
+  scores={conf:0,stress:0,resilience:0,soc:0,lead:0,creat:0,empat:0,adapt:0};
+  answers=[];
+  showPage("p-intro");
+}
+</script>
+</body>
+</html>

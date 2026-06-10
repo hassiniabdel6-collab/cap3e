@@ -239,6 +239,7 @@ body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;align-items
         <div class="dpills">
           <div class="dpill" style="background:var(--amber-l);color:var(--amber)">&#128293; <span id="stk">1</span>j</div>
           <div class="dpill" style="background:var(--blue-l);color:var(--blue)">&#11088; <span id="xpn">100</span></div>
+          <div class="dpill" style="background:var(--surface2);color:var(--text3);cursor:pointer;font-size:10px" onclick="confirmReset()" title="Reinitialiser mon profil">&#8635;</div>
         </div>
       </div>
       <div class="lvwrap"><span class="lvlbl">Niv.1</span><div class="lvtrack"><div class="lvfill" id="lvf" style="width:10%"></div></div><span class="lvlbl">Niv.2</span></div>
@@ -654,6 +655,12 @@ function renderMission(){
   var pct=Math.round((done/m.s.length)*100);
   document.getElementById("mwf").style.width=pct+"%";
   document.getElementById("mwc").textContent=done+" / "+m.s.length+" etape"+(done>1?"s":"");
+}
+
+function confirmReset(){
+  if(confirm("Reinitialiser ton profil CAPilot ? Tu devras refaire l'onboarding.")){
+    resetState();
+  }
 }
 
 function showBadges(){alert("Tes badges\n\nPassager (niveau 1) - Debloque !\nChasseur d'objectifs - Coche tes 3 objectifs 3 semaines\nStreak Master - 7 jours consecutifs\nPilote Solo - Gere un dossier seul");}

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Quiz Orientation — Quelle voie te correspond ?</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F2;--bg2:#EEECEA;--surface:#fff;
+  --ink:#1A1816;--ink2:#5A5855;--ink3:#9A9890;
+  --blue:#1A4FBF;--blue-l:#EBF0FB;
+  --teal:#0D6E56;--teal-l:#E2F4EE;
+  --amber:#9B5A08;--amber-l:#FDF0E0;
+  --purple:#5B3FA0;--purple-l:#EFEBFB;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.15);
+  --r:14px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+
+.header{background:var(--ink);padding:2rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(26,79,191,0.2)}
+.header-badge{display:inline-block;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:4px 14px;font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:.75rem;letter-spacing:.06em;text-transform:uppercase}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:700;color:#fff;margin-bottom:.375rem;letter-spacing:-.02em}
+.header-title span{color:#6EA8FE}
+.header-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;max-width:400px;margin:0 auto}
+
+.main{max-width:540px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+
+/* PAGES */
+.page{display:none}
+.page.on{display:block}
+
+/* INTRO */
+.intro-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem}
+.intro-icon{font-size:40px;margin-bottom:.75rem;display:block;text-align:center}
+.intro-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:.5rem;text-align:center}
+.intro-text{font-size:14px;color:var(--ink2);line-height:1.7;margin-bottom:1rem;text-align:center}
+.intro-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:1.25rem}
+.intro-pill{font-size:12px;padding:4px 12px;border-radius:20px;background:var(--bg2);color:var(--ink2)}
+.btn-start{width:100%;padding:14px;border-radius:var(--r);background:var(--ink);color:#fff;font-size:15px;font-weight:500;font-family:inherit;border:none;cursor:pointer;transition:opacity .15s}
+.btn-start:hover{opacity:.85}
+
+/* QUIZ */
+.quiz-hd{display:flex;align-items:center;gap:10px;margin-bottom:1.25rem}
+.quiz-prog-track{flex:1;height:5px;background:var(--bg2);border-radius:3px;overflow:hidden}
+.quiz-prog-fill{height:100%;border-radius:3px;background:var(--blue);transition:width .4s ease}
+.quiz-num{font-size:12px;color:var(--ink3);font-weight:500;white-space:nowrap}
+.quiz-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem}
+.quiz-emoji{font-size:32px;display:block;text-align:center;margin-bottom:.75rem}
+.quiz-q{font-family:'Syne',sans-serif;font-size:17px;font-weight:600;color:var(--ink);line-height:1.4;margin-bottom:1.25rem;text-align:center}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:13px 16px;border-radius:var(--rs);border:1.5px solid var(--border2);background:var(--bg);font-size:14px;color:var(--ink2);cursor:pointer;text-align:left;font-family:inherit;line-height:1.5;transition:all .15s}
+.quiz-opt:hover{border-color:var(--blue);background:var(--blue-l);color:var(--ink)}
+.quiz-opt.sel{border-color:var(--blue);background:var(--blue-l);color:var(--blue);font-weight:500}
+.btn-next{width:100%;padding:14px;border-radius:var(--r);background:var(--blue);color:#fff;font-size:15px;font-weight:500;font-family:inherit;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(26,79,191,.25);transition:opacity .15s}
+.btn-next:disabled{background:var(--bg2);color:var(--ink3);box-shadow:none;cursor:default}
+
+/* LOADING */
+.loading{text-align:center;padding:3rem 1.5rem}
+.loading-emoji{font-size:52px;display:block;margin-bottom:1rem;animation:spin 2s linear infinite}
+@keyframes spin{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.loading-text{font-size:14px;color:var(--ink2);line-height:1.7}
+
+/* RESULTATS */
+.result-header{text-align:center;margin-bottom:1.5rem}
+.result-emoji{font-size:52px;display:block;margin-bottom:.75rem}
+.result-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:.375rem}
+.result-sub{font-size:14px;color:var(--ink2);line-height:1.6}
+
+/* BARRES */
+.voie-bars{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem}
+.voie-bar-item{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);padding:12px 14px}
+.vbi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.vbi-name{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink)}
+.vbi-icon{font-size:18px}
+.vbi-pct{font-size:16px;font-weight:700}
+.vbi-track{height:8px;border-radius:4px;background:var(--bg2);overflow:hidden}
+.vbi-fill{height:100%;border-radius:4px;transition:width 1s ease}
+.vbi-desc{font-size:12px;color:var(--ink3);margin-top:5px;line-height:1.5}
+
+/* PROFIL DOMINANT */
+.profil-card{border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;border:0.5px solid}
+.profil-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.profil-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:.5rem}
+.profil-desc{font-size:13px;line-height:1.7;margin-bottom:.75rem}
+.profil-next{font-size:13px;font-weight:500;margin-bottom:.375rem}
+.profil-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;margin-bottom:.375rem;line-height:1.5}
+.profil-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px}
+
+/* LIENS */
+.liens-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.lien-card{padding:10px 12px;border-radius:var(--rs);border:0.5px solid var(--border2);background:var(--surface);text-decoration:none;display:block;transition:all .15s}
+.lien-card:hover{border-color:var(--blue);transform:translateY(-1px)}
+.lien-icon{font-size:18px;margin-bottom:4px}
+.lien-title{font-size:12px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.lien-url{font-size:11px;color:var(--ink3)}
+
+.btn-restart{width:100%;padding:12px;border-radius:var(--r);background:transparent;color:var(--ink2);font-size:14px;font-weight:500;font-family:inherit;border:0.5px solid var(--border2);cursor:pointer;margin-top:8px;transition:all .15s}
+.btn-restart:hover{background:var(--bg2)}
+
+.pilo-box{background:var(--ink);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem}
+.pilo-hd{display:flex;align-items:center;gap:10px;margin-bottom:.625rem}
+.pilo-av{width:30px;height:30px;border-radius:50%;background:rgba(110,168,254,0.15);border:1px solid rgba(110,168,254,0.3);display:flex;align-items:center;justify-content:center;font-size:15px}
+.pilo-name{font-size:11px;font-weight:500;color:#6EA8FE}
+.pilo-msg{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;font-style:italic}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">Quiz orientation · 3e</div>
+  <div class="header-title">Quelle voie te <span>correspond ?</span></div>
+  <p class="header-sub">Decouvre en quelques questions quelle voie apres la 3e te ressemble le plus.</p>
+</div>
+
+<div class="main">
+
+  <!-- INTRO -->
+  <div class="page on" id="p-intro">
+    <div class="intro-card">
+      <span class="intro-icon">&#129517;</span>
+      <div class="intro-title">Trouve ta voie en 3 minutes</div>
+      <div class="intro-text">Tu hesites entre la voie generale, le bac pro ou le CAP ? Ce quiz de 10 questions t'aide a identifier la voie qui te correspond vraiment. Pas de bonne ou mauvaise reponse — juste tes gouts et ta facon de travailler.</div>
+      <div class="intro-pills">
+        <span class="intro-pill">&#10024; 10 questions</span>
+        <span class="intro-pill">&#128338; 3 minutes</span>
+        <span class="intro-pill">&#128202; Resultats en %</span>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">Commencer le quiz &#8594;</button>
+    </div>
+    <div style="font-size:12px;color:var(--ink3);text-align:center">Tes reponses sont anonymes et ne sont pas enregistrees.</div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="page" id="p-quiz">
+    <div class="quiz-hd">
+      <span class="quiz-num" id="qnum">1/10</span>
+      <div class="quiz-prog-track"><div class="quiz-prog-fill" id="qprog" style="width:10%"></div></div>
+      <span class="quiz-num" id="qpct">10%</span>
+    </div>
+    <div class="quiz-card">
+      <span class="quiz-emoji" id="qemoji">&#128161;</span>
+      <div class="quiz-q" id="qq">Chargement...</div>
+      <div class="quiz-opts" id="qopts"></div>
+    </div>
+    <button class="btn-next" id="btnNext" disabled onclick="nextQ()">Suivant &#8594;</button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="page" id="p-loading">
+    <div class="loading">
+      <span class="loading-emoji">&#129517;</span>
+      <div class="loading-text">Analyse de tes reponses...<br>On calcule ta voie ideale !</div>
+    </div>
+  </div>
+
+  <!-- RESULTATS -->
+  <div class="page" id="p-result">
+    <div class="result-header">
+      <span class="result-emoji" id="rEmoji">&#127919;</span>
+      <div class="result-title" id="rTitle">Tes resultats</div>
+      <div class="result-sub" id="rSub">Voici comment tes reponses se repartissent entre les differentes voies.</div>
+    </div>
+
+    <div class="voie-bars" id="voieBars"></div>
+    <div class="profil-card" id="profilCard"></div>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg" id="piloMsg"></div>
+    </div>
+
+    <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#127279; Pour aller plus loin</div>
+    <div class="liens-grid">
+      <a class="lien-card" href="orientation.html" target="_blank">
+        <div class="lien-icon">&#129517;</div>
+        <div class="lien-title">Page Orientation complete</div>
+        <div class="lien-url">Affelnet, dispositifs, ressources</div>
+      </a>
+      <a class="lien-card" href="infographie_voies_orientation.html" target="_blank">
+        <div class="lien-icon">&#128506;</div>
+        <div class="lien-title">Infographie des voies</div>
+        <div class="lien-url">Vision claire et visuelle</div>
+      </a>
+      <a class="lien-card" href="https://www.onisep.fr" target="_blank">
+        <div class="lien-icon">&#127919;</div>
+        <div class="lien-title">ONISEP</div>
+        <div class="lien-url">onisep.fr</div>
+      </a>
+      <a class="lien-card" href="https://bv.ac-versailles.fr" target="_blank">
+        <div class="lien-icon">&#127968;</div>
+        <div class="lien-title">Academie de Versailles</div>
+        <div class="lien-url">bv.ac-versailles.fr</div>
+      </a>
+    </div>
+
+    <button class="btn-restart" onclick="restart()">&#8635; Recommencer le quiz</button>
+  </div>
+
+</div>
+
+<script>
+var QUESTIONS=[
+  {e:"&#128064;",q:"A l'ecole, tu preferes surtout :",opts:[
+    {t:"Les matieres generales (francais, maths, histoire...)",s:{gt:3,pro:0,cap:0}},
+    {t:"Les activites pratiques, les projets, le travail concret",s:{gt:0,pro:2,cap:3}},
+    {t:"Les matieres scientifiques et techniques",s:{gt:2,pro:2,cap:1}},
+    {t:"Un peu des deux selon les matieres",s:{gt:1,pro:1,cap:1}}
+  ]},
+  {e:"&#128170;",q:"Apres les cours, tu preferes :",opts:[
+    {t:"Lire, faire des recherches, apprendre de nouvelles choses",s:{gt:3,pro:0,cap:0}},
+    {t:"Faire quelque chose avec tes mains (cuisine, bricolage, sport...)",s:{gt:0,pro:2,cap:3}},
+    {t:"Creer, dessiner, inventer",s:{gt:1,pro:2,cap:2}},
+    {t:"Aider les autres, etre avec des gens",s:{gt:1,pro:2,cap:1}}
+  ]},
+  {e:"&#127919;",q:"Dans 5 ans, tu te vois plutot :",opts:[
+    {t:"En train de faire des etudes longues (fac, BTS, grande ecole...)",s:{gt:3,pro:1,cap:0}},
+    {t:"En train d'apprendre un metier concret avec un diplome pro",s:{gt:0,pro:3,cap:1}},
+    {t:"Deja en train de travailler et d'etre autonome financierement",s:{gt:0,pro:1,cap:3}},
+    {t:"Tu ne sais pas encore — tu as besoin de plus de temps",s:{gt:1,pro:1,cap:1}}
+  ]},
+  {e:"&#128203;",q:"Face a un devoir difficile, tu :",opts:[
+    {t:"Cherches a comprendre le fond du probleme et tu perseveres",s:{gt:3,pro:1,cap:0}},
+    {t:"Preferes quand c'est concret et qu'on voit directement l'utilite",s:{gt:0,pro:2,cap:3}},
+    {t:"Demandes de l'aide et travailles en equipe",s:{gt:1,pro:2,cap:2}},
+    {t:"Tries les infos importantes et vas a l'essentiel",s:{gt:2,pro:1,cap:2}}
+  ]},
+  {e:"&#128188;",q:"Le metier ideal pour toi, c'est un metier :",opts:[
+    {t:"Intellectuel, avec de la reflexion et de l'analyse",s:{gt:3,pro:0,cap:0}},
+    {t:"Manuel ou technique, avec des gestes precis et concrets",s:{gt:0,pro:2,cap:3}},
+    {t:"En contact avec les gens (soin, education, service...)",s:{gt:1,pro:2,cap:2}},
+    {t:"Creatif, avec de l'expression et de l'innovation",s:{gt:2,pro:2,cap:1}}
+  ]},
+  {e:"&#127979;",q:"Comment tu apprends le mieux ?",opts:[
+    {t:"En lisant des cours, en faisant des exercices theoriques",s:{gt:3,pro:0,cap:0}},
+    {t:"En faisant par moi-meme, en pratiquant directement",s:{gt:0,pro:2,cap:3}},
+    {t:"En observant quelqu'un faire puis en reproduisant",s:{gt:0,pro:2,cap:3}},
+    {t:"En echangeant, en posant des questions, en debattant",s:{gt:2,pro:1,cap:1}}
+  ]},
+  {e:"&#128293;",q:"Ce qui te motive le plus a l'ecole, c'est :",opts:[
+    {t:"Comprendre comment le monde fonctionne",s:{gt:3,pro:0,cap:0}},
+    {t:"Apprendre un metier et etre competent rapidement",s:{gt:0,pro:2,cap:3}},
+    {t:"Avoir de bons resultats et progresser",s:{gt:2,pro:2,cap:1}},
+    {t:"Les projets collectifs et les sorties scolaires",s:{gt:1,pro:2,cap:2}}
+  ]},
+  {e:"&#128176;",q:"Par rapport a l'argent et au travail :",opts:[
+    {t:"Tu preferes prendre le temps de bien te former, meme si c'est long",s:{gt:3,pro:1,cap:0}},
+    {t:"Tu veux travailler et gagner ta vie assez rapidement",s:{gt:0,pro:1,cap:3}},
+    {t:"Tu veux une bonne formation ET une bonne insertion pro",s:{gt:1,pro:3,cap:1}},
+    {t:"L'argent c'est pas ta priorite — c'est la passion qui compte",s:{gt:2,pro:2,cap:2}}
+  ]},
+  {e:"&#129309;",q:"En groupe de travail, tu es plutot :",opts:[
+    {t:"Celui ou celle qui organise, qui structure les idees",s:{gt:3,pro:1,cap:0}},
+    {t:"Celui ou celle qui fait, qui realise concrètement",s:{gt:0,pro:2,cap:3}},
+    {t:"Celui ou celle qui motive et soude le groupe",s:{gt:1,pro:2,cap:2}},
+    {t:"Celui ou celle qui innove et propose des idees originales",s:{gt:2,pro:2,cap:1}}
+  ]},
+  {e:"&#127775;",q:"Si tu pouvais choisir ton lycee ideal, ce serait :",opts:[
+    {t:"Un lycee general avec beaucoup de matieres variees",s:{gt:3,pro:0,cap:0}},
+    {t:"Un lycee pro avec des stages et de la pratique",s:{gt:0,pro:3,cap:1}},
+    {t:"Un CFA en apprentissage pour travailler en meme temps",s:{gt:0,pro:1,cap:3}},
+    {t:"N'importe lequel du moment que l'ambiance est bonne",s:{gt:1,pro:1,cap:1}}
+  ]}
+];
+
+var cur=0,answers=[],scores={gt:0,pro:0,cap:0};
+
+var PROFILS={
+  gt:{
+    emoji:"&#127891;",
+    nom:"Voie Generale et Technologique",
+    couleur:"#1A4FBF",bg:"#EBF0FB",
+    desc:"Tu es a l'aise avec les matieres theoriques, tu aimes comprendre en profondeur et tu envisages des etudes assez longues. La seconde GT te permettra de decouvrir de nombreuses disciplines avant de choisir tes specialites en premiere.",
+    debouches:["Bac general (specialites au choix)","Bac technologique (STMG, STI2D, ST2S...)","Puis BTS, BUT, Licence, Classe preparatoire, Grande ecole"],
+    conseils:"Explore les lycees GT de ton secteur et leurs sections disponibles. La seconde est une annee de decouverte — profites-en.",
+    pilo:"Tu es taille.e pour la voie generale. Tu aimes comprendre le pourquoi des choses — c'est une force immense pour des etudes longues. Ne te bride pas par manque de confiance."
+  },
+  pro:{
+    emoji:"&#128295;",
+    nom:"Voie Professionnelle — Bac Pro",
+    couleur:"#0D6E56",bg:"#E2F4EE",
+    desc:"Tu preferes la pratique a la theorie, tu as envie d'apprendre un metier concret tout en obtenant un vrai diplome. Le bac pro en 3 ans, avec des periodes en entreprise, est fait pour toi. Il ouvre aussi les portes du BTS.",
+    debouches:["Bac professionnel (14 familles de metiers)","Periodes de stage en entreprise incluses","Puis emploi direct ou BTS / Mention Complementaire"],
+    conseils:"Choisis ta specialite en fonction de ce qui te passionne vraiment. Les stages de bac pro sont une vraie richesse pour ton CV.",
+    pilo:"La voie pro n'est pas une voie de garage — c'est une voie d'excellence pour ceux qui apprennent en faisant. Beaucoup de chefs d'entreprise et de metiers d'avenir passent par la."
+  },
+  cap:{
+    emoji:"&#128295;",
+    nom:"CAP ou Apprentissage",
+    couleur:"#9B5A08",bg:"#FDF0E0",
+    desc:"Tu veux entrer rapidement dans la vie active, apprendre un metier precis et etre autonome. Le CAP en 2 ans ou l'apprentissage en alternance te permettent d'etre forme.e sur le terrain, d'etre remunere.e et d'acquerir une vraie experience.",
+    debouches:["CAP en 2 ans (puis possibilite de passer un bac pro)","Apprentissage : alterner CFA et entreprise","Insertion rapide dans la vie professionnelle"],
+    conseils:"L'apprentissage te permet d'etre remunere.e pendant ta formation. C'est souvent le meilleur tremplin pour ceux qui apprennent en faisant.",
+    pilo:"Choisir le CAP ou l'apprentissage, c'est choisir l'efficacite et la concretude. Tu seras souvent plus avance.e que tes camarades en termes d'experience professionnelle."
+  }
+};
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  window.scrollTo(0,0);
+}
+
+function startQuiz(){showPage('p-quiz');renderQ();}
+
+function renderQ(){
+  var q=QUESTIONS[cur];
+  document.getElementById('qnum').textContent=(cur+1)+'/'+QUESTIONS.length;
+  var pct=Math.round(((cur+1)/QUESTIONS.length)*100);
+  document.getElementById('qprog').style.width=pct+'%';
+  document.getElementById('qpct').textContent=pct+'%';
+  document.getElementById('qemoji').innerHTML=q.e;
+  document.getElementById('qq').textContent=q.q;
+  var opts=document.getElementById('qopts');
+  opts.innerHTML='';
+  q.opts.forEach(function(opt,i){
+    var btn=document.createElement('button');
+    btn.className='quiz-opt';
+    btn.textContent=opt.t;
+    btn.onclick=function(){
+      document.querySelectorAll('.quiz-opt').forEach(function(b){b.classList.remove('sel');});
+      btn.classList.add('sel');
+      answers[cur]=i;
+      document.getElementById('btnNext').disabled=false;
+    };
+    opts.appendChild(btn);
+  });
+  document.getElementById('btnNext').disabled=true;
+  if(answers[cur]!==undefined){
+    opts.children[answers[cur]].classList.add('sel');
+    document.getElementById('btnNext').disabled=false;
+  }
+  // Dernier bouton
+  document.getElementById('btnNext').textContent=cur===QUESTIONS.length-1?'Voir mes resultats &#8594;':'Suivant &#8594;';
+  document.getElementById('btnNext').innerHTML=cur===QUESTIONS.length-1?'Voir mes resultats &#8594;':'Suivant &#8594;';
+}
+
+function nextQ(){
+  var selIdx=answers[cur];
+  var sel=QUESTIONS[cur].opts[selIdx];
+  Object.keys(sel.s).forEach(function(k){scores[k]+=sel.s[k];});
+  cur++;
+  if(cur>=QUESTIONS.length){
+    showPage('p-loading');
+    setTimeout(showResults,2000);
+  } else {
+    renderQ();
+  }
+}
+
+function showResults(){
+  var total=scores.gt+scores.pro+scores.cap;
+  var pcts={
+    gt:Math.round((scores.gt/total)*100),
+    pro:Math.round((scores.pro/total)*100),
+    cap:Math.round((scores.cap/total)*100)
+  };
+  // Corriger arrondi
+  var diff=100-(pcts.gt+pcts.pro+pcts.cap);
+  var maxKey=Object.keys(pcts).reduce(function(a,b){return pcts[a]>pcts[b]?a:b;});
+  pcts[maxKey]+=diff;
+
+  // Dominant
+  var dominant=Object.keys(pcts).reduce(function(a,b){return pcts[a]>pcts[b]?a:b;});
+  var pr=PROFILS[dominant];
+
+  // Header
+  document.getElementById('rEmoji').innerHTML=pr.emoji;
+  document.getElementById('rTitle').textContent='Ta voie dominante : '+pr.nom;
+  document.getElementById('rSub').textContent='Voici comment tes reponses se repartissent entre les voies.';
+
+  // Barres
+  var bars=document.getElementById('voieBars');
+  var voiesOrder=[
+    {k:'gt',label:'Voie Generale et Techno',color:'#1A4FBF',icon:'&#127891;',desc:'Seconde GT → Premiere → Terminale → Bac'},
+    {k:'pro',label:'Voie Professionnelle (Bac Pro)',color:'#0D6E56',icon:'&#128295;',desc:'Bac pro 3 ans avec stages en entreprise'},
+    {k:'cap',label:'CAP ou Apprentissage',color:'#9B5A08',icon:'&#129309;',desc:'2 ans CAP ou alternance CFA + entreprise'}
+  ];
+  // Trier par score decroissant
+  voiesOrder.sort(function(a,b){return pcts[b.k]-pcts[a.k];});
+  bars.innerHTML='';
+  voiesOrder.forEach(function(v){
+    var div=document.createElement('div');
+    div.className='voie-bar-item';
+    div.innerHTML=
+      '<div class="vbi-top">'+
+      '<div class="vbi-name"><span class="vbi-icon">'+v.icon+'</span>'+v.label+'</div>'+
+      '<div class="vbi-pct" style="color:'+v.color+'">'+pcts[v.k]+'%</div>'+
+      '</div>'+
+      '<div class="vbi-track"><div class="vbi-fill" style="width:0%;background:'+v.color+'" data-w="'+pcts[v.k]+'%"></div></div>'+
+      '<div class="vbi-desc">'+v.desc+'</div>';
+    bars.appendChild(div);
+  });
+  // Animer les barres
+  setTimeout(function(){
+    document.querySelectorAll('.vbi-fill').forEach(function(el){
+      el.style.width=el.getAttribute('data-w');
+    });
+  },100);
+
+  // Profil dominant
+  var pc=document.getElementById('profilCard');
+  var debouches=pr.debouches.map(function(d){return '<div class="profil-item"><div class="profil-dot" style="background:'+pr.couleur+'"></div>'+d+'</div>';}).join('');
+  pc.style.background=pr.bg;
+  pc.style.borderColor=pr.couleur+'40';
+  pc.innerHTML=
+    '<div class="profil-label" style="color:'+pr.couleur+'">Ton profil dominant</div>'+
+    '<div class="profil-title" style="color:'+pr.couleur+'">'+pr.emoji+' '+pr.nom+'</div>'+
+    '<div class="profil-desc" style="color:var(--ink2)">'+pr.desc+'</div>'+
+    '<div class="profil-next" style="color:'+pr.couleur+'">Debouches :</div>'+
+    debouches+
+    '<div style="font-size:12px;color:var(--ink3);margin-top:.625rem;font-style:italic">'+pr.conseils+'</div>';
+
+  // PILO
+  document.getElementById('piloMsg').textContent=pr.pilo;
+
+  showPage('p-result');
+}
+
+function restart(){
+  cur=0;answers=[];scores={gt:0,pro:0,cap:0};
+  showPage('p-intro');
+}
+</script>
+</body>
+</html>

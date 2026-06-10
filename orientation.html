@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orientation apres la 3e — Cap 3e</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F2;--bg2:#EEECEA;--bg3:#E4E2DC;
+  --surface:#FFFFFF;--surface2:#F2F0EB;
+  --ink:#1A1816;--ink2:#5A5855;--ink3:#9A9890;
+  --blue:#1A4FBF;--blue-l:#EBF0FB;--blue-m:rgba(26,79,191,0.2);
+  --teal:#0D6E56;--teal-l:#E2F4EE;
+  --amber:#9B5A08;--amber-l:#FDF0E0;
+  --red:#C13030;--red-l:#FCEAEA;
+  --purple:#5B3FA0;--purple-l:#EFEBFB;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --r:14px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.header{background:var(--ink);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(26,79,191,0.15)}
+.header::after{content:'';position:absolute;bottom:-20px;left:10%;width:120px;height:120px;border-radius:50%;background:rgba(13,110,86,0.1)}
+.header-inner{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:1rem}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,38px);font-weight:700;color:#fff;margin-bottom:.5rem;line-height:1.2;letter-spacing:-.02em}
+.header-title span{color:#6EA8FE}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:520px;margin-bottom:1.5rem}
+.header-pills{display:flex;gap:8px;flex-wrap:wrap}
+.hpill{font-size:11px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45)}
+
+/* NAV INTERNE */
+.nav-interne{background:var(--surface);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:50;overflow-x:auto;scrollbar-width:none}
+.nav-interne::-webkit-scrollbar{display:none}
+.nav-interne-inner{display:flex;max-width:760px;margin:0 auto;padding:0 1.25rem}
+.nav-tab{padding:12px 16px;font-size:13px;font-weight:500;color:var(--ink3);border:none;background:transparent;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;font-family:inherit}
+.nav-tab.active,.nav-tab:hover{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* MAIN */
+.main{max-width:760px;margin:0 auto;padding:2rem 1.25rem 4rem}
+
+/* SECTIONS */
+.section{display:none}
+.section.active{display:block}
+.section-eyebrow{font-size:11px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(20px,3vw,28px);font-weight:700;color:var(--ink);margin-bottom:.75rem;line-height:1.25}
+.section-intro{font-size:15px;color:var(--ink2);line-height:1.8;margin-bottom:1.5rem}
+
+/* CARDS VOIES */
+.voies-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:1.5rem}
+.voie-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.25rem;border-top:4px solid;cursor:pointer;transition:all .2s}
+.voie-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.voie-card.open .voie-body{display:block}
+.voie-top{margin-bottom:.75rem}
+.voie-emoji{font-size:28px;margin-bottom:.5rem;display:block}
+.voie-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.voie-short{font-size:12px;color:var(--ink3)}
+.voie-toggle{font-size:12px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-top:.5rem}
+.voie-body{display:none;margin-top:.75rem;padding-top:.75rem;border-top:0.5px solid var(--border)}
+.voie-body p{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:.5rem}
+.voie-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink2);margin-bottom:.375rem;line-height:1.5}
+.voie-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.lien-off{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 10px;border-radius:6px;text-decoration:none;margin-top:.5rem;transition:opacity .15s}
+.lien-off:hover{opacity:.8}
+
+/* PROJET */
+.projet-steps{display:flex;flex-direction:column;gap:0;margin-bottom:1.5rem}
+.projet-step{display:flex;gap:1rem;padding:1rem 0;border-bottom:0.5px solid var(--border)}
+.projet-step:last-child{border-bottom:none}
+.pstep-num{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;margin-top:2px;font-family:'DM Mono',monospace}
+.pstep-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.pstep-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+.pstep-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:5px;font-weight:500}
+
+/* QUIZ INTERETS */
+.interets-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:1rem 0}
+.interet-opt{padding:10px 8px;border-radius:var(--rs);border:1.5px solid var(--border2);background:var(--surface);cursor:pointer;text-align:center;transition:all .15s;font-family:inherit}
+.interet-opt.sel{border-color:var(--blue);background:var(--blue-l)}
+.interet-icon{font-size:22px;margin-bottom:4px}
+.interet-label{font-size:12px;font-weight:500;color:var(--ink2)}
+.interet-opt.sel .interet-label{color:var(--blue)}
+.metiers-result{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.25rem;margin-top:1rem;display:none}
+.metier-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border);font-size:13px;color:var(--ink2)}
+.metier-item:last-child{border-bottom:none}
+.metier-icon{font-size:18px;flex-shrink:0}
+
+/* CALENDRIER */
+.timeline{position:relative;padding-left:2rem;margin-bottom:1.5rem}
+.timeline::before{content:'';position:absolute;left:7px;top:4px;bottom:4px;width:2px;background:linear-gradient(to bottom,var(--blue),var(--teal),var(--amber))}
+.tl-item{position:relative;margin-bottom:1.5rem}
+.tl-dot{position:absolute;left:-2rem;top:4px;width:14px;height:14px;border-radius:50%;border:2px solid;background:var(--bg)}
+.tl-date{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;font-family:'DM Mono',monospace}
+.tl-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.tl-desc{font-size:12px;color:var(--ink2);line-height:1.6}
+.tl-urgence{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;margin-top:4px}
+
+/* AFFELNET */
+.affelnet-steps{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.aff-step{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs)}
+.aff-num{width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;font-family:'DM Mono',monospace}
+.aff-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.aff-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* DISPOSITIFS */
+.disp-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.25rem;margin-bottom:10px;border-left:4px solid}
+.disp-top{display:flex;align-items:flex-start;gap:12px;cursor:pointer}
+.disp-emoji{font-size:26px;flex-shrink:0}
+.disp-name{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.disp-short{font-size:12px;color:var(--ink3)}
+.disp-toggle{margin-left:auto;font-size:18px;color:var(--ink3);transition:transform .2s}
+.disp-card.open .disp-toggle{transform:rotate(180deg)}
+.disp-body{display:none;margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+.disp-card.open .disp-body{display:block}
+.disp-body p{font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:.625rem}
+.disp-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink2);margin-bottom:.375rem;line-height:1.5}
+.disp-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px}
+
+/* RESSOURCES */
+.ressources-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
+.res-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.125rem;text-decoration:none;display:block;transition:all .15s}
+.res-card:hover{border-color:var(--blue);transform:translateY(-2px)}
+.res-icon{font-size:24px;margin-bottom:.5rem}
+.res-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.res-desc{font-size:12px;color:var(--ink2);line-height:1.5}
+.res-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:6px;font-weight:500}
+
+/* NATIONAL BOX */
+.national-box{background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--r);padding:1rem 1.25rem;margin:1rem 0;display:flex;align-items:flex-start;gap:10px}
+.national-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.national-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.national-desc{font-size:12px;color:var(--ink2);line-height:1.6}
+.national-link{font-size:12px;color:var(--blue);font-weight:500;text-decoration:none;display:inline-block;margin-top:4px}
+
+/* PILO */
+.pilo-box{background:var(--ink);border-radius:var(--r);padding:1.25rem;margin:1rem 0}
+.pilo-hd{display:flex;align-items:center;gap:10px;margin-bottom:.625rem}
+.pilo-av{width:32px;height:32px;border-radius:50%;background:rgba(110,168,254,0.15);border:1px solid rgba(110,168,254,0.3);display:flex;align-items:center;justify-content:center;font-size:16px}
+.pilo-name{font-size:12px;font-weight:500;color:#6EA8FE}
+.pilo-msg{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;font-style:italic}
+
+.sep{height:0.5px;background:var(--border);margin:1.5rem 0}
+.btn-main{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:var(--rs);background:var(--blue);color:#fff;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:inherit;text-decoration:none;transition:opacity .15s;margin-top:.5rem}
+.btn-main:hover{opacity:.9}
+.btn-outline{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:var(--rs);background:transparent;color:var(--ink2);font-size:13px;font-weight:500;border:0.5px solid var(--border2);cursor:pointer;font-family:inherit;text-decoration:none;transition:all .15s;margin-top:.5rem;margin-left:8px}
+.btn-outline:hover{background:var(--bg3)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">&#129517; Academie de Versailles · Gennevilliers</div>
+    <div class="header-title">Ton orientation<br><span>apres la 3e</span></div>
+    <p class="header-sub">Comprendre, anticiper, preparer, decider. L'orientation n'est pas un choix qu'on fait en fevrier — c'est un travail qu'on mene toute l'annee.</p>
+    <div class="header-pills">
+      <span class="hpill">&#127968; Academie de Versailles</span>
+      <span class="hpill">&#127757; Liens nationaux disponibles</span>
+      <span class="hpill">&#128106; Pour eleves, familles et PP</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV INTERNE -->
+<nav class="nav-interne">
+  <div class="nav-interne-inner">
+    <button class="nav-tab active" onclick="showSection('voies',this)">Les voies</button>
+    <button class="nav-tab" onclick="showSection('projet',this)">Mon projet</button>
+    <button class="nav-tab" onclick="showSection('calendrier',this)">Calendrier</button>
+    <button class="nav-tab" onclick="showSection('affelnet',this)">Affelnet</button>
+    <button class="nav-tab" onclick="showSection('dispositifs',this)">Dispositifs</button>
+    <button class="nav-tab" onclick="showSection('ressources',this)">Ressources</button>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- ── SECTION 1 : LES VOIES ──────────────────────────── -->
+  <div class="section active" id="s-voies">
+    <div class="section-eyebrow">01 — Comprendre</div>
+    <div class="section-title">Les voies apres la 3e</div>
+    <p class="section-intro">Apres la 3e, trois grandes voies s'offrent a toi. Aucune n'est superieure a l'autre — chacune mene a des metiers et des reussites differentes. L'important, c'est de choisir en fonction de QUI TU ES, pas de ce qu'on attend de toi.</p>
+
+    <div class="voies-grid">
+      <div class="voie-card" style="border-top-color:#1A4FBF" onclick="toggleVoie(this)">
+        <div class="voie-top">
+          <span class="voie-emoji">&#127891;</span>
+          <div class="voie-name">Voie generale et technologique</div>
+          <div class="voie-short">Seconde GT → Premiere → Terminale → Bac</div>
+        </div>
+        <div class="voie-toggle" style="color:#1A4FBF">En savoir plus &#8964;</div>
+        <div class="voie-body">
+          <p>La seconde generale et technologique est une classe de decouverte. Tu choisis tes specialites en premiere (3 matieres sur 12). Le bac general ouvre les portes de l'enseignement superieur : BTS, BUT, licence, classe preparatoire, ecole.</p>
+          <p><strong>Pour toi si :</strong></p>
+          <div class="voie-item"><div class="voie-dot" style="background:#1A4FBF"></div>Tu aimes les cours theoriques et les matieres generales</div>
+          <div class="voie-item"><div class="voie-dot" style="background:#1A4FBF"></div>Tu n'as pas encore de projet professionnel precis</div>
+          <div class="voie-item"><div class="voie-dot" style="background:#1A4FBF"></div>Tu envisages des etudes longues (bac+3 et plus)</div>
+          <a class="lien-off" style="background:var(--blue-l);color:var(--blue)" href="https://www.onisep.fr/formation/apres-la-3e/la-seconde-gt" target="_blank">&#127279; ONISEP — Seconde GT</a>
+        </div>
+      </div>
+
+      <div class="voie-card" style="border-top-color:#0D6E56" onclick="toggleVoie(this)">
+        <div class="voie-top">
+          <span class="voie-emoji">&#128295;</span>
+          <div class="voie-name">Voie professionnelle</div>
+          <div class="voie-short">Bac Pro (3 ans) ou CAP (2 ans)</div>
+        </div>
+        <div class="voie-toggle" style="color:#0D6E56">En savoir plus &#8964;</div>
+        <div class="voie-body">
+          <p>La voie pro permet d'apprendre un metier tout en obtenant un diplome national. Le bac pro se prepare en 3 ans avec des periodes en entreprise. Le CAP se prepare en 2 ans et permet d'entrer rapidement dans la vie active.</p>
+          <p><strong>Pour toi si :</strong></p>
+          <div class="voie-item"><div class="voie-dot" style="background:#0D6E56"></div>Tu preferes la pratique a la theorie</div>
+          <div class="voie-item"><div class="voie-dot" style="background:#0D6E56"></div>Tu as deja un projet professionnel precis</div>
+          <div class="voie-item"><div class="voie-dot" style="background:#0D6E56"></div>Tu veux entrer rapidement dans la vie active</div>
+          <a class="lien-off" style="background:var(--teal-l);color:var(--teal)" href="https://www.onisep.fr/formation/apres-la-3e/la-voie-professionnelle" target="_blank">&#127279; ONISEP — Voie professionnelle</a>
+        </div>
+      </div>
+
+      <div class="voie-card" style="border-top-color:#9B5A08" onclick="toggleVoie(this)">
+        <div class="voie-top">
+          <span class="voie-emoji">&#129309;</span>
+          <div class="voie-name">Apprentissage</div>
+          <div class="voie-short">CAP, Bac Pro ou BTS en alternance</div>
+        </div>
+        <div class="voie-toggle" style="color:#9B5A08">En savoir plus &#8964;</div>
+        <div class="voie-body">
+          <p>L'apprentissage permet de preparer un diplome tout en travaillant en entreprise. Tu alternes entre le centre de formation (CFA) et l'entreprise. Tu es remunere et tu acquiers une vraie experience professionnelle.</p>
+          <p><strong>Pour toi si :</strong></p>
+          <div class="voie-item"><div class="voie-dot" style="background:#9B5A08"></div>Tu apprends mieux en faisant qu'en ecoutant</div>
+          <div class="voie-item"><div class="voie-dot" style="background:#9B5A08"></div>Tu veux etre remunere pendant ta formation</div>
+          <div class="voie-item"><div class="voie-dot" style="background:#9B5A08"></div>Tu as un projet professionnel et envie d'une experience concrete</div>
+          <a class="lien-off" style="background:var(--amber-l);color:var(--amber)" href="https://www.alternance.emploi.gouv.fr" target="_blank">&#127279; Portail national de l'alternance</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="national-box">
+      <span class="national-icon">&#127757;</span>
+      <div>
+        <div class="national-title">Ressources nationales complementaires</div>
+        <div class="national-desc">Ces outils nationaux completent les informations academiques et te permettent d'explorer toutes les formations disponibles en France.</div>
+        <a class="national-link" href="https://www.onisep.fr" target="_blank">ONISEP.fr — Toutes les formations et metiers &#8599;</a><br>
+        <a class="national-link" href="https://www.parcoursup.fr" target="_blank">Parcoursup.fr — Enseignement superieur &#8599;</a><br>
+        <a class="national-link" href="https://www.education.gouv.fr/orientation" target="_blank">Education.gouv.fr — Guide de l'orientation &#8599;</a>
+      </div>
+    </div>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">Il n'y a pas de bonne ou mauvaise voie. Il y a LA voie qui correspond a tes forces, tes envies et ton projet. Un eleve en CAP qui fait le metier qu'il aime vaut mieux qu'un eleve en terminale generale qui subit ses cours. Choisis pour toi, pas pour les autres.</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2 : MON PROJET ─────────────────────────── -->
+  <div class="section" id="s-projet">
+    <div class="section-eyebrow">02 — Construire</div>
+    <div class="section-title">Construire mon projet d'orientation</div>
+    <p class="section-intro">L'orientation ne se decide pas en une nuit. C'est un processus de decouverte de soi qui prend toute l'annee. Voici les etapes pour construire ton projet serieusement.</p>
+
+    <div class="projet-steps">
+      <div class="projet-step">
+        <div class="pstep-num">1</div>
+        <div>
+          <div class="pstep-title">Connais tes centres d'interet</div>
+          <div class="pstep-desc">Qu'est-ce qui te passionne en dehors de l'ecole ? Qu'est-ce que tu fais pendant des heures sans t'en rendre compte ? Tes centres d'interet sont des indicateurs precieux de ton orientation.</div>
+          <span class="pstep-tag" style="background:var(--blue-l);color:var(--blue)">Outil : Quiz "Qui es-tu vraiment ?" sur Cap 3e</span>
+        </div>
+      </div>
+      <div class="projet-step">
+        <div class="pstep-num">2</div>
+        <div>
+          <div class="pstep-title">Identifie tes competences</div>
+          <div class="pstep-desc">Dans quelles matieres es-tu a l'aise ? Qu'est-ce que tes profs et tes proches reconnaissent chez toi ? Tes competences ne sont pas que scolaires — creativite, sens du contact, organisation comptent aussi.</div>
+          <span class="pstep-tag" style="background:var(--teal-l);color:var(--teal)">Outil : Passeport CAPilot</span>
+        </div>
+      </div>
+      <div class="projet-step">
+        <div class="pstep-num">3</div>
+        <div>
+          <div class="pstep-title">Explore les metiers</div>
+          <div class="pstep-desc">Ne te limite pas aux metiers que tu connais deja. Il existe des milliers de metiers — beaucoup ne s'inventent pas seuls. Explore, lis des temoignages, regarde des videos de professionnels.</div>
+          <span class="pstep-tag" style="background:var(--purple-l);color:var(--purple)">Ressource : ONISEP, Mon Orientation en ligne</span>
+        </div>
+      </div>
+      <div class="projet-step">
+        <div class="pstep-num">4</div>
+        <div>
+          <div class="pstep-title">Fais des mini-experiences</div>
+          <div class="pstep-desc">Le stage de 3e est une chance unique. Choisis-le dans un secteur qui t'interesse vraiment — pas juste par facilite. Rencontre aussi des professionnels via ton entourage, des forums metiers, des journees portes ouvertes.</div>
+          <span class="pstep-tag" style="background:var(--amber-l);color:var(--amber)">Priorite : Stage de 3e bien prepare</span>
+        </div>
+      </div>
+      <div class="projet-step">
+        <div class="pstep-num">5</div>
+        <div>
+          <div class="pstep-title">Echange avec ton professeur principal</div>
+          <div class="pstep-desc">Ton PP connait tes resultats, tes comportements en classe et les realites du terrain. Un rendez-vous avec lui peut t'aider a valider ou ajuster ton projet. N'attends pas qu'il te convoque — prends l'initiative.</div>
+          <span class="pstep-tag" style="background:var(--blue-l);color:var(--blue)">Demande un entretien individuel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MINI QUIZ INTERETS -->
+    <div class="sep"></div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.5rem">&#127919; Decouvre les metiers qui correspondent a tes interets</div>
+    <p style="font-size:13px;color:var(--ink2);margin-bottom:1rem">Selectionne ce qui t'attire et decouvre des pistes d'orientation.</p>
+    <div class="interets-grid" id="interetsGrid">
+      <div class="interet-opt" onclick="selInteret(this,'sciences')"><div class="interet-icon">&#128300;</div><div class="interet-label">Sciences</div></div>
+      <div class="interet-opt" onclick="selInteret(this,'tech')"><div class="interet-icon">&#128187;</div><div class="interet-label">Technologie</div></div>
+      <div class="interet-opt" onclick="selInteret(this,'sante')"><div class="interet-icon">&#129657;</div><div class="interet-label">Sante</div></div>
+      <div class="interet-opt" onclick="selInteret(this,'social')"><div class="interet-icon">&#129309;</div><div class="interet-label">Social</div></div>
+      <div class="interet-opt" onclick="selInteret(this,'creatif')"><div class="interet-icon">&#127912;</div><div class="interet-label">Creation</div></div>
+      <div class="interet-opt" onclick="selInteret(this,'sport')"><div class="interet-icon">&#9917;</div><div class="interet-label">Sport</div></div>
+      <div class="interet-opt" onclick="selInteret(this,'commerce')"><div class="interet-icon">&#128188;</div><div class="interet-label">Commerce</div></div>
+      <div class="interet-opt" onclick="selInteret(this,'nature')"><div class="interet-icon">&#127807;</div><div class="interet-label">Nature</div></div>
+    </div>
+    <div class="metiers-result" id="metiersResult">
+      <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:.75rem" id="metiersTitle">Pistes d'orientation pour toi :</div>
+      <div id="metiersList"></div>
+      <div class="national-box" style="margin-top:1rem">
+        <span class="national-icon">&#127279;</span>
+        <div>
+          <div class="national-title">Aller plus loin</div>
+          <a class="national-link" href="https://www.onisep.fr/decouvrir-les-metiers" target="_blank">Explorer tous les metiers sur ONISEP &#8599;</a><br>
+          <a class="national-link" href="https://monorientationenligne.fr" target="_blank">Conseil personnalise sur Mon Orientation en Ligne &#8599;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3 : CALENDRIER ────────────────────────── -->
+  <div class="section" id="s-calendrier">
+    <div class="section-eyebrow">03 — Anticiper</div>
+    <div class="section-title">Calendrier de l'orientation 2024-2025</div>
+    <p class="section-intro">L'orientation a ses propres dates. Ne les laisse pas te surprendre. Voici les grandes etapes de l'annee pour un eleve de 3e dans l'academie de Versailles.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#1A4FBF;border-color:#1A4FBF"></div>
+        <div class="tl-date" style="color:#1A4FBF">Septembre — Octobre</div>
+        <div class="tl-title">Debut de l'annee — Bilan et objectifs</div>
+        <div class="tl-desc">Rencontre avec ton PP. Definition de tes objectifs du semestre. Debut de la reflexion sur l'orientation. Premier entretien individuel d'orientation.</div>
+        <span class="tl-urgence" style="background:var(--blue-l);color:var(--blue)">Preparation</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#0D6E56;border-color:#0D6E56"></div>
+        <div class="tl-date" style="color:#0D6E56">Novembre — Decembre</div>
+        <div class="tl-title">Stage de decouverte professionnelle</div>
+        <div class="tl-desc">Semaine de stage en entreprise. A preparer serieusement : choix de l'entreprise, lettre de motivation, rapport de stage. C'est une experience cle pour ton orientation.</div>
+        <span class="tl-urgence" style="background:var(--teal-l);color:var(--teal)">Important</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#1A4FBF;border-color:#1A4FBF"></div>
+        <div class="tl-date" style="color:#1A4FBF">Janvier</div>
+        <div class="tl-title">Conseil de classe du 1er semestre</div>
+        <div class="tl-desc">Bilan de ton premier semestre. Formulation de tes premières intentions d'orientation. Discussion avec ton PP et ta famille.</div>
+        <span class="tl-urgence" style="background:var(--blue-l);color:var(--blue)">Bilan</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#9B5A08;border-color:#9B5A08"></div>
+        <div class="tl-date" style="color:#9B5A08">Fevrier — Mars</div>
+        <div class="tl-title">Saisie des voeux sur Affelnet</div>
+        <div class="tl-desc">Ouverture d'Affelnet pour la saisie des voeux d'orientation. Tu peux saisir jusqu'a 10 voeux classes par ordre de preference. Attention aux dates limites de l'academie de Versailles.</div>
+        <span class="tl-urgence" style="background:var(--red-l);color:var(--red)">Critique</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#C13030;border-color:#C13030"></div>
+        <div class="tl-date" style="color:#C13030">Avril — Mai</div>
+        <div class="tl-title">Preparation au brevet — Oral DNB</div>
+        <div class="tl-desc">Preparation intensive au DNB. L'oral de 3e (15 minutes) porte sur un projet personnel, un EPI ou un parcours. A preparer bien a l'avance avec ton prof principal.</div>
+        <span class="tl-urgence" style="background:var(--red-l);color:var(--red)">Urgent</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot" style="background:#0D6E56;border-color:#0D6E56"></div>
+        <div class="tl-date" style="color:#0D6E56">Juin</div>
+        <div class="tl-title">Reponses Affelnet et brevet</div>
+        <div class="tl-desc">Reception des resultats d'affectation Affelnet. Si tu n'as pas eu ta formation : procedure complementaire possible. Epreuves ecrites du brevet (francais, maths, histoire-geo, sciences).</div>
+        <span class="tl-urgence" style="background:var(--teal-l);color:var(--teal)">Resultats</span>
+      </div>
+    </div>
+
+    <div class="national-box">
+      <span class="national-icon">&#127757;</span>
+      <div>
+        <div class="national-title">Calendrier national officiel</div>
+        <div class="national-desc">Les dates exactes varient selon les academies. Consulte le calendrier officiel de l'academie de Versailles pour les dates precises.</div>
+        <a class="national-link" href="https://www.ac-versailles.fr" target="_blank">Academie de Versailles — Calendrier &#8599;</a><br>
+        <a class="national-link" href="https://www.education.gouv.fr/calendrier-scolaire" target="_blank">Calendrier scolaire national &#8599;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4 : AFFELNET ──────────────────────────── -->
+  <div class="section" id="s-affelnet">
+    <div class="section-eyebrow">04 — Demarches</div>
+    <div class="section-title">Affelnet — Saisir ses voeux</div>
+    <p class="section-intro">Affelnet est la plateforme officielle de l'academie de Versailles pour l'affectation des eleves de 3e vers le lycee. Voici comment ca fonctionne, etape par etape.</p>
+
+    <div class="affelnet-steps">
+      <div class="aff-step">
+        <div class="aff-num">1</div>
+        <div>
+          <div class="aff-title">Connexion a Affelnet</div>
+          <div class="aff-desc">Connecte-toi avec les identifiants fournis par ton etablissement (souvent les memes que Pronote ou EduConnect). Verifie que tes informations personnelles sont correctes.</div>
+        </div>
+      </div>
+      <div class="aff-step">
+        <div class="aff-num">2</div>
+        <div>
+          <div class="aff-title">Rechercher les formations</div>
+          <div class="aff-desc">Utilise le moteur de recherche pour trouver les formations qui t'interessent. Tu peux filtrer par type (GT, Pro, CAP), par secteur geographique, par specialite. Explore les lycees de Gennevilliers et du 92.</div>
+        </div>
+      </div>
+      <div class="aff-step">
+        <div class="aff-num">3</div>
+        <div>
+          <div class="aff-title">Saisir ses voeux (jusqu'a 10)</div>
+          <div class="aff-desc">Tu peux saisir jusqu'a 10 voeux, classes par ordre de preference. Le 1er voeu est le plus important. Mets en 1er ce que tu veux vraiment — pas ce que tu crois accessible.</div>
+        </div>
+      </div>
+      <div class="aff-step">
+        <div class="aff-num">4</div>
+        <div>
+          <div class="aff-title">Valider avec ta famille</div>
+          <div class="aff-desc">La validation finale des voeux doit etre faite par tes parents ou representants legaux. Ne laisse pas trainer — les delais sont stricts dans l'academie de Versailles.</div>
+        </div>
+      </div>
+      <div class="aff-step">
+        <div class="aff-num">5</div>
+        <div>
+          <div class="aff-title">Attendre les resultats</div>
+          <div class="aff-desc">Les resultats sont communiques en juin. Si tu n'obtiens pas ta formation prioritaire, une procedure complementaire est possible. Ton etablissement t'accompagnera dans cette demarche.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="national-box">
+      <span class="national-icon">&#127968;</span>
+      <div>
+        <div class="national-title">Affelnet Versailles</div>
+        <div class="national-desc">La plateforme Affelnet est specifique a chaque academie. Pour l'academie de Versailles (qui couvre les Hauts-de-Seine, les Yvelines, le Val-d'Oise et l'Essonne) :</div>
+        <a class="national-link" href="https://bv.ac-versailles.fr" target="_blank">Portail Affelnet — Academie de Versailles &#8599;</a><br>
+        <a class="national-link" href="https://www.education.gouv.fr/orientation-au-lycee-9176" target="_blank">Guide national de l'affectation &#8599;</a>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#128196; Documents a preparer</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:1rem">
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);font-size:13px;color:var(--ink2)"><span style="font-size:16px">&#128196;</span>Livret scolaire (bulletins des 3 trimestres de 4e et 3e)</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);font-size:13px;color:var(--ink2)"><span style="font-size:16px">&#128196;</span>Dossier de candidature pour formations selectionnees</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);font-size:13px;color:var(--ink2)"><span style="font-size:16px">&#128196;</span>Lettre de motivation (pour certaines formations specifiques)</div>
+      <div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);font-size:13px;color:var(--ink2)"><span style="font-size:16px">&#128196;</span>Avis du conseil de classe (fourni par l'etablissement)</div>
+    </div>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">Mets ton 1er voeu sur ce que tu veux vraiment, pas sur ce que tu crois "raisonnable". L'affectation tient compte de plein de criteres — et beaucoup d'eleves obtiennent leur premier voeu. Ne te sabote pas par manque de confiance.</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 5 : DISPOSITIFS ───────────────────────── -->
+  <div class="section" id="s-dispositifs">
+    <div class="section-eyebrow">05 — Dispositifs specifiques</div>
+    <div class="section-title">Dispositifs et filieres particulieres</div>
+    <p class="section-intro">Certaines formations ont des conditions d'acces specifiques ou des procedures particulieres. Voici les principaux dispositifs disponibles dans l'academie de Versailles.</p>
+
+    <div class="disp-card" style="border-left-color:#1A4FBF">
+      <div class="disp-top" onclick="toggleDisp(this.closest('.disp-card'))">
+        <span class="disp-emoji">&#127760;</span>
+        <div><div class="disp-name">Sections europeennes et internationales</div><div class="disp-short">Enseignement renforce dans une langue etrangere</div></div>
+        <span class="disp-toggle">&#8964;</span>
+      </div>
+      <div class="disp-body">
+        <p>Les sections europeennes permettent de suivre certaines matieres (histoire-geo, maths, SVT...) en langue etrangere (anglais, espagnol, allemand, italien...). C'est un atout considerable pour le bac et les etudes superieures.</p>
+        <p><strong>Conditions :</strong> Bon niveau dans la langue concernee, motivation, dossier scolaire solide. Selection sur dossier et parfois entretien.</p>
+        <p><strong>Dans le 92 (Hauts-de-Seine) :</strong> Plusieurs lycees de Gennevilliers et alentours proposent des sections europeennes.</p>
+        <div class="disp-item"><div class="disp-dot" style="background:#1A4FBF"></div>Renseignes-toi aupres de ton etablissement avant les voeux Affelnet</div>
+        <div class="disp-item"><div class="disp-dot" style="background:#1A4FBF"></div>La section europeenne peut etre combinee avec d'autres formations</div>
+        <a class="lien-off" style="background:var(--blue-l);color:var(--blue)" href="https://bv.ac-versailles.fr/rechetab/sections-europeennes.html" target="_blank">&#127279; Sections europeennes — Academie de Versailles</a>
+      </div>
+    </div>
+
+    <div class="disp-card" style="border-left-color:#0D6E56">
+      <div class="disp-top" onclick="toggleDisp(this.closest('.disp-card'))">
+        <span class="disp-emoji">&#128218;</span>
+        <div><div class="disp-name">PassPro</div><div class="disp-short">Acces a la voie professionnelle par oral</div></div>
+        <span class="disp-toggle">&#8964;</span>
+      </div>
+      <div class="disp-body">
+        <p>PassPro est une procedure specifique qui permet d'acceder a certaines formations professionnelles (bac pro, CAP) via un oral de motivation. Elle concerne les formations tres demandees ou particulieres.</p>
+        <p><strong>Filieres concernees :</strong> Certains bac pro et CAP avec un nombre de places limite ou des criteres de selection specifiques (metiers de la coiffure, esthetique, restauration, mode...).</p>
+        <p><strong>L'oral PassPro :</strong></p>
+        <div class="disp-item"><div class="disp-dot" style="background:#0D6E56"></div>Duree : environ 15 minutes</div>
+        <div class="disp-item"><div class="disp-dot" style="background:#0D6E56"></div>Jury : enseignants et professionnels du secteur</div>
+        <div class="disp-item"><div class="disp-dot" style="background:#0D6E56"></div>Contenu : presentation de ton projet, motivations, connaissance du metier</div>
+        <p><strong>Calendrier :</strong> Les oraux PassPro ont lieu generalement en mars-avril, avant la saisie definitive des voeux. Renseigne-toi aupres de ton etablissement.</p>
+        <p><strong>Se preparer :</strong> Connais le metier vise, prepare ton argumentaire, fais des simulations avec ton PP. C'est une chance de montrer ta motivation au-dela des notes.</p>
+        <a class="lien-off" style="background:var(--teal-l);color:var(--teal)" href="https://bv.ac-versailles.fr" target="_blank">&#127279; Academie de Versailles — PassPro</a>
+      </div>
+    </div>
+
+    <div class="disp-card" style="border-left-color:#5B3FA0">
+      <div class="disp-top" onclick="toggleDisp(this.closest('.disp-card'))">
+        <span class="disp-emoji">&#9889;</span>
+        <div><div class="disp-name">Seconde @venir</div><div class="disp-short">Dispositif d'orientation active en seconde</div></div>
+        <span class="disp-toggle">&#8964;</span>
+      </div>
+      <div class="disp-body">
+        <p>Seconde @venir est un dispositif propose dans certains lycees qui permet aux eleves de seconde de decouvrir le monde professionnel et de construire leur projet d'orientation de facon active et accompagnee.</p>
+        <p><strong>Ce que ca apporte :</strong></p>
+        <div class="disp-item"><div class="disp-dot" style="background:#5B3FA0"></div>Rencontres avec des professionnels de differents secteurs</div>
+        <div class="disp-item"><div class="disp-dot" style="background:#5B3FA0"></div>Visites d'entreprises et de centres de formation</div>
+        <div class="disp-item"><div class="disp-dot" style="background:#5B3FA0"></div>Accompagnement personnalise dans la construction du projet</div>
+        <div class="disp-item"><div class="disp-dot" style="background:#5B3FA0"></div>Lien entre les enseignements et les realites du monde du travail</div>
+        <p><strong>Conditions d'acces :</strong> Ce dispositif est propose dans certains lycees de l'academie. Il peut necessiter une inscription specifique ou etre integre au parcours de la classe.</p>
+        <a class="lien-off" style="background:var(--purple-l);color:var(--purple)" href="https://lyc-auffray-clichy.ac-versailles.fr/index.php/les-formations/seconde-venir/" target="_blank">&#127279; Exemple — Lycee Auffray, Clichy</a>
+      </div>
+    </div>
+
+    <div class="national-box" style="margin-top:1rem">
+      <span class="national-icon">&#127757;</span>
+      <div>
+        <div class="national-title">Autres dispositifs nationaux</div>
+        <a class="national-link" href="https://www.onisep.fr/formation/apres-la-3e" target="_blank">Toutes les formations apres la 3e — ONISEP &#8599;</a><br>
+        <a class="national-link" href="https://www.education.gouv.fr/cap-2" target="_blank">Tout savoir sur le CAP — Education.gouv &#8599;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 6 : RESSOURCES ────────────────────────── -->
+  <div class="section" id="s-ressources">
+    <div class="section-eyebrow">06 — Ressources</div>
+    <div class="section-title">Boite a outils orientation</div>
+    <p class="section-intro">Toutes les ressources dont tu as besoin pour preparer ton orientation, classees par theme.</p>
+
+    <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#127968; Academie de Versailles</div>
+    <div class="ressources-grid">
+      <a class="res-card" href="https://bv.ac-versailles.fr" target="_blank">
+        <div class="res-icon">&#127968;</div>
+        <div class="res-title">Portail academie de Versailles</div>
+        <div class="res-desc">Toutes les informations officielles sur l'orientation, Affelnet, les lycees et les formations du 92.</div>
+        <span class="res-tag" style="background:var(--blue-l);color:var(--blue)">Academique</span>
+      </a>
+      <a class="res-card" href="https://bv.ac-versailles.fr/rechetab/sections-europeennes.html" target="_blank">
+        <div class="res-icon">&#127760;</div>
+        <div class="res-title">Sections europeennes</div>
+        <div class="res-desc">Recherche des lycees proposant des sections europeennes dans l'academie de Versailles.</div>
+        <span class="res-tag" style="background:var(--blue-l);color:var(--blue)">Academique</span>
+      </a>
+      <a class="res-card" href="https://lyc-auffray-clichy.ac-versailles.fr/index.php/les-formations/seconde-venir/" target="_blank">
+        <div class="res-icon">&#9889;</div>
+        <div class="res-title">Seconde @venir</div>
+        <div class="res-desc">Presentation du dispositif Seconde @venir au lycee Auffray de Clichy-la-Garenne.</div>
+        <span class="res-tag" style="background:var(--purple-l);color:var(--purple)">Dispositif</span>
+      </a>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#127757; Ressources nationales</div>
+    <div class="ressources-grid">
+      <a class="res-card" href="https://www.onisep.fr" target="_blank">
+        <div class="res-icon">&#127919;</div>
+        <div class="res-title">ONISEP</div>
+        <div class="res-desc">La reference nationale pour les formations, les metiers et l'orientation. Fiches metiers, videos, conseils.</div>
+        <span class="res-tag" style="background:var(--teal-l);color:var(--teal)">National</span>
+      </a>
+      <a class="res-card" href="https://monorientationenligne.fr" target="_blank">
+        <div class="res-icon">&#128222;</div>
+        <div class="res-title">Mon Orientation en Ligne</div>
+        <div class="res-desc">Conseils personnalises par chat ou telephone avec des conseillers en orientation. Gratuit.</div>
+        <span class="res-tag" style="background:var(--teal-l);color:var(--teal)">National</span>
+      </a>
+      <a class="res-card" href="https://www.alternance.emploi.gouv.fr" target="_blank">
+        <div class="res-icon">&#129309;</div>
+        <div class="res-title">Portail de l'alternance</div>
+        <div class="res-desc">Toutes les offres d'apprentissage en France. Recherche par metier, region et niveau de formation.</div>
+        <span class="res-tag" style="background:var(--amber-l);color:var(--amber)">Apprentissage</span>
+      </a>
+      <a class="res-card" href="https://www.parcoursup.fr" target="_blank">
+        <div class="res-icon">&#127891;</div>
+        <div class="res-title">Parcoursup</div>
+        <div class="res-desc">La plateforme de l'enseignement superieur. Utile pour explorer les filieres post-bac des maintenant.</div>
+        <span class="res-tag" style="background:var(--blue-l);color:var(--blue)">Superieur</span>
+      </a>
+      <a class="res-card" href="https://www.cidj.com" target="_blank">
+        <div class="res-icon">&#128218;</div>
+        <div class="res-title">CIDJ</div>
+        <div class="res-desc">Centre d'Information et de Documentation Jeunesse. Ressources sur les formations, les metiers et la vie des jeunes.</div>
+        <span class="res-tag" style="background:var(--purple-l);color:var(--purple)">Jeunesse</span>
+      </a>
+      <a class="res-card" href="https://www.education.gouv.fr/orientation" target="_blank">
+        <div class="res-icon">&#127984;&#65039;</div>
+        <div class="res-title">Education nationale</div>
+        <div class="res-desc">Le guide officiel de l'orientation du ministere de l'Education nationale.</div>
+        <span class="res-tag" style="background:var(--teal-l);color:var(--teal)">Officiel</span>
+      </a>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#128196; Fiches pratiques Cap 3e</div>
+    <div class="ressources-grid">
+      <a class="res-card" href="fiche_voeux_3e.html" target="_blank">
+        <div class="res-icon">&#128203;</div>
+        <div class="res-title">Fiche de recueil des voeux</div>
+        <div class="res-desc">Prepare tes voeux Affelnet avec cette fiche structuree. Classe, argumente, valide.</div>
+        <span class="res-tag" style="background:var(--blue-l);color:var(--blue)">Cap 3e</span>
+      </a>
+      <a class="res-card" href="infographie_voies_orientation.html" target="_blank">
+        <div class="res-icon">&#128506;</div>
+        <div class="res-title">Infographie des voies</div>
+        <div class="res-desc">Vision claire et visuelle de toutes les voies possibles apres la 3e.</div>
+        <span class="res-tag" style="background:var(--blue-l);color:var(--blue)">Cap 3e</span>
+      </a>
+      <a class="res-card" href="page_ressources_outils.html" target="_blank">
+        <div class="res-icon">&#129520;</div>
+        <div class="res-title">Ressources et outils</div>
+        <div class="res-desc">Tous les outils pratiques pour preparer ton orientation et ton brevet.</div>
+        <span class="res-tag" style="background:var(--blue-l);color:var(--blue)">Cap 3e</span>
+      </a>
+    </div>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">L'orientation, c'est pas une destination — c'est un voyage. Et comme tout voyage, ca se prepare. Utilise ces ressources, pose des questions, explore sans avoir peur de te tromper. Les meilleures orientations sont celles qu'on a murie, pas celles qu'on a subies.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Navigation entre sections
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('s-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Voies accordeon
+function toggleVoie(card) {
+  card.classList.toggle('open');
+  var toggle = card.querySelector('.voie-toggle');
+  if(card.classList.contains('open')){
+    toggle.innerHTML = 'Reduire &#8963;';
+  } else {
+    toggle.innerHTML = 'En savoir plus &#8964;';
+  }
+}
+
+// Dispositifs accordeon
+function toggleDisp(card) {
+  card.classList.toggle('open');
+}
+
+// Mini quiz interets
+var METIERS = {
+  sciences: ["Chercheur.se / Scientifique","Medecin ou infirmier.e","Ingenieur.e en biotechnologies","Professeur.e de sciences","Technicien.ne de laboratoire"],
+  tech: ["Developpeur.se / Programmeur.se","Technicien.ne en informatique","Ingenieur.e en cybersecurite","Designer UX/UI","Administrateur.rice systemes"],
+  sante: ["Infirmier.e","Aide-soignant.e","Kinesitherapeute","Pharmacien.ne","Ambulancier.e"],
+  social: ["Educateur.rice specialise.e","Assistant.e social.e","Animateur.rice","Conseiller.e en insertion","Aide medico-psychologique"],
+  creatif: ["Graphiste / Designer","Architecte","Illustrateur.rice","Chef.fe cuisinier.e","Decorateur.rice d'interieur"],
+  sport: ["Coach sportif","Kinesitherapeute","Animateur.rice sportif.ve","Moniteur.rice d'auto-ecole","Pompier.e"],
+  commerce: ["Commercial.e / Vendeur.se","Manager de rayon","Charge.e de communication","Comptable","Banquier.e / Conseiller.e financier.e"],
+  nature: ["Agriculteur.rice","Paysagiste","Garde-forestier.e","Veterinaire","Technicien.ne en environnement"]
+};
+
+var selectedInterets = [];
+
+function selInteret(el, key) {
+  el.classList.toggle('sel');
+  if(el.classList.contains('sel')) {
+    if(!selectedInterets.includes(key)) selectedInterets.push(key);
+  } else {
+    selectedInterets = selectedInterets.filter(function(k){return k!==key;});
+  }
+  updateMetiers();
+}
+
+function updateMetiers() {
+  var result = document.getElementById('metiersResult');
+  var list = document.getElementById('metiersList');
+  var title = document.getElementById('metiersTitle');
+
+  if(selectedInterets.length === 0) {
+    result.style.display = 'none';
+    return;
+  }
+
+  result.style.display = 'block';
+  var metiers = [];
+  selectedInterets.forEach(function(k){
+    if(METIERS[k]) metiers = metiers.concat(METIERS[k]);
+  });
+  // Dedupliquer
+  metiers = metiers.filter(function(v,i){return metiers.indexOf(v)===i;});
+  // Limiter a 8
+  metiers = metiers.slice(0,8);
+
+  title.textContent = 'Pistes d\'orientation pour toi (' + metiers.length + ' idees) :';
+  list.innerHTML = metiers.map(function(m){
+    return '<div class="metier-item"><span class="metier-icon">&#127919;</span>' + m + '</div>';
+  }).join('');
+}
+</script>
+</body>
+</html>

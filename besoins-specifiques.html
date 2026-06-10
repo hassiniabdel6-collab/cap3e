@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Besoins specifiques — Cap 3e</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F8F7F4;--bg2:#EEECEA;--bg3:#E2E0DA;
+  --surface:#FFFFFF;
+  --ink:#1A1816;--ink2:#4A4845;--ink3:#8A8885;
+  --blue:#1A4FBF;--blue-l:#EBF0FB;
+  --teal:#0D6E56;--teal-l:#E2F4EE;
+  --amber:#9B5A08;--amber-l:#FDF0E0;
+  --purple:#5B3FA0;--purple-l:#EFEBFB;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.15);
+  --r:16px;--rs:10px;
+  --font-size:17px;--line-height:1.9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Atkinson Hyperlegible','DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:var(--font-size);line-height:var(--line-height)}
+
+/* ACCESSIBILITE */
+.a11y-bar{background:var(--ink);padding:.625rem 1.25rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100}
+.a11y-label{font-size:12px;color:rgba(255,255,255,0.5);margin-right:4px}
+.a11y-btn{padding:5px 12px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.8);font-size:12px;cursor:pointer;font-family:inherit;transition:all .15s}
+.a11y-btn.on{background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.5)}
+body.big-font{--font-size:20px}
+body.big-line{--line-height:2.4}
+body.cream-bg{--bg:#FFF8E7;--bg2:#FFF0CC;--surface:#FFFDF5}
+body.high-contrast{--bg:#000;--bg2:#111;--surface:#111;--ink:#fff;--ink2:#eee;--ink3:#ccc;--border:rgba(255,255,255,0.3)}
+
+/* HEADER */
+.header{background:var(--ink);padding:2rem 1.5rem;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(91,63,160,0.2)}
+.header-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:1rem}
+.header-title{font-size:clamp(22px,4vw,34px);font-weight:700;color:#fff;margin-bottom:.5rem;line-height:1.25}
+.header-title span{color:#A78BFA}
+.header-sub{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:500px}
+
+/* MAIN */
+.main{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+
+/* SECTION */
+.section{margin-bottom:2rem}
+.section-title{font-size:clamp(16px,3vw,20px);font-weight:700;color:var(--ink);margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+
+/* INTRO BLOCS — differencies */
+.intro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:2rem}
+.intro-card{border-radius:var(--r);padding:1.25rem;border:0.5px solid var(--border2)}
+.intro-card-icon{font-size:28px;margin-bottom:.625rem}
+.intro-card-title{font-size:15px;font-weight:700;margin-bottom:.375rem}
+.intro-card-desc{font-size:13px;line-height:1.7}
+
+/* DISPOSITIFS */
+.dispo-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.25rem;cursor:pointer;transition:all .2s;border-left:4px solid;margin-bottom:12px}
+.dispo-top{display:flex;align-items:flex-start;gap:12px}
+.dispo-emoji{font-size:28px;flex-shrink:0;margin-top:2px}
+.dispo-name{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.dispo-short{font-size:13px;color:var(--ink3);line-height:1.5}
+.dispo-toggle{margin-left:auto;font-size:18px;color:var(--ink3);flex-shrink:0;transition:transform .2s}
+.dispo-card.open .dispo-toggle{transform:rotate(180deg)}
+.dispo-body{display:none;margin-top:1rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+.dispo-card.open .dispo-body{display:block}
+.dispo-body p{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:.75rem}
+.dispo-item{display:flex;align-items:flex-start;gap:8px;font-size:14px;color:var(--ink2);margin-bottom:.5rem;line-height:1.6}
+.dispo-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:7px}
+
+/* TROUBLES */
+.troubles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:1.5rem}
+.trouble-chip{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);padding:12px;text-align:center;cursor:pointer;transition:all .15s}
+.trouble-chip.sel{border-color:var(--blue);background:var(--blue-l)}
+.trouble-icon{font-size:24px;margin-bottom:5px}
+.trouble-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.trouble-desc{font-size:11px;color:var(--ink3)}
+.trouble-panel{display:none;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.25rem;margin-top:8px}
+.trouble-panel.on{display:block}
+.trouble-panel h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.trouble-panel p{font-size:14px;color:var(--ink2);line-height:1.8;margin-bottom:.75rem}
+.conseil-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:.75rem 0}
+.conseil-card{padding:10px 12px;border-radius:var(--rs);font-size:13px;color:var(--ink2);line-height:1.5;border:0.5px solid var(--border)}
+.conseil-title{font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+
+/* DROITS */
+.droits-list{display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem}
+.droit-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs)}
+.droit-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.droit-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.droit-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* OUTILS */
+.outils-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:1.5rem}
+.outil-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.125rem}
+.outil-icon{font-size:26px;margin-bottom:.5rem}
+.outil-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.outil-desc{font-size:12px;color:var(--ink2);line-height:1.6}
+.outil-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:6px;font-weight:500}
+
+/* PILO */
+.pilo-box{background:var(--ink);border-radius:var(--r);padding:1.25rem;margin:.75rem 0}
+.pilo-hd{display:flex;align-items:center;gap:10px;margin-bottom:.625rem}
+.pilo-av{width:32px;height:32px;border-radius:50%;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-size:16px}
+.pilo-name{font-size:12px;font-weight:500;color:#A78BFA}
+.pilo-msg{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.8;font-style:italic}
+
+.sep{height:0.5px;background:var(--border);margin:2rem 0}
+</style>
+</head>
+<body>
+
+<div class="a11y-bar" role="toolbar">
+  <span class="a11y-label">Accessibilite :</span>
+  <button class="a11y-btn" onclick="toggleA11y('big-font',this)">A+ Texte</button>
+  <button class="a11y-btn" onclick="toggleA11y('big-line',this)">&#8597; Espacement</button>
+  <button class="a11y-btn" onclick="toggleA11y('cream-bg',this)">&#127775; Fond creme</button>
+  <button class="a11y-btn" onclick="toggleA11y('high-contrast',this)">&#9680; Contraste</button>
+</div>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">&#128218; Espace inclusion · Cap 3e</div>
+    <div class="header-title">Besoins <span>specifiques</span></div>
+    <p class="header-sub">Tu as un PAP ou un PPS ? Cette page explique tes droits, les amenagements disponibles et les outils pour reussir malgre les difficultes.</p>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- PILO -->
+  <div class="pilo-box">
+    <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+    <div class="pilo-msg">Avoir des besoins specifiques, ce n'est pas un defaut — c'est une facon differente de fonctionner. Les plus grands innovateurs de l'histoire etaient dyslexiques ou avaient des troubles de l'attention. Ta difference est une force si tu apprends a la connaitre et a l'utiliser.</div>
+  </div>
+
+  <!-- 3 BLOCS DIFFERENCIES -->
+  <div class="section">
+    <div class="section-title">&#127775; Ce que cette page t'apporte</div>
+    <div class="intro-grid">
+      <div class="intro-card" style="background:var(--blue-l);border-color:rgba(26,79,191,0.2)">
+        <div class="intro-card-icon">&#128214;</div>
+        <div class="intro-card-title" style="color:var(--blue)">Comprendre tes droits</div>
+        <div class="intro-card-desc" style="color:var(--ink2)">Tiers temps, ordinateur, non-penalisation de l'orthographe, AESH... Connais exactement ce a quoi tu as droit en classe et au brevet.</div>
+      </div>
+      <div class="intro-card" style="background:var(--teal-l);border-color:rgba(13,110,86,0.2)">
+        <div class="intro-card-icon">&#129520;</div>
+        <div class="intro-card-title" style="color:var(--teal)">Outils pour travailler</div>
+        <div class="intro-card-desc" style="color:var(--ink2)">Synthese vocale, cartes mentales, minuteur Pomodoro, police dyslexie... Des outils concrets et gratuits pour compenser tes difficultes au quotidien.</div>
+      </div>
+      <div class="intro-card" style="background:var(--purple-l);border-color:rgba(91,63,160,0.2)">
+        <div class="intro-card-icon">&#129517;</div>
+        <div class="intro-card-title" style="color:var(--purple)">Construire ton avenir</div>
+        <div class="intro-card-desc" style="color:var(--ink2)">Avoir un PAP ou un PPS ne ferme aucune porte. Lycee general, bac pro, CAP, apprentissage — toutes les voies sont accessibles avec les bons amenagements.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- DISPOSITIFS : PAP + PPS uniquement -->
+  <div class="section">
+    <div class="section-title">&#128196; Les dispositifs officiels</div>
+
+    <div class="dispo-card" style="border-left-color:var(--blue)" onclick="toggleDispo(this)">
+      <div class="dispo-top">
+        <span class="dispo-emoji">&#128196;</span>
+        <div>
+          <div class="dispo-name">PAP</div>
+          <div class="dispo-short">Plan d'Accompagnement Personnalise</div>
+        </div>
+        <span class="dispo-toggle">&#8964;</span>
+      </div>
+      <div class="dispo-body">
+        <p>Le PAP est un document officiel qui liste les amenagements pedagogiques dont tu beneficies en classe et aux examens. Il est etabli par le chef d'etablissement, en lien avec le medecin scolaire et les enseignants.</p>
+        <p><strong>Le PAP est fait pour toi si tu as :</strong></p>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>Un trouble dys (dyslexie, dysorthographie, dyscalculie, dyspraxie...)</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>Un TDAH (trouble de l'attention)</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>Une difficulte persistante impactant ta scolarite</div>
+        <p style="margin-top:.75rem"><strong>Le PAP peut prevoir :</strong></p>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>Du temps supplementaire aux evaluations (tiers temps)</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>L'utilisation d'un ordinateur en classe et aux examens</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>Des documents agrandis ou adaptes</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>La non-penalisation de l'orthographe</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--blue)"></div>Des consignes reformulees ou simplifiees</div>
+        <p style="margin-top:.75rem"><strong>Comment le demander :</strong> Prends rendez-vous avec le medecin scolaire de ton etablissement avec ta famille. Le PAP est revise chaque annee.</p>
+      </div>
+    </div>
+
+    <div class="dispo-card" style="border-left-color:var(--teal)" onclick="toggleDispo(this)">
+      <div class="dispo-top">
+        <span class="dispo-emoji">&#128220;</span>
+        <div>
+          <div class="dispo-name">PPS</div>
+          <div class="dispo-short">Projet Personnalise de Scolarisation</div>
+        </div>
+        <span class="dispo-toggle">&#8964;</span>
+      </div>
+      <div class="dispo-body">
+        <p>Le PPS est le document le plus complet pour les eleves en situation de handicap reconnu. Il est etabli par la MDPH et organise l'ensemble de ta scolarite.</p>
+        <p><strong>Le PPS peut inclure :</strong></p>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--teal)"></div>Une orientation vers un dispositif specifique adapte a tes besoins</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--teal)"></div>Des soins therapeutiques (orthophonie, ergotherapie, psychomotricite...)</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--teal)"></div>Une aide humaine (AESH) a temps plein ou partiel</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--teal)"></div>Du materiel pedagogique adapte finance par la collectivite</div>
+        <div class="dispo-item"><div class="dispo-dot" style="background:var(--teal)"></div>Des amenagements specifiques pour le brevet</div>
+        <p style="margin-top:.75rem"><strong>Difference avec le PAP :</strong> Le PPS concerne les situations de handicap reconnues officiellement. Il est plus complet et implique davantage de partenaires (famille, etablissement, soignants).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- TROUBLES DYS -->
+  <div class="section">
+    <div class="section-title">&#129504; Comprendre les troubles DYS</div>
+    <p style="font-size:14px;color:var(--ink2);margin-bottom:1rem;line-height:1.7">Clique sur un trouble pour comprendre ce que c'est et avoir des conseils concrets.</p>
+    <div class="troubles-grid">
+      <div class="trouble-chip" onclick="showTrouble('dyslexie',this)"><div class="trouble-icon">&#128214;</div><div class="trouble-name">Dyslexie</div><div class="trouble-desc">Lecture et ecriture</div></div>
+      <div class="trouble-chip" onclick="showTrouble('dysorthographie',this)"><div class="trouble-icon">&#9999;&#65039;</div><div class="trouble-name">Dysorthographie</div><div class="trouble-desc">Orthographe</div></div>
+      <div class="trouble-chip" onclick="showTrouble('dyscalculie',this)"><div class="trouble-icon">&#128290;</div><div class="trouble-name">Dyscalculie</div><div class="trouble-desc">Nombres et calcul</div></div>
+      <div class="trouble-chip" onclick="showTrouble('dyspraxie',this)"><div class="trouble-icon">&#9997;&#65039;</div><div class="trouble-name">Dyspraxie</div><div class="trouble-desc">Gestes et coordination</div></div>
+      <div class="trouble-chip" onclick="showTrouble('tdah',this)"><div class="trouble-icon">&#9889;</div><div class="trouble-name">TDAH</div><div class="trouble-desc">Attention et concentration</div></div>
+      <div class="trouble-chip" onclick="showTrouble('tsa',this)"><div class="trouble-icon">&#127775;</div><div class="trouble-name">TSA / Autisme</div><div class="trouble-desc">Spectre autistique</div></div>
+    </div>
+    <div id="troublePanel" class="trouble-panel"></div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- DROITS -->
+  <div class="section">
+    <div class="section-title">&#9878;&#65039; Tes droits au college et au brevet</div>
+    <div class="droits-list">
+      <div class="droit-item"><span class="droit-icon">&#128336;</span><div><div class="droit-title">Tiers temps</div><div class="droit-desc">Un tiers de temps supplementaire pour tous les examens, y compris le brevet. Un examen de 2h devient 2h40.</div></div></div>
+      <div class="droit-item"><span class="droit-icon">&#128187;</span><div><div class="droit-title">Ordinateur et logiciels adaptes</div><div class="droit-desc">Correcteur orthographique, synthetiseur vocal, logiciel de lecture — en classe et aux examens si prevu dans ton PAP ou PPS.</div></div></div>
+      <div class="droit-item"><span class="droit-icon">&#128272;</span><div><div class="droit-title">Non-penalisation de l'orthographe</div><div class="droit-desc">Avec une dyslexie ou dysorthographie reconnue, tes erreurs d'orthographe ne sont pas penalisees dans les matieres autres que le francais.</div></div></div>
+      <div class="droit-item"><span class="droit-icon">&#128101;</span><div><div class="droit-title">AESH — Accompagnant</div><div class="droit-desc">Un Accompagnant des Eleves en Situation de Handicap peut t'aider en classe si ton PPS le prevoit.</div></div></div>
+      <div class="droit-item"><span class="droit-icon">&#128196;</span><div><div class="droit-title">Documents adaptes</div><div class="droit-desc">Documents agrandis, police dyslexie-friendly, interlignes augmentes, fond creme — a demander a ton etablissement.</div></div></div>
+      <div class="droit-item"><span class="droit-icon">&#127891;</span><div><div class="droit-title">Amenagements au brevet</div><div class="droit-desc">Tous tes amenagements PAP ou PPS s'appliquent au brevet. Signale-les a ton etablissement bien avant les epreuves.</div></div></div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- OUTILS -->
+  <div class="section">
+    <div class="section-title">&#129520; Outils pratiques</div>
+    <div class="outils-grid">
+      <div class="outil-card"><div class="outil-icon">&#128266;</div><div class="outil-title">Synthese vocale</div><div class="outil-desc">Des logiciels lisent le texte a voix haute. Utile pour la lecture et la comprehension des longs textes.</div><span class="outil-tag" style="background:var(--blue-l);color:var(--blue)">Dyslexie · TDAH</span></div>
+      <div class="outil-card"><div class="outil-icon">&#127358;</div><div class="outil-title">Cartes mentales</div><div class="outil-desc">Organise tes idees visuellement plutot que lineairement. Ideal pour les revisions et la prise de notes.</div><span class="outil-tag" style="background:var(--purple-l);color:var(--purple)">Tous profils</span></div>
+      <div class="outil-card"><div class="outil-icon">&#128276;</div><div class="outil-title">Minuteur Pomodoro</div><div class="outil-desc">20 min de travail, 5 min de pause. Maintient la concentration et evite la surcharge cognitive.</div><span class="outil-tag" style="background:var(--amber-l);color:var(--amber)">TDAH · TSA</span></div>
+      <div class="outil-card"><div class="outil-icon">&#128247;</div><div class="outil-title">Photo du tableau</div><div class="outil-desc">Photographie le tableau avec accord du prof plutot que de recopier si ecrire vite est difficile.</div><span class="outil-tag" style="background:var(--teal-l);color:var(--teal)">Dyspraxie · Dys</span></div>
+      <div class="outil-card"><div class="outil-icon">&#128218;</div><div class="outil-title">Police dyslexie</div><div class="outil-desc">OpenDyslexic ou Arial corps 14, fond creme, interligne 1.5 — bien plus lisible pour les profils dys.</div><span class="outil-tag" style="background:var(--blue-l);color:var(--blue)">Dyslexie</span></div>
+      <div class="outil-card"><div class="outil-icon">&#127358;</div><div class="outil-title">Fiches de revision colorees</div><div class="outil-desc">Associe chaque matiere a une couleur. La memoire visuelle compense les difficultes de memorisation lineaire.</div><span class="outil-tag" style="background:var(--purple-l);color:var(--purple)">Tous profils</span></div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <!-- ORIENTATION -->
+  <div class="section">
+    <div class="section-title">&#129517; Ton orientation apres la 3e</div>
+    <p style="font-size:14px;color:var(--ink2);margin-bottom:1rem;line-height:1.7">Avoir des besoins specifiques ne ferme aucune porte. Tous les parcours sont accessibles avec les bons amenagements.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem">
+      <div class="droit-item"><span class="droit-icon">&#127891;</span><div><div class="droit-title">Lycee general ou technologique</div><div class="droit-desc">Tous tes amenagements PAP ou PPS continuent au lycee. Bac general, technologique ou professionnel selon ton projet.</div></div></div>
+      <div class="droit-item"><span class="droit-icon">&#128295;</span><div><div class="droit-title">CAP ou Bac Pro</div><div class="droit-desc">Accessible avec le brevet ou en equivalence. La pratique prime sur la theorie — tres adapte aux profils dys.</div></div></div>
+      <div class="droit-item"><span class="droit-icon">&#129309;</span><div><div class="droit-title">Apprentissage</div><div class="droit-desc">L'alternance entreprise / centre de formation est souvent ideale : apprentissage par la pratique, rythme different.</div></div></div>
+    </div>
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">Richard Branson, Steve Jobs, Agatha Christie etaient dyslexiques. Orlando Bloom a une dyslexie severe. Tes difficultes t'ont appris a travailler differemment — et ca, c'est une force que peu de gens ont. Ta difference ne definit pas ce que tu peux accomplir.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggleA11y(cls,btn){document.body.classList.toggle(cls);btn.classList.toggle('on');}
+function toggleDispo(card){card.classList.toggle('open');}
+
+var TROUBLES={
+  dyslexie:{titre:"La Dyslexie",desc:"La dyslexie est un trouble specifique de la lecture et de l'ecriture. Ce n'est pas un manque d'intelligence — c'est une facon differente de traiter l'information ecrite. Le cerveau dyslexique est souvent plus fort en pensee visuelle et creative.",conseils:[{titre:"En classe",items:["S'asseoir pres du tableau","Utiliser un doigt pour suivre les lignes","Demander du temps supplementaire","Prendre des photos du tableau"]},{titre:"A la maison",items:["Utiliser la synthese vocale pour les textes longs","Ecrire en police Arial corps 14 sur fond creme","Relire a voix haute","Utiliser des cartes mentales"]},{titre:"Droits",items:["Tiers temps aux evaluations et au brevet","Non-penalisation de l'orthographe","Ordinateur avec correcteur","Documents agrandis"]}],color:"#1A4FBF",bg:"#EBF0FB"},
+  dysorthographie:{titre:"La Dysorthographie",desc:"La dysorthographie touche specifiquement l'orthographe. Elle accompagne souvent la dyslexie. Les regles orthographiques sont difficiles a memoriser et appliquer automatiquement.",conseils:[{titre:"En classe",items:["Demander la non-penalisation de l'orthographe","Utiliser un correcteur orthographique","Se concentrer sur le fond plutot que la forme"]},{titre:"A la maison",items:["Utiliser des applications d'entrainement orthographique","Creer ses propres fiches de regles illustrees","Relire en cherchant UN type d'erreur a la fois"]},{titre:"Droits",items:["Non-penalisation officielle avec PAP","Logiciel correcteur aux examens","Tiers temps"]}],color:"#5B3FA0",bg:"#EFEBFB"},
+  dyscalculie:{titre:"La Dyscalculie",desc:"La dyscalculie est un trouble specifique du calcul et du raisonnement numerique. Les chiffres et les operations sont tres difficiles a automatiser. C'est tres repandu et souvent mal compris.",conseils:[{titre:"En classe",items:["Utiliser une calculatrice autorisee","Ecrire les etapes du calcul clairement","Demander plus de temps pour les problemes"]},{titre:"A la maison",items:["Pratiquer avec des jeux de calcul adaptes","Apprendre les tables via des chansons ou rythmes","Faire du concret : cuisiner, mesurer, compter"]},{titre:"Droits",items:["Calculatrice autorisee si prevu au PAP","Tiers temps aux evaluations","Formules fournies si necessaire"]}],color:"#0D6E56",bg:"#E2F4EE"},
+  dyspraxie:{titre:"La Dyspraxie",desc:"La dyspraxie affecte la coordination des gestes. Ecrire vite et lisiblement, s'organiser dans l'espace sont difficiles. Ce n'est pas de la maladresse — c'est un trouble neurologique.",conseils:[{titre:"En classe",items:["Utiliser un ordinateur pour ecrire","Prendre des photos du tableau","Demander des fiches deja imprimees"]},{titre:"A la maison",items:["Preparer son cartable la veille avec une checklist","Utiliser des organiseurs visuels","Utiliser des outils a prise en main facile"]},{titre:"Droits",items:["Ordinateur aux evaluations et au brevet","Tiers temps","Documents pre-remplis"]}],color:"#9B5A08",bg:"#FDF0E0"},
+  tdah:{titre:"Le TDAH",desc:"Le TDAH se manifeste par des difficultes de concentration, d'impulsivite et parfois d'agitation. Le cerveau TDAH est souvent tres creatif et rapide — mais a du mal avec les taches longues et repetitives.",conseils:[{titre:"En classe",items:["S'asseoir en avant loin des distractions","Noter ce qui traverse l'esprit sur un brouillon","Demander que les consignes soient fractionnees"]},{titre:"A la maison",items:["Travailler en sessions courtes (20 min) avec pause","Eliminer toutes les distractions","Utiliser un minuteur visible"]},{titre:"Droits",items:["Tiers temps aux evaluations","Salle separee pour les examens si prevu","Amenagements sur mesure selon le PAP"]}],color:"#C13030",bg:"#FCEAEA"},
+  tsa:{titre:"Le TSA — Trouble du Spectre Autistique",desc:"Le TSA regroupe des particularites neurologiques qui affectent la communication sociale et les comportements. Chaque personne TSA est unique. Beaucoup ont des capacites exceptionnelles dans certains domaines.",conseils:[{titre:"En classe",items:["Avoir un emploi du temps clair et stable","Etre prevenu.e a l'avance des changements","S'asseoir dans un endroit calme et previsible"]},{titre:"A la maison",items:["Creer des routines stables et visibles","Utiliser des supports visuels pour l'organisation","Communiquer par ecrit si c'est plus confortable"]},{titre:"Droits",items:["AESH avec formation specifique si prevu","Amenagements sensoriels (casque anti-bruit)","Tiers temps et salle separee aux examens"]}],color:"#5B3FA0",bg:"#EFEBFB"}
+};
+
+function showTrouble(key,chip){
+  document.querySelectorAll('.trouble-chip').forEach(function(c){c.classList.remove('sel');});
+  chip.classList.add('sel');
+  var t=TROUBLES[key];
+  var panel=document.getElementById('troublePanel');
+  var conseils=t.conseils.map(function(c){
+    return '<div class="conseil-card" style="background:'+t.bg+';border-color:'+t.color+'20">'+
+      '<div class="conseil-title" style="color:'+t.color+'">'+c.titre+'</div>'+
+      c.items.map(function(i){return '<div style="font-size:13px;color:var(--ink2);margin-bottom:3px">· '+i+'</div>';}).join('')+
+      '</div>';
+  }).join('');
+  panel.innerHTML='<h3 style="color:'+t.color+'">'+t.titre+'</h3><p>'+t.desc+'</p><div class="conseil-grid">'+conseils+'</div>';
+  panel.classList.add('on');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+</script>
+</body>
+</html>

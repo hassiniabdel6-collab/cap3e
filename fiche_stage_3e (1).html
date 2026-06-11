@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preparer mon stage de 3e — Cap 3e</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F2;--bg2:#EEECEA;--bg3:#E4E2DC;
+  --surface:#FFFFFF;--surface2:#F2F0EB;
+  --ink:#1A1816;--ink2:#5A5855;--ink3:#9A9890;
+  --blue:#1A4FBF;--blue-l:#EBF0FB;
+  --teal:#0D6E56;--teal-l:#E2F4EE;
+  --amber:#9B5A08;--amber-l:#FDF0E0;
+  --red:#C13030;--red-l:#FCEAEA;
+  --purple:#5B3FA0;--purple-l:#EFEBFB;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --r:14px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.header{background:var(--ink);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(13,110,86,0.15)}
+.header::after{content:'';position:absolute;bottom:-20px;left:10%;width:120px;height:120px;border-radius:50%;background:rgba(26,79,191,0.1)}
+.header-inner{max-width:720px;margin:0 auto;position:relative;z-index:1}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:1rem}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#fff;margin-bottom:.5rem;line-height:1.2;letter-spacing:-.02em}
+.header-title span{color:#6EE7B7}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:500px;margin-bottom:1.5rem}
+.header-pills{display:flex;gap:8px;flex-wrap:wrap}
+.hpill{font-size:11px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45)}
+
+/* NAV */
+.nav-interne{background:var(--surface);border-bottom:0.5px solid var(--border);position:sticky;top:0;z-index:50;overflow-x:auto;scrollbar-width:none}
+.nav-interne::-webkit-scrollbar{display:none}
+.nav-inner{display:flex;max-width:720px;margin:0 auto;padding:0 1.25rem}
+.nav-tab{padding:12px 16px;font-size:13px;font-weight:500;color:var(--ink3);border:none;background:transparent;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;font-family:inherit}
+.nav-tab.active,.nav-tab:hover{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* MAIN */
+.main{max-width:720px;margin:0 auto;padding:2rem 1.25rem 4rem}
+.section{display:none}
+.section.active{display:block}
+.eyebrow{font-size:11px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(20px,3vw,26px);font-weight:700;color:var(--ink);margin-bottom:.75rem;line-height:1.25}
+.sec-intro{font-size:15px;color:var(--ink2);line-height:1.8;margin-bottom:1.5rem}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:0;margin-bottom:1.5rem}
+.step{display:flex;gap:1rem;padding:1rem 0;border-bottom:0.5px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;margin-top:2px;font-family:'DM Mono',monospace}
+.step-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.step-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+.step-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:5px;font-weight:500}
+
+/* CARDS */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-bottom:1.5rem}
+.card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.125rem}
+.card-icon{font-size:26px;margin-bottom:.5rem}
+.card-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.card-desc{font-size:12px;color:var(--ink2);line-height:1.6}
+.card-tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;margin-top:6px;font-weight:500}
+
+/* TIPS */
+.tip{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--rs);margin-bottom:6px;font-size:13px;line-height:1.6}
+.tip-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:6px;margin-bottom:1.5rem}
+.check-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--rs);cursor:pointer;transition:all .15s}
+.check-item.done{background:var(--teal-l);border-color:rgba(13,110,86,.3)}
+.check-icon{font-size:16px;flex-shrink:0;margin-top:1px;transition:all .15s}
+.check-text{font-size:13px;color:var(--ink2);line-height:1.5}
+.check-item.done .check-text{color:var(--teal)}
+
+/* ACCORDEON */
+.acc-item{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);margin-bottom:8px;overflow:hidden}
+.acc-top{display:flex;align-items:center;gap:12px;padding:1rem 1.125rem;cursor:pointer}
+.acc-emoji{font-size:22px;flex-shrink:0}
+.acc-title{font-size:14px;font-weight:600;color:var(--ink);flex:1}
+.acc-toggle{font-size:18px;color:var(--ink3);transition:transform .2s}
+.acc-item.open .acc-toggle{transform:rotate(180deg)}
+.acc-body{display:none;padding:0 1.125rem 1rem;border-top:0.5px solid var(--border)}
+.acc-item.open .acc-body{display:block}
+.acc-body p{font-size:13px;color:var(--ink2);line-height:1.8;margin-bottom:.5rem;margin-top:.75rem}
+.acc-item-line{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink2);margin-bottom:.375rem;line-height:1.5}
+.acc-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px;background:var(--teal)}
+
+/* MODELE */
+.modele{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.25rem;margin-bottom:1rem;font-family:'DM Mono',monospace;font-size:12px;color:var(--ink2);line-height:1.8;white-space:pre-wrap}
+.modele-title{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:.75rem;display:flex;align-items:center;gap:8px}
+
+/* ERREURS */
+.erreurs-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.5rem}
+.erreur-item{padding:10px 12px;border-radius:var(--rs);font-size:12px;line-height:1.5}
+
+/* RAPPORT */
+.rapport-section{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.125rem;margin-bottom:8px;border-left:3px solid}
+.rs-title{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.rs-desc{font-size:12px;color:var(--ink2);line-height:1.6}
+.rs-pages{font-size:11px;font-weight:500;margin-top:4px;font-family:'DM Mono',monospace}
+
+/* PILO */
+.pilo-box{background:var(--ink);border-radius:var(--r);padding:1.25rem;margin:1rem 0}
+.pilo-hd{display:flex;align-items:center;gap:10px;margin-bottom:.625rem}
+.pilo-av{width:32px;height:32px;border-radius:50%;background:rgba(110,232,183,0.15);border:1px solid rgba(110,232,183,0.3);display:flex;align-items:center;justify-content:center;font-size:16px}
+.pilo-name{font-size:12px;font-weight:500;color:#6EE7B7}
+.pilo-msg{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;font-style:italic}
+
+.sep{height:0.5px;background:var(--border);margin:1.5rem 0}
+.btn-main{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:var(--rs);background:var(--teal);color:#fff;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:inherit;text-decoration:none;transition:opacity .15s}
+.btn-main:hover{opacity:.9}
+.national-box{background:var(--surface2);border:0.5px solid var(--border2);border-radius:var(--r);padding:1rem 1.25rem;margin:1rem 0;display:flex;align-items:flex-start;gap:10px}
+.national-link{font-size:12px;color:var(--blue);font-weight:500;text-decoration:none;display:inline-block;margin-top:4px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">&#128188; Stage de 3e · Cap 3e</div>
+    <div class="header-title">Preparer mon <span>stage de 3e</span></div>
+    <p class="header-sub">Trouver, preparer, reussir et rendre compte de son stage. Tout ce qu'il faut savoir, etape par etape.</p>
+    <div class="header-pills">
+      <span class="hpill">&#128197; 1 semaine en entreprise</span>
+      <span class="hpill">&#128196; Rapport obligatoire</span>
+      <span class="hpill">&#129517; Cle pour ton orientation</span>
+    </div>
+  </div>
+</div>
+
+<!-- BLOC DOCUMENTS OFFICIELS -->
+<div style="background:var(--surface);border-bottom:0.5px solid var(--border)">
+  <div style="max-width:720px;margin:0 auto;padding:1.25rem">
+    <div style="font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem">&#128196; Tes documents officiels — College Guy Moquet</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">
+      <div style="background:var(--amber-l);border:0.5px solid rgba(155,90,8,.2);border-radius:12px;padding:1rem">
+        <div style="font-size:22px;margin-bottom:.5rem">&#128218;</div>
+        <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:3px">Cahier d'observation</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.6">A remplir chaque jour pendant le stage. Contient les fiches entreprise, journal de bord et rencontres professionnelles.</div>
+        <div style="font-size:11px;color:var(--amber);font-weight:500;margin-top:.5rem">Remis par ton college</div><a href="Cahier_d_observation_de_stage.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:.5rem;font-size:12px;font-weight:500;color:var(--amber);text-decoration:none;background:rgba(155,90,8,.1);padding:4px 10px;border-radius:20px">&#11015; Telecharger le cahier</a>
+      </div>
+      <div style="background:var(--blue-l);border:0.5px solid rgba(26,79,191,.2);border-radius:12px;padding:1rem">
+        <div style="font-size:22px;margin-bottom:.5rem">&#128203;</div>
+        <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:3px">Consignes officielles</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.6">Format diaporama, 7 000 caracteres minimum, plan de l'oral en 5 parties. A lire absolument avant de commencer.</div>
+        <div style="font-size:11px;color:var(--blue);font-weight:500;margin-top:.5rem">Voir section "Le rapport"</div><a href="Consignes_Rapport_de_stage.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:.5rem;font-size:12px;font-weight:500;color:var(--blue);text-decoration:none;background:rgba(26,79,191,.1);padding:4px 10px;border-radius:20px">&#11015; Telecharger les consignes</a>
+      </div>
+      <div style="background:var(--teal-l);border:0.5px solid rgba(13,110,86,.2);border-radius:12px;padding:1rem">
+        <div style="font-size:22px;margin-bottom:.5rem">&#9989;</div>
+        <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:3px">Fiche d'evaluation tuteur</div>
+        <div style="font-size:12px;color:var(--ink2);line-height:1.6">Ton tuteur evalue ton comportement, ta ponctualite, ton integration et ton interet. C'est compte dans ta note.</div>
+        <div style="font-size:11px;color:var(--teal);font-weight:500;margin-top:.5rem">Remplie par l'entreprise</div><a href="Fiche_d_evaluation_Tuteur.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:5px;margin-top:.5rem;font-size:12px;font-weight:500;color:var(--teal);text-decoration:none;background:rgba(13,110,86,.1);padding:4px 10px;border-radius:20px">&#11015; Telecharger la fiche</a>
+      </div>
+    </div>
+    <div style="background:var(--red-l);border:0.5px solid rgba(193,48,48,.2);border-radius:8px;padding:10px 14px;margin-top:.75rem;display:flex;align-items:center;gap:10px">
+      <span style="font-size:18px">&#128197;</span>
+      <div style="font-size:13px;color:var(--red)"><strong>Date limite :</strong> Rapport a envoyer par mail a ton professeur principal avant le <strong>mardi 05 janvier 2026 a 23h59.</strong></div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav-interne">
+  <div class="nav-inner">
+    <button class="nav-tab active" onclick="showSec('trouver',this)">Trouver son stage</button>
+    <button class="nav-tab" onclick="showSec('candidature',this)">Ma candidature</button>
+    <button class="nav-tab" onclick="showSec('reussir',this)">Reussir son stage</button>
+    <button class="nav-tab" onclick="showSec('rapport',this)">Le rapport</button>
+  </div>
+</nav>
+
+<div class="main">
+
+  <!-- ── SECTION 1 : TROUVER ────────────────────────────── -->
+  <div class="section active" id="s-trouver">
+    <div class="eyebrow">01 — Trouver</div>
+    <div class="sec-title">Trouver son stage</div>
+    <p class="sec-intro">Le stage de 3e est une semaine de decouverte professionnelle obligatoire. C'est aussi une chance unique d'explorer un metier qui t'interesse vraiment. Ne le choisis pas par facilite — choisis-le avec intention.</p>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">Le stage de 3e c'est souvent le premier vrai contact avec le monde du travail. Choisis une entreprise dans un secteur qui t'interesse — pas juste celle de ton voisin ou la plus facile a trouver. C'est une semaine qui peut changer ta vision de ton orientation.</div>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#127919; Par ou commencer ?</div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Choisis ton secteur d'activite</div>
+          <div class="step-desc">Qu'est-ce qui t'interesse ? Sante, informatique, commerce, artisanat, sport, communication, restauration... Choisis en lien avec ton projet d'orientation. Le stage sera beaucoup plus enrichissant.</div>
+          <span class="step-tag" style="background:var(--teal-l);color:var(--teal)">Aide : Quiz orientation sur Cap 3e</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Liste des entreprises potentielles</div>
+          <div class="step-desc">Note 5 a 10 entreprises de ton secteur pres de chez toi. Utilise Google Maps, les pages jaunes, ou demande autour de toi (famille, voisins, amis). Ne te limite pas aux grandes entreprises — les PME et artisans accueillent souvent tres bien.</div>
+          <span class="step-tag" style="background:var(--blue-l);color:var(--blue)">Objectif : 5 entreprises minimum</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Prends contact</div>
+          <div class="step-desc">Appelle ou va directement en personne. Presente-toi, explique que tu es en 3e et que tu cherches un stage de decouverte. Sois poli.e, clair.e et concis.e. En cas de refus, remercie et passe a la suivante.</div>
+          <span class="step-tag" style="background:var(--amber-l);color:var(--amber)">Ne pas attendre la derniere minute</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Fais signer la convention</div>
+          <div class="step-desc">Une fois l'entreprise trouvee, ton college te fournit une convention de stage a faire signer par l'entreprise et tes parents. C'est obligatoire avant le debut du stage.</div>
+          <span class="step-tag" style="background:var(--red-l);color:var(--red)">Obligatoire avant le stage</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#128295; Secteurs populaires et idees</div>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">&#129657;</div><div class="card-title">Sante et social</div><div class="card-desc">Hopital, pharmacie, cabinet medical, EHPAD, association caritative, centre de loisirs.</div><span class="card-tag" style="background:var(--teal-l);color:var(--teal)">Tres demande</span></div>
+      <div class="card"><div class="card-icon">&#128187;</div><div class="card-title">Informatique et tech</div><div class="card-desc">Startup, agence web, service informatique d'une entreprise, reparateur de materiel.</div><span class="card-tag" style="background:var(--blue-l);color:var(--blue)">En forte croissance</span></div>
+      <div class="card"><div class="card-icon">&#127869;</div><div class="card-title">Restauration et hotellerie</div><div class="card-desc">Restaurant, boulangerie, patisserie, hotel, traiteur, cantine scolaire.</div><span class="card-tag" style="background:var(--amber-l);color:var(--amber)">Accessible</span></div>
+      <div class="card"><div class="card-icon">&#127912;</div><div class="card-title">Creation et communication</div><div class="card-desc">Agence de communication, studio graphique, journal local, radio, theatre.</div><span class="card-tag" style="background:var(--purple-l);color:var(--purple)">Createur</span></div>
+      <div class="card"><div class="card-icon">&#9917;</div><div class="card-title">Sport et animation</div><div class="card-desc">Club sportif, salle de sport, centre de vacances, maison de quartier, MJC.</div><span class="card-tag" style="background:var(--teal-l);color:var(--teal)">Dynamique</span></div>
+      <div class="card"><div class="card-icon">&#128188;</div><div class="card-title">Commerce et vente</div><div class="card-desc">Magasin, supermarche, boutique, e-commerce, banque, assurance.</div><span class="card-tag" style="background:var(--blue-l);color:var(--blue)">Polyvalent</span></div>
+    </div>
+
+    <div class="national-box">
+      <span style="font-size:20px;flex-shrink:0">&#127279;</span>
+      <div>
+        <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px">Ressources pour trouver un stage</div>
+        <a class="national-link" href="https://www.onisep.fr/formation/se-former-en-france/le-stage-en-entreprise" target="_blank">ONISEP — Le stage en entreprise &#8599;</a><br>
+        <a class="national-link" href="https://www.viadeo.com" target="_blank">Viadeo — Reseau professionnel &#8599;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2 : CANDIDATURE ────────────────────────── -->
+  <div class="section" id="s-candidature">
+    <div class="eyebrow">02 — Candidature</div>
+    <div class="sec-title">Preparer ma candidature</div>
+    <p class="sec-intro">Une bonne candidature fait la difference. Meme pour un stage de 3e, un mail ou une lettre bien rediges montrent ton serieux et ta motivation. Voici comment faire.</p>
+
+    <div class="acc-item open">
+      <div class="acc-top" onclick="toggleAcc(this.closest('.acc-item'))">
+        <span class="acc-emoji">&#128140;</span>
+        <span class="acc-title">Le mail de candidature</span>
+        <span class="acc-toggle">&#8964;</span>
+      </div>
+      <div class="acc-body">
+        <p>Un mail de candidature doit etre court, clair et professionnel. Voici la structure ideale :</p>
+        <div class="modele-title">&#128196; Modele de mail</div>
+        <div class="modele">Objet : Demande de stage de decouverte — 3e — [Prenom Nom]
+
+Madame, Monsieur,
+
+Je suis eleve en classe de 3e au college [Nom du college] de [Ville]. Dans le cadre de ma scolarite, je dois effectuer un stage de decouverte professionnelle du [date debut] au [date fin].
+
+Votre [entreprise / cabinet / association] m'interesse particulierement car [raison concrete et personnelle — ex : je m'interesse au domaine de la sante depuis...].
+
+Je serais tres heureux.se de pouvoir vous rencontrer et decouvrir votre metier au quotidien.
+
+Je reste a votre disposition pour tout renseignement complementaire.
+
+Dans l'attente de votre reponse, je vous adresse mes cordiales salutations.
+
+[Prenom Nom]
+[Tel ou email de tes parents]</div>
+        <div class="tip" style="background:var(--teal-l);margin-top:.5rem">
+          <span class="tip-icon">&#10024;</span>
+          <span style="font-size:13px;color:var(--teal)"><strong>Conseil :</strong> La raison concrete et personnelle est la partie la plus importante. Ne mets pas "car cela m'interesse" — dis POURQUOI ca t'interesse vraiment.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-top" onclick="toggleAcc(this.closest('.acc-item'))">
+        <span class="acc-emoji">&#128222;</span>
+        <span class="acc-title">L'appel telephonique</span>
+        <span class="acc-toggle">&#8964;</span>
+      </div>
+      <div class="acc-body">
+        <p>L'appel direct est souvent plus efficace que le mail. Prepare-toi avant de telephoner :</p>
+        <div class="acc-item-line"><div class="acc-dot"></div>Note sur papier ce que tu vas dire avant d'appeler</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Appelle en semaine entre 9h et 12h ou 14h et 17h</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Commence par te presenter : "Bonjour, je m'appelle [Prenom], je suis eleve de 3e..."</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Explique clairement ta demande et les dates</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Si refus : remercie poliment et note la raison</div>
+        <div class="tip" style="background:var(--blue-l);margin-top:.75rem">
+          <span class="tip-icon">&#128161;</span>
+          <span style="font-size:13px;color:var(--blue)"><strong>Astuce :</strong> S'ils disent "envoyez un mail", c'est souvent une facon de refuser. Envoie quand meme le mail mais continue a chercher en parallele.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-top" onclick="toggleAcc(this.closest('.acc-item'))">
+        <span class="acc-emoji">&#128203;</span>
+        <span class="acc-title">Le CV pour le stage</span>
+        <span class="acc-toggle">&#8964;</span>
+      </div>
+      <div class="acc-body">
+        <p>Un CV de stage de 3e est simple — tu n'as pas besoin d'experience professionnelle. Mets en avant tes activites, tes loisirs, tes competences et ta motivation.</p>
+        <p><strong>Ce qu'il faut inclure :</strong></p>
+        <div class="acc-item-line"><div class="acc-dot"></div>Tes coordonnees (prenom, nom, ville, email ou tel parents)</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Ta formation (college, classe, annee)</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Tes activites extra-scolaires (sport, musique, theatre, benevolat...)</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Tes competences (langues, informatique, permis...)</div>
+        <div class="acc-item-line"><div class="acc-dot"></div>Une courte phrase de motivation personnalisee</div>
+        <div style="margin-top:1rem">
+          <a class="btn-main" href="generateur_cv_stage.html" target="_blank">&#128203; Generer mon CV avec le generateur Cap 3e &#8594;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#9989; Checklist avant d'envoyer</div>
+    <div class="checklist" id="check-cand">
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">J'ai verifie l'orthographe et la grammaire</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">J'ai personnalise le mail avec le nom de l'entreprise</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">J'ai indique les dates exactes du stage</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">J'ai explique POURQUOI cette entreprise m'interesse</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">J'ai joint mon CV si disponible</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">J'ai mis mes coordonnees de contact</span></div>
+    </div>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">Ne te decourage pas si tu essuies des refus. C'est normal. Les meilleurs stagiaires sont ceux qui ont insiste. Fixe-toi un objectif : contacter au moins 10 entreprises. Statistiquement, tu obtiendras une reponse positive.</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3 : REUSSIR ────────────────────────────── -->
+  <div class="section" id="s-reussir">
+    <div class="eyebrow">03 — Reussir</div>
+    <div class="sec-title">Reussir son stage</div>
+    <p class="sec-intro">Tu as trouve ton stage — bravo ! Maintenant l'objectif c'est d'en tirer le maximum. Une semaine bien vecue peut vraiment changer ta vision de ton orientation et te donner confiance pour la suite.</p>
+
+    <div class="cards-grid">
+      <div class="card" style="border-top:3px solid var(--teal)">
+        <div class="card-icon">&#128205;</div>
+        <div class="card-title">Ponctualite et serieux</div>
+        <div class="card-desc">Arrive toujours a l'heure — meme en avance. Previens si tu as un probleme. C'est la base du professionnalisme.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--blue)">
+        <div class="card-icon">&#128064;</div>
+        <div class="card-title">Observer et poser des questions</div>
+        <div class="card-desc">Tu n'es pas la pour travailler — tu es la pour observer et apprendre. Pose des questions intelligentes sur le metier, les formations, le quotidien.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--purple)">
+        <div class="card-icon">&#128203;</div>
+        <div class="card-title">Prendre des notes</div>
+        <div class="card-desc">Note chaque jour ce que tu as fait, observe, appris. Ces notes seront indispensables pour ecrire ton rapport de stage.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--amber)">
+        <div class="card-icon">&#129309;</div>
+        <div class="card-title">S'integrer dans l'equipe</div>
+        <div class="card-desc">Sois souriant.e, serviable et discret.e. Ne reste pas dans ton coin. Montre que tu t'integres naturellement.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--teal)">
+        <div class="card-icon">&#128247;</div>
+        <div class="card-title">Collecter des informations</div>
+        <div class="card-desc">Demande des documents sur l'entreprise, des plaquettes, des infos sur les metiers. Avec accord, prends des photos pour illustrer ton rapport.</div>
+      </div>
+      <div class="card" style="border-top:3px solid var(--red)">
+        <div class="card-icon">&#128241;</div>
+        <div class="card-title">Telephone range</div>
+        <div class="card-desc">Pendant le stage, le telephone est range. Pas de reseaux sociaux, pas de messages. Tu es en milieu professionnel — comporte-toi en professionnel.</div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#10060; Les erreurs a eviter absolument</div>
+    <div class="erreurs-grid">
+      <div class="erreur-item" style="background:var(--red-l);border:0.5px solid rgba(193,48,48,.2)">
+        <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:3px">&#10060; Etre en retard</div>
+        <div style="font-size:12px;color:var(--ink2)">Meme une seule fois, ca marque tres negativement. Previens toujours.</div>
+      </div>
+      <div class="erreur-item" style="background:var(--red-l);border:0.5px solid rgba(193,48,48,.2)">
+        <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:3px">&#10060; Rester passif</div>
+        <div style="font-size:12px;color:var(--ink2)">Attendre qu'on te parle sans rien faire donne une mauvaise image. Sois pro-actif.ve.</div>
+      </div>
+      <div class="erreur-item" style="background:var(--red-l);border:0.5px solid rgba(193,48,48,.2)">
+        <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:3px">&#10060; Telephone visible</div>
+        <div style="font-size:12px;color:var(--ink2)">C'est la premiere chose remarquee. Telephone dans le sac, point.</div>
+      </div>
+      <div class="erreur-item" style="background:var(--red-l);border:0.5px solid rgba(193,48,48,.2)">
+        <div style="font-size:13px;font-weight:600;color:var(--red);margin-bottom:3px">&#10060; Ne pas noter</div>
+        <div style="font-size:12px;color:var(--ink2)">Sans notes quotidiennes, impossible d'ecrire un bon rapport. Prends ton carnet.</div>
+      </div>
+      <div class="erreur-item" style="background:var(--teal-l);border:0.5px solid rgba(13,110,86,.2)">
+        <div style="font-size:13px;font-weight:600;color:var(--teal);margin-bottom:3px">&#10003; A la place</div>
+        <div style="font-size:12px;color:var(--ink2)">Arrive 5 min en avance, prends un carnet, pose des questions, montre ton interet.</div>
+      </div>
+      <div class="erreur-item" style="background:var(--teal-l);border:0.5px solid rgba(13,110,86,.2)">
+        <div style="font-size:13px;font-weight:600;color:var(--teal);margin-bottom:3px">&#10003; La bonne attitude</div>
+        <div style="font-size:12px;color:var(--ink2)">Sourire, politesse, curiosite et humilite. Tu es la pour apprendre, pas pour impressionner.</div>
+      </div>
+    </div>
+
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#127919; Questions a poser pendant le stage</div>
+    <div class="checklist">
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Quel est votre parcours pour arriver a ce poste ?</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Qu'est-ce que vous aimez le plus dans votre metier ?</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Quelles sont les qualites indispensables dans ce secteur ?</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Quelles formations conseillez-vous pour ce metier ?</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Quelles sont les evolutions possibles dans ce domaine ?</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Est-ce que ce metier a beaucoup change ces dernieres annees ?</span></div>
+    </div>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">Un bon stage ne se mesure pas a ce que tu as fait — il se mesure a ce que tu as appris. Meme si c'est ennuyeux, meme si tu n'aimes pas le secteur — chaque experience t'apprend quelque chose sur toi-meme et sur ce que tu veux ou ne veux pas faire plus tard.</div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4 : RAPPORT ────────────────────────────── -->
+  <div class="section" id="s-rapport">
+    <div class="eyebrow">04 — Rapport officiel</div>
+    <div class="sec-title">Le rapport de stage</div>
+    <p class="sec-intro">Le rapport de stage du college Guy Moquet se presente sous forme de <strong>diaporama</strong>. Il est accompagne d'une epreuve orale. Voici les consignes officielles a respecter.</p>
+
+    <!-- ALERTE CONSIGNES OFFICIELLES -->
+    <div style="background:var(--amber-l);border:1px solid rgba(155,90,8,.3);border-radius:var(--r);padding:1.125rem;margin-bottom:1.5rem">
+      <div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:.5rem">&#128203; Consignes officielles — College Guy Moquet</div>
+      <div style="font-size:13px;color:var(--ink2);line-height:1.7">
+        Le rapport est un <strong>diaporama</strong> (20 diapositives maximum, 5 minimum).<br>
+        <strong>7 000 caracteres minimum.</strong><br>
+        <strong>Aucune phrase redigee</strong> sur les diapositives — uniquement photos, mots-cles, titres et plan.<br>
+        A envoyer par mail a ton professeur principal <strong>avant le mardi 05 janvier 2026 a 23h59.</strong>
+      </div>
+    </div>
+
+    <!-- STRUCTURE OFFICIELLE -->
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#128196; Structure officielle du diaporama</div>
+
+    <div class="rapport-section" style="border-left-color:var(--ink3)">
+      <div class="rs-title">&#128196; Page de garde</div>
+      <div class="rs-desc">Titre du rapport, ton prenom et nom, classe, date, nom du college et nom de l'entreprise. Soigne la mise en page — c'est la premiere impression.</div>
+      <div class="rs-pages" style="color:var(--ink3)">1 diapositive</div>
+    </div>
+    <div class="rapport-section" style="border-left-color:var(--ink3)">
+      <div class="rs-title">&#128203; Sommaire</div>
+      <div class="rs-desc">Liste les 5 grandes parties avec les numeros de pages. A rediger en dernier quand tout est fini.</div>
+      <div class="rs-pages" style="color:var(--ink3)">1 diapositive — pages numerotees</div>
+    </div>
+    <div class="rapport-section" style="border-left-color:var(--teal)">
+      <div class="rs-title">&#128221; Introduction</div>
+      <div class="rs-desc">Explique pourquoi tu as choisi ce stage, les demarches effectuees pour le trouver. Mets ta lettre de motivation en annexe.</div>
+      <div class="rs-pages" style="color:var(--teal)">1 diapositive minimum · Lettre de motivation en annexe</div>
+    </div>
+    <div class="rapport-section" style="border-left-color:var(--amber)">
+      <div class="rs-title">&#127970; Partie I — Presentation de l'entreprise</div>
+      <div class="rs-desc">Secteur d'activite, production, nombre de salaries, historique de la societe, organigramme. Utilise les informations recueillies avec ton cahier d'observation.</div>
+      <div class="rs-pages" style="color:var(--amber)">1 diapositive minimum</div>
+    </div>
+    <div class="rapport-section" style="border-left-color:var(--purple)">
+      <div class="rs-title">&#128203; Partie II — Journal de bord des 5 jours</div>
+      <div class="rs-desc">Description de tes activites journalieres pour chaque jour du stage. Utilise les notes de ton cahier d'observation. Sois precis.e et concret.e.</div>
+      <div class="rs-pages" style="color:var(--purple)">1 diapositive minimum · 5 jours a documenter</div>
+    </div>
+    <div class="rapport-section" style="border-left-color:var(--blue)">
+      <div class="rs-title">&#128188; Partie III — Fiche metier detaillee</div>
+      <div class="rs-desc">Diplomes necessaires, qualites requises, salaire (debutant et 5 ans d'experience), outils et instruments utilises, lieu et conditions de travail, horaires, avantages et inconvenients.</div>
+      <div class="rs-pages" style="color:var(--blue)">1 diapositive minimum</div>
+    </div>
+    <div class="rapport-section" style="border-left-color:var(--teal)">
+      <div class="rs-title">&#129304; Partie IV — Bilan personnel et orientation</div>
+      <div class="rs-desc">Ton avis personnel redige et argumente. Ta reflexion par rapport a ton projet d'orientation. Est-ce que ce stage a confirme ou change tes envies ? Sois honnete et personnel.</div>
+      <div class="rs-pages" style="color:var(--teal)">1 diapositive minimum</div>
+    </div>
+    <div class="rapport-section" style="border-left-color:var(--ink3)">
+      <div class="rs-title">&#128247; Annexes</div>
+      <div class="rs-desc">Lettre de motivation, photos (avec accord), documents collectes, plaquettes de l'entreprise.</div>
+      <div class="rs-pages" style="color:var(--ink3)">Obligatoire pour la lettre de motivation</div>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- EPREUVE ORALE -->
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#127908; L'epreuve orale — Plan officiel</div>
+    <div style="background:var(--blue-l);border:0.5px solid var(--blue-m);border-radius:var(--r);padding:1.125rem;margin-bottom:1rem">
+      <div style="font-size:13px;font-weight:600;color:var(--blue);margin-bottom:.75rem">Plan obligatoire de l'oral</div>
+      <div class="steps" style="margin-bottom:0">
+        <div class="step" style="padding:.625rem 0">
+          <div class="step-num" style="background:var(--blue);width:24px;height:24px;font-size:11px">1</div>
+          <div><div class="step-title" style="font-size:13px">Introduction</div><div class="step-desc" style="font-size:12px">Presentation personnelle + demarches de recherche de stage</div></div>
+        </div>
+        <div class="step" style="padding:.625rem 0">
+          <div class="step-num" style="background:var(--blue);width:24px;height:24px;font-size:11px">2</div>
+          <div><div class="step-title" style="font-size:13px">Presentation de l'entreprise</div><div class="step-desc" style="font-size:12px">Localisation, activite, nombre de salaries</div></div>
+        </div>
+        <div class="step" style="padding:.625rem 0">
+          <div class="step-num" style="background:var(--blue);width:24px;height:24px;font-size:11px">3</div>
+          <div><div class="step-title" style="font-size:13px">Presentation du ou des metier(s) observe(s)</div><div class="step-desc" style="font-size:12px">Cursus · Taches · Salaires · Inconvenients et avantages</div></div>
+        </div>
+        <div class="step" style="padding:.625rem 0">
+          <div class="step-num" style="background:var(--blue);width:24px;height:24px;font-size:11px">4</div>
+          <div><div class="step-title" style="font-size:13px">Analyse de l'experience personnelle</div><div class="step-desc" style="font-size:12px">Ce que tu as vecu, ressenti, appris</div></div>
+        </div>
+        <div class="step" style="padding:.625rem 0;border-bottom:none">
+          <div class="step-num" style="background:var(--blue);width:24px;height:24px;font-size:11px">5</div>
+          <div><div class="step-title" style="font-size:13px">Conclusion</div><div class="step-desc" style="font-size:12px">Lien avec ton projet d'orientation</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip" style="background:var(--teal-l)">
+      <span class="tip-icon">&#10024;</span>
+      <span style="font-size:13px;color:var(--teal)"><strong>Important :</strong> L'oral est juge autant sur son contenu que sur sa forme : coherence des diapositives, tenue vestimentaire, langage employe. Entraine-toi a voix haute avant le jour J.</span>
+    </div>
+
+    <div class="sep"></div>
+
+    <!-- CAHIER D'OBSERVATION -->
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#128218; Le cahier d'observation — Pendant le stage</div>
+    <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1rem">Ton college te remet un cahier d'observation a remplir pendant le stage. Il te guidera pour collecter toutes les informations dont tu auras besoin pour ton rapport.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">&#127970;</div>
+        <div class="card-title">L'entreprise</div>
+        <div class="card-desc">Nom, adresse, secteur, activite, nombre de salaries, forme juridique, organigramme, horaires.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128203;</div>
+        <div class="card-title">Journal de bord</div>
+        <div class="card-desc">Tableau heure par heure pour chaque journee + bilan de fin de journee.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128101;</div>
+        <div class="card-title">Rencontres professionnelles</div>
+        <div class="card-desc">Fiches detaillees pour 2 professionnels : metier, parcours, salaire, conditions de travail.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#128196;</div>
+        <div class="card-title">Fiche d'evaluation tuteur</div>
+        <div class="card-desc">Ton tuteur remplit une fiche : comportement, langage, interet, ponctualite, integration.</div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div style="font-size:15px;font-weight:600;color:var(--ink);margin-bottom:.75rem">&#9989; Checklist finale avant d'envoyer</div>
+    <div class="checklist">
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Page de garde complete (titre, nom, classe, date, college, entreprise)</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Sommaire avec pages numerotees</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Introduction avec raisons du choix et demarches</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Partie I — Presentation de l'entreprise complete</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Partie II — Journal de bord des 5 jours</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Partie III — Fiche metier detaillee</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Partie IV — Bilan personnel et orientation</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Lettre de motivation en annexe</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">7 000 caracteres minimum verifies</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Aucune phrase redigee sur les diapositives</span></div>
+      <div class="check-item" onclick="toggleCheck(this)"><span class="check-icon">&#9675;</span><span class="check-text">Envoye par mail au PP avant le mardi 23h59</span></div>
+    </div>
+
+    <div class="pilo-box">
+      <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+      <div class="pilo-msg">Ton diaporama, c'est ta vitrine. Pas de phrases entieres — des images fortes, des mots-cles percutants, et TOI qui parles. L'oral c'est l'occasion de montrer qui tu es au-dela de tes notes. Entraine-toi devant un miroir ou filme-toi. Tu vas y arriver.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showSec(id,btn){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('s-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleAcc(item){item.classList.toggle('open');}
+function toggleCheck(item){
+  item.classList.toggle('done');
+  var icon=item.querySelector('.check-icon');
+  icon.innerHTML=item.classList.contains('done')?'&#10003;':'&#9675;';
+}
+</script>
+</body>
+</html>

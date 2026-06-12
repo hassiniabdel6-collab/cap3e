@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ils sont passes par Guy Moquet — Cap 3e</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F6F2;--bg2:#EEECEA;--bg3:#E4E2DC;
+  --surface:#FFFFFF;--surface2:#F2F0EB;
+  --ink:#1A1816;--ink2:#5A5855;--ink3:#9A9890;
+  --blue:#1A4FBF;--blue-l:#EBF0FB;
+  --teal:#0D6E56;--teal-l:#E2F4EE;
+  --amber:#9B5A08;--amber-l:#FDF0E0;
+  --purple:#5B3FA0;--purple-l:#EFEBFB;
+  --red:#C13030;--red-l:#FCEAEA;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.14);
+  --r:14px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.7}
+
+/* HEADER */
+.header{background:var(--ink);padding:2.5rem 1.5rem 2rem;position:relative;overflow:hidden;text-align:center}
+.header::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:rgba(26,79,191,0.15)}
+.header::after{content:'';position:absolute;bottom:-20px;left:10%;width:120px;height:120px;border-radius:50%;background:rgba(91,63,160,0.1)}
+.header-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:0.5px solid rgba(255,255,255,0.15);border-radius:20px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:1rem}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:#fff;margin-bottom:.5rem;line-height:1.2;letter-spacing:-.02em}
+.header-title span{color:#A78BFA}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;max-width:480px;margin:0 auto 1.5rem}
+.header-pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.hpill{font-size:11px;padding:4px 12px;border-radius:20px;background:rgba(255,255,255,0.06);border:0.5px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45)}
+
+/* MAIN */
+.main{max-width:680px;margin:0 auto;padding:2rem 1.25rem 4rem}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:2rem}
+.stat{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1rem;text-align:center}
+.stat-n{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;margin-bottom:2px}
+.stat-l{font-size:11px;color:var(--ink3);line-height:1.4}
+
+/* FILTRES */
+.filtres{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem}
+.filtre-btn{padding:6px 14px;border-radius:20px;border:0.5px solid var(--border2);background:var(--surface);font-size:12px;font-weight:500;color:var(--ink2);cursor:pointer;font-family:inherit;transition:all .15s}
+.filtre-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* TEMOIGNAGES */
+.temos-list{display:flex;flex-direction:column;gap:12px;margin-bottom:2rem}
+.temo-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.375rem 1.25rem 1.125rem;position:relative;overflow:hidden}
+.temo-card::before{content:'\201C';font-family:'Playfair Display',serif;font-size:72px;color:var(--purple);opacity:.1;position:absolute;top:-8px;left:8px;line-height:1;pointer-events:none}
+.temo-voie{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.temo-message{font-family:'Playfair Display',serif;font-size:15px;color:var(--ink);line-height:1.85;font-style:italic;margin-bottom:.875rem;padding-left:.25rem}
+.temo-conseil{font-size:13px;color:var(--ink2);line-height:1.7;background:var(--bg2);border-radius:var(--rs);padding:.75rem 1rem;margin-bottom:.875rem;border-left:3px solid var(--purple)}
+.temo-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.temo-author{display:flex;align-items:center;gap:10px}
+.temo-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;font-weight:700}
+.temo-name{font-size:14px;font-weight:600;color:var(--ink)}
+.temo-meta{font-size:11px;color:var(--ink3);margin-top:1px}
+.temo-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.temo-stars{color:#F59E0B;font-size:13px;letter-spacing:1px}
+.temo-themes{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.theme-tag{font-size:10px;padding:2px 7px;border-radius:20px;background:var(--purple-l);color:var(--purple);font-weight:500}
+
+/* EMPTY */
+.empty{text-align:center;padding:3rem 1rem;color:var(--ink3)}
+.empty-icon{font-size:40px;margin-bottom:.75rem;display:block}
+
+/* PILO */
+.pilo-box{background:var(--ink);border-radius:var(--r);padding:1.25rem;margin-bottom:2rem}
+.pilo-hd{display:flex;align-items:center;gap:10px;margin-bottom:.625rem}
+.pilo-av{width:32px;height:32px;border-radius:50%;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-size:16px}
+.pilo-name{font-size:12px;font-weight:500;color:#A78BFA}
+.pilo-msg{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;font-style:italic}
+
+/* CTA */
+.cta-box{background:var(--purple-l);border:0.5px solid rgba(91,63,160,.2);border-radius:var(--r);padding:1.5rem;text-align:center;margin-top:2rem}
+.cta-emoji{font-size:36px;margin-bottom:.75rem;display:block}
+.cta-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--purple);margin-bottom:.375rem}
+.cta-sub{font-size:13px;color:var(--ink2);line-height:1.7;margin-bottom:1.25rem;max-width:400px;margin-left:auto;margin-right:auto}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:var(--r);background:var(--purple);color:#fff;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .15s}
+.btn-cta:hover{opacity:.9}
+
+.sep{height:0.5px;background:var(--border);margin:1.5rem 0}
+.sec-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:.375rem}
+.sec-sub{font-size:13px;color:var(--ink2);margin-bottom:1.25rem;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">&#127891; Anciens eleves · College Guy Moquet</div>
+    <div class="header-title">Ils sont passes par <span>Guy Moquet</span></div>
+    <p class="header-sub">Des anciens eleves te parlent de leur parcours, de leur metier et te donnent leurs conseils pour bien choisir ta voie.</p>
+    <div class="header-pills">
+      <span class="hpill">&#127891; Anciens eleves</span>
+      <span class="hpill">&#129309; Gennevilliers et alentours</span>
+      <span class="hpill">&#10003; Examines avant publication</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-n" id="statTotal" style="color:var(--purple)">0</div>
+      <div class="stat-l">Temoignages publies</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" id="statVoies" style="color:var(--blue)">—</div>
+      <div class="stat-l">Voies representees</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n" id="statSatisf" style="color:var(--teal)">—</div>
+      <div class="stat-l">Satisfaction moyenne</div>
+    </div>
+  </div>
+
+  <!-- PILO -->
+  <div class="pilo-box">
+    <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
+    <div class="pilo-msg">Ces anciens eleves ont vecu exactement ce que tu vis en ce moment. Lis leurs temoignages — pas pour copier leur parcours, mais pour voir que toutes les voies menent quelque part quand on les choisit avec conviction.</div>
+  </div>
+
+  <!-- FILTRES -->
+  <div class="sec-title">Tous les temoignages</div>
+  <p class="sec-sub">Filtrer par voie choisie apres la 3e :</p>
+  <div class="filtres">
+    <button class="filtre-btn on" onclick="filtrer('tous',this)">Tous</button>
+    <button class="filtre-btn" onclick="filtrer('gt',this)">Bac General</button>
+    <button class="filtre-btn" onclick="filtrer('techno',this)">Bac Techno</button>
+    <button class="filtre-btn" onclick="filtrer('pro',this)">Bac Pro</button>
+    <button class="filtre-btn" onclick="filtrer('cap',this)">CAP</button>
+    <button class="filtre-btn" onclick="filtrer('apprentissage',this)">Apprentissage</button>
+  </div>
+
+  <div class="temos-list" id="temoZone"></div>
+
+  <!-- CTA -->
+  <div class="sep"></div>
+  <div class="cta-box">
+    <span class="cta-emoji">&#9997;&#65039;</span>
+    <div class="cta-title">Tu es passe.e par Guy Moquet ?</div>
+    <p class="cta-sub">Partage ton parcours et adresse un message aux eleves de 3e qui se posent encore des questions sur leur avenir. Ton experience peut tout changer pour eux.</p>
+    <a class="btn-cta" href="https://hassiniofficiel.wixsite.com/cap-3e/temoignages" target="_blank">Partager mon temoignage &#8594;</a>
+  </div>
+
+</div>
+
+<script>
+// ── TEMOIGNAGES VALIDES ───────────────────────────────────
+// COMMENT AJOUTER UN TEMOIGNAGE :
+// 1. Copie un bloc { ... } dans le tableau ci-dessous
+// 2. Remplis les champs :
+//    prenom     : prenom ou "Anonyme"
+//    annee      : ex "3e en 2022"
+//    situation  : situation actuelle (ex "Etudiant en BTS Commerce")
+//    voie       : "gt" / "techno" / "pro" / "cap" / "apprentissage" / "autre"
+//    voieLabel  : texte affiché (ex "Bac General")
+//    message    : le temoignage principal (italique)
+//    conseil    : le conseil aux eleves de 3e (encadre)
+//    themes     : tableau de themes (ex ["Croire en soi","Voie pro c est bien"])
+//    note       : 1 a 5
+//    anonyme    : true si publication anonyme demandee
+// 3. Uploade le fichier sur GitHub
+
+var TEMOIGNAGES = [
+  // Exemple — a remplacer par de vrais temoignages
+  {
+    prenom: "Yassin",
+    annee: "3e en 2021",
+    situation: "Technicien en informatique",
+    voie: "pro",
+    voieLabel: "Bac Pro SN",
+    message: "En 3e, tout le monde me disait de viser le bac general. J'ai suivi ma passion pour l'informatique et j'ai choisi le bac pro Systemes Numeriques. Aujourd'hui j'ai un CDI et je suis fier de mon choix.",
+    conseil: "Ne laisse pas les autres choisir ta voie a ta place. Si tu sais ce que tu veux faire, fonce — les etudes courtes et professionnelles menent tres bien.",
+    themes: ["Voie pro c'est bien","Croire en soi","Ne pas ecouter les decourageants"],
+    note: 5,
+    anonyme: false
+  },
+  {
+    prenom: "Amina",
+    annee: "3e en 2020",
+    situation: "Etudiante en BTS Soin Infirmier",
+    voie: "pro",
+    voieLabel: "Bac Pro ASSP",
+    message: "J'ai toujours voulu travailler dans la sante. J'ai choisi le bac pro Accompagnement Soins et Services a la Personne. C'est un metier qui a du sens et je ne regrette absolument pas.",
+    conseil: "Le secteur de la sante recrute beaucoup. Si tu aimes aider les autres, n'hesite pas a explorer cette voie — il y a bien plus que medecin ou infirmier.",
+    themes: ["Suivre sa passion","Voie pro c'est bien","Les grandes etudes ca paye"],
+    note: 5,
+    anonyme: false
+  },
+  {
+    prenom: "Anonyme",
+    annee: "3e en 2019",
+    situation: "En licence de droit",
+    voie: "gt",
+    voieLabel: "Bac General",
+    message: "Le bac general m'a ouvert beaucoup de portes. Ce n'est pas toujours facile mais ca vaut le coup si tu aimes apprendre et que tu as un projet d'etudes longues.",
+    conseil: "Le plus important c'est de savoir POURQUOI tu choisis une voie. Si c'est juste parce que c'est ce qu'on attend de toi, tu vas souffrir. Choisis pour toi.",
+    themes: ["Croire en soi","Les grandes etudes ca paye"],
+    note: 4,
+    anonyme: true
+  }
+];
+
+// ── CONFIGURATION ─────────────────────────────────────────
+var VOIE_CONFIG = {
+  gt:           {label:"Bac General",     bg:"#EBF0FB", color:"#1A4FBF", emoji:"&#127891;"},
+  techno:       {label:"Bac Techno",      bg:"#E2F4EE", color:"#0D6E56", emoji:"&#128295;"},
+  pro:          {label:"Bac Pro",         bg:"#FDF0E0", color:"#9B5A08", emoji:"&#128296;"},
+  cap:          {label:"CAP",             bg:"#FCEAEA", color:"#C13030", emoji:"&#128297;"},
+  apprentissage:{label:"Apprentissage",   bg:"#EFEBFB", color:"#5B3FA0", emoji:"&#129309;"},
+  autre:        {label:"Autre parcours",  bg:"#F2F0EB", color:"#5A5855", emoji:"&#127919;"}
+};
+
+var AVATARS_F = ["&#127891;","&#128218;","&#9997;&#65039;","&#128203;","&#127775;","&#129304;","&#128170;","&#127919;"];
+
+function getStars(n){
+  var s="";
+  for(var i=1;i<=5;i++) s+= i<=n?"&#9733;":"&#9734;";
+  return s;
+}
+
+function renderTemos(filtre){
+  var zone = document.getElementById("temoZone");
+  var liste = filtre==="tous" ? TEMOIGNAGES : TEMOIGNAGES.filter(function(t){return t.voie===filtre;});
+
+  if(liste.length===0){
+    zone.innerHTML='<div class="empty"><span class="empty-icon">&#128172;</span>Aucun temoignage dans cette categorie pour le moment.<br>Sois le premier a partager ton parcours !</div>';
+    return;
+  }
+
+  zone.innerHTML = liste.map(function(t,i){
+    var cfg = VOIE_CONFIG[t.voie] || VOIE_CONFIG.autre;
+    var av = AVATARS_F[i % AVATARS_F.length];
+    var themes = (t.themes||[]).slice(0,3).map(function(th){
+      return '<span class="theme-tag">'+th+'</span>';
+    }).join("");
+    var nom = t.anonyme ? "Anonyme" : t.prenom;
+
+    return '<div class="temo-card">'+
+      '<span class="temo-voie" style="background:'+cfg.bg+';color:'+cfg.color+'">'+cfg.emoji+' '+t.voieLabel+'</span>'+
+      '<div class="temo-message">'+t.message+'</div>'+
+      (t.conseil ? '<div class="temo-conseil">&#128161; <strong>Conseil aux 3e :</strong> '+t.conseil+'</div>' : '')+
+      '<div class="temo-footer">'+
+      '<div class="temo-author">'+
+      '<div class="temo-av" style="background:'+cfg.bg+';color:'+cfg.color+'">'+av+'</div>'+
+      '<div>'+
+      '<div class="temo-name">'+nom+'</div>'+
+      '<div class="temo-meta">'+t.annee+' · '+t.situation+'</div>'+
+      '</div></div>'+
+      '<div class="temo-right">'+
+      '<div class="temo-stars">'+getStars(t.note)+'</div>'+
+      '<div class="temo-themes">'+themes+'</div>'+
+      '</div></div></div>';
+  }).join("");
+
+  // Stats
+  document.getElementById("statTotal").textContent = TEMOIGNAGES.length;
+  var voiesUniques = [...new Set(TEMOIGNAGES.map(function(t){return t.voie;}))].length;
+  document.getElementById("statVoies").textContent = voiesUniques;
+  var moy = TEMOIGNAGES.reduce(function(a,t){return a+t.note;},0)/TEMOIGNAGES.length;
+  document.getElementById("statSatisf").textContent = moy.toFixed(1)+"/5";
+}
+
+function filtrer(type, btn){
+  document.querySelectorAll(".filtre-btn").forEach(function(b){b.classList.remove("on");});
+  btn.classList.add("on");
+  renderTemos(type);
+}
+
+renderTemos("tous");
+</script>
+</body>
+</html>

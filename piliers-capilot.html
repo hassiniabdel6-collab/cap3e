@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Les 9 piliers CAPilot — Cap 3e</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080C14;--bg2:#0E1420;--bg3:#151C2E;
+  --surface:#1A2236;--surface2:#212B40;
+  --blue:#3B7EF8;--blue-l:rgba(59,126,248,0.12);--blue-m:rgba(59,126,248,0.25);
+  --teal:#0FD6A0;--teal-l:rgba(15,214,160,0.12);
+  --amber:#F59E0B;--amber-l:rgba(245,158,11,0.12);
+  --purple:#A78BFA;--purple-l:rgba(167,139,250,0.12);
+  --red:#F43F5E;--red-l:rgba(244,63,94,0.12);
+  --green:#10B981;--green-l:rgba(16,185,129,0.12);
+  --text:#F0F2F8;--text2:#8892A8;--text3:#4A5568;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --r:14px;--rs:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh}
+
+/* HEADER */
+.header{padding:2.5rem 1.5rem 2rem;text-align:center;position:relative;overflow:hidden;border-bottom:0.5px solid var(--border)}
+.header::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(59,126,248,0.1),transparent 70%)}
+.header::after{content:'';position:absolute;bottom:-40px;left:-20px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,0.08),transparent 70%)}
+.header-inner{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,126,248,0.1);border:0.5px solid rgba(59,126,248,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--blue);margin-bottom:1rem}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,36px);font-weight:700;color:var(--text);margin-bottom:.5rem;letter-spacing:-.02em}
+.header-title span{color:var(--blue)}
+.header-sub{font-size:14px;color:var(--text2);line-height:1.7;max-width:500px;margin:0 auto 1.5rem}
+
+/* PROGRESSION GLOBALE */
+.global-prog{max-width:760px;margin:0 auto;padding:1.25rem 1.5rem;border-bottom:0.5px solid var(--border)}
+.gp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.625rem}
+.gp-title{font-size:13px;font-weight:500;color:var(--text2)}
+.gp-score{font-size:13px;font-weight:600;color:var(--blue)}
+.gp-track{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.gp-fill{height:100%;border-radius:3px;background:linear-gradient(to right,var(--blue),var(--teal));transition:width .6s ease}
+.gp-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:.75rem}
+.gp-pill{font-size:11px;padding:3px 10px;border-radius:20px;background:var(--surface);border:0.5px solid var(--border2);color:var(--text3)}
+.gp-pill.done{background:var(--teal-l);border-color:rgba(15,214,160,.3);color:var(--teal)}
+
+/* PILIERS GRID */
+.main{max-width:760px;margin:0 auto;padding:1.5rem}
+.piliers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:2rem}
+.pilier-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.125rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.pilier-card:hover{transform:translateY(-2px);border-color:var(--border2)}
+.pilier-card.active{border-color:var(--blue);background:var(--bg3)}
+.pilier-card.completed{border-color:rgba(15,214,160,.3);background:var(--teal-l)}
+.pc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.625rem}
+.pc-icon{font-size:24px}
+.pc-status{font-size:18px}
+.pc-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-bottom:3px}
+.pc-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.pc-desc{font-size:11px;color:var(--text2);line-height:1.5}
+.pc-prog{height:3px;background:var(--surface2);border-radius:2px;overflow:hidden;margin-top:.75rem}
+.pc-fill{height:100%;border-radius:2px;transition:width .4s}
+
+/* DETAIL PILIER */
+.pilier-detail{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-bottom:1rem;display:none}
+.pilier-detail.show{display:block}
+.pd-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem;padding-bottom:1rem;border-bottom:0.5px solid var(--border)}
+.pd-icon{font-size:32px}
+.pd-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+.pd-subtitle{font-size:12px;color:var(--text2)}
+.pd-close{margin-left:auto;width:28px;height:28px;border-radius:50%;background:var(--surface2);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--text2);flex-shrink:0}
+.pd-desc{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:1.25rem}
+
+/* ACTIVITES */
+.activites{display:flex;flex-direction:column;gap:8px;margin-bottom:1.25rem}
+.activite{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:var(--rs);border:0.5px solid var(--border2);background:var(--bg3);cursor:pointer;transition:all .15s}
+.activite.done{background:var(--teal-l);border-color:rgba(15,214,160,.3)}
+.act-check{font-size:16px;flex-shrink:0;margin-top:1px}
+.act-content{}
+.act-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px}
+.act-desc{font-size:12px;color:var(--text2);line-height:1.5}
+.activite.done .act-title{color:var(--teal)}
+.act-xp{font-size:10px;font-weight:600;padding:2px 6px;border-radius:20px;background:var(--blue-l);color:var(--blue);margin-left:auto;flex-shrink:0;align-self:flex-start;margin-top:2px}
+
+/* QUIZ */
+.quiz-zone{background:var(--bg3);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.125rem;margin-bottom:1rem}
+.quiz-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:.75rem}
+.quiz-q{font-size:13px;color:var(--text2);margin-bottom:.625rem;line-height:1.6}
+.quiz-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:.75rem}
+.quiz-opt{padding:8px 12px;border-radius:var(--rs);border:0.5px solid var(--border2);background:var(--surface2);font-size:12px;color:var(--text2);cursor:pointer;font-family:inherit;text-align:left;transition:all .15s}
+.quiz-opt:hover{border-color:var(--blue);color:var(--text)}
+.quiz-opt.sel{border-color:var(--blue);background:var(--blue-l);color:var(--blue)}
+.quiz-opt.correct{border-color:var(--teal);background:var(--teal-l);color:var(--teal)}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red)}
+.quiz-feedback{font-size:12px;line-height:1.6;padding:8px 12px;border-radius:var(--rs);display:none}
+
+/* PILO */
+.pilo-box{background:linear-gradient(135deg,var(--bg3),var(--surface));border:0.5px solid var(--border2);border-radius:var(--r);padding:1.125rem;margin-bottom:1rem}
+.pilo-hd{display:flex;align-items:center;gap:10px;margin-bottom:.5rem}
+.pilo-av{width:28px;height:28px;border-radius:50%;background:var(--blue-l);border:1px solid var(--blue-m);display:flex;align-items:center;justify-content:center;font-size:14px}
+.pilo-name{font-size:11px;font-weight:500;color:var(--blue)}
+.pilo-msg{font-size:13px;color:var(--text2);line-height:1.7;font-style:italic}
+
+.sec-title{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:.625rem;text-transform:uppercase;letter-spacing:.06em;font-family:'DM Mono',monospace}
+.btn-valider{width:100%;padding:12px;border-radius:var(--r);background:var(--blue);color:#fff;font-size:14px;font-weight:500;font-family:inherit;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(59,126,248,.25);transition:opacity .15s;margin-top:.5rem}
+.btn-valider:hover{opacity:.9}
+.btn-valider:disabled{background:var(--surface2);color:var(--text3);box-shadow:none;cursor:default}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">&#129310; CAPilot · Parcours d'autonomie</div>
+    <div class="header-title">Les <span>9 piliers</span> CAPilot</div>
+    <p class="header-sub">Ton parcours d'accompagnement complet. Explore chaque pilier, realise les activites et mesure ta progression tout au long de l'annee.</p>
+  </div>
+</div>
+
+<!-- PROGRESSION GLOBALE -->
+<div class="global-prog">
+  <div class="gp-top">
+    <span class="gp-title">Progression globale</span>
+    <span class="gp-score" id="gpScore">0 / 9 piliers</span>
+  </div>
+  <div class="gp-track"><div class="gp-fill" id="gpFill" style="width:0%"></div></div>
+  <div class="gp-pills" id="gpPills"></div>
+</div>
+
+<div class="main">
+  <!-- GRILLE 9 PILIERS -->
+  <div class="piliers-grid" id="piliersGrid"></div>
+
+  <!-- DETAIL PILIER -->
+  <div class="pilier-detail" id="pilierDetail"></div>
+</div>
+
+<script>
+// ── DONNEES 9 PILIERS ─────────────────────────────────────
+var PILIERS = [
+  {
+    id: "p1",
+    num: "01",
+    icon: "&#128197;",
+    title: "Gestion des echeances",
+    desc: "Anticiper, planifier et ne jamais etre pris de court. L'autonomie commence par savoir gerer son temps.",
+    color: "--red",
+    colorHex: "#F43F5E",
+    colorL: "rgba(244,63,94,0.12)",
+    pilo: "Connaitre ses deadlines a l'avance, c'est la base. Un eleve qui anticipe n'est jamais stresse le dernier soir. Cette semaine, note toutes tes echeances dans ton agenda.",
+    activites: [
+      {id:"a1_1", title:"Lister mes echeances du mois", desc:"Note dans ton agenda toutes les dates importantes : devoirs, examens, dossiers a rendre.", xp:20},
+      {id:"a1_2", title:"Preparer mon planning de la semaine", desc:"Chaque lundi matin, planifie tes 3 priorites de la semaine.", xp:20},
+      {id:"a1_3", title:"Utiliser CAPilot pour mes deadlines", desc:"Verifie tes echeances dans CAPilot chaque jour pendant 5 jours consecutifs.", xp:30}
+    ],
+    quiz: {
+      q: "Quelle est la meilleure strategie pour ne jamais oublier une deadline ?",
+      opts: [
+        {t:"Essayer de tout memoriser", correct:false, feedback:"La memoire est faillible, surtout sous le stress. Un outil externe est indispensable."},
+        {t:"Noter toutes les echeances dans un agenda des qu'elles sont donnees", correct:true, feedback:"Exactement ! Des qu'une date est donnee, elle va dans l'agenda. Pas apres, maintenant."},
+        {t:"Attendre que le prof rappelle", correct:false, feedback:"Attendre que quelqu'un te rappelle, c'est perdre son autonomie. Tu dois gerer toi-meme."},
+        {t:"S'en souvenir la veille", correct:false, feedback:"La veille, c'est souvent trop tard pour bien preparer. L'anticipation est cle."}
+      ]
+    }
+  },
+  {
+    id: "p2",
+    num: "02",
+    icon: "&#127919;",
+    title: "Objectifs prioritaires",
+    desc: "Ton contrat semestriel — 3 objectifs choisis parmi les 31 objectifs officiels du college Guy Moquet.",
+    color: "--blue",
+    colorHex: "#3B7EF8",
+    colorL: "rgba(59,126,248,0.12)",
+    pilo: "Choisir ses objectifs, c'est prendre la responsabilite de son parcours. Ce n'est pas le prof qui decide — c'est toi. Et quand tu coches un objectif, c'est une vraie victoire.",
+    activites: [
+      {id:"a2_1", title:"Choisir mes 3 objectifs du semestre", desc:"Dans CAPilot, selectionne tes 3 objectifs prioritaires parmi les 31 objectifs officiels.", xp:30},
+      {id:"a2_2", title:"Cocher un effort concret cette semaine", desc:"Pour chaque objectif, identifie une action concrete que tu feras cette semaine.", xp:20},
+      {id:"a2_3", title:"Faire le bilan de mi-semestre", desc:"A mi-semestre, evalue ton progres sur chaque objectif avec ton PP.", xp:30}
+    ],
+    quiz: {
+      q: "Pourquoi est-il important de choisir ses objectifs soi-meme ?",
+      opts: [
+        {t:"Pour faire plaisir au prof", correct:false, feedback:"Les objectifs ne sont pas pour faire plaisir — ils sont pour toi et ton developpement."},
+        {t:"Parce que ca n'a pas d'importance", correct:false, feedback:"Les objectifs guident ton comportement toute l'annee. Ils ont une grande importance."},
+        {t:"Pour s'approprier son parcours et devenir acteur de sa scolarite", correct:true, feedback:"Exactement ! Choisir ses objectifs, c'est prendre en main sa scolarite. C'est ca l'autonomie."},
+        {t:"Pour avoir de meilleures notes", correct:false, feedback:"Les objectifs ne concernent pas que les notes — ils couvrent le comportement, le travail et l'ambition."}
+      ]
+    }
+  },
+  {
+    id: "p3",
+    num: "03",
+    icon: "&#129517;",
+    title: "Orientation active",
+    desc: "Explorer les metiers, construire son projet, preparer Affelnet et decider en confiance.",
+    color: "--teal",
+    colorHex: "#0FD6A0",
+    colorL: "rgba(15,214,160,0.12)",
+    pilo: "L'orientation n'est pas un evenement qui arrive en fevrier — c'est un travail de toute l'annee. Chaque decouverte, chaque rencontre, chaque stage te rapproche de TON projet.",
+    activites: [
+      {id:"a3_1", title:"Faire le quiz d'orientation Cap 3e", desc:"Decouvre quelle voie te correspond le mieux en 10 questions.", xp:20},
+      {id:"a3_2", title:"Explorer 3 metiers sur ONISEP", desc:"Va sur onisep.fr et explore 3 metiers qui t'attirent. Note le diplome requis pour chacun.", xp:25},
+      {id:"a3_3", title:"Preparer mes voeux Affelnet", desc:"Avec l'aide de ton PP, prepare et valide tes voeux sur Affelnet avant la deadline.", xp:40}
+    ],
+    quiz: {
+      q: "Quand faut-il commencer a reflechir a son orientation ?",
+      opts: [
+        {t:"En fevrier, quand Affelnet ouvre", correct:false, feedback:"Attendre fevrier, c'est trop tard. Les voeux doivent refleter un projet muri tout au long de l'annee."},
+        {t:"Des le debut de la 3e — c'est un travail de toute l'annee", correct:true, feedback:"Exactement ! L'orientation se construit tout au long de l'annee : explorations, stage, entretiens, reflexions."},
+        {t:"Apres le brevet", correct:false, feedback:"Apres le brevet c'est trop tard — les affectations sont deja faites en juin."},
+        {t:"C'est le role des parents de decider", correct:false, feedback:"Les parents peuvent accompagner, mais la decision doit venir de l'eleve. C'est son projet."}
+      ]
+    }
+  },
+  {
+    id: "p4",
+    num: "04",
+    icon: "&#127918;",
+    title: "Gamification",
+    desc: "XP, niveaux, badges, missions, streaks — chaque effort devient visible et motivant.",
+    color: "--amber",
+    colorHex: "#F59E0B",
+    colorL: "rgba(245,158,11,0.12)",
+    pilo: "La gamification ce n'est pas juste des jeux — c'est rendre visible ta progression. Chaque XP que tu gagnes represente un vrai effort. Chaque badge, une vraie competence.",
+    activites: [
+      {id:"a4_1", title:"Atteindre le niveau 2 dans CAPilot", desc:"Gagne 200 XP en cochant tes objectifs et en completant des missions.", xp:30},
+      {id:"a4_2", title:"Obtenir mon premier badge", desc:"Debloque ton premier badge en realisant une action specifique dans CAPilot.", xp:25},
+      {id:"a4_3", title:"Maintenir un streak de 5 jours", desc:"Connecte-toi a CAPilot 5 jours consecutifs pour maintenir ton streak.", xp:35}
+    ],
+    quiz: {
+      q: "A quoi sert la gamification dans un outil educatif ?",
+      opts: [
+        {t:"A rendre les eleves accros a leur telephone", correct:false, feedback:"La gamification bien concue encourage des comportements positifs, pas la dependance."},
+        {t:"A rendre les efforts visibles et a maintenir la motivation sur la duree", correct:true, feedback:"Exactement ! Voir sa progression et etre recompense pour ses efforts maintient l'engagement dans le temps."},
+        {t:"A remplacer le travail scolaire", correct:false, feedback:"La gamification accompagne le travail scolaire — elle ne le remplace pas."},
+        {t:"C'est juste pour s'amuser", correct:false, feedback:"La gamification a un vrai objectif pedagogique : ancrer des habitudes positives."}
+      ]
+    }
+  },
+  {
+    id: "p5",
+    num: "05",
+    icon: "&#129302;",
+    title: "PILO — IA conversationnelle",
+    desc: "Ton coach numerique personnel — toujours disponible, bienveillant et adapte a ton profil.",
+    color: "--blue",
+    colorHex: "#3B7EF8",
+    colorL: "rgba(59,126,248,0.12)",
+    pilo: "Je suis PILO. Je suis la pour t'aider a t'organiser, explorer ton orientation et rester motive. Je connais tes objectifs et je m'adapte a toi. Tu n'es jamais seul.e dans cette aventure.",
+    activites: [
+      {id:"a5_1", title:"Avoir ma premiere conversation avec PILO", desc:"Ouvre CAPilot et echange avec PILO sur ton orientation ou ton organisation.", xp:20},
+      {id:"a5_2", title:"Utiliser PILO pour preparer mon stage", desc:"Demande a PILO de t'aider a rediger ton mail de candidature pour le stage.", xp:30},
+      {id:"a5_3", title:"Explorer 3 metiers avec PILO", desc:"Utilise l'onglet Orientation de CAPilot pour explorer 3 metiers avec PILO.", xp:25}
+    ],
+    quiz: {
+      q: "Quelle est la valeur ajoutee de PILO par rapport a une simple recherche Google ?",
+      opts: [
+        {t:"PILO est plus rapide que Google", correct:false, feedback:"La rapidite n'est pas l'avantage principal de PILO."},
+        {t:"PILO connait ton profil, tes objectifs et adapte ses reponses a ta situation", correct:true, feedback:"Exactement ! PILO n'est pas generique — il connait tes objectifs, ta situation et adapte ses conseils en consequence."},
+        {t:"PILO remplace le professeur principal", correct:false, feedback:"PILO complement le PP — il ne le remplace pas. Le contact humain reste indispensable."},
+        {t:"PILO donne toujours les meilleures notes", correct:false, feedback:"PILO t'aide a progresser — mais les resultats dependent de ton travail, pas d'un outil."}
+      ]
+    }
+  },
+  {
+    id: "p6",
+    num: "06",
+    icon: "&#9889;",
+    title: "Engagement quotidien",
+    desc: "Le check-in de 2 minutes par jour — la cle de la regularite et de la progression.",
+    color: "--amber",
+    colorHex: "#F59E0B",
+    colorL: "rgba(245,158,11,0.12)",
+    pilo: "2 minutes par jour, c'est tout ce qu'il faut. Pas besoin de passer une heure — juste 2 minutes pour verifier tes echeances, cocher un objectif et rester sur la bonne trajectoire.",
+    activites: [
+      {id:"a6_1", title:"Faire mon check-in pendant 3 jours", desc:"Connecte-toi a CAPilot et fais ton check-in quotidien pendant 3 jours de suite.", xp:25},
+      {id:"a6_2", title:"Repondre a PILO chaque matin pendant une semaine", desc:"Prends l'habitude de repondre au message de PILO chaque matin avant les cours.", xp:30},
+      {id:"a6_3", title:"Atteindre un streak de 7 jours", desc:"7 jours consecutifs de check-in = badge Streak Master debloque.", xp:40}
+    ],
+    quiz: {
+      q: "Pourquoi 2 minutes par jour est-il plus efficace qu'une heure par semaine ?",
+      opts: [
+        {t:"Ce n'est pas plus efficace — une heure par semaine suffit", correct:false, feedback:"La regularite quotidienne ancre les habitudes bien mieux qu'une session longue et rare."},
+        {t:"Parce que ca prend moins de temps en total", correct:false, feedback:"2 min x 7 jours = 14 min, c'est moins qu'une heure. Mais ce n'est pas la vraie raison."},
+        {t:"Parce que la regularite quotidienne cree des habitudes durables et maintient l'engagement", correct:true, feedback:"Exactement ! La science du comportement montre que la frequence compte plus que la duree pour ancrer une habitude."},
+        {t:"Parce que CAPilot ne fonctionne que 2 minutes", correct:false, feedback:"CAPilot n'a pas de limite de temps — c'est l'utilisateur qui choisit 2 minutes par habitude."}
+      ]
+    }
+  },
+  {
+    id: "p7",
+    num: "07",
+    icon: "&#128106;",
+    title: "Implication des familles",
+    desc: "Les familles informees de la progression — sans prendre en charge le parcours de l'eleve.",
+    color: "--green",
+    colorHex: "#10B981",
+    colorL: "rgba(16,185,129,0.12)",
+    pilo: "Tes parents peuvent t'aider sans tout gerer a ta place. L'idee c'est qu'ils voient tes progres et te felicitent — pas qu'ils fassent les choses a ta place. L'autonomie reste la tienne.",
+    activites: [
+      {id:"a7_1", title:"Partager mes objectifs avec ma famille", desc:"Montre a un parent ou tuteur tes 3 objectifs du semestre dans CAPilot.", xp:20},
+      {id:"a7_2", title:"Faire un bilan mensuel en famille", desc:"Une fois par mois, presente tes progres a ta famille de facon autonome.", xp:25},
+      {id:"a7_3", title:"Inviter ma famille a consulter le tableau de bord", desc:"Partage le lien du tableau de bord parents avec ta famille.", xp:20}
+    ],
+    quiz: {
+      q: "Quel est l'objectif de l'implication des familles dans CAPilot ?",
+      opts: [
+        {t:"Que les parents gerent le parcours scolaire de l'eleve", correct:false, feedback:"Au contraire ! L'objectif est que l'eleve reste autonome tout en informant sa famille."},
+        {t:"Informer les familles des progres sans qu'elles prennent en charge le parcours", correct:true, feedback:"Exactement ! Les familles sont informees et peuvent encourager — mais c'est l'eleve qui reste aux commandes."},
+        {t:"Remplacer les reunions parents-professeurs", correct:false, feedback:"CAPilot ne remplace pas les rencontres — il les complement en donnant plus de visibilite."},
+        {t:"Controler ce que fait l'eleve a tout moment", correct:false, feedback:"CAPilot n'est pas un outil de surveillance — c'est un outil d'autonomie et de celebration des progres."}
+      ]
+    }
+  },
+  {
+    id: "p8",
+    num: "08",
+    icon: "&#128104;&#8205;&#127979;",
+    title: "Suivi professeur principal",
+    desc: "Alertes precoces, tableau de bord, exports pour les conseils de classe.",
+    color: "--purple",
+    colorHex: "#A78BFA",
+    colorL: "rgba(167,139,250,0.12)",
+    pilo: "Ton PP a un tableau de bord qui lui permet de voir tes progres, de detecter les difficultes avant qu'elles deviennent des problemes et de t'aider au bon moment. C'est un filet de securite.",
+    activites: [
+      {id:"a8_1", title:"Prendre rendez-vous avec mon PP", desc:"Demande un entretien individuel a ton professeur principal pour faire le point sur tes objectifs.", xp:25},
+      {id:"a8_2", title:"Preparer mon bilan de semestre", desc:"Avant le conseil de classe, prepare un bilan de tes objectifs a presenter a ton PP.", xp:30},
+      {id:"a8_3", title:"Valider mes voeux d'orientation avec mon PP", desc:"Avant la saisie sur Affelnet, echange avec ton PP pour valider tes choix.", xp:35}
+    ],
+    quiz: {
+      q: "Quel est le role du tableau de bord du professeur principal dans CAPilot ?",
+      opts: [
+        {t:"Surveiller les eleves en permanence", correct:false, feedback:"Le tableau de bord n'est pas un outil de surveillance — c'est un outil d'accompagnement bienveillant."},
+        {t:"Detecter les difficultes tot et accompagner l'eleve au bon moment", correct:true, feedback:"Exactement ! Le PP peut voir les alertes et intervenir avant que les problemes s'aggravent."},
+        {t:"Remplacer les bulletins scolaires", correct:false, feedback:"CAPilot ne remplace pas les bulletins — il les complement avec des informations sur le comportement et l'autonomie."},
+        {t:"Donner des notes supplementaires", correct:false, feedback:"CAPilot ne donne pas de notes — il mesure l'autonomie, les objectifs et la progression."}
+      ]
+    }
+  },
+  {
+    id: "p9",
+    num: "09",
+    icon: "&#128220;",
+    title: "Passeport numerique",
+    desc: "Tes competences, ton parcours et tes reussites — exportables et partageables.",
+    color: "--teal",
+    colorHex: "#0FD6A0",
+    colorL: "rgba(15,214,160,0.12)",
+    pilo: "Ton passeport numerique, c'est la preuve de tout ce que tu as accompli cette annee. Pas tes notes — tes competences, tes objectifs atteints, tes missions completees. C'est TON bilan.",
+    activites: [
+      {id:"a9_1", title:"Consulter mon passeport dans CAPilot", desc:"Ouvre l'onglet Passeport dans CAPilot et verifie tes competences enregistrees.", xp:15},
+      {id:"a9_2", title:"Exporter mon passeport", desc:"Telecharge ton passeport numerique en cliquant sur 'Exporter' dans CAPilot.", xp:20},
+      {id:"a9_3", title:"Completer mon passeport avec 5 objectifs valides", desc:"Coche au moins 5 objectifs dans CAPilot pour enrichir ton passeport.", xp:35}
+    ],
+    quiz: {
+      q: "En quoi le passeport numerique est-il different d'un bulletin scolaire ?",
+      opts: [
+        {t:"Il n'y a aucune difference", correct:false, feedback:"Le passeport et le bulletin sont tres differents dans ce qu'ils mesurent."},
+        {t:"Le passeport mesure les competences et l'autonomie, pas les notes", correct:true, feedback:"Exactement ! Le bulletin mesure les savoirs academiques. Le passeport mesure les competences transversales : autonomie, organisation, orientation, perseverance."},
+        {t:"Le passeport remplace le bulletin", correct:false, feedback:"Le passeport complement le bulletin — ils mesurent des choses differentes et les deux ont leur valeur."},
+        {t:"Le passeport est moins important que le bulletin", correct:false, feedback:"Dans le monde professionnel, les competences transversales sont souvent plus valorisees que les notes."}
+      ]
+    }
+  }
+];
+
+// ── ETAT ─────────────────────────────────────────────────
+var etat = {};
+try { etat = JSON.parse(localStorage.getItem('cap3e_piliers') || '{}'); } catch(e){}
+
+function save() {
+  try { localStorage.setItem('cap3e_piliers', JSON.stringify(etat)); } catch(e){}
+}
+
+function getProgPilier(pid) {
+  var p = PILIERS.find(function(p){return p.id===pid;});
+  if(!p) return 0;
+  var done = p.activites.filter(function(a){return etat[a.id];}).length;
+  return Math.round((done / p.activites.length) * 100);
+}
+
+function isPilierComplete(pid) {
+  var p = PILIERS.find(function(p){return p.id===pid;});
+  if(!p) return false;
+  return p.activites.every(function(a){return etat[a.id];});
+}
+
+// ── RENDER GRILLE ─────────────────────────────────────────
+function renderGrid() {
+  var grid = document.getElementById('piliersGrid');
+  grid.innerHTML = PILIERS.map(function(p){
+    var prog = getProgPilier(p.id);
+    var complete = isPilierComplete(p.id);
+    var cls = complete ? 'completed' : '';
+    var status = complete ? '&#10003;' : (prog > 0 ? '&#9654;' : '&#9675;');
+    return '<div class="pilier-card '+cls+'" onclick="showDetail(\''+p.id+'\')" id="card_'+p.id+'">'+
+      '<div class="pc-top">'+
+      '<span class="pc-icon">'+p.icon+'</span>'+
+      '<span class="pc-status" style="color:'+(complete?'var(--teal)':'var(--text3)')+'">'+status+'</span>'+
+      '</div>'+
+      '<div class="pc-num">Pilier '+p.num+'</div>'+
+      '<div class="pc-title">'+p.title+'</div>'+
+      '<div class="pc-desc">'+p.desc+'</div>'+
+      '<div class="pc-prog"><div class="pc-fill" style="width:'+prog+'%;background:'+p.colorHex+'"></div></div>'+
+      '</div>';
+  }).join('');
+
+  updateGlobalProg();
+  renderPills();
+}
+
+function updateGlobalProg() {
+  var done = PILIERS.filter(function(p){return isPilierComplete(p.id);}).length;
+  var pct = Math.round((done/PILIERS.length)*100);
+  document.getElementById('gpScore').textContent = done + ' / ' + PILIERS.length + ' piliers';
+  document.getElementById('gpFill').style.width = pct + '%';
+}
+
+function renderPills() {
+  var pills = document.getElementById('gpPills');
+  pills.innerHTML = PILIERS.map(function(p){
+    var done = isPilierComplete(p.id);
+    return '<span class="gp-pill'+(done?' done':'')+'">'+p.icon+' '+p.title.split(' ')[0]+'</span>';
+  }).join('');
+}
+
+// ── DETAIL PILIER ─────────────────────────────────────────
+var currentPilier = null;
+
+function showDetail(pid) {
+  var p = PILIERS.find(function(p){return p.id===pid;});
+  if(!p) return;
+  currentPilier = p;
+
+  var detail = document.getElementById('pilierDetail');
+
+  var activitesHtml = p.activites.map(function(a){
+    var done = etat[a.id];
+    return '<div class="activite'+(done?' done':'')+'" onclick="toggleAct(\''+a.id+'\')" id="act_'+a.id+'">'+
+      '<span class="act-check">'+(done?'&#10003;':'&#9675;')+'</span>'+
+      '<div class="act-content">'+
+      '<div class="act-title">'+a.title+'</div>'+
+      '<div class="act-desc">'+a.desc+'</div>'+
+      '</div>'+
+      '<span class="act-xp">+'+a.xp+' XP</span>'+
+      '</div>';
+  }).join('');
+
+  var quizHtml = '';
+  if(p.quiz) {
+    var qid = p.id+'_quiz';
+    var answered = etat[qid];
+    quizHtml = '<div class="quiz-zone">'+
+      '<div class="quiz-title">&#128161; Mini-quiz — Teste ta comprehension</div>'+
+      '<div class="quiz-q">'+p.quiz.q+'</div>'+
+      '<div class="quiz-opts" id="qopts_'+p.id+'">'+
+      p.quiz.opts.map(function(o,i){
+        var cls = '';
+        if(answered!==undefined){
+          if(i===answered) cls = o.correct?' correct':' wrong';
+          else if(o.correct) cls = ' correct';
+        }
+        return '<button class="quiz-opt'+cls+'" onclick="answerQuiz(\''+p.id+'\','+i+')" '+(answered!==undefined?'disabled':'')+'>'+o.t+'</button>';
+      }).join('')+
+      '</div>'+
+      '<div class="quiz-feedback" id="qfb_'+p.id+'" style="display:'+(answered!==undefined?'block':'none')+';background:'+(answered!==undefined?(p.quiz.opts[answered].correct?'var(--teal-l)':'var(--red-l)'):'none')+';color:'+(answered!==undefined?(p.quiz.opts[answered].correct?'var(--teal)':'var(--red)'):'inherit')+'">'+
+      (answered!==undefined ? p.quiz.opts[answered].feedback : '')+
+      '</div>'+
+      '</div>';
+  }
+
+  detail.innerHTML =
+    '<div class="pd-header">'+
+    '<span class="pd-icon">'+p.icon+'</span>'+
+    '<div><div class="pd-title">'+p.title+'</div><div class="pd-subtitle">Pilier '+p.num+' · '+p.activites.length+' activites</div></div>'+
+    '<div class="pd-close" onclick="closeDetail()">&#10005;</div>'+
+    '</div>'+
+    '<div class="pd-desc">'+p.desc+'</div>'+
+    '<div class="pilo-box"><div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div><div class="pilo-msg">'+p.pilo+'</div></div>'+
+    '<div class="sec-title">Activites</div>'+
+    '<div class="activites">'+activitesHtml+'</div>'+
+    quizHtml;
+
+  detail.classList.add('show');
+  detail.scrollIntoView({behavior:'smooth', block:'start'});
+
+  // Marquer la card active
+  document.querySelectorAll('.pilier-card').forEach(function(c){c.classList.remove('active');});
+  var card = document.getElementById('card_'+pid);
+  if(card) card.classList.add('active');
+}
+
+function closeDetail() {
+  document.getElementById('pilierDetail').classList.remove('show');
+  document.querySelectorAll('.pilier-card').forEach(function(c){c.classList.remove('active');});
+  currentPilier = null;
+}
+
+function toggleAct(aid) {
+  etat[aid] = !etat[aid];
+  save();
+  if(currentPilier) showDetail(currentPilier.id);
+  renderGrid();
+}
+
+function answerQuiz(pid, idx) {
+  var qid = pid+'_quiz';
+  if(etat[qid]!==undefined) return;
+  etat[qid] = idx;
+  save();
+  showDetail(pid);
+  renderGrid();
+}
+
+// Init
+renderGrid();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ils sont passes par Guy Moquet — Cap 3e</title>
+<title>Ils sont passés par Guy Moquet — Cap 3e</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -133,13 +133,13 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
 <div class="header">
   <div class="header-inner">
-    <div class="header-badge">&#127891; Anciens eleves · College Guy Moquet</div>
-    <div class="header-title">Ils sont passes par <span>Guy Moquet</span></div>
-    <p class="header-sub">Des anciens eleves te parlent de leur parcours, de leur metier et te donnent leurs conseils pour bien choisir ta voie.</p>
+    <div class="header-badge">&#127891; Anciens élèves · Collège Guy Môquet</div>
+    <div class="header-title">Ils sont passés par <span>Guy Moquet</span></div>
+    <p class="header-sub">Des anciens élèves te parlent de leur parcours, de leur métier et te donnent leurs conseils pour bien choisir ta voie.</p>
     <div class="header-pills">
-      <span class="hpill">&#127891; Anciens eleves</span>
+      <span class="hpill">&#127891; Anciens élèves</span>
       <span class="hpill">&#129309; Gennevilliers et alentours</span>
-      <span class="hpill">&#10003; Examines avant publication</span>
+      <span class="hpill">&#10003; Examinés avant publication</span>
     </div>
   </div>
 </div>
@@ -150,11 +150,11 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
   <div class="stats">
     <div class="stat">
       <div class="stat-n" id="statTotal" style="color:var(--purple)">0</div>
-      <div class="stat-l">Temoignages publies</div>
+      <div class="stat-l">Témoignages publiés</div>
     </div>
     <div class="stat">
       <div class="stat-n" id="statVoies" style="color:var(--blue)">—</div>
-      <div class="stat-l">Voies representees</div>
+      <div class="stat-l">Voies représentées</div>
     </div>
     <div class="stat">
       <div class="stat-n" id="statSatisf" style="color:var(--teal)">—</div>
@@ -165,15 +165,15 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
   <!-- PILO -->
   <div class="pilo-box">
     <div class="pilo-hd"><div class="pilo-av">&#129302;</div><div class="pilo-name">PILO te dit</div></div>
-    <div class="pilo-msg">Ces anciens eleves ont vecu exactement ce que tu vis en ce moment. Lis leurs temoignages — pas pour copier leur parcours, mais pour voir que toutes les voies menent quelque part quand on les choisit avec conviction.</div>
+    <div class="pilo-msg">Ces anciens élèves ont vécu exactement ce que tu vis en ce moment. Lis leurs témoignages — pas pour copier leur parcours, mais pour voir que toutes les voies mènent quelque part quand on les choisit avec conviction.</div>
   </div>
 
   <!-- FILTRES -->
-  <div class="sec-title">Tous les temoignages</div>
-  <p class="sec-sub">Filtrer par voie choisie apres la 3e :</p>
+  <div class="sec-title">Tous les témoignages</div>
+  <p class="sec-sub">Filtrer par voie choisie après la 3e :</p>
   <div class="filtres">
     <button class="filtre-btn on" onclick="filtrer('tous',this)">Tous</button>
-    <button class="filtre-btn" onclick="filtrer('gt',this)">Bac General</button>
+    <button class="filtre-btn" onclick="filtrer('gt',this)">Bac Général</button>
     <button class="filtre-btn" onclick="filtrer('techno',this)">Bac Techno</button>
     <button class="filtre-btn" onclick="filtrer('pro',this)">Bac Pro</button>
     <button class="filtre-btn" onclick="filtrer('cap',this)">CAP</button>
@@ -185,7 +185,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
   <!-- FORMULAIRE TEMOIGNAGE -->
   <div class="sep"></div>
   <div class="form-section" id="formSection">
-    <div class="form-title">&#9997;&#65039; Tu es passe.e par Guy Moquet ?</div>
+    <div class="form-title">&#9997;&#65039; Tu es passé·e par Guy Môquet ?</div>
     <p class="form-sub">Partage ton parcours en 4 etapes — 2 minutes suffisent. Ton temoignage sera examine avant publication. Seul ton prenom apparaitra.</p>
 
     <!-- INDICATEUR -->
@@ -198,30 +198,30 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
     <!-- ETAPE 1 -->
     <div class="form-step active" id="step1">
-      <div class="step-label">Etape 1 / 4</div>
+      <div class="step-label">Étape 1 / 4</div>
       <div class="step-title">Qui es-tu ?</div>
-      <p class="step-hint">Quelques infos pour te presenter aux eleves actuels.</p>
+      <p class="step-hint">Quelques infos pour te présenter aux élèves actuels.</p>
       <div class="form-group">
-        <label class="form-label">Prenom (ou Anonyme) *</label>
+        <label class="form-label">Prénom (ou Anonyme) *</label>
         <input class="form-input" id="f_prenom" type="text" placeholder="Ex : Yassin" maxlength="30">
       </div>
       <div class="form-group">
         <label class="form-label">Ta situation actuelle *</label>
         <select class="form-select" id="f_situation">
           <option value="">Choisir...</option>
-          <option value="En activite professionnelle">En activite professionnelle</option>
-          <option value="En etudes superieures">En etudes superieures</option>
+          <option value="En activité professionnelle">En activité professionnelle</option>
+          <option value="En études supérieures">En études supérieures</option>
           <option value="En formation / apprentissage">En formation / apprentissage</option>
           <option value="En recherche d'emploi">En recherche d'emploi</option>
           <option value="Autre situation">Autre situation</option>
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">Ton metier ou ta formation *</label>
-        <input class="form-input" id="f_metier" type="text" placeholder="Ex : Technicien informatique, Etudiant en BTS...">
+        <label class="form-label">Ton métier ou ta formation *</label>
+        <input class="form-input" id="f_metier" type="text" placeholder="Ex : Technicien informatique, Étudiant en BTS...">
       </div>
       <div class="form-group">
-        <label class="form-label">Annee de ta 3e a Guy Moquet</label>
+        <label class="form-label">Année de ta 3e à Guy Môquet</label>
         <input class="form-input" id="f_annee" type="text" placeholder="Ex : 2021">
       </div>
       <div class="btn-row">
@@ -231,14 +231,14 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
     <!-- ETAPE 2 -->
     <div class="form-step" id="step2">
-      <div class="step-label">Etape 2 / 4</div>
+      <div class="step-label">Étape 2 / 4</div>
       <div class="step-title">Ton parcours</div>
-      <p class="step-hint">Quelle voie as-tu choisie apres la 3e ?</p>
+      <p class="step-hint">Quelle voie as-tu choisie après la 3e ?</p>
       <div class="form-group">
-        <label class="form-label">Ta voie apres la 3e *</label>
+        <label class="form-label">Ta voie après la 3e *</label>
         <select class="form-select" id="f_voie">
           <option value="">Choisir...</option>
-          <option value="gt">Bac general</option>
+          <option value="gt">Bac général</option>
           <option value="techno">Bac technologique</option>
           <option value="pro">Bac professionnel</option>
           <option value="cap">CAP</option>
@@ -248,7 +248,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       </div>
       <div class="form-group">
         <label class="form-label">Ton parcours depuis la 3e</label>
-        <textarea class="form-textarea" id="f_parcours" placeholder="En quelques mots, raconte ton chemin depuis Guy Moquet..." maxlength="300" oninput="updateCount('f_parcours','cnt_parcours',300)"></textarea>
+        <textarea class="form-textarea" id="f_parcours" placeholder="En quelques mots, raconte ton chemin depuis Guy Môquet..." maxlength="300" oninput="updateCount('f_parcours','cnt_parcours',300)"></textarea>
         <div class="char-count"><span id="cnt_parcours">0</span> / 300</div>
       </div>
       <div class="btn-row">
@@ -259,25 +259,25 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
     <!-- ETAPE 3 -->
     <div class="form-step" id="step3">
-      <div class="step-label">Etape 3 / 4</div>
+      <div class="step-label">Étape 3 / 4</div>
       <div class="step-title">Ton message</div>
-      <p class="step-hint">Ce que tu aurais aime qu'on te dise a 14 ans.</p>
+      <p class="step-hint">Ce que tu aurais aimé qu'on te dise à 14 ans.</p>
       <div class="form-group">
-        <label class="form-label">Ton conseil aux eleves de 3e * <span style="color:var(--ink3)">(50 min.)</span></label>
+        <label class="form-label">Ton conseil aux élèves de 3e * <span style="color:var(--ink3)">(50 min.)</span></label>
         <textarea class="form-textarea" id="f_conseil" placeholder="Qu'est-ce que tu leur dirais aujourd'hui ?" maxlength="400" oninput="updateCount('f_conseil','cnt_conseil',400)"></textarea>
         <div class="char-count"><span id="cnt_conseil">0</span> / 400</div>
       </div>
       <div class="form-group">
-        <label class="form-label">Les themes de ton message (3 max)</label>
+        <label class="form-label">Les thèmes de ton message (3 max)</label>
         <div class="themes-grid" id="themesGrid">
-          <button class="theme-opt" onclick="toggleTheme(this,'Il n y a pas de sous-metiers')">Il n y a pas de sous-metiers</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Il n'y a pas de sous-métiers')">Il n'y a pas de sous-métiers</button>
           <button class="theme-opt" onclick="toggleTheme(this,'Suivre sa passion')">Suivre sa passion</button>
-          <button class="theme-opt" onclick="toggleTheme(this,'La voie pro c est bien')">La voie pro c est bien</button>
-          <button class="theme-opt" onclick="toggleTheme(this,'Les grandes etudes ca paye')">Les grandes etudes ca paye</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'La voie pro, c'est bien')">La voie pro, c'est bien</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Les grandes études, ça paye')">Les grandes études, ça paye</button>
           <button class="theme-opt" onclick="toggleTheme(this,'Les reconversions sont possibles')">Les reconversions sont possibles</button>
           <button class="theme-opt" onclick="toggleTheme(this,'Croire en soi')">Croire en soi</button>
-          <button class="theme-opt" onclick="toggleTheme(this,'Travailler dur ca paye')">Travailler dur ca paye</button>
-          <button class="theme-opt" onclick="toggleTheme(this,'Ne pas ecouter les decourageants')">Ne pas ecouter les decourageants</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Travailler dur, ça paye')">Travailler dur, ça paye</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Ne pas écouter les décourageants')">Ne pas écouter les décourageants</button>
         </div>
       </div>
       <div class="form-group">
@@ -298,8 +298,8 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
     <!-- ETAPE 4 -->
     <div class="form-step" id="step4">
-      <div class="step-label">Etape 4 / 4</div>
-      <div class="step-title">Derniere etape</div>
+      <div class="step-label">Étape 4 / 4</div>
+      <div class="step-title">Dernière étape</div>
       <p class="step-hint">Pour que M. Hassini puisse te contacter avant publication.</p>
       <div class="form-group">
         <label class="form-label">Ton email *</label>
@@ -308,24 +308,24 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
       <div class="form-group">
         <label class="form-label">Accord de publication *</label>
         <div class="accord-grid">
-          <button class="accord-opt" id="acc1" onclick="setAccord('avec prenom et metier')">&#9989; Oui, avec mon prenom et metier</button>
+          <button class="accord-opt" id="acc1" onclick="setAccord('avec prénom et métier')">&#9989; Oui, avec mon prénom et métier</button>
           <button class="accord-opt" id="acc2" onclick="setAccord('anonyme')">&#128065; Oui, en anonyme</button>
         </div>
       </div>
       <div style="font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:1rem">
-        &#128274; Ton temoignage est examine avant publication. Ton email ne sera jamais affiche.
+        &#128274; Ton témoignage est examiné avant publication. Ton email ne sera jamais affiché.
       </div>
       <div class="btn-row">
         <button class="btn-prev" onclick="goStep(3)">&#8592; Retour</button>
-        <button class="btn-next" id="btnEnvoyer" onclick="envoyerTemoignage()">Envoyer mon temoignage &#8594;</button>
+        <button class="btn-next" id="btnEnvoyer" onclick="envoyerTemoignage()">Envoyer mon témoignage &#8594;</button>
       </div>
     </div>
 
     <!-- SUCCES -->
     <div class="success-box" id="successBox">
       <span class="success-icon">&#127881;</span>
-      <div class="success-title">Merci pour ton temoignage !</div>
-      <div class="success-sub">Il sera examine avant d'etre publie sur cette page.<br>Dans l'attente de validation, a tres bientot !<br><br>Des questions ? <a href="mailto:hassinicap3e@gmail.com" style="color:var(--teal)">hassinicap3e@gmail.com</a></div>
+      <div class="success-title">Merci pour ton témoignage !</div>
+      <div class="success-sub">Il sera examiné avant d'être publié sur cette page.<br>Dans l'attente de validation, à très bientôt !<br><br>Des questions ? <a href="mailto:hassinicap3e@gmail.com" style="color:var(--teal)">hassinicap3e@gmail.com</a></div>
     </div>
 
   </div>
@@ -341,7 +341,7 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 //    annee      : ex "3e en 2022"
 //    situation  : situation actuelle (ex "Etudiant en BTS Commerce")
 //    voie       : "gt" / "techno" / "pro" / "cap" / "apprentissage" / "autre"
-//    voieLabel  : texte affiché (ex "Bac General")
+//    voieLabel  : texte affiché (ex "Bac Général")
 //    message    : le temoignage principal (italique)
 //    conseil    : le conseil aux eleves de 3e (encadre)
 //    themes     : tableau de themes (ex ["Croire en soi","Voie pro c est bien"])
@@ -353,11 +353,11 @@ var TEMOIGNAGES = [
   {
     prenom: "Nawfel",
     annee: "3e en 2017-2018",
-    situation: "En etudes superieures",
+    situation: "En études supérieures",
     voie: "gt",
-    voieLabel: "Bac General",
-    message: "Lycee Galilee, puis une premiere annee en licence d'histoire a la Sorbonne et enfin une licence de Sciences de la vie a CY Cergy Paris Universite.",
-    conseil: "De se renseigner des maintenant sur les formations a faire post-bac afin d'etre au courant sur tous les choix accessibles. Et si une passion vous anime, il vaut mieux choisir une voie qui vous y amenera que de forcement suivre le chemin scolaire habituel.",
+    voieLabel: "Bac Général",
+    message: "Lycée Galilée, puis une première année en licence d'histoire à la Sorbonne et enfin une licence de Sciences de la vie à CY Cergy Paris Université.",
+    conseil: "De se renseigner dès maintenant sur les formations à faire post-bac afin d'être au courant sur tous les choix accessibles. Et si une passion vous anime, il vaut mieux choisir une voie qui vous y amènera que de forcément suivre le chemin scolaire habituel.",
     themes: ["Suivre sa passion","Les reconversions sont possibles","Croire en soi"],
     note: 5,
     anonyme: false
@@ -380,7 +380,7 @@ var TEMOIGNAGES = [
 
 // ── CONFIGURATION ─────────────────────────────────────────
 var VOIE_CONFIG = {
-  gt:           {label:"Bac General",     bg:"#EBF0FB", color:"#1A4FBF", emoji:"&#127891;"},
+  gt:           {label:"Bac Général",     bg:"#EBF0FB", color:"#1A4FBF", emoji:"&#127891;"},
   techno:       {label:"Bac Techno",      bg:"#E2F4EE", color:"#0D6E56", emoji:"&#128295;"},
   pro:          {label:"Bac Pro",         bg:"#FDF0E0", color:"#9B5A08", emoji:"&#128296;"},
   cap:          {label:"CAP",             bg:"#FCEAEA", color:"#C13030", emoji:"&#128297;"},
@@ -401,7 +401,7 @@ function renderTemos(filtre){
   var liste = filtre==="tous" ? TEMOIGNAGES : TEMOIGNAGES.filter(function(t){return t.voie===filtre;});
 
   if(liste.length===0){
-    zone.innerHTML='<div class="empty"><span class="empty-icon">&#128172;</span>Aucun temoignage dans cette categorie pour le moment.<br>Sois le premier a partager ton parcours !</div>';
+    zone.innerHTML='<div class="empty"><span class="empty-icon">&#128172;</span>Aucun témoignage dans cette catégorie pour le moment.<br>Sois le premier à partager ton parcours !</div>';
     return;
   }
 
@@ -452,14 +452,14 @@ var formData = { note: 0, themes: [], accord: '' };
 function goStep(n) {
   // Validation
   if(n === 2) {
-    if(!document.getElementById('f_prenom').value.trim()) { alert('Merci d entrer ton prenom.'); return; }
+    if(!document.getElementById('f_prenom').value.trim()) { alert('Merci d\'entrer ton prénom.'); return; }
     if(!document.getElementById('f_situation').value) { alert('Merci de choisir ta situation.'); return; }
-    if(!document.getElementById('f_metier').value.trim()) { alert('Merci d indiquer ton metier ou ta formation.'); return; }
+    if(!document.getElementById('f_metier').value.trim()) { alert('Merci d\'indiquer ton métier ou ta formation.'); return; }
   }
   if(n === 4) {
     var conseil = document.getElementById('f_conseil').value.trim();
-    if(conseil.length < 50) { alert('Ton conseil doit faire au moins 50 caracteres (' + conseil.length + '/50).'); return; }
-    if(!document.getElementById('f_voie').value) { alert('Merci de choisir ta voie apres la 3e.'); return; }
+    if(conseil.length < 50) { alert('Ton conseil doit faire au moins 50 caractères (' + conseil.length + '/50).'); return; }
+    if(!document.getElementById('f_voie').value) { alert('Merci de choisir ta voie après la 3e.'); return; }
   }
 
   // Cacher toutes les etapes
@@ -495,7 +495,7 @@ function toggleTheme(btn, theme) {
     btn.classList.remove('sel');
     formData.themes = formData.themes.filter(function(t){return t !== theme;});
   } else {
-    if(formData.themes.length >= 3) { alert('3 themes maximum.'); return; }
+    if(formData.themes.length >= 3) { alert('3 thèmes maximum.'); return; }
     btn.classList.add('sel');
     formData.themes.push(theme);
   }
@@ -505,13 +505,13 @@ function setAccord(val) {
   formData.accord = val;
   document.getElementById('acc1').classList.remove('sel');
   document.getElementById('acc2').classList.remove('sel');
-  if(val === 'avec prenom et metier') document.getElementById('acc1').classList.add('sel');
+  if(val === 'avec prénom et métier') document.getElementById('acc1').classList.add('sel');
   else document.getElementById('acc2').classList.add('sel');
 }
 
 function envoyerTemoignage() {
   var email = document.getElementById('f_email').value.trim();
-  if(!email || !email.includes('@')) { alert('Merci d entrer un email valide.'); return; }
+  if(!email || !email.includes('@')) { alert('Merci d\'entrer un email valide.'); return; }
   if(!formData.accord) { alert('Merci de choisir ton accord de publication.'); return; }
 
   var btn = document.getElementById('btnEnvoyer');
@@ -519,7 +519,7 @@ function envoyerTemoignage() {
   btn.textContent = 'Envoi en cours...';
 
   var body = new FormData();
-  body.append('_subject', 'Nouveau temoignage Cap 3e — ' + document.getElementById('f_prenom').value);
+  body.append('_subject', 'Nouveau témoignage Cap 3e — ' + document.getElementById('f_prenom').value);
   body.append('prenom', document.getElementById('f_prenom').value);
   body.append('situation', document.getElementById('f_situation').value);
   body.append('metier', document.getElementById('f_metier').value);
@@ -543,13 +543,13 @@ function envoyerTemoignage() {
       document.getElementById('successBox').style.display='block';
     } else {
       btn.disabled = false;
-      btn.textContent = 'Envoyer mon temoignage →';
-      alert('Une erreur s est produite. Verifie ta connexion et reessaie.');
+      btn.textContent = 'Envoyer mon témoignage →';
+      alert('Une erreur s\'est produite. Vérifie ta connexion et réessaie.');
     }
   }).catch(function(){
     btn.disabled = false;
-    btn.textContent = 'Envoyer mon temoignage →';
-    alert('Une erreur s est produite. Verifie ta connexion et reessaie.');
+    btn.textContent = 'Envoyer mon témoignage →';
+    alert('Une erreur s\'est produite. Vérifie ta connexion et réessaie.');
   });
 }
 

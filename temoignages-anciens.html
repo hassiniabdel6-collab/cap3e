@@ -86,6 +86,47 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 .sep{height:0.5px;background:var(--border);margin:1.5rem 0}
 .sec-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:.375rem}
 .sec-sub{font-size:13px;color:var(--ink2);margin-bottom:1.25rem;line-height:1.6}
+
+/* FORMULAIRE */
+.form-section{background:var(--surface);border:0.5px solid var(--border2);border-radius:var(--r);padding:1.5rem;margin-top:1rem}
+.form-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:.375rem}
+.form-sub{font-size:13px;color:var(--ink2);margin-bottom:1.5rem;line-height:1.6}
+.form-step{display:none}
+.form-step.active{display:block}
+.step-indicator{display:flex;gap:6px;margin-bottom:1.25rem}
+.step-dot{flex:1;height:4px;border-radius:2px;background:var(--bg2);transition:background .3s}
+.step-dot.done{background:var(--purple)}
+.step-dot.active{background:var(--purple);opacity:.5}
+.step-label{font-size:11px;color:var(--ink3);margin-bottom:1rem;font-family:'DM Mono',monospace}
+.step-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:.25rem}
+.step-hint{font-size:12px;color:var(--ink3);margin-bottom:1.25rem;line-height:1.5}
+.form-group{margin-bottom:1rem}
+.form-label{font-size:12px;font-weight:500;color:var(--ink2);margin-bottom:5px;display:block}
+.form-input{width:100%;padding:11px 14px;border-radius:var(--rs);border:1px solid var(--border2);background:var(--bg);color:var(--ink);font-size:14px;font-family:inherit;transition:border-color .15s;outline:none}
+.form-input:focus{border-color:var(--purple)}
+.form-select{width:100%;padding:11px 14px;border-radius:var(--rs);border:1px solid var(--border2);background:var(--bg);color:var(--ink);font-size:14px;font-family:inherit;cursor:pointer;outline:none}
+.form-textarea{width:100%;padding:11px 14px;border-radius:var(--rs);border:1px solid var(--border2);background:var(--bg);color:var(--ink);font-size:14px;font-family:inherit;resize:vertical;min-height:100px;line-height:1.6;outline:none}
+.form-textarea:focus,.form-select:focus{border-color:var(--purple)}
+.char-count{font-size:11px;color:var(--ink3);text-align:right;margin-top:3px}
+.stars-row{display:flex;gap:6px;margin-bottom:.5rem}
+.star-btn{font-size:26px;cursor:pointer;color:var(--bg3);background:none;border:none;padding:2px;transition:color .15s}
+.star-btn.on{color:#F59E0B}
+.themes-grid{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.5rem}
+.theme-opt{padding:5px 12px;border-radius:20px;border:1px solid var(--border2);background:var(--bg);font-size:12px;color:var(--ink2);cursor:pointer;font-family:inherit;transition:all .15s}
+.theme-opt.sel{background:var(--purple-l);border-color:var(--purple);color:var(--purple)}
+.accord-grid{display:flex;gap:10px;flex-wrap:wrap}
+.accord-opt{flex:1;min-width:140px;padding:10px 14px;border-radius:var(--rs);border:1px solid var(--border2);background:var(--bg);font-size:13px;color:var(--ink2);cursor:pointer;font-family:inherit;text-align:left;transition:all .15s}
+.accord-opt.sel{background:var(--purple-l);border-color:var(--purple);color:var(--purple)}
+.btn-row{display:flex;gap:10px;margin-top:1.25rem}
+.btn-next{flex:1;padding:12px;border-radius:var(--r);background:var(--purple);color:#fff;font-size:14px;font-weight:500;font-family:inherit;border:none;cursor:pointer;transition:opacity .15s}
+.btn-next:hover{opacity:.9}
+.btn-next:disabled{background:var(--bg3);color:var(--ink3);cursor:default}
+.btn-prev{padding:12px 18px;border-radius:var(--r);background:transparent;color:var(--ink2);font-size:14px;font-weight:500;font-family:inherit;border:1px solid var(--border2);cursor:pointer;transition:all .15s}
+.btn-prev:hover{background:var(--bg2)}
+.success-box{display:none;background:var(--teal-l);border:0.5px solid rgba(13,110,86,.3);border-radius:var(--r);padding:1.5rem;text-align:center}
+.success-icon{font-size:40px;margin-bottom:.75rem;display:block}
+.success-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--teal);margin-bottom:.375rem}
+.success-sub{font-size:13px;color:var(--ink2);line-height:1.6}
 </style>
 </head>
 <body>
@@ -141,13 +182,152 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 
   <div class="temos-list" id="temoZone"></div>
 
-  <!-- CTA -->
+  <!-- FORMULAIRE TEMOIGNAGE -->
   <div class="sep"></div>
-  <div class="cta-box">
-    <span class="cta-emoji">&#9997;&#65039;</span>
-    <div class="cta-title">Tu es passe.e par Guy Moquet ?</div>
-    <p class="cta-sub">Partage ton parcours et adresse un message aux eleves de 3e qui se posent encore des questions sur leur avenir. Ton experience peut tout changer pour eux.</p>
-    <a class="btn-cta" href="https://hassiniofficiel.wixsite.com/cap-3e/temoignages" target="_blank">Partager mon temoignage &#8594;</a>
+  <div class="form-section" id="formSection">
+    <div class="form-title">&#9997;&#65039; Tu es passe.e par Guy Moquet ?</div>
+    <p class="form-sub">Partage ton parcours en 4 etapes — 2 minutes suffisent. Ton temoignage sera examine avant publication. Seul ton prenom apparaitra.</p>
+
+    <!-- INDICATEUR -->
+    <div class="step-indicator">
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+      <div class="step-dot" id="dot3"></div>
+      <div class="step-dot" id="dot4"></div>
+    </div>
+
+    <!-- ETAPE 1 -->
+    <div class="form-step active" id="step1">
+      <div class="step-label">Etape 1 / 4</div>
+      <div class="step-title">Qui es-tu ?</div>
+      <p class="step-hint">Quelques infos pour te presenter aux eleves actuels.</p>
+      <div class="form-group">
+        <label class="form-label">Prenom (ou Anonyme) *</label>
+        <input class="form-input" id="f_prenom" type="text" placeholder="Ex : Yassin" maxlength="30">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ta situation actuelle *</label>
+        <select class="form-select" id="f_situation">
+          <option value="">Choisir...</option>
+          <option value="En activite professionnelle">En activite professionnelle</option>
+          <option value="En etudes superieures">En etudes superieures</option>
+          <option value="En formation / apprentissage">En formation / apprentissage</option>
+          <option value="En recherche d'emploi">En recherche d'emploi</option>
+          <option value="Autre situation">Autre situation</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ton metier ou ta formation *</label>
+        <input class="form-input" id="f_metier" type="text" placeholder="Ex : Technicien informatique, Etudiant en BTS...">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Annee de ta 3e a Guy Moquet</label>
+        <input class="form-input" id="f_annee" type="text" placeholder="Ex : 2021">
+      </div>
+      <div class="btn-row">
+        <button class="btn-next" onclick="goStep(2)">Suivant &#8594;</button>
+      </div>
+    </div>
+
+    <!-- ETAPE 2 -->
+    <div class="form-step" id="step2">
+      <div class="step-label">Etape 2 / 4</div>
+      <div class="step-title">Ton parcours</div>
+      <p class="step-hint">Quelle voie as-tu choisie apres la 3e ?</p>
+      <div class="form-group">
+        <label class="form-label">Ta voie apres la 3e *</label>
+        <select class="form-select" id="f_voie">
+          <option value="">Choisir...</option>
+          <option value="gt">Bac general</option>
+          <option value="techno">Bac technologique</option>
+          <option value="pro">Bac professionnel</option>
+          <option value="cap">CAP</option>
+          <option value="apprentissage">Apprentissage / alternance</option>
+          <option value="autre">Autre parcours</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ton parcours depuis la 3e</label>
+        <textarea class="form-textarea" id="f_parcours" placeholder="En quelques mots, raconte ton chemin depuis Guy Moquet..." maxlength="300" oninput="updateCount('f_parcours','cnt_parcours',300)"></textarea>
+        <div class="char-count"><span id="cnt_parcours">0</span> / 300</div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-prev" onclick="goStep(1)">&#8592; Retour</button>
+        <button class="btn-next" onclick="goStep(3)">Suivant &#8594;</button>
+      </div>
+    </div>
+
+    <!-- ETAPE 3 -->
+    <div class="form-step" id="step3">
+      <div class="step-label">Etape 3 / 4</div>
+      <div class="step-title">Ton message</div>
+      <p class="step-hint">Ce que tu aurais aime qu'on te dise a 14 ans.</p>
+      <div class="form-group">
+        <label class="form-label">Ton conseil aux eleves de 3e * <span style="color:var(--ink3)">(50 min.)</span></label>
+        <textarea class="form-textarea" id="f_conseil" placeholder="Qu'est-ce que tu leur dirais aujourd'hui ?" maxlength="400" oninput="updateCount('f_conseil','cnt_conseil',400)"></textarea>
+        <div class="char-count"><span id="cnt_conseil">0</span> / 400</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Les themes de ton message (3 max)</label>
+        <div class="themes-grid" id="themesGrid">
+          <button class="theme-opt" onclick="toggleTheme(this,'Il n y a pas de sous-metiers')">Il n y a pas de sous-metiers</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Suivre sa passion')">Suivre sa passion</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'La voie pro c est bien')">La voie pro c est bien</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Les grandes etudes ca paye')">Les grandes etudes ca paye</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Les reconversions sont possibles')">Les reconversions sont possibles</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Croire en soi')">Croire en soi</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Travailler dur ca paye')">Travailler dur ca paye</button>
+          <button class="theme-opt" onclick="toggleTheme(this,'Ne pas ecouter les decourageants')">Ne pas ecouter les decourageants</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Ta satisfaction sur ton parcours</label>
+        <div class="stars-row" id="starsRow">
+          <button class="star-btn" onclick="setNote(1)">&#9733;</button>
+          <button class="star-btn" onclick="setNote(2)">&#9733;</button>
+          <button class="star-btn" onclick="setNote(3)">&#9733;</button>
+          <button class="star-btn" onclick="setNote(4)">&#9733;</button>
+          <button class="star-btn" onclick="setNote(5)">&#9733;</button>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-prev" onclick="goStep(2)">&#8592; Retour</button>
+        <button class="btn-next" onclick="goStep(4)">Suivant &#8594;</button>
+      </div>
+    </div>
+
+    <!-- ETAPE 4 -->
+    <div class="form-step" id="step4">
+      <div class="step-label">Etape 4 / 4</div>
+      <div class="step-title">Derniere etape</div>
+      <p class="step-hint">Pour que M. Hassini puisse te contacter avant publication.</p>
+      <div class="form-group">
+        <label class="form-label">Ton email *</label>
+        <input class="form-input" id="f_email" type="email" placeholder="ton@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Accord de publication *</label>
+        <div class="accord-grid">
+          <button class="accord-opt" id="acc1" onclick="setAccord('avec prenom et metier')">&#9989; Oui, avec mon prenom et metier</button>
+          <button class="accord-opt" id="acc2" onclick="setAccord('anonyme')">&#128065; Oui, en anonyme</button>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--ink3);line-height:1.6;margin-bottom:1rem">
+        &#128274; Ton temoignage est examine avant publication. Ton email ne sera jamais affiche.
+      </div>
+      <div class="btn-row">
+        <button class="btn-prev" onclick="goStep(3)">&#8592; Retour</button>
+        <button class="btn-next" id="btnEnvoyer" onclick="envoyerTemoignage()">Envoyer mon temoignage &#8594;</button>
+      </div>
+    </div>
+
+    <!-- SUCCES -->
+    <div class="success-box" id="successBox">
+      <span class="success-icon">&#127881;</span>
+      <div class="success-title">Merci pour ton temoignage !</div>
+      <div class="success-sub">Il sera examine avant d'etre publie sur cette page.<br>Dans l'attente de validation, a tres bientot !<br><br>Des questions ? <a href="mailto:hassinicap3e@gmail.com" style="color:var(--teal)">hassinicap3e@gmail.com</a></div>
+    </div>
+
   </div>
 
 </div>
@@ -253,6 +433,114 @@ function filtrer(type, btn){
 }
 
 renderTemos("tous");
+
+// ── FORMULAIRE 4 ETAPES ───────────────────────────────────
+var formData = { note: 0, themes: [], accord: '' };
+
+function goStep(n) {
+  // Validation
+  if(n === 2) {
+    if(!document.getElementById('f_prenom').value.trim()) { alert('Merci d entrer ton prenom.'); return; }
+    if(!document.getElementById('f_situation').value) { alert('Merci de choisir ta situation.'); return; }
+    if(!document.getElementById('f_metier').value.trim()) { alert('Merci d indiquer ton metier ou ta formation.'); return; }
+  }
+  if(n === 4) {
+    var conseil = document.getElementById('f_conseil').value.trim();
+    if(conseil.length < 50) { alert('Ton conseil doit faire au moins 50 caracteres (' + conseil.length + '/50).'); return; }
+    if(!document.getElementById('f_voie').value) { alert('Merci de choisir ta voie apres la 3e.'); return; }
+  }
+
+  // Cacher toutes les etapes
+  document.querySelectorAll('.form-step').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('step' + n).classList.add('active');
+
+  // Mettre a jour les dots
+  for(var i=1;i<=4;i++){
+    var dot = document.getElementById('dot'+i);
+    dot.classList.remove('done','active');
+    if(i < n) dot.classList.add('done');
+    else if(i === n) dot.classList.add('active');
+  }
+
+  // Scroll vers le formulaire
+  document.getElementById('formSection').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function updateCount(fieldId, countId, max) {
+  var val = document.getElementById(fieldId).value.length;
+  document.getElementById(countId).textContent = val;
+}
+
+function setNote(n) {
+  formData.note = n;
+  document.querySelectorAll('.star-btn').forEach(function(btn, i){
+    btn.classList.toggle('on', i < n);
+  });
+}
+
+function toggleTheme(btn, theme) {
+  if(btn.classList.contains('sel')) {
+    btn.classList.remove('sel');
+    formData.themes = formData.themes.filter(function(t){return t !== theme;});
+  } else {
+    if(formData.themes.length >= 3) { alert('3 themes maximum.'); return; }
+    btn.classList.add('sel');
+    formData.themes.push(theme);
+  }
+}
+
+function setAccord(val) {
+  formData.accord = val;
+  document.getElementById('acc1').classList.remove('sel');
+  document.getElementById('acc2').classList.remove('sel');
+  if(val === 'avec prenom et metier') document.getElementById('acc1').classList.add('sel');
+  else document.getElementById('acc2').classList.add('sel');
+}
+
+function envoyerTemoignage() {
+  var email = document.getElementById('f_email').value.trim();
+  if(!email || !email.includes('@')) { alert('Merci d entrer un email valide.'); return; }
+  if(!formData.accord) { alert('Merci de choisir ton accord de publication.'); return; }
+
+  var btn = document.getElementById('btnEnvoyer');
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours...';
+
+  var body = new FormData();
+  body.append('_subject', 'Nouveau temoignage Cap 3e — ' + document.getElementById('f_prenom').value);
+  body.append('prenom', document.getElementById('f_prenom').value);
+  body.append('situation', document.getElementById('f_situation').value);
+  body.append('metier', document.getElementById('f_metier').value);
+  body.append('annee', document.getElementById('f_annee').value);
+  body.append('voie', document.getElementById('f_voie').value);
+  body.append('parcours', document.getElementById('f_parcours').value);
+  body.append('conseil', document.getElementById('f_conseil').value);
+  body.append('themes', formData.themes.join(', '));
+  body.append('note', formData.note);
+  body.append('accord', formData.accord);
+  body.append('email', email);
+
+  fetch('https://formspree.io/f/xlgvkaod', {
+    method: 'POST',
+    body: body,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(r) {
+    if(r.ok) {
+      document.querySelectorAll('.form-step').forEach(function(s){s.style.display='none';});
+      document.querySelector('.step-indicator').style.display='none';
+      document.getElementById('successBox').style.display='block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Envoyer mon temoignage →';
+      alert('Une erreur s est produite. Verifie ta connexion et reessaie.');
+    }
+  }).catch(function(){
+    btn.disabled = false;
+    btn.textContent = 'Envoyer mon temoignage →';
+    alert('Une erreur s est produite. Verifie ta connexion et reessaie.');
+  });
+}
+
 </script>
 </body>
 </html>

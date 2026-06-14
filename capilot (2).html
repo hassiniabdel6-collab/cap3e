@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CAPilot</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#080C14;--bg2:#0E1420;--bg3:#151C2E;
+  --surface:#1A2236;--surface2:#212B40;
+  --blue:#3B7EF8;--blue-l:rgba(59,126,248,0.12);--blue-m:rgba(59,126,248,0.25);
+  --teal:#0FD6A0;--teal-l:rgba(15,214,160,0.12);
+  --amber:#F59E0B;--amber-l:rgba(245,158,11,0.12);
+  --red:#F43F5E;--red-l:rgba(244,63,94,0.12);
+  --text:#F0F2F8;--text2:#8892A8;--text3:#4A5568;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+}
+html,body{height:100%;overflow:hidden;background:var(--bg)}
+body{font-family:'DM Sans',sans-serif;color:var(--text);display:flex;align-items:center;justify-content:center}
+.shell{width:100%;max-width:390px;height:100vh;max-height:780px;background:var(--bg);display:flex;flex-direction:column;position:relative;overflow:hidden}
+@media(min-width:500px){.shell{border-radius:40px;height:780px;box-shadow:0 0 0 1px rgba(255,255,255,.08),0 40px 80px rgba(0,0,0,.6)}}
+.status{display:flex;justify-content:space-between;padding:12px 20px 4px;font-size:12px;color:var(--text2);flex-shrink:0;z-index:2;position:relative}
+.page{display:none;flex-direction:column;position:absolute;top:40px;left:0;right:0;bottom:0;overflow:hidden}
+.page.on{display:flex}
+#p-splash{align-items:center;justify-content:center;padding:2rem;text-align:center;background:var(--bg);overflow-y:auto}
+.logo{width:80px;height:80px;border-radius:22px;background:var(--bg3);border:1px solid rgba(59,126,248,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;animation:fl 3s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.title{font-family:'Syne',sans-serif;font-size:40px;font-weight:700;letter-spacing:-.02em;margin-bottom:.25rem}
+.title span{color:var(--blue)}
+.sub{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:2rem;max-width:260px}
+.pill{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;background:var(--surface);border:1px solid var(--border2);font-size:13px;color:var(--text2);margin-bottom:8px}
+.btn{width:100%;padding:14px;border-radius:14px;background:var(--blue);color:#fff;font-size:15px;font-weight:500;font-family:inherit;border:none;cursor:pointer;box-shadow:0 8px 24px rgba(59,126,248,.35);margin-top:1rem}
+.btn:disabled{background:var(--surface2);color:var(--text3);box-shadow:none;cursor:default}
+#p-onboard{background:var(--bg)}
+.prog-wrap{flex-shrink:0;padding:0 1.25rem .25rem}
+.prog-track{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;border-radius:2px;background:var(--blue);transition:width .4s}
+.slbl{font-size:11px;color:var(--text3);text-align:right;padding:4px 1.25rem 10px;flex-shrink:0}
+.obody{flex:1;overflow-y:auto;padding:0 1.25rem 1.5rem;display:flex;flex-direction:column}
+.psay{display:flex;gap:10px;margin-bottom:1.25rem}
+.pav{width:34px;height:34px;border-radius:50%;background:var(--surface2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;margin-top:2px}
+.pbub{background:var(--surface);border:1px solid var(--border2);border-radius:4px 14px 14px 14px;padding:10px 13px;font-size:13px;line-height:1.6;flex:1}
+.flbl{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:6px;display:block}
+.fin{width:100%;padding:13px 14px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);color:var(--text);font-size:15px;font-family:inherit;margin-bottom:14px}
+.fin:focus{outline:none;border-color:var(--blue)}
+.fin::placeholder{color:var(--text3)}
+.avgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.avopt{aspect-ratio:1;border-radius:12px;border:1px solid var(--border2);background:var(--surface);display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;transition:all .15s}
+.avopt.sel{border-color:var(--blue);background:var(--blue-l);transform:scale(1.05)}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.iopt{padding:12px 10px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);cursor:pointer;text-align:center;transition:all .15s}
+.iopt.sel{border-color:var(--teal);background:var(--teal-l)}
+.iicon{font-size:22px;margin-bottom:4px}
+.ilbl{font-size:12px;font-weight:500;color:var(--text2)}
+.iopt.sel .ilbl{color:var(--teal)}
+.cboxes{display:flex;gap:8px;justify-content:center;margin-bottom:8px}
+.cbox{width:46px;height:54px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);color:var(--blue);font-size:20px;font-weight:600;text-align:center;font-family:'Syne',sans-serif}
+.cbox:focus{outline:none;border-color:var(--blue);background:var(--blue-l)}
+.chint{font-size:12px;color:var(--text3);text-align:center;margin-bottom:16px}
+.mrow{display:flex;gap:8px;margin-bottom:14px}
+.mbtn{flex:1;padding:12px 4px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);text-align:center;cursor:pointer;font-size:22px;transition:all .15s}
+.mbtn span{display:block;font-size:10px;color:var(--text3);margin-top:3px}
+.mbtn.sel{border-color:var(--blue);background:var(--blue-l)}
+.catlbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:8px 0 4px;margin-top:4px}
+.objbtn{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);font-size:12px;color:var(--text2);cursor:pointer;font-family:inherit;text-align:left;width:100%;margin-bottom:4px;transition:all .15s}
+.objbtn.sel{border-color:rgba(15,214,160,.4);background:var(--teal-l);color:var(--teal)}
+#p-welcome{align-items:center;justify-content:center;padding:2rem;text-align:center;background:var(--bg);overflow-y:auto}
+.wav{width:72px;height:72px;border-radius:50%;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 1rem}
+.xptost{display:inline-flex;align-items:center;gap:8px;background:var(--teal-l);border:1px solid rgba(15,214,160,.3);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:500;color:var(--teal);margin-bottom:1.25rem}
+.wname{font-family:'Syne',sans-serif;font-size:26px;font-weight:700;margin-bottom:.5rem}
+.wsub{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:1.5rem;max-width:280px}
+.mbox{width:100%;background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:1.25rem;text-align:left;margin-bottom:1.25rem}
+.mblbl{font-size:11px;font-weight:500;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.mbtitle{font-size:14px;font-weight:500;margin-bottom:4px}
+.mbsub{font-size:12px;color:var(--text2);margin-bottom:10px}
+.mbfoot{display:flex;justify-content:space-between;font-size:11px}
+#p-dash{background:var(--bg)}
+.dhd{padding:1rem 1.25rem .75rem;flex-shrink:0;border-bottom:1px solid var(--border)}
+.dtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.dgreet{font-size:12px;color:var(--text2)}
+.dname{font-family:'Syne',sans-serif;font-size:18px;font-weight:700}
+.dpills{display:flex;gap:6px}
+.dpill{display:flex;align-items:center;gap:4px;border-radius:20px;padding:3px 9px;font-size:12px;font-weight:500}
+.lvwrap{display:flex;align-items:center;gap:8px}
+.lvlbl{font-size:11px;color:var(--text3)}
+.lvtrack{flex:1;height:4px;border-radius:2px;background:var(--surface2);overflow:hidden}
+.lvfill{height:100%;border-radius:2px;background:var(--blue);transition:width .6s}
+.dbody{flex:1;overflow-y:auto;padding:1rem 1.25rem 1.5rem}
+.pcard{background:linear-gradient(135deg,var(--bg3),var(--surface));border:1px solid var(--border2);border-radius:16px;padding:1.25rem;margin-bottom:1rem}
+.pchd{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
+.pcav{width:36px;height:36px;border-radius:50%;background:var(--blue-l);border:1px solid var(--blue-m);display:flex;align-items:center;justify-content:center;font-size:18px}
+.pcname{font-size:13px;font-weight:500}
+.pcsub{font-size:11px;color:var(--blue)}
+.pcmsg{font-size:13px;line-height:1.6;margin-bottom:.75rem}
+.pcopts{display:flex;flex-direction:column;gap:6px}
+.pcopt{padding:9px 12px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);font-size:12px;color:var(--text2);cursor:pointer;text-align:left;font-family:inherit;transition:all .15s}
+.sechd{display:flex;justify-content:space-between;align-items:center;margin-bottom:.625rem;margin-top:.75rem}
+.sectitle{font-size:13px;font-weight:500}
+.dlcard{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border-left:3px solid;margin-bottom:6px;background:var(--surface)}
+.dlinfo{flex:1}
+.dltitle{font-size:13px;font-weight:500}
+.dlsub{font-size:11px;color:var(--text3);margin-top:1px}
+.dlbadge{font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.ocard{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:1.125rem;margin-bottom:8px}
+.octop{display:flex;justify-content:space-between;margin-bottom:6px}
+.octitle{font-size:13px;font-weight:500}
+.ocxp{font-size:11px;background:var(--blue-l);color:var(--blue);padding:2px 8px;border-radius:20px;font-weight:500}
+.ocdesc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:10px}
+.ocprog{height:4px;border-radius:2px;background:var(--surface2);overflow:hidden;margin-bottom:6px}
+.ocfill{height:100%;border-radius:2px;background:var(--teal);transition:width .4s}
+.ocfoot{display:flex;justify-content:space-between;font-size:11px;color:var(--text3)}
+.taskbtn{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1px solid var(--border2);background:var(--bg3);font-size:12px;color:var(--text2);cursor:pointer;font-family:inherit;width:100%;margin-top:6px;transition:all .15s}
+.taskbtn.done{background:var(--teal-l);border-color:rgba(15,214,160,.3);color:var(--teal)}
+.navbar{display:flex;border-top:1px solid var(--border);padding:.5rem 0;background:var(--bg);flex-shrink:0}
+.navitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:.25rem 0;cursor:pointer;font-size:10px;color:var(--text3);transition:color .15s}
+.navitem.on{color:var(--blue)}
+.navicon{font-size:20px}
+#p-chat{background:var(--bg)}
+.chathd{padding:1rem 1.25rem;flex-shrink:0;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.chatback{width:32px;height:32px;border-radius:50%;background:var(--surface);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;flex-shrink:0}
+.chatbody{flex:1;overflow-y:auto;padding:1rem 1.25rem;display:flex;flex-direction:column;gap:8px}
+.msgpilo{align-self:flex-start;background:var(--surface);border:1px solid var(--border2);border-radius:4px 14px 14px 14px;padding:10px 13px;max-width:85%;font-size:13px;line-height:1.6}
+.msguser{align-self:flex-end;background:var(--blue);border-radius:14px 14px 4px 14px;padding:10px 13px;max-width:85%;font-size:13px;color:#fff;line-height:1.6}
+.typing{display:flex;align-items:center;gap:4px;padding:10px 13px;background:var(--surface);border-radius:4px 14px 14px 14px;width:fit-content}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--text3);animation:bop .9s infinite}
+.tdot:nth-child(2){animation-delay:.15s}.tdot:nth-child(3){animation-delay:.3s}
+@keyframes bop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+.chatopts{display:flex;flex-direction:column;gap:6px;padding:0 1.25rem .75rem;flex-shrink:0}
+.chatopt{padding:10px 13px;border-radius:10px;border:1px solid var(--border2);background:var(--surface2);font-size:13px;color:var(--text2);cursor:pointer;font-family:inherit;text-align:left;transition:all .15s}
+.chatin-row{display:flex;gap:8px;padding:.75rem 1.25rem 1.25rem;flex-shrink:0;border-top:1px solid var(--border)}
+.chatin{flex:1;padding:10px 14px;border-radius:10px;border:1px solid var(--border2);background:var(--surface);color:var(--text);font-size:13px;font-family:inherit}
+.chatin:focus{outline:none;border-color:var(--blue)}
+.chatsend{width:38px;height:38px;border-radius:50%;background:var(--blue);border:none;cursor:pointer;font-size:16px;flex-shrink:0}
+</style>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyB3lx8FGDKK8ipuHXY7iCJvVNWOzbOD5RU",
+    authDomain: "cap3e-capilot.firebaseapp.com",
+    databaseURL: "https://cap3e-capilot-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "cap3e-capilot",
+    storageBucket: "cap3e-capilot.firebasestorage.app",
+    messagingSenderId: "694025738704",
+    appId: "1:694025738704:web:0c02175f250140953b81d5"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.database();
+  
+  // Test de connexion Firebase au chargement
+  db.ref(".info/connected").on("value", function(snap) {
+    if (snap.val() === true) {
+      console.log("Firebase connecte !");
+    } else {
+      console.log("Firebase deconnecte");
+    }
+  });
+</script>
+</head>
+<body>
+<div class="shell">
+  <div class="status"><span id="clk">09:41</span><span>CAPilot</span><span>...</span></div>
+
+  <div class="page on" id="p-splash">
+    <div class="logo">
+      <svg viewBox="0 0 52 52" width="52" height="52"><rect width="52" height="52" fill="#0A0F1E" rx="12"/><circle cx="26" cy="26" r="16" fill="none" stroke="#3B7EF8" stroke-width=".8" opacity=".5"/><circle cx="26" cy="26" r="10" fill="none" stroke="#3B7EF8" stroke-width=".5" opacity=".3"/><line x1="10" y1="26" x2="42" y2="26" stroke="#3B7EF8" stroke-width=".6" opacity=".4"/><line x1="26" y1="10" x2="26" y2="42" stroke="#3B7EF8" stroke-width=".6" opacity=".4"/><line x1="26" y1="26" x2="38" y2="14" stroke="#3B7EF8" stroke-width="1.8" stroke-linecap="round"/><polygon points="38,14 32,15.5 36.5,20" fill="#3B7EF8"/><circle cx="26" cy="26" r="2.5" fill="#fff"/><circle cx="26" cy="26" r="1" fill="#0A0F1E"/><circle cx="26" cy="11" r="2" fill="#3B7EF8" opacity=".9"/></svg>
+    </div>
+    <div class="title">CAP<span>ilot</span></div>
+    <p class="sub">Ton coach numerique pour reussir ta 3e et ton orientation</p>
+    <div class="pill"><span>&#128274;</span>Acces par code classe - zero email</div>
+    <div class="pill"><span>&#127918;</span>Missions, XP, badges - comme un jeu</div>
+    <div class="pill"><span>&#129302;</span>PILO, ton co-pilote personnel</div>
+    <button class="btn" onclick="go('p-onboard');showStep(1)">Commencer &#8594;</button>
+  </div>
+
+  <div class="page" id="p-onboard">
+    <div class="prog-wrap"><div class="prog-track"><div class="prog-fill" id="prog" style="width:20%"></div></div></div>
+    <div class="slbl" id="slbl">Etape 1 / 5</div>
+    <div class="obody" id="obody">
+      <div id="s1">
+        <div class="psay"><div class="pav">&#129302;</div><div class="pbub">Salut ! Je suis <strong>PILO</strong>. Entre le code de classe que ton prof t'a donne.</div></div>
+        <label class="flbl">Code de classe</label>
+        <div class="cboxes">
+          <input class="cbox" id="cb0" maxlength="1" oninput="cIn(0)">
+          <input class="cbox" id="cb1" maxlength="1" oninput="cIn(1)">
+          <input class="cbox" id="cb2" maxlength="1" oninput="cIn(2)">
+          <input class="cbox" id="cb3" maxlength="1" oninput="cIn(3)">
+          <input class="cbox" id="cb4" maxlength="1" oninput="cIn(4)">
+          <input class="cbox" id="cb5" maxlength="1" oninput="cIn(5)">
+        </div>
+        <div class="chint" id="chint">Code de test : CAP3BA</div>
+        <button class="btn" id="btnC" disabled onclick="showStep(2)" style="margin-top:.5rem">Valider &#8594;</button>
+      </div>
+      <div id="s2" style="display:none">
+        <div class="psay"><div class="pav">&#129302;</div><div class="pbub">Classe reconnue ! Choisis un pseudo.</div></div>
+        <label class="flbl">Ton pseudo</label>
+        <input class="fin" id="pin" maxlength="12" placeholder="Ex : Astro77, PiloteX..." oninput="pChange()">
+        <label class="flbl">Ton avatar</label>
+        <div class="avgrid">
+          <div class="avopt sel" onclick="sAv(this)">&#128120;</div>
+          <div class="avopt" onclick="sAv(this)">&#129418;</div>
+          <div class="avopt" onclick="sAv(this)">&#129409;</div>
+          <div class="avopt" onclick="sAv(this)">&#129302;</div>
+          <div class="avopt" onclick="sAv(this)">&#129409;</div>
+          <div class="avopt" onclick="sAv(this)">&#129419;</div>
+          <div class="avopt" onclick="sAv(this)">&#127754;</div>
+          <div class="avopt" onclick="sAv(this)">&#9889;</div>
+        </div>
+        <button class="btn" id="btnP" disabled onclick="showStep(3)">Continuer &#8594;</button>
+      </div>
+      <div id="s3" style="display:none">
+        <div class="psay"><div class="pav">&#129302;</div><div class="pbub">Choisis tes <strong>3 objectifs prioritaires</strong> pour ce semestre.</div></div>
+        <div id="ogrid"></div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;margin:8px 0">Choisis exactement 3 objectifs</div>
+        <button class="btn" id="btnO" disabled onclick="showStep(4)">Valider mes objectifs &#8594;</button>
+      </div>
+      <div id="s4" style="display:none">
+        <div class="psay"><div class="pav">&#129302;</div><div class="pbub">Qu'est-ce qui t'interesse ? Je m'en souviendrai pour ton orientation.</div></div>
+        <div class="igrid">
+          <div class="iopt" onclick="sInt(this)"><div class="iicon">&#128300;</div><div class="ilbl">Sciences et tech</div></div>
+          <div class="iopt" onclick="sInt(this)"><div class="iicon">&#127912;</div><div class="ilbl">Arts et creation</div></div>
+          <div class="iopt" onclick="sInt(this)"><div class="iicon">&#9917;</div><div class="ilbl">Sport et sante</div></div>
+          <div class="iopt" onclick="sInt(this)"><div class="iicon">&#128218;</div><div class="ilbl">Lettres et langues</div></div>
+          <div class="iopt" onclick="sInt(this)"><div class="iicon">&#128188;</div><div class="ilbl">Economie</div></div>
+          <div class="iopt" onclick="sInt(this)"><div class="iicon">&#127757;</div><div class="ilbl">Environnement</div></div>
+        </div>
+        <button class="btn" id="btnI" disabled onclick="showStep(5)">Continuer &#8594;</button>
+      </div>
+      <div id="s5" style="display:none">
+        <div class="psay"><div class="pav">&#129302;</div><div class="pbub" id="mmsg">Comment tu te sens aujourd'hui ?</div></div>
+        <div class="mrow">
+          <div class="mbtn" onclick="sMood(this,'Fatigue','Check-in leger aujourd hui. On y va doucement.')">&#128564;<span>Fatigue</span></div>
+          <div class="mbtn" onclick="sMood(this,'Neutre','Neutre, c est honnete. On va trouver quelque chose qui t allume.')">&#128528;<span>Neutre</span></div>
+          <div class="mbtn" onclick="sMood(this,'Bien','Bien ! On profite de cette energie.')">&#128578;<span>Bien</span></div>
+          <div class="mbtn" onclick="sMood(this,'Motive','Parfait ! Tu as des deadlines cette semaine.')">&#128293;<span>Motive</span></div>
+        </div>
+        <div id="mrep" style="display:none" class="psay"><div class="pav">&#129302;</div><div class="pbub" id="mreptxt"></div></div>
+        <button class="btn" id="btnM" disabled onclick="finishOnboard()">Acceder a CAPilot &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" id="p-welcome">
+    <div class="wav" id="wav">&#128120;</div>
+    <div class="xptost">&#11088; +100 XP - Profil cree !</div>
+    <div class="wname">Bienvenue, <span id="wnam">Pilote</span> !</div>
+    <p class="wsub">Je suis PILO, ton co-pilote. On avance ensemble. Voici ta premiere mission.</p>
+    <div class="mbox">
+      <div class="mblbl">Mission debloquee</div>
+      <div class="mbtitle">Prendre en main mes 3 objectifs</div>
+      <div class="mbsub">Lis tes objectifs et coche le premier effort concret cette semaine.</div>
+      <div class="mbfoot"><span style="color:var(--teal)">+50 XP</span><span style="color:var(--text3)">Delai : 3 jours</span></div>
+    </div>
+    <button class="btn" onclick="goMain()">Allons-y ! &#8594;</button>
+  </div>
+
+  <div class="page" id="p-dash">
+    <div class="dhd">
+      <div class="dtop">
+        <div><div class="dgreet" id="greet">Bonjour</div><div class="dname" id="dnam">Pilote</div></div>
+        <div class="dpills">
+          <div class="dpill" style="background:var(--amber-l);color:var(--amber)">&#128293; <span id="stk">1</span>j</div>
+          <div class="dpill" style="background:var(--blue-l);color:var(--blue)">&#11088; <span id="xpn">100</span></div>
+          <div class="dpill" style="background:var(--surface2);color:var(--text3);cursor:pointer;font-size:10px" onclick="confirmReset()" title="Reinitialiser mon profil">&#8635;</div>
+        </div>
+      </div>
+      <div class="lvwrap"><span class="lvlbl">Niv.1</span><div class="lvtrack"><div class="lvfill" id="lvf" style="width:10%"></div></div><span class="lvlbl">Niv.2</span></div>
+    </div>
+    <div class="dbody">
+      <div class="pcard">
+        <div class="pchd"><div class="pcav">&#129302;</div><div><div class="pcname">PILO</div><div class="pcsub">Ton co-pilote</div></div></div>
+        <div class="pcmsg" id="pmsg">Chargement...</div>
+        <div class="pcopts" id="popts"></div>
+      </div>
+      <div class="sechd"><div class="sectitle">Echeances</div></div>
+      <div class="dlcard" style="border-color:var(--red);background:var(--red-l)"><div class="dlinfo"><div class="dltitle">Fiche bilan de stage</div><div class="dlsub">A remettre en cours de francais</div></div><div class="dlbadge" style="background:var(--red-l);color:var(--red)">2 jours</div></div>
+      <div class="dlcard" style="border-color:var(--amber)"><div class="dlinfo"><div class="dltitle">Choix options 2de</div><div class="dlsub">A remettre au secretariat</div></div><div class="dlbadge" style="background:var(--amber-l);color:var(--amber)">5 jours</div></div>
+      <div class="dlcard" style="border-color:var(--teal);margin-bottom:0"><div class="dlinfo"><div class="dltitle">Expose SVT</div><div class="dlsub">Presentation orale</div></div><div class="dlbadge" style="background:var(--teal-l);color:var(--teal)">12 jours</div></div>
+      <div class="sechd"><div class="sectitle">Mission de la semaine</div></div>
+      <div class="ocard">
+        <div class="octop"><div class="octitle" id="mwt">Chargement...</div><div class="ocxp" id="mwx">+80 XP</div></div>
+        <div class="ocdesc" id="mwd"></div>
+        <div class="ocprog"><div class="ocfill" id="mwf" style="width:0%"></div></div>
+        <div class="ocfoot"><span id="mwc">0 etape</span><span>Cette semaine</span></div>
+        <div id="mws"></div>
+      </div>
+      <div class="sechd"><div class="sectitle">Mes objectifs du semestre</div></div>
+      <div class="ocard">
+        <div class="octop"><div class="octitle">3 objectifs a atteindre</div><div class="ocxp">+150 XP</div></div>
+        <div class="ocdesc">Coche chaque semaine quand tu fais un effort concret sur tes objectifs.</div>
+        <div class="ocprog"><div class="ocfill" id="objf" style="width:0%"></div></div>
+        <div class="ocfoot"><span id="objc">0 / 3 cette semaine</span><span>Fin du 1er semestre</span></div>
+        <div id="objtasks"></div>
+      </div>
+      <div style="text-align:center;padding:1.5rem 0 .5rem">
+        <button onclick="confirmReset()" style="padding:8px 16px;border-radius:20px;border:0.5px solid rgba(255,255,255,0.1);background:transparent;color:rgba(255,255,255,0.2);font-size:11px;cursor:pointer;font-family:inherit">
+          &#8635; Reinitialiser mon profil
+        </button>
+      </div>
+    </div>
+    <div class="navbar">
+      <div class="navitem on" id="nav-home" onclick="go('p-dash');renderDash();renderMission()"><span class="navicon">&#127968;</span>Accueil</div>
+      <div class="navitem" id="nav-pilo" onclick="go('p-chat');initChat()"><span class="navicon">&#129302;</span>PILO</div>
+      <div class="navitem" id="nav-pass" onclick="go('p-passport');renderPassport()"><span class="navicon">&#128220;</span>Passeport</div>
+      <div class="navitem" id="nav-orient" onclick="go('p-chat');initChat()"><span class="navicon">&#129517;</span>Orientation</div>
+    </div>
+  </div>
+
+  <!-- PASSEPORT NUMERIQUE -->
+  <div class="page" id="p-passport">
+    <div class="dhd" style="display:flex;align-items:center;justify-content:space-between">
+      <div><div class="dgreet">Mon document officiel</div><div class="dname">Passeport CAPilot</div></div>
+      <button onclick="exportPassport()" style="padding:8px 14px;border-radius:8px;background:var(--blue);color:#fff;border:none;font-size:12px;font-weight:500;cursor:pointer">Exporter</button>
+    </div>
+    <div class="dbody" id="passportBody"></div>
+    <div class="navbar">
+      <div class="navitem" onclick="go('p-dash');renderDash();renderMission()"><span class="navicon">&#127968;</span>Accueil</div>
+      <div class="navitem" onclick="go('p-chat');initChat()"><span class="navicon">&#129302;</span>PILO</div>
+      <div class="navitem on"><span class="navicon">&#128220;</span>Passeport</div>
+      <div class="navitem" onclick="go('p-chat');initChat()"><span class="navicon">&#129517;</span>Orientation</div>
+    </div>
+  </div>
+
+  <div class="page" id="p-chat">
+    <div class="chathd">
+      <div class="chatback" onclick="go('p-dash')">&#8592;</div>
+      <div class="pcav">&#129302;</div>
+      <div><div class="pcname">PILO</div><div style="font-size:11px;color:var(--teal)">&#9679; En ligne</div></div>
+    </div>
+    <div class="chatbody" id="cbody"></div>
+    <div class="chatopts" id="copts"></div>
+    <div class="chatin-row">
+      <input class="chatin" id="cinp" placeholder="Ecris a PILO..." onkeydown="if(event.key==='Enter')sendMsg()">
+      <button class="chatsend" onclick="sendMsg()">&#8593;</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── SAUVEGARDE localStorage + Firebase ────────────────────
+var S={pseudo:"",avatar:"A",interests:[],mood:"",xp:100,streak:1,selObj:[],objDone:{},badges:[],missionsCompleted:0,lastVisit:""};
+var ELEVE_ID = null;
+
+function getEleveId(){
+  if(!ELEVE_ID){
+    ELEVE_ID = localStorage.getItem("capilot_id");
+    if(!ELEVE_ID){
+      ELEVE_ID = "eleve_" + Date.now() + "_" + Math.random().toString(36).substr(2,6);
+      localStorage.setItem("capilot_id", ELEVE_ID);
+    }
+  }
+  return ELEVE_ID;
+}
+
+function saveState(){
+  try{
+    localStorage.setItem("capilot_s", JSON.stringify(S));
+    // Sync Firebase
+    var id = getEleveId();
+    var data = {
+      pseudo: S.pseudo,
+      avatar: S.avatar,
+      xp: S.xp,
+      streak: S.streak,
+      niveau: S.xp >= 500 ? 3 : S.xp >= 200 ? 2 : 1,
+      missionsCompleted: S.missionsCompleted,
+      objDoneCount: Object.values(S.objDone).filter(Boolean).length,
+      totalObj: S.selObj ? S.selObj.length : 0,
+      lastVisit: new Date().toISOString(),
+      alerte: S.streak === 0 || (S.xp < 150 && S.missionsCompleted === 0)
+    };
+    db.ref("eleves/" + id).set(data).catch(function(e){});
+  }catch(e){}
+}
+
+function loadState(){
+  try{
+    var saved=localStorage.getItem("capilot_s");
+    if(saved){
+      var parsed=JSON.parse(saved);
+      S=Object.assign(S,parsed);
+      return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+function resetState(){
+  try{
+    var id = getEleveId();
+    db.ref("eleves/" + id).remove().catch(function(e){});
+  }catch(e){}
+  localStorage.removeItem("capilot_s");
+  localStorage.removeItem("capilot_id");
+  location.reload();
+}
+
+function go(id){
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("on");});
+  document.getElementById(id).classList.add("on");
+}
+
+function updateClock(){
+  var n=new Date(),h=n.getHours(),m=n.getMinutes();
+  document.getElementById("clk").textContent=(h<10?"0":"")+h+":"+(m<10?"0":"")+m;
+}
+updateClock();
+setInterval(updateClock,10000);
+
+// Vérifier si déjà inscrit au chargement
+(function(){
+  if(loadState()&&S.pseudo&&S.pseudo.length>0){
+    // Eleve déjà inscrit - aller directement au dashboard
+    go("p-dash");
+    renderDash();
+    renderMission();
+    // Mettre à jour le streak
+    var today=new Date().toDateString();
+    var last=S.lastVisit?new Date(S.lastVisit).toDateString():"";
+    if(last!==today){
+      S.streak=(last===new Date(Date.now()-86400000).toDateString())?S.streak+1:1;
+      S.lastVisit=new Date().toISOString();
+      saveState();
+    }
+    document.getElementById("stk").textContent=S.streak;
+    // Forcer sync Firebase au chargement
+    setTimeout(function(){ saveState(); }, 2000);
+  }
+})();
+
+var STEPS={1:{p:"20%",l:"Etape 1 / 5"},2:{p:"38%",l:"Etape 2 / 5"},3:{p:"56%",l:"Etape 3 / 5"},4:{p:"74%",l:"Etape 4 / 5"},5:{p:"92%",l:"Etape 5 / 5"}};
+function showStep(n){
+  for(var i=1;i<=5;i++){
+    var el=document.getElementById("s"+i);
+    if(el)el.style.display=(i===n?"flex":"none");
+    if(el&&i===n)el.style.flexDirection="column";
+  }
+  document.getElementById("prog").style.width=STEPS[n].p;
+  document.getElementById("slbl").textContent=STEPS[n].l;
+  document.getElementById("obody").scrollTop=0;
+  if(n===3)renderObjGrid();
+}
+
+function cIn(i){
+  var v=document.getElementById("cb"+i).value.toUpperCase();
+  document.getElementById("cb"+i).value=v;
+  if(v&&i<5)document.getElementById("cb"+(i+1)).focus();
+  var full="";for(var j=0;j<6;j++)full+=document.getElementById("cb"+j).value;
+  document.getElementById("btnC").disabled=full.length!==6;
+  if(full.length===6){document.getElementById("chint").textContent="Classe reconnue - College Guy Moquet";document.getElementById("chint").style.color="var(--teal)";}
+}
+
+function pChange(){
+  S.pseudo=document.getElementById("pin").value;
+  document.getElementById("btnP").disabled=S.pseudo.length<3;
+}
+
+function sAv(el){
+  document.querySelectorAll(".avopt").forEach(function(a){a.classList.remove("sel");});
+  el.classList.add("sel");
+  S.avatar=el.textContent;
+}
+
+function sInt(el){
+  var n=document.querySelectorAll(".iopt.sel").length;
+  if(el.classList.contains("sel")){el.classList.remove("sel");}
+  else if(n<3){el.classList.add("sel");}
+  document.getElementById("btnI").disabled=document.querySelectorAll(".iopt.sel").length===0;
+}
+
+function sMood(el,mood,reply){
+  document.querySelectorAll(".mbtn").forEach(function(b){b.classList.remove("sel");});
+  el.classList.add("sel");
+  S.mood=mood;
+  document.getElementById("mreptxt").textContent=reply;
+  document.getElementById("mrep").style.display="flex";
+  document.getElementById("btnM").disabled=false;
+}
+
+var OBJ={
+  "Attitude":[
+    {id:"o1",l:"Accepter les remarques pour progresser",c:["Ecouter sans interrompre.","Noter les remarques pour y reflechir.","Revenir sur son travail avec les conseils."]},
+    {id:"o2",l:"Assumer ses erreurs",c:["Reconnaitre ses erreurs.","Savoir s'excuser et reparer.","Apprendre de ses erreurs."]},
+    {id:"o3",l:"Avoir son materiel",c:["Preparer son materiel la veille.","Racheter le materiel abime ou fini."]},
+    {id:"o4",l:"Avoir un comportement respectueux",c:["Ecouter sans interrompre.","Utiliser un ton approprie.","Se calmer avant de reagir."]},
+    {id:"o5",l:"Avoir une attitude plus positive",c:["Voir les erreurs comme des occasions d'apprendre.","Adopter une attitude positive en classe."]},
+    {id:"o6",l:"Cooperer avec les autres",c:["Ecouter les idees de chacun.","Partager equitablement les taches.","Encourager ses camarades."]},
+    {id:"o7",l:"Etre ponctuel et assidu",c:["Preparer ses affaires la veille.","Mettre un vrai reveil tot.","Ne pas trainer dans les couloirs."]},
+    {id:"o8",l:"Gerer ses bavardages",c:["Choisir un camarade calme a cote.","Se fixer des objectifs de silence."]},
+    {id:"o9",l:"Gerer ses emotions (stress, colere)",c:["Respirer pour se calmer.","En parler a un adulte de confiance."]},
+    {id:"o10",l:"Perseverer",c:["Ne pas se decourager face a la difficulte.","Chercher plusieurs solutions."]},
+    {id:"o11",l:"Se concentrer et etre attentif",c:["Ranger son telephone.","Se placer au premier rang.","Chercher l'idee principale du cours."]},
+    {id:"o12",l:"Se mettre spontanement au travail",c:["Commencer par une tache facile.","Se fixer un objectif precis."]},
+    {id:"o13",l:"Utiliser un langage adapte",c:["Parler avec un ton respectueux.","Prendre le temps de formuler ses pensees."]}
+  ],
+  "Apprentissages":[
+    {id:"o14",l:"Demander de l'aide",c:["Lever la main quand on ne comprend pas.","Aller voir l'enseignant ou un camarade."]},
+    {id:"o15",l:"Etre plus organise",c:["Tenir a jour son agenda.","Preparer son sac la veille.","Faire des listes et les cocher."]},
+    {id:"o16",l:"Faire ses devoirs",c:["Relire les consignes avant de commencer.","Faire relire son travail."]},
+    {id:"o17",l:"Gagner en autonomie",c:["Essayer seul avant de demander de l'aide.","Utiliser les ressources disponibles."]},
+    {id:"o18",l:"Participer davantage a l'oral",c:["Lever la main au moins une fois par cours.","Augmenter la frequence au fil des semaines."]},
+    {id:"o19",l:"Respecter les delais et planifier",c:["Noter les echeances dans l'agenda.","Diviser le travail en etapes.","Prevoir un creneau chaque jour."]},
+    {id:"o20",l:"S'entrainer (exercices)",c:["Refaire les exercices a la maison.","Demander des exercices supplementaires."]},
+    {id:"o21",l:"S'investir davantage",c:["Faire les devoirs avec serieux.","Relire ses cours chaque soir."]},
+    {id:"o22",l:"Soigner la presentation des travaux",c:["Ecrire lisiblement.","Sauter des lignes et encadrer les titres."]},
+    {id:"o23",l:"Travailler l'orientation",c:["Explorer les metiers sur l'ONISEP.","Participer aux portes ouvertes."]},
+    {id:"o24",l:"Travailler la memorisation",c:["Resumer les lecons avec des mots-cles.","Revoir les notions 1 jour puis 7 jours apres."]}
+  ],
+  "Aller plus loin":[
+    {id:"o25",l:"Aider les camarades en difficulte",c:["Proposer son aide avec bienveillance.","Feliciter les progres du camarade."]},
+    {id:"o26",l:"Aller plus loin dans les apprentissages",c:["Faire des recherches personnelles.","Tenir un carnet de reussites."]},
+    {id:"o27",l:"Developper son esprit critique",c:["Se renseigner sur l'actualite.","Distinguer faits et opinions."]},
+    {id:"o28",l:"Enrichir sa culture generale",c:["Regarder des documentaires.","S'informer sur l'actualite mondiale."]},
+    {id:"o29",l:"Etre plus ambitieux",c:["Se fixer des objectifs plus eleves.","Croire en son potentiel."]},
+    {id:"o30",l:"Lire davantage",c:["Lire 10 minutes par jour.","Emprunter des livres au CDI."]},
+    {id:"o31",l:"Prendre des initiatives",c:["Proposer des idees sans qu'on le demande.","S'engager dans des projets de l'etablissement."]}
+  ]
+};
+
+var CATCOL={"Attitude":"#3B7EF8","Apprentissages":"#0FD6A0","Aller plus loin":"#F59E0B"};
+
+function renderObjGrid(){
+  var grid=document.getElementById("ogrid");
+  // Ne recree pas si deja fait — juste mettre a jour les etats
+  if(grid.children.length===0){
+    Object.keys(OBJ).forEach(function(cat){
+      var lbl=document.createElement("div");
+      lbl.className="catlbl";lbl.style.color=CATCOL[cat];lbl.textContent=cat;
+      grid.appendChild(lbl);
+      OBJ[cat].forEach(function(obj){
+        var btn=document.createElement("button");
+        btn.className="objbtn";
+        btn.setAttribute("data-id",obj.id);
+        btn.innerHTML="<span>&#9675;</span>"+obj.l;
+        btn.onclick=function(){
+          var isSel=S.selObj.find(function(o){return o.id===obj.id;});
+          if(isSel){
+            S.selObj=S.selObj.filter(function(o){return o.id!==obj.id;});
+          } else if(S.selObj.length<3){
+            S.selObj.push(obj);
+          }
+          updateObjGrid();
+        };
+        grid.appendChild(btn);
+      });
+    });
+  }
+  updateObjGrid();
+}
+
+function updateObjGrid(){
+  var grid=document.getElementById("ogrid");
+  grid.querySelectorAll("button[data-id]").forEach(function(btn){
+    var id=btn.getAttribute("data-id");
+    var isSel=S.selObj.find(function(o){return o.id===id;});
+    btn.className="objbtn"+(isSel?" sel":"");
+    btn.querySelector("span").innerHTML=isSel?"&#10003;":"&#9675;";
+  });
+  var btnO=document.getElementById("btnO");
+  if(btnO){
+    if(S.selObj.length===3){
+      btnO.removeAttribute("disabled");
+      btnO.style.cssText="background:#3B7EF8;color:#fff;box-shadow:0 8px 24px rgba(59,126,248,.35);cursor:pointer;width:100%;padding:14px;border-radius:14px;font-size:15px;font-weight:500;font-family:inherit;border:none;margin-top:1rem";
+    } else {
+      btnO.setAttribute("disabled","true");
+      btnO.style.cssText="background:#212B40;color:#4A5568;box-shadow:none;cursor:default;width:100%;padding:14px;border-radius:14px;font-size:15px;font-weight:500;font-family:inherit;border:none;margin-top:1rem";
+    }
+  }
+  var msg=document.querySelector("#s3 div[style*='text-align:center']");
+  if(msg){
+    var rem=3-S.selObj.length;
+    if(rem===0){
+      msg.textContent="Parfait ! 3 objectifs selectionnes.";
+      msg.style.color="#0FD6A0";
+    } else {
+      msg.textContent="Choisis exactement 3 objectifs ("+rem+" restant"+(rem>1?"s":"")+")" ;
+      msg.style.color="#4A5568";
+    }
+  }
+}
+
+
+
+function finishOnboard(){
+  S.lastVisit=new Date().toISOString();
+  saveState();
+  document.getElementById("wav").textContent=S.avatar||"A";
+  document.getElementById("wnam").textContent=S.pseudo||"Pilote";
+  go("p-welcome");
+}
+
+function goMain(){
+  go("p-dash");
+  renderDash();
+  renderMission();
+}
+
+var PMSGS=[
+  {m:"Bonjour ! Tu as la fiche bilan de stage dans 2 jours. On la decoupe en 3 etapes ?",o:["Oui, dis-moi comment","Je la ferai ce soir","C'est deja commence"]},
+  {m:"Tu fais des efforts sur tes objectifs - c'est exactement ca l'autonomie !",o:["C'est quoi mon prochain badge ?","Voir mes missions","Parler orientation"]},
+  {m:"Tu t'interesses a quoi comme metier en ce moment ?",o:["Plutot la sante","Plutot l'informatique","Je ne sais pas encore"]}
+];
+var pidx=0;
+
+function renderDash(){
+  var h=new Date().getHours();
+  document.getElementById("greet").textContent=h<12?"Bonjour":h<18?"Bon apres-midi":"Bonsoir";
+  document.getElementById("dnam").textContent=S.pseudo||"Pilote";
+  document.getElementById("xpn").textContent=S.xp;
+  document.getElementById("stk").textContent=S.streak||1;
+  document.getElementById("lvf").style.width=Math.min(S.xp/500*100,100)+"%";
+  renderPilo();
+  renderObjTasks();
+}
+
+function renderPilo(){
+  var m=PMSGS[pidx%PMSGS.length];
+  document.getElementById("pmsg").textContent=m.m;
+  var opts=document.getElementById("popts");
+  opts.innerHTML="";
+  m.o.forEach(function(o){
+    var btn=document.createElement("button");
+    btn.className="pcopt";btn.textContent=o;
+    btn.onclick=function(){piloRep(o);};
+    opts.appendChild(btn);
+  });
+}
+
+function piloRep(r){
+  var reps={
+    "Oui, dis-moi comment":"Plan : ce soir introduction (5 min). Demain corps du texte (10 min). Apres-demain relecture. Tu peux le faire !",
+    "Je la ferai ce soir":"Super ! Mets une alarme a 19h. C'est l'autonomie : tu geres sans qu'on te le rappelle.",
+    "C'est deja commence":"Excellent ! Tu es en avance - c'est exactement ce qu'on vise.",
+    "C'est quoi mon prochain badge ?":"Le badge Chasseur d'objectifs - debloque quand tu coches tes 3 objectifs 3 semaines de suite.",
+    "Voir mes missions":"Tes objectifs sont juste en dessous. Coche un effort concret !",
+    "Parler orientation":"Clique sur PILO en bas pour une vraie conversation sur ton orientation.",
+    "Plutot la sante":"Medecine, infirmier, kine, pharmacie... Bac general conseille.",
+    "Plutot l'informatique":"Developpeur, cybersecurite, IA, data... Le secteur le plus porteur !",
+    "Je ne sais pas encore":"C'est normal en 3e. On va explorer ensemble dans l'onglet Orientation."
+  };
+  document.getElementById("pmsg").textContent=reps[r]||"Interessant ! On en reparle bientot.";
+  document.getElementById("popts").innerHTML="";
+  pidx++;
+  setTimeout(renderPilo,3000);
+}
+
+var objDn=0;
+function renderObjTasks(){
+  var c=document.getElementById("objtasks");
+  c.innerHTML="";
+  if(!S.selObj||S.selObj.length===0){
+    c.innerHTML='<div style="font-size:12px;color:var(--text3);text-align:center;padding:1rem">Tes objectifs apparaitront ici</div>';
+    return;
+  }
+  S.selObj.forEach(function(obj){
+    var btn=document.createElement("button");
+    btn.className="taskbtn"+(S.objDone[obj.id]?" done":"");
+    btn.id="tb_"+obj.id;
+    btn.innerHTML="<span>"+(S.objDone[obj.id]?"&#10003;":"&#9675;")+"</span>"+obj.l;
+    btn.onclick=function(){checkObj(obj);};
+    c.appendChild(btn);
+  });
+}
+
+function checkObj(obj){
+  if(S.objDone[obj.id])return;
+  S.objDone[obj.id]=true;objDn++;
+  var btn=document.getElementById("tb_"+obj.id);
+  if(btn){btn.classList.add("done");btn.querySelector("span").innerHTML="&#10003;";}
+  var pct=Math.round((objDn/3)*100);
+  document.getElementById("objf").style.width=pct+"%";
+  document.getElementById("objc").textContent=objDn+" / 3 cette semaine";
+  S.xp+=50;document.getElementById("xpn").textContent=S.xp;
+  document.getElementById("lvf").style.width=Math.min(S.xp/500*100,100)+"%";
+  if(obj.c&&obj.c.length>0){
+    var conseil=obj.c[Math.floor(Math.random()*obj.c.length)];
+    document.getElementById("pmsg").textContent="Conseil : "+conseil;
+    document.getElementById("popts").innerHTML="";
+    setTimeout(renderPilo,4000);
+  }
+  saveState();
+  if(objDn===3){S.xp+=100;document.getElementById("xpn").textContent=S.xp;saveState();setTimeout(function(){alert("Bravo ! 3 objectifs coches ! +100 XP bonus !");},300);}
+}
+
+var MISSIONS=[
+  {t:"Orientation - Explore ton futur",x:"+80 XP",d:"Passe 10 minutes sur Onisep.fr. Cherche un metier qui t attire et note le diplome requis et une chose surprenante.",s:["J ai ouvert Onisep.fr","J ai trouve un metier","J ai note les infos cles"]},
+  {t:"Stage - Prends les devants",x:"+100 XP",d:"Trouve 2 entreprises ou tu voudrais faire ton stage. Note leur nom et activite. Tu feras la demande seul.",s:["J ai trouve 2 entreprises","J ai note leurs coordonnees","J ai prepare ma demande"]},
+  {t:"Oral DNB - Prepare ta presentation",x:"+90 XP",d:"Choisis ton sujet, note 3 arguments et entraine-toi a parler 1 minute devant un miroir.",s:["J ai choisi mon sujet","J ai mes 3 arguments","Je me suis entraine devant un miroir"]},
+  {t:"Autonomie - Gere sans tes parents",x:"+70 XP",d:"Note toutes tes deadlines scolaires toi-meme cette semaine, sans demander a tes parents.",s:["Deadlines notees","Agenda verifie ce soir","5 jours consecutifs accomplis"]},
+  {t:"Oral - Participe en classe",x:"+60 XP",d:"Participe au moins 1 fois par cours. L oral du DNB se prepare maintenant.",s:["Participe en francais","Participe en maths","Participe dans une autre matiere"]}
+];
+
+var mwDn={};var curM=0;
+function renderMission(){
+  var m=MISSIONS[curM%MISSIONS.length];
+  document.getElementById("mwt").textContent=m.t;
+  document.getElementById("mwx").textContent=m.x;
+  document.getElementById("mwd").textContent=m.d;
+  var steps=document.getElementById("mws");steps.innerHTML="";
+  var done=0;
+  m.s.forEach(function(s,i){
+    var k="m"+curM+"_"+i;
+    if(mwDn[k])done++;
+    var btn=document.createElement("button");
+    btn.className="taskbtn"+(mwDn[k]?" done":"");
+    btn.innerHTML="<span>"+(mwDn[k]?"&#10003;":"&#9675;")+"</span>"+s;
+    btn.onclick=function(){
+      if(mwDn[k])return;mwDn[k]=true;done++;
+      btn.classList.add("done");btn.querySelector("span").innerHTML="&#10003;";
+      var pct=Math.round((done/m.s.length)*100);
+      document.getElementById("mwf").style.width=pct+"%";
+      document.getElementById("mwc").textContent=done+" / "+m.s.length+" etape"+(done>1?"s":"");
+      S.xp+=20;document.getElementById("xpn").textContent=S.xp;saveState();
+      if(done===m.s.length){S.missionsCompleted++;curM=(curM+1)%MISSIONS.length;mwDn={};saveState();setTimeout(function(){renderMission();},500);}
+    };
+    steps.appendChild(btn);
+  });
+  var pct=Math.round((done/m.s.length)*100);
+  document.getElementById("mwf").style.width=pct+"%";
+  document.getElementById("mwc").textContent=done+" / "+m.s.length+" etape"+(done>1?"s":"");
+}
+
+function confirmReset(){
+  if(confirm("Reinitialiser ton profil CAPilot ? Tu devras refaire l'onboarding.")){
+    resetState();
+  }
+}
+
+function showBadges(){alert("Tes badges\n\nPassager (niveau 1) - Debloque !\nChasseur d'objectifs - Coche tes 3 objectifs 3 semaines\nStreak Master - 7 jours consecutifs\nPilote Solo - Gere un dossier seul");}
+
+function renderPassport(){
+  var body=document.getElementById("passportBody");
+  if(!body)return;
+  var objList=S.selObj.map(function(o){
+    var done=S.objDone[o.id];
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;background:'+(done?"var(--teal-l)":"var(--surface)")+';border:1px solid '+(done?"rgba(15,214,160,.3)":"var(--border2)")+';margin-bottom:6px;font-size:13px;color:'+(done?"var(--teal)":"var(--text2)")+'"><span>'+(done?"&#10003;":"&#9675;")+"</span>"+o.l+"</div>";
+  }).join("");
+
+  var nivel=S.xp<200?"Passager":S.xp<600?"Co-pilote":S.xp<1500?"Pilote Junior":S.xp<3000?"Explorateur":"Commandant de bord";
+  var date=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+
+  body.innerHTML='<div style="background:var(--bg3);border:1px solid var(--border2);border-radius:14px;padding:1.25rem;margin-bottom:1rem">'+
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:1rem">'+
+    '<div style="width:48px;height:48px;border-radius:50%;background:var(--blue-l);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:22px">'+(S.avatar||"A")+'</div>'+
+    '<div><div style="font-size:16px;font-weight:700;color:var(--text)">'+(S.pseudo||"Pilote")+'</div><div style="font-size:12px;color:var(--blue)">Niveau : '+nivel+'</div></div>'+
+    '<div style="margin-left:auto;text-align:right"><div style="font-size:20px;font-weight:700;color:var(--text)">'+S.xp+'</div><div style="font-size:11px;color:var(--text3)">XP total</div></div></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">'+
+    '<div style="text-align:center;padding:10px;background:var(--amber-l);border-radius:8px"><div style="font-size:18px;font-weight:700;color:var(--amber)">'+S.streak+'</div><div style="font-size:10px;color:var(--amber)">Streak</div></div>'+
+    '<div style="text-align:center;padding:10px;background:var(--teal-l);border-radius:8px"><div style="font-size:18px;font-weight:700;color:var(--teal)">'+(Object.keys(S.objDone).length)+'</div><div style="font-size:10px;color:var(--teal)">Objectifs</div></div>'+
+    '<div style="text-align:center;padding:10px;background:var(--blue-l);border-radius:8px"><div style="font-size:18px;font-weight:700;color:var(--blue)">'+(S.missionsCompleted||0)+'</div><div style="font-size:10px;color:var(--blue)">Missions</div></div>'+
+    '</div></div>'+
+    '<div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:8px">Mes objectifs du semestre</div>'+
+    objList+
+    '<div style="font-size:11px;color:var(--text3);text-align:center;margin-top:1rem">CAPilot · College Guy Moquet · '+date+'</div>';
+}
+
+function exportPassport(){
+  var nivel=S.xp<200?"Passager":S.xp<600?"Co-pilote":S.xp<1500?"Pilote Junior":S.xp<3000?"Explorateur":"Commandant de bord";
+  var date=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"});
+  var objList=S.selObj.map(function(o){
+    return (S.objDone[o.id]?"[ACQUIS] ":"[EN COURS] ")+o.l;
+  }).join("\n");
+  var txt="PASSEPORT CAPILOT\n"+"=".repeat(30)+"\n\n";
+  txt+="Eleve : "+(S.pseudo||"Pilote")+"\n";
+  txt+="Niveau : "+nivel+"\n";
+  txt+="XP total : "+S.xp+"\n";
+  txt+="Streak : "+S.streak+" jours\n";
+  txt+="Missions completees : "+(S.missionsCompleted||0)+"\n\n";
+  txt+="OBJECTIFS DU SEMESTRE\n"+"-".repeat(20)+"\n"+objList+"\n\n";
+  txt+="College Guy Moquet · Gennevilliers\n"+date+"\n";
+  txt+="cap3e-2026.netlify.app/capilot.html";
+  var a=document.createElement("a");
+  a.href="data:text/plain;charset=utf-8,"+encodeURIComponent(txt);
+  a.download="Passeport_CAPilot_"+(S.pseudo||"Pilote")+".txt";
+  a.click();
+}
+
+var CHAT={
+  "Oui, j ai une idee":{p:"Super ! C'est quoi ton idee ?",o:["Medecine ou sante","Informatique / tech","Quelque chose de creatif","Travailler avec les animaux"]},
+  "Pas vraiment, je cherche":{p:"C'est normal en 3e ! Qu'est-ce que tu aimes faire en dehors de l'ecole ?",o:["Les jeux video","Le sport","Dessiner / creer","Aider les autres"]},
+  "Je suis perdu":{p:"Ca arrive. Quelle matiere tu n'aimes PAS du tout ?",o:["Les maths","Le francais","Les sciences","Le sport"]},
+  "Medecine ou sante":{p:"Medecine, kine, infirmier, pharmacie... Pour la medecine, bac general avec mention. Tu veux explorer ?",o:["Oui explore","Je vise medecin","Autres metiers sante"]},
+  "Informatique / tech":{p:"Developpeur, cybersecurite, IA, data science... Tu preferes creer des applis ou analyser des donnees ?",o:["Creer des applis","Analyser des donnees","La cybersecurite"]},
+  "Quelque chose de creatif":{p:"Designer, architecte, illustrateur, realisateur... Quel aspect creatif t'attire ?",o:["Le dessin / graphisme","La mode","Le cinema / video","L'architecture"]},
+  "Travailler avec les animaux":{p:"Veterinaire, comportementaliste, eleveur, garde-forestier... Tu veux qu'on explore ?",o:["Oui explore","Je vise veterinaire","Autres metiers animaux"]}
+};
+
+function initChat(){
+  var b=document.getElementById("cbody"),o=document.getElementById("copts");
+  b.innerHTML="";o.innerHTML="";
+  setTimeout(function(){
+    addPilo("Salut "+(S.pseudo||"Pilote")+" ! On parle orientation aujourd'hui. Tu as des idees sur ce que tu veux faire plus tard ?");
+    setTimeout(function(){showCOpts(["Oui, j ai une idee","Pas vraiment, je cherche","Je suis perdu"]);},900);
+  },300);
+}
+
+function addPilo(html){
+  var b=document.getElementById("cbody");
+  var t=document.createElement("div");t.className="typing";t.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+  b.appendChild(t);b.scrollTop=b.scrollHeight;
+  setTimeout(function(){b.removeChild(t);var m=document.createElement("div");m.className="msgpilo";m.innerHTML=html;b.appendChild(m);b.scrollTop=b.scrollHeight;},1000);
+}
+
+function addPiloText(txt){
+  var b=document.getElementById("cbody");
+  var m=document.createElement("div");m.className="msgpilo";m.textContent=txt;
+  b.appendChild(m);b.scrollTop=b.scrollHeight;
+}
+
+function addUser(txt){var b=document.getElementById("cbody");var m=document.createElement("div");m.className="msguser";m.textContent=txt;b.appendChild(m);b.scrollTop=b.scrollHeight;}
+
+function showCOpts(arr){
+  var c=document.getElementById("copts");c.innerHTML="";
+  arr.forEach(function(o){var btn=document.createElement("button");btn.className="chatopt";btn.textContent=o;btn.onclick=function(){pickOpt(o);};c.appendChild(btn);});
+}
+
+function pickOpt(o){
+  document.getElementById("copts").innerHTML="";addUser(o);
+  var r=CHAT[o];
+  if(r){setTimeout(function(){addPilo(r.p);setTimeout(function(){showCOpts(r.o);},1200);},500);}
+  else{setTimeout(function(){addPilo("Interessant ! Continue dans cette direction.");setTimeout(function(){showCOpts(["Parler d'un metier","Retour accueil"]);},1200);},500);}
+}
+
+// ── PILO IA RÉELLE (Claude Anthropic) ────────────────────
+var chatHistory=[];
+
+async function sendMsgAI(){
+  var inp=document.getElementById("cinp");
+  var v=inp.value.trim();
+  if(!v||piloLoading)return;
+  inp.value="";
+  addUser(v);
+  piloLoading=true;
+  document.getElementById("copts").innerHTML="";
+
+  // Construire le contexte élève
+  var objNames=S.selObj.map(function(o){return o.l;}).join(", ");
+  var intNames=S.interests.join(", ")||"non renseignes";
+  var systemPrompt="Tu es PILO, le co-pilote numerique de "+( S.pseudo||"l'eleve")+" au college. Tu es bienveillant, encourageant et direct. Tu parles a un collegien de 3e.\n\nProfil de l'eleve :\n- Pseudo : "+(S.pseudo||"Pilote")+"\n- Objectifs du semestre : "+objNames+"\n- Centres d'interet : "+intNames+"\n- XP actuel : "+S.xp+"\n- Humeur du jour : "+(S.mood||"non renseignee")+"\n\nTon role : aider l'eleve sur son orientation, son organisation, ses objectifs et sa confiance en lui. Reponds en 2-3 phrases maximum, de facon concrete et adaptee a un collegien. Utilise un ton amical mais pas familier. Jamais de liste a puces. Si l'eleve parle d'orientation, propose des pistes concretes. Si l'eleve parle de difficultes scolaires, donne un conseil actionnable.";
+
+  chatHistory.push({role:"user",content:v});
+
+  // Ajouter indicateur de frappe
+  var t=document.createElement("div");t.className="typing";t.id="aiTyping";
+  t.innerHTML='<div class="tdot"></div><div class="tdot"></div><div class="tdot"></div>';
+  var b=document.getElementById("cbody");
+  b.appendChild(t);b.scrollTop=b.scrollHeight;
+
+  try{
+    var response=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1000,
+        system:systemPrompt,
+        messages:chatHistory.slice(-10)
+      })
+    });
+    var data=await response.json();
+    var typing=document.getElementById("aiTyping");
+    if(typing)typing.remove();
+    if(data.content&&data.content[0]){
+      var reply=data.content[0].text;
+      chatHistory.push({role:"assistant",content:reply});
+      addPiloText(reply);
+      saveState();
+    } else {
+      addPiloText("Desolé, je n'ai pas pu répondre. Réessaie !");
+    }
+  }catch(e){
+    var typing=document.getElementById("aiTyping");
+    if(typing)typing.remove();
+    // Fallback réponse pré-écrite
+    addPiloText("Je suis en mode hors-ligne. Utilise les boutons pour naviguer, je reviens bientot !");
+    setTimeout(function(){showCOpts(["Parler orientation","Mes deadlines","Retour accueil"]);},1200);
+  }
+  piloLoading=false;
+}
+
+var piloLoading=false;
+
+function sendMsg(){
+  var inp=document.getElementById("cinp");var v=inp.value.trim();if(!v)return;
+  sendMsgAI();
+}
+
+function addPiloText(txt){
+  var b=document.getElementById("cbody");
+  var m=document.createElement("div");m.className="msgpilo";m.textContent=txt;
+  b.appendChild(m);b.scrollTop=b.scrollHeight;
+}
+</script>
+</body>
+</html>

@@ -12,7 +12,19 @@
     gtag('js', new Date());
     gtag('config', 'G-NCCXNNL215', { anonymize_ip: true });
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Polices : chargées uniquement après consentement pour éviter transmission IP à Google -->
+  <!-- Fallback immédiat sur polices système (Georgia, system-ui) -->
+  <script>
+    // Chargement conditionnel des polices Google si consentement accordé
+    (function() {
+      if (localStorage.getItem('cap3e_cookie_consent') === 'accepted') {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap';
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
   <style>
     :root {
       --marine: #0A1F44; --marine2: #1A3A6E; --or: #B8972A; --or-l: #F5EED6;
@@ -52,6 +64,7 @@
     footer a:hover { color: #C9A227; }
     footer p { color: rgba(255,255,255,0.3); font-size: 11px; margin-top: 0.75rem; }
   </style>
+  <script src="consent.js" defer></script>
 </head>
 <body>
 
@@ -139,7 +152,17 @@
   </ul>
   <p>Tu peux également refuser le suivi Google Analytics sur tous les sites via l'extension officielle : <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-out</a>.</p>
 
-  <p style="margin-top:2rem;font-size:12px;color:var(--gris3)">Dernière mise à jour : juillet 2026</p>
+  
+  <h2>7. Modifier votre choix</h2>
+  <p>Vous pouvez modifier votre choix concernant les cookies à tout moment :</p>
+  <div style="margin:1rem 0">
+    <button onclick="cap3eResetConsent()" style="padding:10px 20px;background:#0A1F44;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-family:inherit">
+      Modifier mes préférences cookies
+    </button>
+  </div>
+  <p style="font-size:13px;color:var(--gris3)">Ce bouton efface votre choix précédent et affiche à nouveau la bannière de consentement.</p>
+
+<p style="margin-top:2rem;font-size:12px;color:var(--gris3)">Dernière mise à jour : juillet 2026</p>
 
 </div>
 

@@ -122,14 +122,34 @@ body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(-
 </head>
 <body>
 <script>
+/*
+  ⚠️ AVERTISSEMENT — PROTECTION PROVISOIRE
+  ─────────────────────────────────────────
+  Cette protection par code côté client (JavaScript) est PROVISOIRE.
+  Elle dissuade un visiteur occasionnel mais NE CONSTITUE PAS une
+  sécurité forte : le code est lisible dans le code source par toute
+  personne qui l'inspecte.
+  
+  Action recommandée avant mise en production définitive :
+  Remplacer par une authentification Firebase Authentication
+  (email + mot de passe) ou par un accès restreint côté serveur.
+  
+  Code à transmettre à M. Hassini uniquement par canal sécurisé.
+*/
 (function() {
-  var CODE = "CAP3PP2026";
-  var SESSION_KEY = "cap3e_prof_auth";
-  // Vérifier si déjà authentifié en session
+  var CODE = "yprCoeF3FNBZ";
+  var SESSION_KEY = "cap3e_prof_auth_v2";
   if (sessionStorage.getItem(SESSION_KEY) !== "ok") {
-    var saisi = prompt("\u0026#128274;\u00a0 Acc\u00e8s r\u00e9serv\u00e9 \u00e0 M. Hassini\nEntrez le code d'acc\u00e8s :");
+    var saisi = prompt("\uD83D\uDD12 Acc\u00e8s r\u00e9serv\u00e9 \u00e0 M. Hassini\nEntrez le code d'acc\u00e8s provisoire :");
     if (saisi !== CODE) {
-      document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:system-ui;text-align:center"><div><div style="font-size:3rem;margin-bottom:1rem">\uD83D\uDD12</div><p style="color:#0A1F44;font-size:1.1rem">Acc\u00e8s non autoris\u00e9.</p><p style="color:#888;font-size:0.9rem;margin-top:0.5rem"><a href="capilot.html" style="color:#1A3A6E">Retour au site Cap 3e</a></p></div></div>';
+      document.body.innerHTML = [
+        '<div style="display:flex;align-items:center;justify-content:center;',
+        'height:100vh;font-family:system-ui;text-align:center;background:#F8F7F4">',
+        '<div><div style="font-size:3rem;margin-bottom:1rem">\uD83D\uDD12</div>',
+        '<p style="color:#0A1F44;font-size:1.1rem;font-weight:600">Acc\u00e8s non autoris\u00e9.</p>',
+        '<p style="color:#888;font-size:0.9rem;margin-top:0.5rem">',
+        '<a href="capilot.html" style="color:#1A3A6E">Retour au site Cap 3e</a></p></div></div>'
+      ].join('');
       return;
     }
     sessionStorage.setItem(SESSION_KEY, "ok");

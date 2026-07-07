@@ -12,7 +12,19 @@
     gtag('js', new Date());
     gtag('config', 'G-NCCXNNL215', { anonymize_ip: true });
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Polices : chargées uniquement après consentement pour éviter transmission IP à Google -->
+  <!-- Fallback immédiat sur polices système (Georgia, system-ui) -->
+  <script>
+    // Chargement conditionnel des polices Google si consentement accordé
+    (function() {
+      if (localStorage.getItem('cap3e_cookie_consent') === 'accepted') {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap';
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
   <style>
     :root {
       --marine: #0A1F44; --marine2: #1A3A6E; --or: #B8972A; --or-l: #F5EED6;
@@ -50,6 +62,7 @@
     footer a:hover { color: #C9A227; }
     footer p { color: rgba(255,255,255,0.3); font-size: 11px; margin-top: 0.75rem; }
   </style>
+  <script src="consent.js" defer></script>
 </head>
 <body>
 
@@ -87,17 +100,20 @@
   <p>Ces données sont utilisées uniquement pour améliorer le site (identifier les pages les plus utiles, détecter les problèmes d'affichage) et mesurer l'impact pédagogique du projet.</p>
 
   <h3>B. Données du formulaire de témoignage (volontaire)</h3>
-  <p>Si un ancien élève choisit de partager son témoignage via le formulaire, les données suivantes sont transmises à M. Hassini via le service Formspree :</p>
+  <p>Si un ancien élève choisit de partager son témoignage via le formulaire, les données suivantes sont collectées et transmises :</p>
   <ul>
     <li>Prénom (ou "Anonyme" si préféré)</li>
-    <li>Situation actuelle, métier, année de 3e</li>
+    <li>Situation actuelle, métier ou formation, année de 3e à Guy Môquet</li>
     <li>Voie choisie après la 3e</li>
     <li>Témoignage et conseil rédigés librement</li>
-    <li>Note de satisfaction</li>
-    <li>Accord de publication choisi</li>
-    <li>Adresse e-mail (utilisée uniquement pour valider la publication, jamais affichée)</li>
+    <li>Note de satisfaction sur le parcours</li>
+    <li>Accord de publication choisi (avec prénom et métier, ou anonyme)</li>
+    <li><strong>Adresse e-mail</strong> : utilisée uniquement par M. Hassini pour valider le contenu avant publication. Elle n'est jamais publiée sur le site, jamais transmise à des tiers, et jamais utilisée à des fins commerciales.</li>
   </ul>
-  <p>Ce formulaire est <strong>strictement volontaire</strong>. Aucun élève actuellement scolarisé n'est invité à le remplir.</p>
+  <p><strong>Qui reçoit ces données ?</strong> Les données transitent par <strong>Formspree</strong> (formspree.io), un service américain d'envoi de formulaires, avant d'arriver dans la boîte e-mail de M. Hassini. Formspree est soumis à ses propres conditions d'utilisation disponibles sur <a href="https://formspree.io/legal/privacy-policy/" target="_blank">formspree.io/legal/privacy-policy</a>.</p>
+  <p><strong>Durée de conservation :</strong> Les données sont conservées dans la boîte e-mail de M. Hassini jusqu'à validation ou refus du témoignage. Une fois publié, seuls le prénom (ou "Anonyme"), le métier et le contenu du témoignage sont visibles sur le site. L'adresse e-mail n'est pas conservée au-delà de la validation.</p>
+  <p><strong>Suppression :</strong> Pour demander la suppression d'un témoignage publié ou de vos données, contactez <a href="mailto:hassinicap3e@gmail.com">hassinicap3e@gmail.com</a>. La demande sera traitée dans un délai de 30 jours.</p>
+  <p>Ce formulaire est <strong>strictement volontaire</strong> et réservé aux anciens élèves. Aucun élève actuellement scolarisé n'est invité à le remplir.</p>
 
   <h3>C. Données stockées localement sur ton appareil</h3>
   <p>Certaines pages (CAPilot, piliers) utilisent le stockage local de ton navigateur (<code>localStorage</code>) pour mémoriser ta progression sans la transmettre à un serveur. Ces données restent sur ton appareil et ne sont jamais envoyées à qui que ce soit.</p>

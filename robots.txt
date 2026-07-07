@@ -1,0 +1,29 @@
+# robots.txt — Cap 3e
+# Collège Guy Môquet, Gennevilliers (92)
+
+User-agent: *
+
+# Pages publiques autorisées à l'indexation
+Allow: /cap3e/capilot.html
+Allow: /cap3e/orientation.html
+Allow: /cap3e/temoignages-anciens.html
+Allow: /cap3e/fiche_stage_3e.html
+Allow: /cap3e/fiche_dnb_3e.html
+Allow: /cap3e/fiche_voeux_3e.html
+Allow: /cap3e/besoins-specifiques.html
+Allow: /cap3e/quiz-orientation.html
+Allow: /cap3e/page_ressources_parents.html
+Allow: /cap3e/page_ressources_outils.html
+Allow: /cap3e/infographie_voies_orientation.html
+Allow: /cap3e/generateur_cv_stage.html
+Allow: /cap3e/generateur_lettre_motivation_stage.html
+Allow: /cap3e/formulaire_temoignages.html
+Allow: /cap3e/fiche_pix_3e.html
+
+# Pages privées/techniques — non indexées
+Disallow: /cap3e/dashboard-prof.html
+Disallow: /cap3e/test-firebase.html
+Disallow: /cap3e/capilot-wix.html
+
+# Sitemap
+Sitemap: https://hassiniabdel6-collab.github.io/cap3e/sitemap.xml

@@ -2,26 +2,42 @@
 <html lang="fr">
 <head>
 
-  <!-- Google Analytics 4 - CAP 3e -->
-  <!-- Remplacer G-NCCXNNL215 par l'identifiant GA4 officiel après création de la propriété sur analytics.google.com -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
+  <!-- Google Analytics 4 - CAP 3e — Chargement conditionnel (consentement requis) -->
   <script>
+    // GA4 désactivé par défaut avant consentement — RGPD/CNIL
+    window['ga-disable-G-NCCXNNL215'] = true;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-NCCXNNL215', {
-      anonymize_ip: true,
-      cookie_flags: 'SameSite=None;Secure'
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
     });
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
   <!-- Google Search Console - vérification CAP 3e -->
+  <!-- <meta name="google-site-verification" content="VOTRE_CODE_SEARCH_CONSOLE" /> -->
   <!-- Remplacer le contenu ci-dessous par la balise meta fournie par Google Search Console -->
   <!-- <meta name="google-site-verification" content="VOTRE_CODE_SEARCH_CONSOLE" /> -->
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Besoins specifiques — Cap 3e</title>
   <meta name="description" content="Informations sur les aménagements scolaires : PAP, PPS, troubles DYS, droits et accessibilité pour les élèves de 3e.">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Polices : chargées uniquement après consentement pour éviter transmission IP à Google -->
+  <!-- Fallback immédiat sur polices système (Georgia, system-ui) -->
+  <script>
+    // Chargement conditionnel des polices Google si consentement accordé
+    (function() {
+      if (localStorage.getItem('cap3e_cookie_consent') === 'accepted') {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap';
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
 <style>
 :root{
   --bg:#F8F7F4;--bg2:#EEECEA;--bg3:#E2E0DA;
@@ -124,6 +140,7 @@ body.high-contrast{--bg:#000;--bg2:#111;--surface:#111;--ink:#fff;--ink2:#eee;--
 
 .sep{height:0.5px;background:var(--border);margin:2rem 0}
 </style>
+  <script src="consent.js" defer></script>
 </head>
 <body>
 

@@ -12,7 +12,19 @@
     gtag('js', new Date());
     gtag('config', 'G-NCCXNNL215', { anonymize_ip: true });
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Polices : chargées uniquement après consentement pour éviter transmission IP à Google -->
+  <!-- Fallback immédiat sur polices système (Georgia, system-ui) -->
+  <script>
+    // Chargement conditionnel des polices Google si consentement accordé
+    (function() {
+      if (localStorage.getItem('cap3e_cookie_consent') === 'accepted') {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap';
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
   <style>
     :root {
       --marine: #0A1F44; --marine2: #1A3A6E; --or: #B8972A; --or-l: #F5EED6;
@@ -47,6 +59,7 @@
     footer a:hover { color: #C9A227; }
     footer p { color: rgba(255,255,255,0.3); font-size: 11px; margin-top: 0.75rem; }
   </style>
+  <script src="consent.js" defer></script>
 </head>
 <body>
 

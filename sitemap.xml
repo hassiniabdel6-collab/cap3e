@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Page principale CAPilot -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/capilot.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Orientation -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/orientation.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Témoignages -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/temoignages-anciens.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Stage -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/fiche_stage_3e.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- DNB -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/fiche_dnb_3e.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Voeux Affelnet -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/fiche_voeux_3e.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Besoins spécifiques -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/besoins-specifiques.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Quiz orientation -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/quiz-orientation.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Ressources parents -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/page_ressources_parents.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Ressources outils -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/page_ressources_outils.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Infographie voies -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/infographie_voies_orientation.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Générateur CV stage -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/generateur_cv_stage.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Générateur lettre motivation -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/generateur_lettre_motivation_stage.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Formulaire témoignages -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/formulaire_temoignages.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Fiche PIX -->
+  <url>
+    <loc>https://hassiniabdel6-collab.github.io/cap3e/fiche_pix_3e.html</loc>
+    <lastmod>2026-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

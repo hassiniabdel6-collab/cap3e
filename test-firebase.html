@@ -1,6 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head><meta charset="UTF-8"><title>Test Firebase</title></head>
+<head>
+  <!-- Google Analytics 4 - CAP 3e -->
+  <!-- Remplacer G-XXXXXXXXXX par l'identifiant GA4 officiel après création de la propriété sur analytics.google.com -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      anonymize_ip: true,
+      cookie_flags: 'SameSite=None;Secure'
+    });
+  </script>
+  <!-- Google Search Console - vérification CAP 3e -->
+  <!-- Remplacer le contenu ci-dessous par la balise meta fournie par Google Search Console -->
+  <!-- <meta name="google-site-verification" content="VOTRE_CODE_SEARCH_CONSOLE" /> -->
+  <meta charset="UTF-8"><title>Test Firebase</title></head>
 <body>
 <h2>Test Firebase CAPilot</h2>
 <div id="status">Connexion en cours...</div>

@@ -2,19 +2,23 @@
 <html lang="fr">
 <head>
 
-  <!-- Google Analytics 4 - CAP 3e -->
-  <!-- Remplacer G-NCCXNNL215 par l'identifiant GA4 officiel après création de la propriété sur analytics.google.com -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
+  <!-- Google Analytics 4 - CAP 3e — Chargement conditionnel (consentement requis) -->
   <script>
+    // GA4 désactivé par défaut avant consentement — RGPD/CNIL
+    window['ga-disable-G-NCCXNNL215'] = true;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-NCCXNNL215', {
-      anonymize_ip: true,
-      cookie_flags: 'SameSite=None;Secure'
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied'
     });
   </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
   <!-- Google Search Console - vérification CAP 3e -->
+  <!-- <meta name="google-site-verification" content="VOTRE_CODE_SEARCH_CONSOLE" /> -->
   <!-- Remplacer le contenu ci-dessous par la balise meta fournie par Google Search Console -->
   <!-- <meta name="google-site-verification" content="VOTRE_CODE_SEARCH_CONSOLE" /> -->
   <meta charset="UTF-8">
@@ -79,6 +83,7 @@
   @media(max-width:500px){.discussion-grid,.contacts-grid{grid-template-columns:1fr}.card{margin:1rem .5rem;padding:1.25rem}}
   @media print{body{background:white}.card{box-shadow:none}.faq-a{display:block!important}}
 </style>
+  <script src="consent.js" defer></script>
 </head>
 <body>
 

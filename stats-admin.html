@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suivi des statistiques — Cap 3e (Admin)</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Google Analytics 4 - CAP 3e -->
+  <!-- Remplacer G-XXXXXXXXXX par l'identifiant GA4 officiel -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { anonymize_ip: true });
+  </script>
+
+  <style>
+    :root {
+      --marine: #0A1F44; --marine2: #1A3A6E; --or: #B8972A; --or-l: #F5EED6;
+      --bg: #F8F7F4; --blanc: #FFFFFF; --gris: #5A5855;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--marine); }
+
+    .header { background: var(--marine); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1rem; }
+    .header h1 { color: #fff; font-size: 1.3rem; }
+    .header span { color: var(--or); font-size: 0.85rem; background: rgba(255,255,255,0.08); padding: 3px 10px; border-radius: 20px; }
+
+    .main { max-width: 780px; margin: 2rem auto; padding: 0 1.5rem; }
+
+    .card { background: var(--blanc); border-radius: 12px; border: 1px solid #E4E2DC; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .card-title { font-size: 1rem; font-weight: 700; color: var(--marine); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; }
+    .card-title .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .dot-green  { background: #22C55E; }
+    .dot-blue   { background: #3B82F6; }
+    .dot-or     { background: var(--or); }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-top: 0.75rem; }
+    .btn-marine { background: var(--marine); color: #fff; }
+    .btn-or     { background: var(--or-l); color: var(--or); border: 1px solid var(--or); }
+
+    .step { display: flex; gap: 12px; margin-bottom: 0.75rem; align-items: flex-start; }
+    .step-n { min-width: 26px; height: 26px; border-radius: 50%; background: var(--marine2); color: #fff; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .step-txt { font-size: 0.9rem; color: var(--gris); line-height: 1.6; }
+    .step-txt strong { color: var(--marine); }
+
+    code { background: #EEF2F8; padding: 2px 7px; border-radius: 4px; font-size: 0.85rem; color: var(--marine2); }
+
+    .notice { background: var(--or-l); border-left: 3px solid var(--or); border-radius: 8px; padding: 0.875rem 1rem; font-size: 0.85rem; color: var(--gris); margin-top: 0.75rem; line-height: 1.6; }
+
+    .footer { text-align: center; padding: 2rem; font-size: 0.8rem; color: #9A9890; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>📊 Suivi des statistiques — Cap 3e</h1>
+  </div>
+  <span>🔒 Page réservée à M. Hassini</span>
+</div>
+
+<div class="main">
+
+  <!-- STATUT -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-green"></span> Outils de suivi configurés</div>
+    <div class="step">
+      <div class="step-n">✓</div>
+      <div class="step-txt"><strong>Google Analytics 4</strong> — Code intégré dans toutes les pages du site.<br>
+      <em>En attente de l'identifiant GA4 officiel (G-XXXXXXXXXX) à remplacer.</em></div>
+    </div>
+    <div class="step">
+      <div class="step-n">✓</div>
+      <div class="step-txt"><strong>Google Search Console</strong> — Emplacement prévu dans chaque page pour la balise de vérification.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">✓</div>
+      <div class="step-txt"><strong>sitemap.xml</strong> — Toutes les pages publiques référencées.</div>
+    </div>
+    <div class="step">
+      <div class="step-n">✓</div>
+      <div class="step-txt"><strong>robots.txt</strong> — Pages publiques autorisées, pages privées protégées.</div>
+    </div>
+  </div>
+
+  <!-- ACTIVER GA4 -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-blue"></span> Étapes pour activer Google Analytics 4</div>
+    <div class="step"><div class="step-n">1</div>
+      <div class="step-txt">Aller sur <strong>analytics.google.com</strong> → Créer un compte → Ajouter une propriété GA4 pour <em>hassiniabdel6-collab.github.io/cap3e</em></div>
+    </div>
+    <div class="step"><div class="step-n">2</div>
+      <div class="step-txt">Copier l'<strong>identifiant de mesure</strong> (format <code>G-XXXXXXXXXX</code>)</div>
+    </div>
+    <div class="step"><div class="step-n">3</div>
+      <div class="step-txt">Remplacer toutes les occurrences de <code>G-XXXXXXXXXX</code> dans chaque fichier HTML par votre identifiant réel</div>
+    </div>
+    <div class="step"><div class="step-n">4</div>
+      <div class="step-txt">Les données apparaîtront dans GA4 sous <strong>24 à 48h</strong> après la première visite</div>
+    </div>
+    <a href="https://analytics.google.com" target="_blank" class="btn btn-marine">→ Ouvrir Google Analytics</a>
+    <div class="notice">💡 Les données de navigation sont anonymisées (<code>anonymize_ip: true</code>). Aucune donnée personnelle des élèves n'est collectée.</div>
+  </div>
+
+  <!-- SEARCH CONSOLE -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-or"></span> Étapes pour activer Google Search Console</div>
+    <div class="step"><div class="step-n">1</div>
+      <div class="step-txt">Aller sur <strong>search.google.com/search-console</strong> → Ajouter une propriété → URL prefix → coller <code>https://hassiniabdel6-collab.github.io/cap3e/</code></div>
+    </div>
+    <div class="step"><div class="step-n">2</div>
+      <div class="step-txt">Choisir la méthode <strong>"Balise HTML"</strong> → copier la balise fournie (format <code>&lt;meta name="google-site-verification" content="..."&gt;</code>)</div>
+    </div>
+    <div class="step"><div class="step-n">3</div>
+      <div class="step-txt">Dans chaque fichier HTML, remplacer le commentaire <code>&lt;!-- &lt;meta name="google-site-verification"... --&gt;</code> par la vraie balise (retirer les <code>&lt;!--</code> et <code>--&gt;</code>)</div>
+    </div>
+    <div class="step"><div class="step-n">4</div>
+      <div class="step-txt">Soumettre le sitemap : dans Search Console → Sitemaps → coller <code>sitemap.xml</code></div>
+    </div>
+    <a href="https://search.google.com/search-console" target="_blank" class="btn btn-or">→ Ouvrir Search Console</a>
+  </div>
+
+</div>
+
+<div class="footer">Cap 3e · Collège Guy Môquet, Gennevilliers (92) · Réservé à M. Hassini</div>
+
+</body>
+</html>

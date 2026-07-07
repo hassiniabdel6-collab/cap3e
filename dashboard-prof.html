@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
+
+  <!-- Google Analytics 4 - CAP 3e -->
+  <!-- Remplacer G-XXXXXXXXXX par l'identifiant GA4 officiel après création de la propriété sur analytics.google.com -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', {
+      anonymize_ip: true,
+      cookie_flags: 'SameSite=None;Secure'
+    });
+  </script>
+  <!-- Google Search Console - vérification CAP 3e -->
+  <!-- Remplacer le contenu ci-dessous par la balise meta fournie par Google Search Console -->
+  <!-- <meta name="google-site-verification" content="VOTRE_CODE_SEARCH_CONSOLE" /> -->
+  <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tableau de bord — Professeur Principal · Cap 3e</title>
+  <meta name="description" content="Espace réservé aux enseignants. Suivez la progression de vos élèves, les alertes et les ressources pédagogiques.">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 
 <!-- Firebase SDK -->

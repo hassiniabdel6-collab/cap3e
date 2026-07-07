@@ -20,7 +20,19 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CAPilot — Coach numérique pour collégiens</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <!-- Polices : chargées uniquement après consentement pour éviter transmission IP à Google -->
+  <!-- Fallback immédiat sur polices système (Georgia, system-ui) -->
+  <script>
+    // Chargement conditionnel des polices Google si consentement accordé
+    (function() {
+      if (localStorage.getItem('cap3e_cookie_consent') === 'accepted') {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Serif+Display&display=swap';
+        document.head.appendChild(link);
+      }
+    })();
+  </script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{

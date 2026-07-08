@@ -3,176 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Politique de cookies — Cap 3e</title>
-  <meta name="description" content="Politique de cookies du site Cap 3e : quels cookies sont utilisés, pourquoi et comment les gérer.">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
+  <title>Les cookies sur CAP 3e</title>
+  <meta name="description" content="CAP 3e n'utilise que trois cookies de mesure d'audience, activés uniquement après votre accord. Aucun cookie publicitaire.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
   <script>
+    window['ga-disable-G-NCCXNNL215'] = true;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-NCCXNNL215', { anonymize_ip: true });
+    gtag('consent', 'default', {'analytics_storage': 'denied','ad_storage': 'denied','ad_user_data': 'denied','ad_personalization': 'denied'});
   </script>
-    <!-- Polices : chargées uniquement après consentement pour éviter transmission IP à Google -->
-  <!-- Fallback immédiat sur polices système (Georgia, system-ui) -->
-  <script>
-    // Chargement conditionnel des polices Google si consentement accordé
-    (function() {
-      if (localStorage.getItem('cap3e_cookie_consent') === 'accepted') {
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap';
-        document.head.appendChild(link);
-      }
-    })();
-  </script>
-  <style>
-    :root {
-      --marine: #0A1F44; --marine2: #1A3A6E; --or: #B8972A; --or-l: #F5EED6;
-      --teal: #0D6E56; --teal-l: #E2F4EE; --red: #C13030; --red-l: #FCEAEA;
-      --bg: #F8F7F4; --blanc: #FFFFFF; --gris: #5A5855; --gris3: #9A9890;
-      --border: rgba(0,0,0,0.08);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--marine); line-height: 1.7; }
-    .header { background: var(--marine); padding: 2rem 1.5rem; text-align: center; }
-    .header-badge { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
-    .header h1 { font-family: 'Syne', sans-serif; font-size: 1.8rem; color: #fff; margin-bottom: 0.25rem; }
-    .header h1 span { color: #C9A227; }
-    .header-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
-    .main { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
-    h2 { font-family: 'Syne', sans-serif; font-size: 1.1rem; color: var(--marine); margin: 2rem 0 0.75rem;
-      padding-bottom: 0.4rem; border-bottom: 2px solid var(--or); }
-    p { font-size: 14px; color: var(--gris); margin-bottom: 0.75rem; }
-    ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
-    li { font-size: 14px; color: var(--gris); margin-bottom: 0.3rem; }
-    strong { color: var(--marine); }
-    a { color: var(--marine2); }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 13px; }
-    th { background: var(--marine); color: #fff; padding: 8px 12px; text-align: left; font-size: 12px; }
-    td { padding: 8px 12px; border-bottom: 1px solid var(--border); color: var(--gris); vertical-align: top; }
-    tr:nth-child(even) td { background: var(--bg); }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-    .badge-ok { background: var(--teal-l); color: var(--teal); }
-    .badge-warn { background: var(--or-l); color: var(--or); }
-    .badge-no { background: var(--red-l); color: var(--red); }
-    .notice { background: var(--teal-l); border-left: 3px solid var(--teal); border-radius: 8px;
-      padding: 1rem 1.25rem; margin: 1rem 0; font-size: 14px; color: var(--gris); }
-    .warn { background: var(--or-l); border-left: 3px solid var(--or); border-radius: 8px;
-      padding: 1rem 1.25rem; margin: 1rem 0; font-size: 14px; color: var(--gris); }
-    footer { background: var(--marine); padding: 1.5rem; text-align: center; }
-    footer a { color: rgba(255,255,255,0.6); font-size: 12px; text-decoration: none; margin: 0 0.75rem; }
-    footer a:hover { color: #C9A227; }
-    footer p { color: rgba(255,255,255,0.3); font-size: 11px; margin-top: 0.75rem; }
-  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
   <script src="consent.js" defer></script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--marine:#0A1F44;--marine2:#1A3A6E;--or:#B8972A;--or-l:#F5EED6;--teal:#0D6E56;--teal-l:#E2F4EE;--red:#C13030;--red-l:#FCEAEA;--bg:#F8F7F4;--blanc:#FFFFFF;--gris:#5A5855;--gris3:#9A9890;--border:rgba(0,0,0,0.07)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--marine);line-height:1.75}
+    .header{background:var(--marine);padding:2.5rem 1.5rem 2rem;text-align:center}
+    .header-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--or);margin-bottom:.5rem}
+    .header h1{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,4vw,2rem);color:#fff;margin-bottom:.4rem;line-height:1.2}
+    .header-sub{font-size:14px;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto;line-height:1.65}
+    .nav-strip{background:var(--blanc);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+    .nav-strip a{font-size:13px;color:var(--gris);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+    .nav-strip a:hover,.nav-strip a.active{color:var(--marine);border-bottom-color:var(--or)}
+    .main{max-width:740px;margin:0 auto;padding:3rem 1.5rem 5rem}
+    .section{margin-bottom:2.5rem}
+    .section-title{font-family:'Syne',sans-serif;font-size:1.05rem;color:var(--marine);margin-bottom:.875rem;padding-bottom:.5rem;border-bottom:2px solid var(--or-l);display:flex;align-items:center;gap:.5rem}
+    .section-title span{color:var(--or)}
+    p{font-size:14.5px;color:var(--gris);margin-bottom:.75rem}
+    p:last-child{margin-bottom:0}
+    strong{color:var(--marine)}
+    a{color:var(--marine2);text-underline-offset:2px}
+    ul{padding-left:1.375rem;margin-bottom:.75rem}
+    li{font-size:14.5px;color:var(--gris);margin-bottom:.35rem}
+    .highlight{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:1.125rem 1.375rem;margin-bottom:1.5rem}
+    table{width:100%;border-collapse:collapse;margin-bottom:1rem;font-size:13.5px}
+    th{background:var(--marine);color:#fff;padding:9px 13px;text-align:left;font-size:12px;font-weight:600}
+    td{padding:9px 13px;border-bottom:1px solid var(--border);color:var(--gris);vertical-align:top}
+    tr:nth-child(even) td{background:var(--bg)}
+    .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:600}
+    .badge-warn{background:var(--or-l);color:var(--or)}
+    .badge-no{background:var(--red-l);color:var(--red)}
+    footer{background:var(--marine);padding:2rem 1.5rem;text-align:center}
+    .footer-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--or);margin-bottom:.75rem}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.25rem;margin-bottom:1rem}
+    .footer-links a{color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none}
+    .footer-links a:hover{color:var(--or)}
+    .footer-copy{color:rgba(255,255,255,0.25);font-size:11px}
+  </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-badge">Collège Guy Môquet · Gennevilliers (92)</div>
-  <h1>CAP <span>3e</span></h1>
-  <div class="header-sub">Politique de cookies</div>
+  <div class="header-eyebrow">Confiance &amp; Transparence</div>
+  <h1>Les cookies sur CAP 3e</h1>
+  <p class="header-sub">Quels cookies ce site utilise — et lesquels il n'utilise pas.</p>
 </div>
+
+<nav class="nav-strip">
+  <a href="mentions-legales.html">À propos</a>
+  <a href="confidentialite.html">Confidentialité</a>
+  <a href="cookies.html" class="active">Cookies</a>
+  <a href="accessibilite.html">Accessibilité</a>
+</nav>
 
 <div class="main">
 
-  <div class="notice">
-    Cette page décrit <strong>exactement</strong> les cookies et technologies de stockage utilisés sur le site Cap 3e — sans texte générique. Seuls les éléments réellement présents sont listés.
+  <div class="highlight">
+    <p><strong>En bref.</strong> CAP 3e n'utilise aucun cookie publicitaire, aucun cookie de profilage, aucun suivi inter-sites. Trois cookies de mesure d'audience sont utilisés uniquement si vous y consentez.</p>
   </div>
 
-  <h2>1. Qu'est-ce qu'un cookie ?</h2>
-  <p>Un cookie est un petit fichier texte déposé sur ton appareil par un site web. Il peut servir à mémoriser des préférences, à mesurer la fréquentation ou à te suivre à des fins publicitaires.</p>
-  <p>Sur Cap 3e, nous utilisons uniquement des cookies à finalité technique et statistique. <strong>Aucun cookie publicitaire n'est utilisé.</strong></p>
-
-  <h2>2. Cookies réellement utilisés sur ce site</h2>
-
-  <table>
-    <tr>
-      <th>Nom du cookie</th>
-      <th>Émetteur</th>
-      <th>Finalité</th>
-      <th>Durée</th>
-      <th>Obligatoire ?</th>
-    </tr>
-    <tr>
-      <td><code>_ga</code></td>
-      <td>Google Analytics</td>
-      <td>Distingue les visiteurs uniques (identifiant anonyme)</td>
-      <td>13 mois</td>
-      <td><span class="badge badge-warn">Facultatif</span></td>
-    </tr>
-    <tr>
-      <td><code>_ga_NCCXNNL215</code></td>
-      <td>Google Analytics</td>
-      <td>Maintient l'état de la session de mesure</td>
-      <td>13 mois</td>
-      <td><span class="badge badge-warn">Facultatif</span></td>
-    </tr>
-    <tr>
-      <td><code>_gid</code></td>
-      <td>Google Analytics</td>
-      <td>Distingue les utilisateurs (session courte)</td>
-      <td>24 heures</td>
-      <td><span class="badge badge-warn">Facultatif</span></td>
-    </tr>
-  </table>
-
-  <div class="warn">
-    <strong>Situation actuelle :</strong> Ces cookies Google Analytics sont déposés sans demande de consentement explicite préalable. Cette configuration n'est pas pleinement conforme aux recommandations de la CNIL pour les sites soumis au droit français. Une bannière de consentement est en cours d'intégration.
+  <div class="section">
+    <div class="section-title"><span>●</span> Qu'est-ce qu'un cookie ?</div>
+    <p>Un cookie est un petit fichier enregistré sur votre appareil par un site web. Il peut servir à mémoriser des préférences, à mesurer la fréquentation, ou dans d'autres contextes, à suivre vos habitudes à des fins publicitaires. CAP 3e n'utilise pas cette dernière catégorie.</p>
   </div>
 
-  <h2>3. Stockage local (localStorage) — pas des cookies</h2>
-  <p>Certaines pages de Cap 3e utilisent le <strong>stockage local du navigateur</strong> (<code>localStorage</code>) pour mémoriser ta progression dans CAPilot ou tes réponses à certains outils. Ce mécanisme est différent des cookies :</p>
-  <ul>
-    <li>Les données restent uniquement sur ton appareil</li>
-    <li>Elles ne sont jamais transmises à un serveur</li>
-    <li>Elles sont supprimées si tu vides le cache de ton navigateur</li>
-  </ul>
-  <p>Ce stockage local est <strong>techniquement nécessaire</strong> au fonctionnement de ces outils. Il ne nécessite pas de consentement selon la réglementation en vigueur.</p>
-
-  <h2>4. Cookies tiers — Google Fonts</h2>
-  <p>Le site charge des polices de caractères depuis Google Fonts. Ce chargement transmet techniquement l'adresse IP du visiteur à Google lors de la requête. Google Fonts ne dépose cependant <strong>pas de cookie</strong> de traçage selon la documentation officielle de Google.</p>
-
-  <h2>5. Ce que ce site n'utilise PAS</h2>
-  <ul>
-    <li><span class="badge badge-no">Non utilisé</span> Publicité ciblée ou remarketing</li>
-    <li><span class="badge badge-no">Non utilisé</span> Facebook Pixel ou tout autre pixel tiers</li>
-    <li><span class="badge badge-no">Non utilisé</span> Hotjar, Microsoft Clarity ou outils de heatmap</li>
-    <li><span class="badge badge-no">Non utilisé</span> Cookies de profilage ou de suivi inter-sites</li>
-    <li><span class="badge badge-no">Non utilisé</span> Google Signals (désactivé dans GA4)</li>
-  </ul>
-
-  <h2>6. Comment gérer ou supprimer les cookies</h2>
-  <p>Tu peux à tout moment gérer ou supprimer les cookies depuis les paramètres de ton navigateur :</p>
-  <ul>
-    <li><a href="https://support.google.com/chrome/answer/95647" target="_blank">Google Chrome</a></li>
-    <li><a href="https://support.mozilla.org/fr/kb/effacer-les-cookies-et-les-donnees-de-site-firefox" target="_blank">Mozilla Firefox</a></li>
-    <li><a href="https://support.apple.com/fr-fr/guide/safari/sfri11471/mac" target="_blank">Safari</a></li>
-    <li><a href="https://support.microsoft.com/fr-fr/windows/supprimer-et-g%C3%A9rer-les-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">Microsoft Edge</a></li>
-  </ul>
-  <p>Tu peux également refuser le suivi Google Analytics sur tous les sites via l'extension officielle : <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">Google Analytics Opt-out</a>.</p>
-
-  
-  <h2>7. Modifier votre choix</h2>
-  <p>Vous pouvez modifier votre choix concernant les cookies à tout moment :</p>
-  <div style="margin:1rem 0">
-    <button onclick="cap3eResetConsent()" style="padding:10px 20px;background:#0A1F44;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-family:inherit">
-      Modifier mes préférences cookies
-    </button>
+  <div class="section">
+    <div class="section-title"><span>●</span> Les cookies utilisés sur CAP 3e</div>
+    <table>
+      <tr><th>Cookie</th><th>Rôle</th><th>Durée</th><th>Obligatoire ?</th></tr>
+      <tr>
+        <td><code>_ga</code></td>
+        <td>Identifie les visiteurs uniques de manière anonyme (Google Analytics)</td>
+        <td>13 mois</td>
+        <td><span class="badge badge-warn">Sur accord</span></td>
+      </tr>
+      <tr>
+        <td><code>_ga_NCCXNNL215</code></td>
+        <td>Maintient la session de mesure d'audience</td>
+        <td>13 mois</td>
+        <td><span class="badge badge-warn">Sur accord</span></td>
+      </tr>
+      <tr>
+        <td><code>_gid</code></td>
+        <td>Distingue les visites sur une courte période</td>
+        <td>24 heures</td>
+        <td><span class="badge badge-warn">Sur accord</span></td>
+      </tr>
+    </table>
+    <p>Ces trois cookies ne sont déposés <strong>qu'après votre accord explicite</strong> via la bannière qui s'affiche à votre première visite. Si vous refusez, aucun cookie de mesure n'est déposé.</p>
   </div>
-  <p style="font-size:13px;color:var(--gris3)">Ce bouton efface votre choix précédent et affiche à nouveau la bannière de consentement.</p>
 
-<p style="margin-top:2rem;font-size:12px;color:var(--gris3)">Dernière mise à jour : juillet 2026</p>
+  <div class="section">
+    <div class="section-title"><span>●</span> Le stockage local — différent des cookies</div>
+    <p>CAPilot utilise le stockage local de votre navigateur (<code>localStorage</code>) pour mémoriser votre progression. Ce mécanisme est différent des cookies : les données restent uniquement sur votre appareil, ne sont jamais transmises, et disparaissent si vous videz votre cache.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>●</span> Ce que CAP 3e n'utilise pas</div>
+    <ul>
+      <li><span class="badge badge-no">Absent</span> Cookies publicitaires ou de remarketing</li>
+      <li><span class="badge badge-no">Absent</span> Facebook Pixel ou tout pixel tiers</li>
+      <li><span class="badge badge-no">Absent</span> Outils de heatmap (Hotjar, Clarity…)</li>
+      <li><span class="badge badge-no">Absent</span> Cookies de profilage ou de suivi inter-sites</li>
+      <li><span class="badge badge-no">Absent</span> Google Signals</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>●</span> Modifier votre choix</div>
+    <p>Vous pouvez revenir sur votre décision à tout moment :</p>
+    <div style="margin:1rem 0">
+      <button onclick="cap3eResetConsent()" style="padding:10px 22px;background:var(--marine);color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-family:inherit;font-weight:500">Modifier mes préférences cookies</button>
+    </div>
+    <p>Vous pouvez également gérer les cookies depuis les paramètres de votre navigateur ou utiliser l'<a href="https://tools.google.com/dlpage/gaoptout" target="_blank">extension officielle Google Analytics Opt-out</a>.</p>
+  </div>
+
+  <p style="font-size:12px;color:var(--gris3);margin-top:2rem">Dernière mise à jour : juillet 2026</p>
 
 </div>
 
 <footer>
-  <a href="mentions-legales.html">Mentions légales</a>
-  <a href="confidentialite.html">Politique de confidentialité</a>
-  <a href="cookies.html">Politique de cookies</a>
-  <a href="accessibilite.html">Accessibilité</a>
-  <p>© 2026 Cap 3e · Collège Guy Môquet, Gennevilliers (92) · M. Hassini</p>
+  <div class="footer-label">Confiance &amp; Transparence</div>
+  <div class="footer-links">
+    <a href="mentions-legales.html">À propos de CAP 3e</a>
+    <a href="confidentialite.html">Confidentialité</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accessibilite.html">Accessibilité</a>
+  </div>
+  <div class="footer-copy">© 2026 CAP 3e · Collège Guy Môquet, Gennevilliers (92) · M. Hassini</div>
 </footer>
 
 </body>

@@ -3,130 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accessibilité — Cap 3e</title>
-  <meta name="description" content="Déclaration d'accessibilité du site Cap 3e : engagements, bonnes pratiques mises en œuvre et améliorations prévues.">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
+  <title>Accessibilité — CAP 3e</title>
+  <meta name="description" content="CAP 3e s'engage pour un site accessible à tous les élèves, y compris ceux en situation de handicap. Découvrez notre démarche.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
   <script>
+    window['ga-disable-G-NCCXNNL215'] = true;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-NCCXNNL215', { anonymize_ip: true });
+    gtag('consent', 'default', {'analytics_storage': 'denied','ad_storage': 'denied','ad_user_data': 'denied','ad_personalization': 'denied'});
   </script>
-    <!-- Polices : chargées uniquement après consentement pour éviter transmission IP à Google -->
-  <!-- Fallback immédiat sur polices système (Georgia, system-ui) -->
-  <script>
-    // Chargement conditionnel des polices Google si consentement accordé
-    (function() {
-      if (localStorage.getItem('cap3e_cookie_consent') === 'accepted') {
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap';
-        document.head.appendChild(link);
-      }
-    })();
-  </script>
-  <style>
-    :root {
-      --marine: #0A1F44; --marine2: #1A3A6E; --or: #B8972A; --or-l: #F5EED6;
-      --teal: #0D6E56; --teal-l: #E2F4EE; --red: #C13030; --red-l: #FCEAEA;
-      --bg: #F8F7F4; --blanc: #FFFFFF; --gris: #5A5855; --gris3: #9A9890;
-      --border: rgba(0,0,0,0.08);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--marine); line-height: 1.7; }
-    .header { background: var(--marine); padding: 2rem 1.5rem; text-align: center; }
-    .header-badge { font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 0.5rem; }
-    .header h1 { font-family: 'Syne', sans-serif; font-size: 1.8rem; color: #fff; margin-bottom: 0.25rem; }
-    .header h1 span { color: #C9A227; }
-    .header-sub { font-size: 13px; color: rgba(255,255,255,0.5); }
-    .main { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
-    h2 { font-family: 'Syne', sans-serif; font-size: 1.1rem; color: var(--marine); margin: 2rem 0 0.75rem;
-      padding-bottom: 0.4rem; border-bottom: 2px solid var(--or); }
-    p { font-size: 14px; color: var(--gris); margin-bottom: 0.75rem; }
-    ul { padding-left: 1.25rem; margin-bottom: 0.75rem; }
-    li { font-size: 14px; color: var(--gris); margin-bottom: 0.4rem; }
-    strong { color: var(--marine); }
-    a { color: var(--marine2); }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-right: 6px; }
-    .badge-ok { background: var(--teal-l); color: var(--teal); }
-    .badge-partial { background: var(--or-l); color: var(--or); }
-    .badge-no { background: var(--red-l); color: var(--red); }
-    .notice { background: var(--teal-l); border-left: 3px solid var(--teal); border-radius: 8px;
-      padding: 1rem 1.25rem; margin: 1rem 0; font-size: 14px; color: var(--gris); }
-    footer { background: var(--marine); padding: 1.5rem; text-align: center; }
-    footer a { color: rgba(255,255,255,0.6); font-size: 12px; text-decoration: none; margin: 0 0.75rem; }
-    footer a:hover { color: #C9A227; }
-    footer p { color: rgba(255,255,255,0.3); font-size: 11px; margin-top: 0.75rem; }
-  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
   <script src="consent.js" defer></script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{--marine:#0A1F44;--marine2:#1A3A6E;--or:#B8972A;--or-l:#F5EED6;--teal:#0D6E56;--teal-l:#E2F4EE;--red:#C13030;--red-l:#FCEAEA;--bg:#F8F7F4;--blanc:#FFFFFF;--gris:#5A5855;--gris3:#9A9890;--border:rgba(0,0,0,0.07)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--marine);line-height:1.75}
+    .header{background:var(--marine);padding:2.5rem 1.5rem 2rem;text-align:center}
+    .header-eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--or);margin-bottom:.5rem}
+    .header h1{font-family:'Syne',sans-serif;font-size:clamp(1.5rem,4vw,2rem);color:#fff;margin-bottom:.4rem;line-height:1.2}
+    .header-sub{font-size:14px;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto;line-height:1.65}
+    .nav-strip{background:var(--blanc);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+    .nav-strip a{font-size:13px;color:var(--gris);text-decoration:none;padding:4px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+    .nav-strip a:hover,.nav-strip a.active{color:var(--marine);border-bottom-color:var(--or)}
+    .main{max-width:740px;margin:0 auto;padding:3rem 1.5rem 5rem}
+    .section{margin-bottom:2.5rem}
+    .section-title{font-family:'Syne',sans-serif;font-size:1.05rem;color:var(--marine);margin-bottom:.875rem;padding-bottom:.5rem;border-bottom:2px solid var(--or-l);display:flex;align-items:center;gap:.5rem}
+    .section-title span{color:var(--or)}
+    p{font-size:14.5px;color:var(--gris);margin-bottom:.75rem}
+    p:last-child{margin-bottom:0}
+    strong{color:var(--marine)}
+    a{color:var(--marine2);text-underline-offset:2px}
+    ul{padding-left:1.375rem;margin-bottom:.75rem}
+    li{font-size:14.5px;color:var(--gris);margin-bottom:.35rem}
+    .highlight{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:0 10px 10px 0;padding:1.125rem 1.375rem;margin-bottom:1.5rem}
+    .badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:600;margin-right:6px}
+    .badge-ok{background:var(--teal-l);color:var(--teal)}
+    .badge-warn{background:var(--or-l);color:var(--or)}
+    footer{background:var(--marine);padding:2rem 1.5rem;text-align:center}
+    .footer-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--or);margin-bottom:.75rem}
+    .footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem 1.25rem;margin-bottom:1rem}
+    .footer-links a{color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none}
+    .footer-links a:hover{color:var(--or)}
+    .footer-copy{color:rgba(255,255,255,0.25);font-size:11px}
+  </style>
 </head>
 <body>
 
 <div class="header">
-  <div class="header-badge">Collège Guy Môquet · Gennevilliers (92)</div>
-  <h1>CAP <span>3e</span></h1>
-  <div class="header-sub">Accessibilité</div>
+  <div class="header-eyebrow">Confiance &amp; Transparence</div>
+  <h1>Accessibilité</h1>
+  <p class="header-sub">Notre engagement pour un site accessible au plus grand nombre.</p>
 </div>
+
+<nav class="nav-strip">
+  <a href="mentions-legales.html">À propos</a>
+  <a href="confidentialite.html">Confidentialité</a>
+  <a href="cookies.html">Cookies</a>
+  <a href="accessibilite.html" class="active">Accessibilité</a>
+</nav>
 
 <div class="main">
 
-  <div class="notice">
-    Cette page est une déclaration de transparence, pas une déclaration de conformité totale. Cap 3e est un projet porté par un seul enseignant. Nous décrivons honnêtement ce qui est en place et ce qui reste à améliorer.
+  <div class="highlight">
+    <p><strong>Notre engagement.</strong> CAP 3e est destiné à tous les élèves de 3e, y compris ceux qui rencontrent des difficultés particulières d'apprentissage ou de navigation numérique. L'accessibilité est une exigence pédagogique, pas une contrainte technique.</p>
   </div>
 
-  <h2>1. Engagement</h2>
-  <p>Cap 3e est destiné à tous les élèves de 3e, y compris ceux qui présentent des besoins particuliers. L'accessibilité n'est pas une contrainte technique : c'est une exigence pédagogique.</p>
-  <p>L'objectif est de progresser vers une conformité au <strong>RGAA (Référentiel Général d'Amélioration de l'Accessibilité)</strong> niveau AA, dans la mesure des ressources disponibles pour un projet porté individuellement.</p>
+  <div class="section">
+    <div class="section-title"><span>●</span> Ce qui est déjà en place</div>
+    <ul>
+      <li><span class="badge badge-ok">OK</span>Site entièrement en HTTPS, sécurisé et fiable</li>
+      <li><span class="badge badge-ok">OK</span>Langue française déclarée sur toutes les pages</li>
+      <li><span class="badge badge-ok">OK</span>Site adaptatif — fonctionne sur téléphone, tablette et ordinateur</li>
+      <li><span class="badge badge-ok">OK</span>Titres de pages descriptifs sur l'ensemble du site</li>
+      <li><span class="badge badge-ok">OK</span>Contrastes de couleurs satisfaisants</li>
+      <li><span class="badge badge-ok">OK</span>Police Atkinson Hyperlegible sur la page Besoins spécifiques — conçue pour les personnes dyslexiques</li>
+      <li><span class="badge badge-ok">OK</span>Aucun contenu audio ou vidéo se déclenchant automatiquement</li>
+      <li><span class="badge badge-ok">OK</span>Navigation possible sans JavaScript pour le contenu principal</li>
+    </ul>
+  </div>
 
-  <h2>2. Ce qui est déjà en place</h2>
-  <ul>
-    <li><span class="badge badge-ok">OK</span> Site entièrement en HTTPS</li>
-    <li><span class="badge badge-ok">OK</span> Langue déclarée (<code>lang="fr"</code>) sur toutes les pages</li>
-    <li><span class="badge badge-ok">OK</span> Balises <code>&lt;meta viewport&gt;</code> présentes — site responsive mobile</li>
-    <li><span class="badge badge-ok">OK</span> Titres de pages (<code>&lt;title&gt;</code>) descriptifs sur toutes les pages</li>
-    <li><span class="badge badge-ok">OK</span> Contrastes de couleurs globalement satisfaisants (texte sombre sur fond clair)</li>
-    <li><span class="badge badge-ok">OK</span> Police Atkinson Hyperlegible utilisée sur la page Besoins spécifiques (police conçue pour les DYS)</li>
-    <li><span class="badge badge-ok">OK</span> Liens externes signalés (attributs <code>target="_blank"</code>)</li>
-    <li><span class="badge badge-ok">OK</span> Aucun contenu audio ou vidéo automatique</li>
-    <li><span class="badge badge-ok">OK</span> Navigation possible sans JavaScript pour le contenu principal</li>
-  </ul>
+  <div class="section">
+    <div class="section-title"><span>●</span> Ce qui est en cours d'amélioration</div>
+    <ul>
+      <li><span class="badge badge-warn">En cours</span>Textes alternatifs sur les images — à compléter sur certaines pages</li>
+      <li><span class="badge badge-warn">En cours</span>Navigation au clavier sur les composants interactifs de CAPilot</li>
+      <li><span class="badge badge-warn">En cours</span>Messages d'erreur des formulaires rendus plus explicites</li>
+    </ul>
+  </div>
 
-  <h2>3. Ce qui est partiellement en place</h2>
-  <ul>
-    <li><span class="badge badge-partial">Partiel</span> Textes alternatifs sur les images — présents sur certaines pages, à compléter</li>
-    <li><span class="badge badge-partial">Partiel</span> Structure des titres (H1, H2, H3) — cohérente sur la plupart des pages, à vérifier sur toutes</li>
-    <li><span class="badge badge-partial">Partiel</span> Accessibilité au clavier — la navigation principale est possible, les composants interactifs (CAPilot) sont à améliorer</li>
-    <li><span class="badge badge-partial">Partiel</span> Formulaires — les labels sont présents, les messages d'erreur sont à rendre plus explicites</li>
-  </ul>
+  <div class="section">
+    <div class="section-title"><span>●</span> Ce qui est prévu</div>
+    <p>CAP 3e est un projet porté par un enseignant seul. Certaines améliorations nécessitent un temps de développement que nous cherchons à dégager progressivement :</p>
+    <ul>
+      <li>Audit d'accessibilité complet selon le référentiel RGAA (niveau AA)</li>
+      <li>Tests avec des lecteurs d'écran (NVDA, VoiceOver)</li>
+      <li>Option de contraste élevé</li>
+    </ul>
+  </div>
 
-  <h2>4. Ce qui n'est pas encore en place</h2>
-  <ul>
-    <li><span class="badge badge-no">À faire</span> Déclaration RGAA formelle</li>
-    <li><span class="badge badge-no">À faire</span> Audit d'accessibilité complet par un outil ou un expert</li>
-    <li><span class="badge badge-no">À faire</span> Lecteur d'écran testé (NVDA, VoiceOver)</li>
-    <li><span class="badge badge-no">À faire</span> Bannière de consentement aux cookies accessible</li>
-    <li><span class="badge badge-no">À faire</span> Mode contraste élevé ou thème sombre</li>
-  </ul>
+  <div class="section">
+    <div class="section-title"><span>●</span> Technologies utilisées</div>
+    <p>Le site est construit en HTML5, CSS3 et JavaScript sans framework lourd. Cette approche favorise la légèreté, la compatibilité et une accessibilité de base solide sur tous les appareils et navigateurs, y compris les plus anciens.</p>
+  </div>
 
-  <h2>5. Technologies utilisées</h2>
-  <p>Le site est construit en HTML5, CSS3 et JavaScript vanilla (sans framework lourd). Cette approche favorise la légèreté, la compatibilité et l'accessibilité de base.</p>
+  <div class="section">
+    <div class="section-title"><span>●</span> Signaler un problème</div>
+    <p>Si vous rencontrez une difficulté pour accéder à une page ou utiliser un outil de CAP 3e, merci de nous en informer. Chaque retour est pris en compte sérieusement et traité dans les meilleurs délais.</p>
+    <p>Contact : <a href="mailto:hassinicap3e@gmail.com">hassinicap3e@gmail.com</a></p>
+  </div>
 
-  <h2>6. Signaler un problème</h2>
-  <p>Si tu rencontres une difficulté pour accéder à une page ou utiliser un outil de Cap 3e, tu peux le signaler à :</p>
-  <p><a href="mailto:hassinicap3e@gmail.com">hassinicap3e@gmail.com</a></p>
-  <p>Chaque retour est pris en compte pour améliorer le site.</p>
-
-  <p style="margin-top:2rem;font-size:12px;color:var(--gris3)">Dernière mise à jour : juillet 2026</p>
+  <p style="font-size:12px;color:var(--gris3);margin-top:2rem">Dernière mise à jour : juillet 2026</p>
 
 </div>
 
 <footer>
-  <a href="mentions-legales.html">Mentions légales</a>
-  <a href="confidentialite.html">Politique de confidentialité</a>
-  <a href="cookies.html">Politique de cookies</a>
-  <a href="accessibilite.html">Accessibilité</a>
-  <p>© 2026 Cap 3e · Collège Guy Môquet, Gennevilliers (92) · M. Hassini</p>
+  <div class="footer-label">Confiance &amp; Transparence</div>
+  <div class="footer-links">
+    <a href="mentions-legales.html">À propos de CAP 3e</a>
+    <a href="confidentialite.html">Confidentialité</a>
+    <a href="cookies.html">Cookies</a>
+    <a href="accessibilite.html">Accessibilité</a>
+  </div>
+  <div class="footer-copy">© 2026 CAP 3e · Collège Guy Môquet, Gennevilliers (92) · M. Hassini</div>
 </footer>
 
 </body>

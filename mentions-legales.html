@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>À propos de CAP 3e — Confiance & Transparence</title>
-  <meta name="description" content="Découvrez CAP 3e : un projet pédagogique conçu par un enseignant pour accompagner les élèves de 3e dans leur orientation, leur stage et leur brevet.">
+  <title>À propos de CAP 3e — Confiance &amp; Transparence</title>
+  <meta name="description" content="Découvrez CAP 3e : un projet pédagogique conçu par un enseignant pour accompagner tous les élèves de 3e dans leur orientation, leur stage et leur brevet.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
   <script>
     window['ga-disable-G-NCCXNNL215'] = true;
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('consent', 'default', {'analytics_storage': 'denied','ad_storage': 'denied','ad_user_data': 'denied','ad_personalization': 'denied'});
+    gtag('consent', 'default', {'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});
   </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
   <script src="consent.js" defer></script>
@@ -24,6 +24,8 @@
       --or-l:    #F5EED6;
       --teal:    #0D6E56;
       --teal-l:  #E2F4EE;
+      --red:     #C13030;
+      --red-l:   #FCEAEA;
       --bg:      #F8F7F4;
       --blanc:   #FFFFFF;
       --gris:    #5A5855;
@@ -31,147 +33,141 @@
       --border:  rgba(0,0,0,0.07);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--marine); line-height: 1.75; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--bg); color: var(--marine); line-height: 1.8; }
 
     /* HEADER */
-    .header { background: var(--marine); padding: 2.5rem 1.5rem 2rem; text-align: center; }
-    .header-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--or); margin-bottom: .5rem; }
-    .header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 4vw, 2.2rem); color: #fff; margin-bottom: .4rem; line-height: 1.2; }
-    .header-sub { font-size: 14px; color: rgba(255,255,255,0.55); max-width: 520px; margin: 0 auto; line-height: 1.65; }
+    .header { background: var(--marine); padding: 3rem 1.5rem 2.25rem; text-align: center; }
+    .header-eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--or); font-weight: 600; margin-bottom: .625rem; }
+    .header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 4vw, 2.25rem); color: #fff; margin-bottom: .5rem; line-height: 1.2; }
+    .header-sub { font-size: 14.5px; color: rgba(255,255,255,0.5); max-width: 560px; margin: 0 auto; line-height: 1.7; }
 
-    /* NAV INTERNE */
-    .nav-strip { background: var(--blanc); border-bottom: 1px solid var(--border); padding: .75rem 1.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-    .nav-strip a { font-size: 13px; color: var(--gris); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
-    .nav-strip a:hover, .nav-strip a.active { color: var(--marine); border-bottom-color: var(--or); }
+    /* NAVIGATION INTERNE */
+    .nav-strip { background: var(--blanc); border-bottom: 1px solid var(--border); padding: .875rem 1.5rem; display: flex; gap: 0 2rem; flex-wrap: wrap; justify-content: center; position: sticky; top: 0; z-index: 10; }
+    .nav-strip a { font-size: 13px; color: var(--gris3); text-decoration: none; padding: 5px 0; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; white-space: nowrap; }
+    .nav-strip a:hover { color: var(--marine); }
+    .nav-strip a.active { color: var(--marine); border-bottom-color: var(--or); font-weight: 500; }
 
-    /* MAIN */
-    .main { max-width: 740px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+    /* CONTENU */
+    .main { max-width: 760px; margin: 0 auto; padding: 3.5rem 1.5rem 6rem; }
 
-    /* INTRO PROJET */
-    .project-intro { background: var(--blanc); border-radius: 16px; border: 1px solid var(--border); padding: 2rem 2rem 1.75rem; margin-bottom: 2.5rem; }
-    .project-intro .eyebrow { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--or); font-weight: 600; margin-bottom: .75rem; }
-    .project-intro h2 { font-family: 'Syne', sans-serif; font-size: 1.5rem; color: var(--marine); margin-bottom: 1rem; line-height: 1.25; }
-    .project-intro p { font-size: 15px; color: var(--gris); margin-bottom: .875rem; }
-    .project-intro p:last-child { margin-bottom: 0; }
-
-    /* ENGAGEMENTS */
-    .engagements { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 2.5rem; }
-    .eng-card { background: var(--blanc); border: 1px solid var(--border); border-radius: 12px; padding: 1.125rem 1.25rem; display: flex; gap: .875rem; align-items: flex-start; }
-    .eng-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 1px; }
-    .eng-title { font-size: 13px; font-weight: 600; color: var(--marine); margin-bottom: 3px; }
-    .eng-desc { font-size: 12.5px; color: var(--gris3); line-height: 1.55; }
-
-    /* NATURE DU PROJET */
-    .nature-box { background: var(--teal-l); border-left: 4px solid var(--teal); border-radius: 0 12px 12px 0; padding: 1.375rem 1.5rem; margin-bottom: 2.5rem; }
-    .nature-box p { font-size: 14px; color: var(--gris); margin-bottom: .6rem; }
+    /* ENCADRÉS */
+    .intro-block { background: var(--blanc); border-radius: 14px; border: 1px solid var(--border); padding: 2rem 2rem 1.875rem; margin-bottom: 3rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+    .intro-block .eyebrow { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--or); font-weight: 600; margin-bottom: .875rem; }
+    .intro-block h2 { font-family: 'Syne', sans-serif; font-size: 1.45rem; color: var(--marine); margin-bottom: 1.125rem; line-height: 1.25; }
+    .highlight { background: var(--teal-l); border-left: 4px solid var(--teal); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+    .highlight .hl-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: .4rem; }
+    .highlight p { color: var(--gris); font-size: 15px; }
+    .highlight strong { color: var(--teal); }
+    .nature-box { background: var(--teal-l); border-left: 4px solid var(--teal); border-radius: 0 12px 12px 0; padding: 1.375rem 1.5rem; margin-bottom: .5rem; }
+    .nature-box p { color: var(--gris); font-size: 14.5px; margin-bottom: .625rem; }
     .nature-box p:last-child { margin-bottom: 0; }
     .nature-box strong { color: var(--teal); }
 
     /* SECTIONS */
-    .section { margin-bottom: 2.5rem; }
-    .section-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; color: var(--marine); margin-bottom: .875rem; padding-bottom: .5rem; border-bottom: 2px solid var(--or-l); display: flex; align-items: center; gap: .5rem; }
-    .section-title span { color: var(--or); }
-    p, li { font-size: 14.5px; color: var(--gris); }
-    p { margin-bottom: .75rem; }
-    strong { color: var(--marine); }
-    a { color: var(--marine2); text-underline-offset: 2px; }
+    .section { margin-bottom: 2.75rem; }
+    .section-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--marine); margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--or-l); display: flex; align-items: center; gap: .5rem; }
+    .section-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--or); flex-shrink: 0; }
+
+    /* TYPOGRAPHIE */
+    p { font-size: 14.5px; color: var(--gris); margin-bottom: .875rem; }
+    p:last-child { margin-bottom: 0; }
+    strong { color: var(--marine); font-weight: 600; }
+    a { color: var(--marine2); text-underline-offset: 3px; }
+    a:hover { color: var(--marine); }
+    ul { padding-left: 1.375rem; margin-bottom: .875rem; }
+    li { font-size: 14.5px; color: var(--gris); margin-bottom: .45rem; line-height: 1.65; }
+
+    /* CARTES ENGAGEMENTS */
+    .eng-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: .5rem; }
+    .eng-card { background: var(--blanc); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.25rem 1.125rem; display: flex; gap: .875rem; align-items: flex-start; }
+    .eng-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+    .eng-title { font-size: 13.5px; font-weight: 600; color: var(--marine); margin-bottom: 4px; }
+    .eng-desc { font-size: 12.5px; color: var(--gris3); line-height: 1.55; }
 
     /* FICHE CONCEPTEUR */
-    .fiche { background: var(--blanc); border: 1px solid var(--border); border-radius: 12px; padding: 1.375rem 1.5rem; margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center; }
-    .fiche-av { width: 52px; height: 52px; border-radius: 50%; background: var(--marine); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-    .fiche-name { font-size: 15px; font-weight: 600; color: var(--marine); }
-    .fiche-role { font-size: 13px; color: var(--gris3); margin-top: 2px; line-height: 1.5; }
+    .fiche { background: var(--blanc); border: 1px solid var(--border); border-radius: 12px; padding: 1.375rem 1.5rem; margin-bottom: 1rem; display: flex; gap: 1.125rem; align-items: center; }
+    .fiche-av { width: 54px; height: 54px; border-radius: 50%; background: var(--marine); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+    .fiche-name { font-size: 15.5px; font-weight: 700; color: var(--marine); margin-bottom: 3px; }
+    .fiche-role { font-size: 13px; color: var(--gris3); line-height: 1.55; }
+
+    /* TABLEAU */
+    .table-wrap { overflow-x: auto; margin-bottom: 1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 500px; }
+    th { background: var(--marine); color: #fff; padding: 10px 14px; text-align: left; font-size: 12px; font-weight: 600; letter-spacing: .02em; }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--gris); vertical-align: top; }
+    tr:nth-child(even) td { background: var(--bg); }
+
+    /* BADGES */
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+    .badge-ok   { background: var(--teal-l); color: var(--teal); }
+    .badge-warn { background: var(--or-l);   color: var(--or); }
+    .badge-no   { background: var(--red-l);  color: var(--red); }
+
+    /* LISTE AVEC BADGE */
+    .badge-list { list-style: none; padding: 0; }
+    .badge-list li { display: flex; align-items: flex-start; gap: .75rem; font-size: 14.5px; color: var(--gris); margin-bottom: .625rem; line-height: 1.6; }
+    .badge-list li .badge { flex-shrink: 0; margin-top: 2px; }
+
+    /* BOUTON */
+    .btn-primary { display: inline-block; padding: 11px 24px; background: var(--marine); color: #fff; border: none; border-radius: 9px; cursor: pointer; font-size: 14px; font-family: inherit; font-weight: 500; transition: opacity .15s; }
+    .btn-primary:hover { opacity: .88; }
+
+    /* DATE */
+    .date-note { font-size: 12px; color: var(--gris3); margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
 
     /* FOOTER */
-    footer { background: var(--marine); padding: 2rem 1.5rem; text-align: center; }
-    .footer-label { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--or); margin-bottom: .75rem; }
-    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.25rem; margin-bottom: 1rem; }
-    .footer-links a { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: none; }
+    footer { background: var(--marine); padding: 2.25rem 1.5rem 2rem; text-align: center; }
+    .footer-label { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--or); font-weight: 600; margin-bottom: .875rem; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.5rem; margin-bottom: .875rem; }
+    .footer-links a { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: none; transition: color .15s; }
     .footer-links a:hover { color: var(--or); }
-    .footer-copy { color: rgba(255,255,255,0.25); font-size: 11px; }
+    .footer-copy { color: rgba(255,255,255,0.22); font-size: 11px; }
   </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-eyebrow">Confiance &amp; Transparence</div>
   <h1>À propos de CAP 3e</h1>
   <p class="header-sub">Tout ce que vous devez savoir sur ce projet, ses valeurs et ses engagements envers les élèves et les familles.</p>
 </div>
-
 <nav class="nav-strip">
-  <a href="mentions-legales.html" class="active">À propos</a>
+  <a href="mentions-legales.html"class="active">À propos</a>
   <a href="confidentialite.html">Confidentialité</a>
   <a href="cookies.html">Cookies</a>
   <a href="accessibilite.html">Accessibilité</a>
 </nav>
-
 <div class="main">
 
-  <!-- PRÉSENTATION DU PROJET -->
-  <div class="project-intro">
+  <div class="intro-block">
     <div class="eyebrow">Le projet</div>
     <h2>CAP 3e, c'est quoi exactement&nbsp;?</h2>
-    <p>CAP 3e est un site pédagogique créé par un professeur principal de 3e pour accompagner ses élèves — et tous les collégiens qui le souhaitent — dans les grandes étapes de leur année&nbsp;: choisir une voie d'orientation, préparer leur stage, réussir leur brevet, et construire leur confiance en eux.</p>
-    <p>C'est une initiative personnelle, née d'un constat simple&nbsp;: les élèves de 3e ont besoin d'outils concrets, accessibles et bienveillants. Pas d'une plateforme froide et impersonnelle.</p>
-    <p>CAP 3e complète les ressources officielles. Il ne les remplace pas. Pour toute décision administrative — orientation, inscription, calendrier scolaire — les informations transmises par le collège, l'académie ou le ministère de l'Éducation nationale prévalent toujours.</p>
+    <p>CAP 3e est un site pédagogique conçu par un professeur principal de 3e pour accompagner les collégiens — et leurs familles — dans les grandes étapes de leur année&nbsp;: choisir une voie d'orientation, préparer leur stage en entreprise, réussir le brevet des collèges, et construire progressivement leur confiance en eux.</p>
+    <p>Ce projet est né d'un constat simple&nbsp;: les élèves de 3e ont besoin d'outils concrets, accessibles et bienveillants. Pas d'une plateforme froide et impersonnelle.</p>
+    <p>CAP 3e complète les ressources officielles de l'Éducation nationale. Il ne les remplace pas. Pour toute décision administrative — orientation, inscription, calendrier scolaire — les informations transmises par l'établissement, l'académie ou le ministère de l'Éducation nationale prévalent toujours.</p>
   </div>
 
-  <!-- ENGAGEMENTS -->
   <div class="section">
-    <div class="section-title"><span>●</span> Les engagements de CAP 3e</div>
-    <div class="engagements">
-      <div class="eng-card">
-        <div class="eng-icon">🎓</div>
-        <div>
-          <div class="eng-title">Entièrement gratuit</div>
-          <div class="eng-desc">Aucun abonnement, aucun paiement, aucune publicité. Toujours.</div>
-        </div>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon">🔓</div>
-        <div>
-          <div class="eng-title">Accessible à tous</div>
-          <div class="eng-desc">Sans inscription, sans email, sans création de compte obligatoire.</div>
-        </div>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon">🤝</div>
-        <div>
-          <div class="eng-title">Au service des élèves</div>
-          <div class="eng-desc">Chaque outil, chaque fiche, chaque conseil est pensé pour l'élève — pas pour l'institution.</div>
-        </div>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon">🔒</div>
-        <div>
-          <div class="eng-title">Respect de la vie privée</div>
-          <div class="eng-desc">Collecte minimale de données. Aucun profil élève. Aucune revente.</div>
-        </div>
-      </div>
-      <div class="eng-card">
-        <div class="eng-icon">💡</div>
-        <div>
-          <div class="eng-title">Transparence totale</div>
-          <div class="eng-desc">Ce que ce site fait — et ce qu'il ne fait pas — est expliqué clairement dans ces pages.</div>
-        </div>
-      </div>
+    <div class="section-title"><div class="dot"></div>Les engagements de CAP 3e</div>
+    <div class="eng-grid">
+      <div class="eng-card"><div class="eng-icon">🎓</div><div><div class="eng-title">Entièrement gratuit</div><div class="eng-desc">Aucun abonnement, aucun paiement, aucune publicité. Toujours.</div></div></div>
+      <div class="eng-card"><div class="eng-icon">🔓</div><div><div class="eng-title">Accessible à tous</div><div class="eng-desc">Sans inscription, sans adresse email, sans création de compte obligatoire.</div></div></div>
+      <div class="eng-card"><div class="eng-icon">🤝</div><div><div class="eng-title">Au service des élèves</div><div class="eng-desc">Chaque outil, chaque fiche, chaque conseil est pensé pour l'élève — pas pour l'institution.</div></div></div>
+      <div class="eng-card"><div class="eng-icon">🔒</div><div><div class="eng-title">Respect de la vie privée</div><div class="eng-desc">Collecte minimale de données. Aucun profil élève constitué. Aucune revente de données.</div></div></div>
+      <div class="eng-card"><div class="eng-icon">💡</div><div><div class="eng-title">Transparence totale</div><div class="eng-desc">Ce que ce site fait — et ce qu'il ne fait pas — est expliqué clairement dans cet espace.</div></div></div>
     </div>
   </div>
 
-  <!-- NATURE DU PROJET -->
   <div class="section">
-    <div class="section-title"><span>●</span> Nature du projet</div>
+    <div class="section-title"><div class="dot"></div>Nature du projet</div>
     <div class="nature-box">
       <p><strong>CAP 3e est une initiative pédagogique indépendante.</strong> Ce site a été conçu et est maintenu bénévolement par un enseignant, en dehors de ses obligations institutionnelles.</p>
-      <p>Il n'est pas mandaté par le ministère de l'Éducation nationale, ni par l'académie de Versailles, ni par le collège Guy Môquet. Il s'inscrit dans l'esprit des ressources pédagogiques libres, au service des élèves.</p>
-      <p>Pour toute décision concernant l'orientation, l'affectation ou les examens, référez-vous toujours aux informations officielles de votre établissement.</p>
+      <p>Il n'est pas mandaté par le ministère de l'Éducation nationale, ni par l'académie de Versailles, ni par l'établissement. Il s'inscrit dans l'esprit des ressources pédagogiques libres, conçues dans l'intérêt des élèves.</p>
+      <p>Pour toute décision concernant l'orientation, l'affectation ou les examens, les familles sont invitées à se référer aux informations officielles communiquées par leur établissement.</p>
     </div>
   </div>
 
-  <!-- CONCEPTEUR -->
   <div class="section">
-    <div class="section-title"><span>●</span> Concepteur du projet pédagogique</div>
+    <div class="section-title"><div class="dot"></div>Concepteur du projet pédagogique</div>
     <div class="fiche">
       <div class="fiche-av">👨‍🏫</div>
       <div>
@@ -182,40 +178,35 @@
     <p>Contact&nbsp;: <a href="mailto:hassinicap3e@gmail.com">hassinicap3e@gmail.com</a></p>
   </div>
 
-  <!-- HÉBERGEMENT -->
   <div class="section">
-    <div class="section-title"><span>●</span> Hébergement</div>
-    <p>Le site est hébergé gratuitement sur <strong>GitHub Pages</strong>, un service de la société GitHub, Inc. (88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis). L'ensemble du site est servi exclusivement en HTTPS.</p>
+    <div class="section-title"><div class="dot"></div>Hébergement</div>
+    <p>Le site est hébergé gratuitement sur <strong>GitHub Pages</strong>, un service de la société GitHub, Inc. L'ensemble du site est servi exclusivement en HTTPS, garantissant la sécurité des échanges entre votre navigateur et nos serveurs.</p>
   </div>
 
-  <!-- PROPRIÉTÉ INTELLECTUELLE -->
   <div class="section">
-    <div class="section-title"><span>●</span> Propriété intellectuelle</div>
-    <p>Les textes, outils, fiches et contenus originaux de CAP 3e sont protégés par le droit d'auteur et restent la propriété de leur auteur. Leur reproduction partielle ou totale est soumise à autorisation préalable.</p>
-    <p>Les ressources officielles référencées (ONISEP, Éducation nationale, Affelnet…) restent la propriété de leurs auteurs respectifs.</p>
+    <div class="section-title"><div class="dot"></div>Propriété intellectuelle</div>
+    <p>Les textes, outils, fiches et contenus originaux de CAP 3e sont protégés par le droit d'auteur. Leur reproduction, même partielle, est soumise à autorisation préalable.</p>
+    <p>Les ressources officielles référencées — ONISEP, Éducation nationale, Affelnet, PIX… — restent la propriété de leurs auteurs respectifs.</p>
   </div>
 
-  <!-- DONNÉES -->
   <div class="section">
-    <div class="section-title"><span>●</span> Vos données personnelles</div>
-    <p>CAP 3e n'exige aucune création de compte. La collecte de données est limitée au strict minimum. Aucun profil n'est créé sur les élèves, aucune information nominative n'est stockée sans raison.</p>
+    <div class="section-title"><div class="dot"></div>Vos données personnelles</div>
+    <p>CAP 3e n'exige aucune création de compte. La collecte de données est réduite au strict minimum nécessaire au fonctionnement du site. Aucune information nominative n'est conservée sans justification pédagogique.</p>
     <p>Pour en savoir plus, consultez notre <a href="confidentialite.html">politique de confidentialité</a>, rédigée dans un langage simple et accessible.</p>
   </div>
 
-  <p style="font-size:12px;color:var(--gris3);margin-top:2rem">Dernière mise à jour&nbsp;: juillet 2026</p>
+  <p class="date-note">Dernière mise à jour&nbsp;: juillet 2026</p>
 
 </div>
-
 <footer>
   <div class="footer-label">Confiance &amp; Transparence</div>
   <div class="footer-links">
     <a href="mentions-legales.html">À propos de CAP 3e</a>
-    <a href="confidentialite.html">Confidentialité</a>
-    <a href="cookies.html">Cookies</a>
+    <a href="confidentialite.html">Politique de confidentialité</a>
+    <a href="cookies.html">Politique de cookies</a>
     <a href="accessibilite.html">Accessibilité</a>
   </div>
   <div class="footer-copy">© 2026 CAP 3e · Collège Guy Môquet, Gennevilliers (92) · M. Hassini</div>
 </footer>
-
 </body>
 </html>

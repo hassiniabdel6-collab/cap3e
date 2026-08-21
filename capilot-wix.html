@@ -2,18 +2,8 @@
 <html lang="fr">
 <head>
 
-  <!-- Google Analytics 4 - CAP 3e -->
-  <!-- Remplacer G-NCCXNNL215 par l'identifiant GA4 officiel après création de la propriété sur analytics.google.com -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NCCXNNL215"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NCCXNNL215', {
-      anonymize_ip: true,
-      cookie_flags: 'SameSite=None;Secure'
-    });
-  </script>
+  <!-- Google Analytics 4 - CAP 3e — chargement conditionnel via consent.js (Consent Mode basique, harmonisé avec le reste du site) -->
+  <script src="consent.js" defer></script>
   <!-- Google Search Console - vérification CAP 3e -->
   <!-- Remplacer le contenu ci-dessous par la balise meta fournie par Google Search Console -->
   <!-- <meta name="google-site-verification" content="VOTRE_CODE_SEARCH_CONSOLE" /> -->

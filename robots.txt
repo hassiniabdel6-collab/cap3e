@@ -22,7 +22,6 @@ Allow: /cap3e/fiche_pix_3e.html
 
 # Pages privées/techniques — non indexées
 Disallow: /cap3e/dashboard-prof.html
-Disallow: /cap3e/test-firebase.html
 Disallow: /cap3e/capilot-wix.html
 
 # Sitemap

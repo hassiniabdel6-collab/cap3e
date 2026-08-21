@@ -1,18 +1,60 @@
 // ── GESTION CONSENTEMENT COOKIES — Cap 3e ──────────────────────
-// Version 1.0 — Juillet 2026 — Conforme recommandations CNIL
+// Version 2.0 — 29 juillet 2026 — Consent Mode "basique"
+//
+// Principe : GA4 n'est JAMAIS chargé tant qu'un consentement positif n'a
+// pas été enregistré. Avant tout choix, et en cas de refus, aucun script
+// Google n'est injecté dans le DOM et aucune requête réseau vers Google
+// n'est émise. C'est la différence avec la v1.0 : il n'y a plus de balise
+// <script src="googletagmanager.com/...">  statique dans le <head> des
+// pages ; ce fichier est desormais l'unique point d'entrée qui décide,
+// et le seul endroit du projet où l'identifiant G-NCCXNNL215 apparaît
+// dans une balise <script>.
 
 var CAP3E_CONSENT_KEY = 'cap3e_cookie_consent';
+var CAP3E_GA_ID = 'G-NCCXNNL215';
+var CAP3E_GA_SCRIPT_ID = 'cap3e-ga4-script';
 
+// État par défaut : désactivé. Posé en tout premier, avant toute autre
+// logique, pour qu'aucun appel gtag() ne puisse jamais transmettre de
+// donnée tant que cap3eLoadGA4() n'a pas explicitement levé ce drapeau.
+window['ga-disable-' + CAP3E_GA_ID] = true;
+
+function cap3eInitDataLayer() {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+}
+
+// Charge GA4 dynamiquement. N'est appelée QUE depuis cap3eAcceptCookies()
+// ou depuis l'initialisation si un consentement "accepted" est déjà
+// mémorisé. N'injecte jamais la balise deux fois sur une même page.
 function cap3eLoadGA4() {
-  if (typeof gtag !== 'function') return;
-  gtag('consent', 'update', {
-    'analytics_storage': 'granted'
-  });
-  gtag('config', 'G-NCCXNNL215', {
+  cap3eInitDataLayer();
+  window['ga-disable-' + CAP3E_GA_ID] = false;
+
+  if (document.getElementById(CAP3E_GA_SCRIPT_ID)) {
+    // Script déjà présent sur cette page (ex. appel redondant) : ne pas
+    // recréer de balise, seulement confirmer le consentement.
+    gtag('consent', 'update', { analytics_storage: 'granted' });
+    return;
+  }
+
+  var script = document.createElement('script');
+  script.id = CAP3E_GA_SCRIPT_ID;
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + CAP3E_GA_ID;
+  document.head.appendChild(script);
+
+  gtag('js', new Date());
+  gtag('consent', 'update', { analytics_storage: 'granted' });
+  gtag('config', CAP3E_GA_ID, {
     anonymize_ip: true,
     allow_google_signals: false,
     allow_ad_personalization_signals: false
   });
+}
+
+function cap3eDisableGA4() {
+  window['ga-disable-' + CAP3E_GA_ID] = true;
 }
 
 function cap3eShowBanner() {
@@ -49,31 +91,37 @@ function cap3eShowBanner() {
 
 function cap3eAcceptCookies() {
   localStorage.setItem(CAP3E_CONSENT_KEY, 'accepted');
-  document.getElementById('cap3e-cookie-banner').remove();
+  var banner = document.getElementById('cap3e-cookie-banner');
+  if (banner) banner.remove();
   cap3eLoadGA4();
 }
 
 function cap3eRefuseCookies() {
   localStorage.setItem(CAP3E_CONSENT_KEY, 'refused');
-  document.getElementById('cap3e-cookie-banner').remove();
-  // Désactiver GA4
-  window['ga-disable-G-NCCXNNL215'] = true;
+  var banner = document.getElementById('cap3e-cookie-banner');
+  if (banner) banner.remove();
+  cap3eDisableGA4(); // pas d'injection de script — GA4 ne charge jamais
 }
 
+// Utilisée par le bouton "Modifier mes préférences cookies" de cookies.html
+// (inchangé — le nom de la fonction est conservé pour compatibilité).
 function cap3eResetConsent() {
   localStorage.removeItem(CAP3E_CONSENT_KEY);
   location.reload();
 }
 
-// Initialisation au chargement
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   var consent = localStorage.getItem(CAP3E_CONSENT_KEY);
   if (consent === 'accepted') {
+    // Consentement déjà mémorisé : GA4 peut se charger automatiquement,
+    // sans réafficher la bannière (cf. consigne "chargé automatiquement
+    // au prochain affichage").
     cap3eLoadGA4();
   } else if (consent === 'refused') {
-    window['ga-disable-G-NCCXNNL215'] = true;
+    cap3eDisableGA4();
   } else {
-    // Pas encore de choix — afficher la bannière
+    // Aucun choix encore enregistré : ne rien charger, afficher la bannière.
+    cap3eDisableGA4();
     cap3eShowBanner();
   }
 });

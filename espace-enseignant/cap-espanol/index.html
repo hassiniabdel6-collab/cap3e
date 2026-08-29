@@ -1,0 +1,19 @@
+<!doctype html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>CAP-Español — Agenda Enseignant 2026-2027 — RC4B Premium</title><link rel='stylesheet' href='styles.css'><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* EHH WEB PRIVATE ADAPTER — CAP-Español 2026-2027 */
+(() => {
+ const URL='https://acvggcalehcxsjzpmsnw.supabase.co', KEY='sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX', APP='cap_espanol';
+ const MANAGED=new Set(['capV15_2026_2027','cap_messages','hassini_agenda_core_2026_2027','hassini_session_progress_2026_2027']);
+ const sb=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,detectSessionInUrl:true,autoRefreshToken:true}});
+ window.EHH_SUPABASE=sb; window.EHH_CLOUD_READY=false;
+ const nativeSet=Storage.prototype.setItem; let syncing=false;
+ async function cloudWrite(k,v){ if(syncing||!MANAGED.has(k))return; const {data:{user}}=await sb.auth.getUser(); if(!user)return; const {error}=await sb.from('ehh_app_state').upsert({user_id:user.id,app_name:APP,state_key:k,state_data:{value:v},updated_at:new Date().toISOString()},{onConflict:'user_id,app_name,state_key'}); if(error)console.warn('EHH cloud write',error); }
+ Storage.prototype.setItem=function(k,v){nativeSet.call(this,k,v);if(this===window.localStorage&&MANAGED.has(k)&&window.EHH_CLOUD_READY)cloudWrite(k,v).catch(console.warn)};
+ async function init(){ const {data:{session}}=await sb.auth.getSession(); if(!session){document.documentElement.style.visibility='hidden';location.replace('/cap3e/espace-enseignant/');return;} const {data,error}=await sb.from('ehh_app_state').select('state_key,state_data,updated_at').eq('app_name',APP); if(error){console.warn('EHH cloud read',error);window.EHH_CLOUD_READY=true;return;} let changed=false; if(Array.isArray(data)&&data.length){syncing=true;for(const row of data){if(MANAGED.has(row.state_key)&&row.state_data&&typeof row.state_data.value==='string'){const cur=localStorage.getItem(row.state_key);if(cur!==row.state_data.value){nativeSet.call(localStorage,row.state_key,row.state_data.value);changed=true;}}}syncing=false;} else {for(const k of MANAGED){const v=localStorage.getItem(k);if(v!==null)await cloudWrite(k,v);}} window.EHH_CLOUD_READY=true; if(changed&&!sessionStorage.getItem('ehh_cap_cloud_reload')){sessionStorage.setItem('ehh_cap_cloud_reload','1');location.reload();return;} sessionStorage.removeItem('ehh_cap_cloud_reload'); }
+ window.addEventListener('load',()=>init().catch(e=>{console.error('EHH init',e);window.EHH_CLOUD_READY=true;}));
+})();
+</script>
+</head><body><div id='app'></div><script src='AGENDA_INTELLIGENT_HASSINI.js'></script><script src='app.js'></script><script>
+document.addEventListener('DOMContentLoaded',function(){if(!window.HassiniAgendaCore)return;HassiniAgendaCore.registerSessionProvider(function(iso){if(typeof dayCourses!=='function')return[];return dayCourses(iso).map(function(e){return {date:iso,start:e.start,end:e.end,classId:e.class,subject:e.type,level:e.level,room:'104'};});});});
+</script>
+</body></html>

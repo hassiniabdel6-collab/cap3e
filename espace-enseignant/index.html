@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -31,7 +32,7 @@
       border: 1px solid #dce4e4;
       border-radius: 18px;
       padding: 32px;
-      box-shadow: 0 12px 35px rgba(0,0,0,.07);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, .07);
     }
 
     h1 {
@@ -132,6 +133,9 @@
       Accès privé sécurisé
     </p>
 
+
+    <!-- ZONE NON CONNECTÉE -->
+
     <section id="loginBox">
 
       <label for="email">
@@ -149,8 +153,14 @@
         Recevoir mon lien de connexion
       </button>
 
+      <button id="anonymousTest" class="light">
+        Tester l’accès non authentifié
+      </button>
+
     </section>
 
+
+    <!-- ZONE PRIVÉE -->
 
     <section id="privateBox" class="hidden">
 
@@ -187,6 +197,7 @@
       Vérification de la session…
     </div>
 
+
     <p class="small">
       Cette page ne contient aucune donnée d’élève.
       Elle utilise uniquement la clé publique navigateur Supabase.
@@ -196,124 +207,64 @@
   </main>
 
 
-<script>
+  <script>
 
-const SUPABASE_URL =
-  "https://acvggcalehcxsjzpmsnw.supabase.co";
+    const SUPABASE_URL =
+      "https://acvggcalehcxsjzpmsnw.supabase.co";
 
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX";
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX";
 
 
-const client = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY,
-  {
-    auth: {
-      persistSession: true,
-      detectSessionInUrl: true,
-      autoRefreshToken: true
+    const client = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY,
+      {
+        auth: {
+          persistSession: true,
+          detectSessionInUrl: true,
+          autoRefreshToken: true
+        }
+      }
+    );
+
+
+    const loginBox =
+      document.getElementById("loginBox");
+
+    const privateBox =
+      document.getElementById("privateBox");
+
+    const statusBox =
+      document.getElementById("status");
+
+    const userInfo =
+      document.getElementById("userInfo");
+
+    const TEST_KEY =
+      "ehh_github_rls_test_v1";
+
+
+    function status(message) {
+
+      statusBox.textContent = message;
+
     }
-  }
-);
 
 
-const loginBox =
-  document.getElementById("loginBox");
+    async function refreshSession() {
 
-const privateBox =
-  document.getElementById("privateBox");
-
-const statusBox =
-  document.getElementById("status");
-
-const userInfo =
-  document.getElementById("userInfo");
-
-const TEST_KEY =
-  "ehh_github_rls_test_v1";
+      const {
+        data: { session },
+        error
+      } = await client.auth.getSession();
 
 
-function status(message) {
-
-  statusBox.textContent = message;
-
-}
-
-
-async function refreshSession() {
-
-  const {
-    data: { session },
-    error
-  } = await client.auth.getSession();
-
-
-  if (error) {
-
-    status(
-      "Erreur de lecture de session : " +
-      error.message
-    );
-
-    return;
-
-  }
-
-
-  if (!session) {
-
-    loginBox.classList.remove("hidden");
-
-    privateBox.classList.add("hidden");
-
-    status(
-      "Aucune session active. Utilisez votre lien de connexion."
-    );
-
-    return;
-
-  }
-
-
-  const user = session.user;
-
-
-  loginBox.classList.add("hidden");
-
-  privateBox.classList.remove("hidden");
-
-
-  userInfo.textContent =
-    "Utilisateur connecté : " +
-    (user.email || user.id);
-
-
-  status(
-    "Connexion réussie. La session Supabase est reconnue sur cette page."
-  );
-
-}
-
-
-
-document
-  .getElementById("sendLink")
-  .addEventListener(
-    "click",
-    async () => {
-
-      const email =
-        document
-          .getElementById("email")
-          .value
-          .trim();
-
-
-      if (!email) {
+      if (error) {
 
         status(
-          "Veuillez saisir votre adresse e-mail."
+          "Erreur de lecture de session : " +
+          error.message
         );
 
         return;
@@ -321,279 +272,430 @@ document
       }
 
 
+      if (!session) {
+
+        loginBox.classList.remove("hidden");
+
+        privateBox.classList.add("hidden");
+
+        userInfo.textContent = "";
+
+        status(
+          "Aucune session active. Utilisez votre lien de connexion."
+        );
+
+        return;
+
+      }
+
+
+      const user = session.user;
+
+
+      loginBox.classList.add("hidden");
+
+      privateBox.classList.remove("hidden");
+
+
+      userInfo.textContent =
+        "Utilisateur connecté : " +
+        (user.email || user.id);
+
+
       status(
-        "Envoi du lien de connexion…"
+        "Connexion réussie. La session Supabase est reconnue sur cette page."
       );
 
-
-      const redirectURL =
-        window.location.origin +
-        window.location.pathname;
+    }
 
 
-      const {
-        error
-      } = await client.auth.signInWithOtp({
+    /*
+     * CONNEXION PAR E-MAIL
+     */
 
-        email: email,
+    document
+      .getElementById("sendLink")
+      .addEventListener(
+        "click",
+        async () => {
 
-        options: {
+          const email =
+            document
+              .getElementById("email")
+              .value
+              .trim();
 
-          shouldCreateUser: false,
 
-          emailRedirectTo:
-            redirectURL
+          if (!email) {
+
+            status(
+              "Veuillez saisir votre adresse e-mail."
+            );
+
+            return;
+
+          }
+
+
+          status(
+            "Envoi du lien de connexion…"
+          );
+
+
+          const redirectURL =
+            window.location.origin +
+            window.location.pathname;
+
+
+          const {
+            error
+          } = await client.auth.signInWithOtp({
+
+            email: email,
+
+            options: {
+
+              shouldCreateUser: false,
+
+              emailRedirectTo:
+                redirectURL
+
+            }
+
+          });
+
+
+          if (error) {
+
+            if (
+              error.message &&
+              error.message
+                .toLowerCase()
+                .includes("rate limit")
+            ) {
+
+              status(
+                "Limite temporaire d’envoi d’e-mails atteinte. Attendez avant de demander un nouveau lien."
+              );
+
+              return;
+
+            }
+
+
+            status(
+              "Erreur : " +
+              error.message
+            );
+
+            return;
+
+          }
+
+
+          status(
+            "Lien envoyé. Consultez votre e-mail puis utilisez le bouton Sign in."
+          );
 
         }
-
-      });
-
-
-      if (error) {
-
-        status(
-          "Erreur : " +
-          error.message
-        );
-
-        return;
-
-      }
-
-
-      status(
-        "Lien envoyé. Consultez votre e-mail puis utilisez le bouton Sign in."
       );
 
-    }
-  );
+
+    /*
+     * TEST ÉCRITURE AUTHENTIFIÉE
+     */
+
+    document
+      .getElementById("writeTest")
+      .addEventListener(
+        "click",
+        async () => {
+
+          const {
+            data: { user },
+            error: userError
+          } = await client.auth.getUser();
 
 
+          if (
+            userError ||
+            !user
+          ) {
 
-document
-  .getElementById("writeTest")
-  .addEventListener(
-    "click",
-    async () => {
+            status(
+              "Aucune session authentifiée."
+            );
 
-      const {
-        data: { user },
-        error: userError
-      } = await client.auth.getUser();
+            return;
 
-
-      if (
-        userError ||
-        !user
-      ) {
-
-        status(
-          "Aucune session authentifiée."
-        );
-
-        return;
-
-      }
-
-
-      const payload = {
-
-        user_id:
-          user.id,
-
-        app_name:
-          "test_securite",
-
-        state_key:
-          TEST_KEY,
-
-        state_data: {
-
-          fictif: true,
-
-          message:
-            "Test RLS Espace Enseignant Hassini",
-
-          timestamp:
-            new Date().toISOString()
-
-        },
-
-        updated_at:
-          new Date().toISOString()
-
-      };
-
-
-      const {
-        error
-      } = await client
-        .from("ehh_app_state")
-        .upsert(
-          payload,
-          {
-            onConflict:
-              "user_id,app_name,state_key"
           }
-        );
 
 
-      if (error) {
+          const payload = {
 
-        status(
-          "Écriture refusée : " +
-          error.message
-        );
+            user_id:
+              user.id,
 
-        return;
+            app_name:
+              "test_securite",
 
-      }
+            state_key:
+              TEST_KEY,
+
+            state_data: {
+
+              fictif: true,
+
+              message:
+                "Test RLS Espace Enseignant Hassini",
+
+              timestamp:
+                new Date().toISOString()
+
+            },
+
+            updated_at:
+              new Date().toISOString()
+
+          };
 
 
-      status(
-        "✓ Écriture fictive réussie.\n\nLe RLS autorise correctement votre utilisateur authentifié."
+          const {
+            error
+          } = await client
+            .from("ehh_app_state")
+            .upsert(
+              payload,
+              {
+                onConflict:
+                  "user_id,app_name,state_key"
+              }
+            );
+
+
+          if (error) {
+
+            status(
+              "Écriture refusée : " +
+              error.message
+            );
+
+            return;
+
+          }
+
+
+          status(
+            "✓ Écriture fictive réussie.\n\nLe RLS autorise correctement votre utilisateur authentifié."
+          );
+
+        }
       );
 
-    }
-  );
+
+    /*
+     * TEST LECTURE AUTHENTIFIÉE
+     */
+
+    document
+      .getElementById("readTest")
+      .addEventListener(
+        "click",
+        async () => {
+
+          const {
+            data,
+            error
+          } = await client
+            .from("ehh_app_state")
+            .select(
+              "app_name,state_key,state_data,updated_at"
+            )
+            .eq(
+              "app_name",
+              "test_securite"
+            )
+            .eq(
+              "state_key",
+              TEST_KEY
+            )
+            .maybeSingle();
 
 
+          if (error) {
 
-document
-  .getElementById("readTest")
-  .addEventListener(
-    "click",
-    async () => {
+            status(
+              "Lecture refusée : " +
+              error.message
+            );
 
-      const {
-        data,
-        error
-      } = await client
-        .from("ehh_app_state")
-        .select(
-          "app_name,state_key,state_data,updated_at"
-        )
-        .eq(
-          "app_name",
-          "test_securite"
-        )
-        .eq(
-          "state_key",
-          TEST_KEY
-        )
-        .maybeSingle();
+            return;
+
+          }
 
 
-      if (error) {
+          if (!data) {
 
-        status(
-          "Lecture refusée : " +
-          error.message
-        );
+            status(
+              "Aucune donnée fictive présente."
+            );
 
-        return;
+            return;
 
-      }
-
-
-      if (!data) {
-
-        status(
-          "Aucune donnée fictive présente."
-        );
-
-        return;
-
-      }
+          }
 
 
-      status(
-        "✓ Lecture réussie.\n\n" +
-        JSON.stringify(
-          data,
-          null,
-          2
-        )
+          status(
+            "✓ Lecture réussie.\n\n" +
+            JSON.stringify(
+              data,
+              null,
+              2
+            )
+          );
+
+        }
       );
 
-    }
-  );
+
+    /*
+     * TEST SUPPRESSION AUTHENTIFIÉE
+     */
+
+    document
+      .getElementById("deleteTest")
+      .addEventListener(
+        "click",
+        async () => {
+
+          const {
+            error
+          } = await client
+            .from("ehh_app_state")
+            .delete()
+            .eq(
+              "app_name",
+              "test_securite"
+            )
+            .eq(
+              "state_key",
+              TEST_KEY
+            );
 
 
+          if (error) {
 
-document
-  .getElementById("deleteTest")
-  .addEventListener(
-    "click",
-    async () => {
+            status(
+              "Suppression refusée : " +
+              error.message
+            );
 
-      const {
-        error
-      } = await client
-        .from("ehh_app_state")
-        .delete()
-        .eq(
-          "app_name",
-          "test_securite"
-        )
-        .eq(
-          "state_key",
-          TEST_KEY
-        );
+            return;
+
+          }
 
 
-      if (error) {
+          status(
+            "✓ Donnée fictive supprimée."
+          );
 
-        status(
-          "Suppression refusée : " +
-          error.message
-        );
-
-        return;
-
-      }
-
-
-      status(
-        "✓ Donnée fictive supprimée."
+        }
       );
 
-    }
-  );
+
+    /*
+     * TEST ACCÈS NON AUTHENTIFIÉ
+     */
+
+    document
+      .getElementById("anonymousTest")
+      .addEventListener(
+        "click",
+        async () => {
+
+          const {
+            data: { session }
+          } = await client.auth.getSession();
 
 
+          if (session) {
 
-document
-  .getElementById("logout")
-  .addEventListener(
-    "click",
-    async () => {
+            status(
+              "Ce test doit être effectué sans session. Déconnectez-vous d’abord."
+            );
 
-      await client.auth.signOut();
+            return;
 
-      status(
-        "Déconnexion réussie."
+          }
+
+
+          const {
+            data,
+            error
+          } = await client
+            .from("ehh_app_state")
+            .select(
+              "app_name,state_key,state_data,updated_at"
+            )
+            .limit(1);
+
+
+          if (error) {
+
+            status(
+              "✓ Accès non authentifié bloqué.\n\nAucune lecture privée n’est autorisée sans connexion."
+            );
+
+            return;
+
+          }
+
+
+          if (!data || data.length === 0) {
+
+            status(
+              "✓ Accès non authentifié sécurisé.\n\nAucune donnée privée n’est accessible sans connexion."
+            );
+
+            return;
+
+          }
+
+
+          status(
+            "⚠ ALERTE DE SÉCURITÉ : une donnée privée est accessible sans authentification."
+          );
+
+        }
       );
 
-      await refreshSession();
 
-    }
-  );
+    /*
+     * DÉCONNEXION
+     */
+
+    document
+      .getElementById("logout")
+      .addEventListener(
+        "click",
+        async () => {
+
+          await client.auth.signOut();
+
+          await refreshSession();
+
+        }
+      );
 
 
+    /*
+     * INITIALISATION
+     */
 
-client.auth.onAuthStateChange(
-  async () => {
+    refreshSession();
 
-    await refreshSession();
-
-  }
-);
-
-
-refreshSession();
-
-</script>
+  </script>
 
 </body>
+
 </html>

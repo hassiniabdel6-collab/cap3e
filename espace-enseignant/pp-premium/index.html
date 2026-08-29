@@ -1732,7 +1732,7 @@ h1,h2,h3,.page-title,.section-title,.card-title{
     if(!session){
       document.documentElement.style.visibility='hidden';
       const target='./';
-      location.replace('../');
+      location.replace('/cap3e/espace-enseignant/');
       return;
     }
     const {data,error}=await sb.from('ehh_app_state')
@@ -2761,27 +2761,27 @@ h1,h2,h3,.page-title,.section-title,.card-title{
 <div class="settings-form-grid">
 <div class="field full">
 <label>Établissement</label>
-<input value="Collège Guy Môquet"/>
+<input id="ehhSchoolName" value="Collège Guy Môquet"/>
 </div>
 <div class="field">
 <label>Professeur principal</label>
-<input value="M. Hassini"/>
+<input id="ehhTeacherName" value="M. Hassini"/>
 </div>
 <div class="field">
 <label>Matière</label>
-<input value="Espagnol"/>
+<input id="ehhSubject" value="Espagnol"/>
 </div>
 <div class="field">
 <label>Ville</label>
-<input value="Gennevilliers"/>
+<input id="ehhCity" value="Gennevilliers"/>
 </div>
 <div class="field">
 <label>Département</label>
-<input value="92"/>
+<input id="ehhDepartment" value="92"/>
 </div>
 </div>
 <div class="settings-savebar">
-<button class="premium-btn primary" data-save-local="">Enregistrer cette section</button>
+<button class="premium-btn primary" data-save-local="general">Enregistrer cette section</button>
 </div>
 </div>
 <div class="settings-pane" id="settings-schoolyear">
@@ -4001,8 +4001,32 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('settings-'+btn.dataset.settingsTab).classList.add('active');
   }));
   document.querySelectorAll('[data-switch]').forEach(sw=>sw.addEventListener('click',()=>sw.classList.toggle('on')));
-  document.getElementById('saveSettingsBtn')?.addEventListener('click',()=>showToast('Configuration enregistrée dans le prototype local.'));
-  document.querySelectorAll('[data-save-local]').forEach(btn=>btn.addEventListener('click',()=>showToast('Section enregistrée dans le prototype local.')));
+  document.getElementById('saveSettingsBtn')?.addEventListener('click',()=>{ehhSaveGeneralSettings();});
+  const EHH_GENERAL_SETTINGS_KEY='ppCockpitSettingsV2';
+  function ehhReadSettings(){try{return JSON.parse(localStorage.getItem(EHH_GENERAL_SETTINGS_KEY)||'{}')}catch(e){return {}}}
+  function ehhLoadGeneralSettings(){
+    const p=ehhReadSettings(), g=p.general||{};
+    const vals={ehhSchoolName:g.schoolName,ehhTeacherName:g.teacherName,ehhSubject:g.subject,ehhCity:g.city,ehhDepartment:g.department};
+    Object.entries(vals).forEach(([id,v])=>{const el=document.getElementById(id);if(el&&v!==undefined&&v!==null)el.value=v});
+  }
+  function ehhSaveGeneralSettings(){
+    const p=ehhReadSettings();
+    p.general={
+      schoolName:document.getElementById('ehhSchoolName')?.value?.trim()||'',
+      teacherName:document.getElementById('ehhTeacherName')?.value?.trim()||'',
+      subject:document.getElementById('ehhSubject')?.value?.trim()||'',
+      city:document.getElementById('ehhCity')?.value?.trim()||'',
+      department:document.getElementById('ehhDepartment')?.value?.trim()||''
+    };
+    p.updatedAt=new Date().toISOString();
+    localStorage.setItem(EHH_GENERAL_SETTINGS_KEY,JSON.stringify(p));
+    showToast('✓ Paramètres généraux enregistrés et synchronisés.');
+  }
+  ehhLoadGeneralSettings();
+  document.querySelectorAll('[data-save-local]').forEach(btn=>btn.addEventListener('click',()=>{
+    if(btn.dataset.saveLocal==='general')ehhSaveGeneralSettings();
+    else showToast('Section enregistrée dans le prototype local.');
+  }));
   document.getElementById('resetSettingsBtn')?.addEventListener('click',()=>showToast('Réinitialisation désactivée dans ce prototype pour éviter toute perte.'));
   document.getElementById('importClassesBtn')?.addEventListener('click',()=>showToast('Import de la nouvelle répartition prêt à être raccordé.'));
   document.getElementById('downloadTemplateBtn')?.addEventListener('click',()=>showToast('Le modèle d’import sera créé lors de l’étape de raccordement des données.'));

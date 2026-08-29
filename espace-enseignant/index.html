@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Espace Enseignant Hassini</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f8f8;
+      color: #202a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(720px, 100%);
+      background: white;
+      border: 1px solid #dce4e4;
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 12px 35px rgba(0,0,0,.07);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 30px;
+    }
+
+    .subtitle {
+      margin: 0 0 28px;
+      color: #5c6b70;
+      font-size: 17px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #b8c4c4;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #087f73;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px 16px;
+      border: 0;
+      border-radius: 10px;
+      background: #087f73;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #202a2e;
+    }
+
+    button.light {
+      background: #eef3f3;
+      color: #202a2e;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: #eef4f4;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .connected {
+      padding: 14px 16px;
+      background: #edf7f5;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
+
+    .small {
+      margin-top: 20px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #5c6b70;
+    }
+
+    .test-title {
+      margin-top: 26px;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+
+    <h1>Espace Enseignant Hassini</h1>
+
+    <p class="subtitle">
+      Accès privé sécurisé
+    </p>
+
+    <section id="loginBox">
+
+      <label for="email">
+        Adresse e-mail
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        autocomplete="email"
+        placeholder="Votre adresse e-mail"
+      >
+
+      <button id="sendLink">
+        Recevoir mon lien de connexion
+      </button>
+
+    </section>
+
+
+    <section id="privateBox" class="hidden">
+
+      <div class="connected">
+        ✓ Session authentifiée
+      </div>
+
+      <div id="userInfo"></div>
+
+      <h2 class="test-title">
+        Test de sécurité RLS
+      </h2>
+
+      <button id="writeTest">
+        Tester une écriture fictive
+      </button>
+
+      <button id="readTest" class="light">
+        Relire la donnée fictive
+      </button>
+
+      <button id="deleteTest" class="light">
+        Supprimer la donnée de test
+      </button>
+
+      <button id="logout" class="secondary">
+        Se déconnecter
+      </button>
+
+    </section>
+
+
+    <div id="status" class="status">
+      Vérification de la session…
+    </div>
+
+    <p class="small">
+      Cette page ne contient aucune donnée d’élève.
+      Elle utilise uniquement la clé publique navigateur Supabase.
+      Aucune clé secrète ni clé service_role n’est intégrée.
+    </p>
+
+  </main>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://acvggcalehcxsjzpmsnw.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX";
+
+
+const client = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY,
+  {
+    auth: {
+      persistSession: true,
+      detectSessionInUrl: true,
+      autoRefreshToken: true
+    }
+  }
+);
+
+
+const loginBox =
+  document.getElementById("loginBox");
+
+const privateBox =
+  document.getElementById("privateBox");
+
+const statusBox =
+  document.getElementById("status");
+
+const userInfo =
+  document.getElementById("userInfo");
+
+const TEST_KEY =
+  "ehh_github_rls_test_v1";
+
+
+function status(message) {
+
+  statusBox.textContent = message;
+
+}
+
+
+async function refreshSession() {
+
+  const {
+    data: { session },
+    error
+  } = await client.auth.getSession();
+
+
+  if (error) {
+
+    status(
+      "Erreur de lecture de session : " +
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  if (!session) {
+
+    loginBox.classList.remove("hidden");
+
+    privateBox.classList.add("hidden");
+
+    status(
+      "Aucune session active. Utilisez votre lien de connexion."
+    );
+
+    return;
+
+  }
+
+
+  const user = session.user;
+
+
+  loginBox.classList.add("hidden");
+
+  privateBox.classList.remove("hidden");
+
+
+  userInfo.textContent =
+    "Utilisateur connecté : " +
+    (user.email || user.id);
+
+
+  status(
+    "Connexion réussie. La session Supabase est reconnue sur cette page."
+  );
+
+}
+
+
+
+document
+  .getElementById("sendLink")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const email =
+        document
+          .getElementById("email")
+          .value
+          .trim();
+
+
+      if (!email) {
+
+        status(
+          "Veuillez saisir votre adresse e-mail."
+        );
+
+        return;
+
+      }
+
+
+      status(
+        "Envoi du lien de connexion…"
+      );
+
+
+      const redirectURL =
+        window.location.origin +
+        window.location.pathname;
+
+
+      const {
+        error
+      } = await client.auth.signInWithOtp({
+
+        email: email,
+
+        options: {
+
+          shouldCreateUser: false,
+
+          emailRedirectTo:
+            redirectURL
+
+        }
+
+      });
+
+
+      if (error) {
+
+        status(
+          "Erreur : " +
+          error.message
+        );
+
+        return;
+
+      }
+
+
+      status(
+        "Lien envoyé. Consultez votre e-mail puis utilisez le bouton Sign in."
+      );
+
+    }
+  );
+
+
+
+document
+  .getElementById("writeTest")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const {
+        data: { user },
+        error: userError
+      } = await client.auth.getUser();
+
+
+      if (
+        userError ||
+        !user
+      ) {
+
+        status(
+          "Aucune session authentifiée."
+        );
+
+        return;
+
+      }
+
+
+      const payload = {
+
+        user_id:
+          user.id,
+
+        app_name:
+          "test_securite",
+
+        state_key:
+          TEST_KEY,
+
+        state_data: {
+
+          fictif: true,
+
+          message:
+            "Test RLS Espace Enseignant Hassini",
+
+          timestamp:
+            new Date().toISOString()
+
+        },
+
+        updated_at:
+          new Date().toISOString()
+
+      };
+
+
+      const {
+        error
+      } = await client
+        .from("ehh_app_state")
+        .upsert(
+          payload,
+          {
+            onConflict:
+              "user_id,app_name,state_key"
+          }
+        );
+
+
+      if (error) {
+
+        status(
+          "Écriture refusée : " +
+          error.message
+        );
+
+        return;
+
+      }
+
+
+      status(
+        "✓ Écriture fictive réussie.\n\nLe RLS autorise correctement votre utilisateur authentifié."
+      );
+
+    }
+  );
+
+
+
+document
+  .getElementById("readTest")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const {
+        data,
+        error
+      } = await client
+        .from("ehh_app_state")
+        .select(
+          "app_name,state_key,state_data,updated_at"
+        )
+        .eq(
+          "app_name",
+          "test_securite"
+        )
+        .eq(
+          "state_key",
+          TEST_KEY
+        )
+        .maybeSingle();
+
+
+      if (error) {
+
+        status(
+          "Lecture refusée : " +
+          error.message
+        );
+
+        return;
+
+      }
+
+
+      if (!data) {
+
+        status(
+          "Aucune donnée fictive présente."
+        );
+
+        return;
+
+      }
+
+
+      status(
+        "✓ Lecture réussie.\n\n" +
+        JSON.stringify(
+          data,
+          null,
+          2
+        )
+      );
+
+    }
+  );
+
+
+
+document
+  .getElementById("deleteTest")
+  .addEventListener(
+    "click",
+    async () => {
+
+      const {
+        error
+      } = await client
+        .from("ehh_app_state")
+        .delete()
+        .eq(
+          "app_name",
+          "test_securite"
+        )
+        .eq(
+          "state_key",
+          TEST_KEY
+        );
+
+
+      if (error) {
+
+        status(
+          "Suppression refusée : " +
+          error.message
+        );
+
+        return;
+
+      }
+
+
+      status(
+        "✓ Donnée fictive supprimée."
+      );
+
+    }
+  );
+
+
+
+document
+  .getElementById("logout")
+  .addEventListener(
+    "click",
+    async () => {
+
+      await client.auth.signOut();
+
+      status(
+        "Déconnexion réussie."
+      );
+
+      await refreshSession();
+
+    }
+  );
+
+
+
+client.auth.onAuthStateChange(
+  async () => {
+
+    await refreshSession();
+
+  }
+);
+
+
+refreshSession();
+
+</script>
+
+</body>
+</html>

@@ -5818,7 +5818,7 @@ tr:nth-child(even) td{background:#f7f6f2}
    if(!session){location.replace('/cap3e/espace-enseignant/');return;}
    const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value,updated_at').eq('user_id',session.user.id).eq('app_name',APP);
    if(error){console.error('EHH cloud',error); ready=true; return;}
-   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed&&!sessionStorage.getItem('ehh_mspp_cloud_reload')){sessionStorage.setItem('ehh_mspp_cloud_reload','1');location.reload();return;}}
+   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed){location.reload();return;}}
    else {ready=true; for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(managed(k)) push(k,localStorage.getItem(k));}}
    window.EHH_CLOUD_READY=true;
  }
@@ -6112,7 +6112,7 @@ document.addEventListener('DOMContentLoaded',function(){
    if(!session){location.replace('/cap3e/espace-enseignant/');return;}
    const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value,updated_at').eq('user_id',session.user.id).eq('app_name',APP);
    if(error){console.error('EHH cloud',error); ready=true; return;}
-   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed&&!sessionStorage.getItem('ehh_mspp_cloud_reload')){sessionStorage.setItem('ehh_mspp_cloud_reload','1');location.reload();return;}}
+   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed){location.reload();return;}}
    else {ready=true; for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(managed(k)) push(k,localStorage.getItem(k));}}
    window.EHH_CLOUD_READY=true;
  }
@@ -6899,7 +6899,7 @@ document.addEventListener('DOMContentLoaded',function(){
    if(!session){location.replace('/cap3e/espace-enseignant/');return;}
    const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value,updated_at').eq('user_id',session.user.id).eq('app_name',APP);
    if(error){console.error('EHH cloud',error); ready=true; return;}
-   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed&&!sessionStorage.getItem('ehh_mspp_cloud_reload')){sessionStorage.setItem('ehh_mspp_cloud_reload','1');location.reload();return;}}
+   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed){location.reload();return;}}
    else {ready=true; for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(managed(k)) push(k,localStorage.getItem(k));}}
    window.EHH_CLOUD_READY=true;
  }

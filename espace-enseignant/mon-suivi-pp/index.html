@@ -5800,31 +5800,7 @@ tr:nth-child(even) td{background:#f7f6f2}
 <tbody>${bodyRows}</tbody>
 </table>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(function(){
- const URL='https://acvggcalehcxsjzpmsnw.supabase.co';
- const KEY='sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX';
- const APP='mon_suivi_pp';
- const PREFIXES=['monSuiviPP_','hassini_agenda_core_2026_2027','hassini_session_progress_2026_2027'];
- const sb=window.supabase.createClient(URL,KEY);
- let ready=false, silent=false;
- const managed=k=>PREFIXES.some(p=>k.startsWith(p));
- const nativeSet=Storage.prototype.setItem;
- async function push(k,v){if(!ready||silent||!managed(k))return; const {data:{user}}=await sb.auth.getUser(); if(!user)return; await sb.from('ehh_app_state').upsert({user_id:user.id,app_name:APP,state_key:k,state_value:{value:v},updated_at:new Date().toISOString()},{onConflict:'user_id,app_name,state_key'});}
- Storage.prototype.setItem=function(k,v){nativeSet.call(this,k,v); push(String(k),String(v));};
- async function init(){
-   const {data:{session}}=await sb.auth.getSession();
-   if(!session){location.replace('/cap3e/espace-enseignant/');return;}
-   const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value,updated_at').eq('user_id',session.user.id).eq('app_name',APP);
-   if(error){console.error('EHH cloud',error); ready=true; return;}
-   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed){location.reload();return;}}
-   else {ready=true; for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(managed(k)) push(k,localStorage.getItem(k));}}
-   window.EHH_CLOUD_READY=true;
- }
- window.addEventListener('load',init);
-})();
-</script>
+
 
 </body>
 </html>`;
@@ -6094,31 +6070,7 @@ document.addEventListener('DOMContentLoaded',function(){
       '<th>Avis orientation</th><th>Action après conseil</th>'+
       '</tr></thead><tbody>'+body+'</tbody></table>'+
       '
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-(function(){
- const URL='https://acvggcalehcxsjzpmsnw.supabase.co';
- const KEY='sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX';
- const APP='mon_suivi_pp';
- const PREFIXES=['monSuiviPP_','hassini_agenda_core_2026_2027','hassini_session_progress_2026_2027'];
- const sb=window.supabase.createClient(URL,KEY);
- let ready=false, silent=false;
- const managed=k=>PREFIXES.some(p=>k.startsWith(p));
- const nativeSet=Storage.prototype.setItem;
- async function push(k,v){if(!ready||silent||!managed(k))return; const {data:{user}}=await sb.auth.getUser(); if(!user)return; await sb.from('ehh_app_state').upsert({user_id:user.id,app_name:APP,state_key:k,state_value:{value:v},updated_at:new Date().toISOString()},{onConflict:'user_id,app_name,state_key'});}
- Storage.prototype.setItem=function(k,v){nativeSet.call(this,k,v); push(String(k),String(v));};
- async function init(){
-   const {data:{session}}=await sb.auth.getSession();
-   if(!session){location.replace('/cap3e/espace-enseignant/');return;}
-   const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value,updated_at').eq('user_id',session.user.id).eq('app_name',APP);
-   if(error){console.error('EHH cloud',error); ready=true; return;}
-   if(data&&data.length){silent=true; let changed=false; for(const r of data){const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):''; if(managed(r.state_key)&&localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}} silent=false; ready=true; if(changed){location.reload();return;}}
-   else {ready=true; for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(managed(k)) push(k,localStorage.getItem(k));}}
-   window.EHH_CLOUD_READY=true;
- }
- window.addEventListener('load',init);
-})();
-</script>
+
 
 </body></html>';
 
@@ -6881,95 +6833,206 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 </script>
 
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
- const URL='https://acvggcalehcxsjzpmsnw.supabase.co';
- const KEY='sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX';
- const APP='mon_suivi_pp';
- const PREFIXES=['monSuiviPP_','hassini_agenda_core_2026_2027','hassini_session_progress_2026_2027'];
- const sb=window.supabase.createClient(URL,KEY);
- const nativeSet=Storage.prototype.setItem,nativeRemove=Storage.prototype.removeItem;
- let user=null,ready=false,silent=false,started=false;
- const pending=new Map();
- const managed=k=>PREFIXES.some(p=>String(k).startsWith(p));
+  const URL='https://acvggcalehcxsjzpmsnw.supabase.co';
+  const KEY='sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX';
+  const APP='mon_suivi_pp';
+  const PREFIXES=[
+    'monSuiviPP_',
+    'hassini_agenda_core_2026_2027',
+    'hassini_session_progress_2026_2027'
+  ];
 
- async function upsertState(k,v){
-   if(!user)return false;
-   const {error}=await sb.from('ehh_app_state').upsert({
-     user_id:user.id,app_name:APP,state_key:String(k),
-     state_value:{value:String(v)},updated_at:new Date().toISOString()
-   },{onConflict:'user_id,app_name,state_key'});
-   if(error){console.error('[EHH MSPP] write',k,error);return false}
-   return true;
- }
- async function push(k,v){
-   k=String(k); if(!managed(k)||silent)return;
-   if(!ready||!user){pending.set(k,v===null?null:String(v));return}
-   if(v===null){
-     const {error}=await sb.from('ehh_app_state').delete()
-       .eq('user_id',user.id).eq('app_name',APP).eq('state_key',k);
-     if(error){console.error('[EHH MSPP] delete',k,error);pending.set(k,null)}
-     else pending.delete(k);
-     return;
-   }
-   if(await upsertState(k,v))pending.delete(k);else pending.set(k,String(v));
- }
- Storage.prototype.setItem=function(k,v){nativeSet.call(this,k,v);push(k,v)};
- Storage.prototype.removeItem=function(k){nativeRemove.call(this,k);push(k,null)};
+  const sb=window.supabase.createClient(URL,KEY,{
+    auth:{persistSession:true,detectSessionInUrl:true,autoRefreshToken:true}
+  });
 
- async function flush(){if(!ready||!user)return;for(const [k,v] of Array.from(pending))await push(k,v)}
- async function pull(){
-   const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value')
-     .eq('user_id',user.id).eq('app_name',APP);
-   if(error){console.error('[EHH MSPP] pull',error);return false}
-   let changed=false;silent=true;
-   for(const r of (data||[])){
-     if(!managed(r.state_key))continue;
-     const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):'';
-     if(localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true}
-   }
-   silent=false;return changed;
- }
- async function seedAllLocal(){
-   for(let i=0;i<localStorage.length;i++){
-     const k=localStorage.key(i);
-     if(managed(k))await upsertState(k,localStorage.getItem(k));
-   }
- }
- async function init(){
-   if(started)return;started=true;
-   const {data:{session}}=await sb.auth.getSession();
-   if(!session){location.replace('/cap3e/espace-enseignant/');return}
-   user=session.user;
+  const nativeSet=Storage.prototype.setItem;
+  const nativeRemove=Storage.prototype.removeItem;
 
-   /* Contrôle volontaire : doit apparaître dans ehh_app_state. */
-   if(!(await upsertState('__sync_probe__',new Date().toISOString())))return;
+  let user=null;
+  let ready=false;
+  let syncing=false;
+  let started=false;
+  const pending=new Map();
 
-   const {data,error}=await sb.from('ehh_app_state').select('state_key')
-     .eq('user_id',user.id).eq('app_name',APP).neq('state_key','__sync_probe__').limit(1);
-   if(error){console.error('[EHH MSPP] init',error);return}
+  function managed(k){
+    k=String(k);
+    return PREFIXES.some(p=>k.startsWith(p));
+  }
 
-   if(data&&data.length){
-     pending.clear();
-     const changed=await pull();
-     pending.clear();ready=true;window.EHH_CLOUD_READY=true;
-     if(changed){location.reload();return}
-   }else{
-     await seedAllLocal();
-     pending.clear();ready=true;window.EHH_CLOUD_READY=true;
-   }
-   await flush();
- }
- async function refresh(){
-   if(!ready||!user)return;
-   await flush();const changed=await pull();if(changed)location.reload();
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
- else init();
- window.addEventListener('focus',refresh);
- document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});
- setInterval(()=>{if(ready)flush()},3000);
+  async function writeCloud(k,v){
+    if(!user) return false;
+    const {error}=await sb.from('ehh_app_state').upsert({
+      user_id:user.id,
+      app_name:APP,
+      state_key:String(k),
+      state_data:{value:String(v)},
+      updated_at:new Date().toISOString()
+    },{onConflict:'user_id,app_name,state_key'});
+
+    if(error){
+      console.error('[EHH MSPP] écriture cloud',k,error);
+      return false;
+    }
+    return true;
+  }
+
+  async function deleteCloud(k){
+    if(!user) return false;
+    const {error}=await sb.from('ehh_app_state')
+      .delete()
+      .eq('user_id',user.id)
+      .eq('app_name',APP)
+      .eq('state_key',String(k));
+
+    if(error){
+      console.error('[EHH MSPP] suppression cloud',k,error);
+      return false;
+    }
+    return true;
+  }
+
+  async function push(k,v){
+    k=String(k);
+    if(!managed(k) || syncing) return;
+
+    if(!ready || !user){
+      pending.set(k, v===null ? null : String(v));
+      return;
+    }
+
+    const ok = v===null ? await deleteCloud(k) : await writeCloud(k,v);
+    if(ok) pending.delete(k);
+    else pending.set(k, v===null ? null : String(v));
+  }
+
+  Storage.prototype.setItem=function(k,v){
+    nativeSet.call(this,k,v);
+    if(this===window.localStorage) push(k,v);
+  };
+
+  Storage.prototype.removeItem=function(k){
+    nativeRemove.call(this,k);
+    if(this===window.localStorage) push(k,null);
+  };
+
+  async function flushPending(){
+    if(!ready || !user) return;
+    for(const [k,v] of Array.from(pending.entries())){
+      await push(k,v);
+    }
+  }
+
+  async function readCloud(){
+    const {data,error}=await sb.from('ehh_app_state')
+      .select('state_key,state_data,updated_at')
+      .eq('user_id',user.id)
+      .eq('app_name',APP);
+
+    if(error){
+      console.error('[EHH MSPP] lecture cloud',error);
+      return false;
+    }
+
+    let changed=false;
+    syncing=true;
+
+    for(const row of (data||[])){
+      if(!managed(row.state_key)) continue;
+      if(!row.state_data || typeof row.state_data.value!=='string') continue;
+
+      const remote=row.state_data.value;
+      if(localStorage.getItem(row.state_key)!==remote){
+        nativeSet.call(localStorage,row.state_key,remote);
+        changed=true;
+      }
+    }
+
+    syncing=false;
+    return changed;
+  }
+
+  async function seedLocalToCloud(){
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      if(managed(k)){
+        await writeCloud(k,localStorage.getItem(k));
+      }
+    }
+  }
+
+  async function init(){
+    if(started) return;
+    started=true;
+
+    const {data:{session},error}=await sb.auth.getSession();
+    if(error || !session){
+      location.replace('/cap3e/espace-enseignant/');
+      return;
+    }
+
+    user=session.user;
+
+    // Ligne technique de contrôle : elle doit apparaître dans ehh_app_state.
+    const probeOk=await writeCloud('__sync_probe__',new Date().toISOString());
+    if(!probeOk) return;
+
+    const {data,error:readError}=await sb.from('ehh_app_state')
+      .select('state_key')
+      .eq('user_id',user.id)
+      .eq('app_name',APP)
+      .neq('state_key','__sync_probe__')
+      .limit(1);
+
+    if(readError){
+      console.error('[EHH MSPP] initialisation cloud',readError);
+      return;
+    }
+
+    if(data && data.length){
+      pending.clear();
+      const changed=await readCloud();
+      pending.clear();
+      ready=true;
+      window.EHH_CLOUD_READY=true;
+
+      if(changed){
+        location.reload();
+        return;
+      }
+    }else{
+      await seedLocalToCloud();
+      pending.clear();
+      ready=true;
+      window.EHH_CLOUD_READY=true;
+    }
+
+    await flushPending();
+  }
+
+  async function refresh(){
+    if(!ready || !user) return;
+    await flushPending();
+    const changed=await readCloud();
+    if(changed) location.reload();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init,{once:true});
+  }else{
+    init();
+  }
+
+  window.addEventListener('focus',refresh);
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden) refresh();
+  });
 })();
 </script>
 

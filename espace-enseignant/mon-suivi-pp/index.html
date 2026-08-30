@@ -6887,55 +6887,91 @@ document.addEventListener('DOMContentLoaded',function(){
  const URL='https://acvggcalehcxsjzpmsnw.supabase.co';
  const KEY='sb_publishable_VZlbO3biVHyR75Oa00_4jw_e5JdMPbX';
  const APP='mon_suivi_pp';
- const EHH_SYNC_VERSION='2026-08-29-v4-single-adapter';
- window.EHH_SYNC_VERSION=EHH_SYNC_VERSION;
  const PREFIXES=['monSuiviPP_','hassini_agenda_core_2026_2027','hassini_session_progress_2026_2027'];
  const sb=window.supabase.createClient(URL,KEY);
- const nativeSet=Storage.prototype.setItem;
- let ready=false,silent=false,user=null;
+ const nativeSet=Storage.prototype.setItem,nativeRemove=Storage.prototype.removeItem;
+ let user=null,ready=false,silent=false,started=false;
  const pending=new Map();
  const managed=k=>PREFIXES.some(p=>String(k).startsWith(p));
- async function push(k,v){
-   k=String(k); v=String(v);
-   if(!managed(k)||silent)return;
-   if(!ready||!user){pending.set(k,v);return;}
-   const {error}=await sb.from('ehh_app_state').upsert({user_id:user.id,app_name:APP,state_key:k,state_value:{value:v},updated_at:new Date().toISOString()},{onConflict:'user_id,app_name,state_key'});
-   if(error){console.error('EHH push',k,error);pending.set(k,v);} else pending.delete(k);
+
+ async function upsertState(k,v){
+   if(!user)return false;
+   const {error}=await sb.from('ehh_app_state').upsert({
+     user_id:user.id,app_name:APP,state_key:String(k),
+     state_value:{value:String(v)},updated_at:new Date().toISOString()
+   },{onConflict:'user_id,app_name,state_key'});
+   if(error){console.error('[EHH MSPP] write',k,error);return false}
+   return true;
  }
- Storage.prototype.setItem=function(k,v){nativeSet.call(this,k,v);push(k,v);};
- async function flush(){if(!ready||!user)return; for(const [k,v] of Array.from(pending)) await push(k,v);}
- async function pull(reloadIfChanged){
-   if(!user)return;
-   const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value,updated_at').eq('user_id',user.id).eq('app_name',APP);
-   if(error){console.error('EHH pull',error);return;}
-   let changed=false; silent=true;
+ async function push(k,v){
+   k=String(k); if(!managed(k)||silent)return;
+   if(!ready||!user){pending.set(k,v===null?null:String(v));return}
+   if(v===null){
+     const {error}=await sb.from('ehh_app_state').delete()
+       .eq('user_id',user.id).eq('app_name',APP).eq('state_key',k);
+     if(error){console.error('[EHH MSPP] delete',k,error);pending.set(k,null)}
+     else pending.delete(k);
+     return;
+   }
+   if(await upsertState(k,v))pending.delete(k);else pending.set(k,String(v));
+ }
+ Storage.prototype.setItem=function(k,v){nativeSet.call(this,k,v);push(k,v)};
+ Storage.prototype.removeItem=function(k){nativeRemove.call(this,k);push(k,null)};
+
+ async function flush(){if(!ready||!user)return;for(const [k,v] of Array.from(pending))await push(k,v)}
+ async function pull(){
+   const {data,error}=await sb.from('ehh_app_state').select('state_key,state_value')
+     .eq('user_id',user.id).eq('app_name',APP);
+   if(error){console.error('[EHH MSPP] pull',error);return false}
+   let changed=false;silent=true;
    for(const r of (data||[])){
      if(!managed(r.state_key))continue;
      const v=r.state_value&&Object.prototype.hasOwnProperty.call(r.state_value,'value')?String(r.state_value.value):'';
-     if(localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true;}
+     if(localStorage.getItem(r.state_key)!==v){nativeSet.call(localStorage,r.state_key,v);changed=true}
    }
-   silent=false;
-   if(changed&&reloadIfChanged){sessionStorage.setItem('ehh_mspp_cloud_reload','1');location.reload();}
+   silent=false;return changed;
+ }
+ async function seedAllLocal(){
+   for(let i=0;i<localStorage.length;i++){
+     const k=localStorage.key(i);
+     if(managed(k))await upsertState(k,localStorage.getItem(k));
+   }
  }
  async function init(){
+   if(started)return;started=true;
    const {data:{session}}=await sb.auth.getSession();
-   if(!session){location.replace('/cap3e/espace-enseignant/');return;}
+   if(!session){location.replace('/cap3e/espace-enseignant/');return}
    user=session.user;
-   const {data,error}=await sb.from('ehh_app_state').select('state_key').eq('user_id',user.id).eq('app_name',APP).limit(1);
-   if(error){console.error('EHH init',error);ready=true;return;}
-   if(data&&data.length){await pull(sessionStorage.getItem('ehh_mspp_cloud_reload')!=='1');}
-   else {for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(managed(k))pending.set(k,localStorage.getItem(k));}}
-   sessionStorage.removeItem('ehh_mspp_cloud_reload');
-   ready=true; window.EHH_CLOUD_READY=true; await flush();
-   setTimeout(()=>pull(true),1200);
+
+   /* Contrôle volontaire : doit apparaître dans ehh_app_state. */
+   if(!(await upsertState('__sync_probe__',new Date().toISOString())))return;
+
+   const {data,error}=await sb.from('ehh_app_state').select('state_key')
+     .eq('user_id',user.id).eq('app_name',APP).neq('state_key','__sync_probe__').limit(1);
+   if(error){console.error('[EHH MSPP] init',error);return}
+
+   if(data&&data.length){
+     pending.clear();
+     const changed=await pull();
+     pending.clear();ready=true;window.EHH_CLOUD_READY=true;
+     if(changed){location.reload();return}
+   }else{
+     await seedAllLocal();
+     pending.clear();ready=true;window.EHH_CLOUD_READY=true;
+   }
+   await flush();
  }
- window.addEventListener('load',init);
- window.addEventListener('focus',()=>{if(ready){flush().then(()=>pull(true));}});
- document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ready){flush().then(()=>pull(true));}});
- setInterval(()=>{if(ready)flush();},3000);
+ async function refresh(){
+   if(!ready||!user)return;
+   await flush();const changed=await pull();if(changed)location.reload();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});
+ else init();
+ window.addEventListener('focus',refresh);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});
+ setInterval(()=>{if(ready)flush()},3000);
 })();
 </script>
-
 
 </body>
 </html>

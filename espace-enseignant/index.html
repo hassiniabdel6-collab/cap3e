@@ -11,6 +11,7 @@ h1{margin:0 0 6px}.subtitle{color:#5c6b70;margin:0 0 24px}
 input,button,.app{width:100%;padding:14px 16px;border-radius:10px;font-size:16px;box-sizing:border-box}
 input{border:1px solid #b8c4c4}button,.app{border:0;background:#087f73;color:white;font-weight:700;text-decoration:none;text-align:center;cursor:pointer}
 .apps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:22px}.app{min-height:120px;display:flex;flex-direction:column;justify-content:center}
+.app.pp{background:#17365d}.app.cap{background:#8e2f3f}.app.mspp{background:#087f73}
 .app span{font-size:13px;font-weight:500;margin-top:6px}.hidden{display:none}.connected,.status{padding:13px 15px;border-radius:10px;margin-top:18px}
 .connected{background:#edf7f5;font-weight:700}.status{background:#eef4f4}.secondary{background:#202a2e;margin-top:20px}
 .small{font-size:13px;color:#5c6b70;margin-top:18px}.remembered{font-size:13px;color:#5c6b70;margin:8px 0 12px}
@@ -29,9 +30,9 @@ input{border:1px solid #b8c4c4}button,.app{border:0;background:#087f73;color:whi
 <div class="connected">✓ Session authentifiée</div>
 <p id="userInfo"></p>
 <div class="apps">
-<a class="app" href="./pp-premium/">PP Premium<span>Pilotage principal et suivi de classe</span></a>
-<a class="app" href="./cap-espanol/">CAP-Español<span>Organisation et ressources pédagogiques</span></a>
-<a class="app" href="./mon-suivi-pp/">Mon Suivi PP<span>Suivi opérationnel de la classe</span></a>
+<a class="app pp" href="./pp-premium/">PP Premium<span>Pilotage principal et suivi de classe</span></a>
+<a class="app cap" href="./cap-espanol/">CAP-Español<span>Organisation et ressources pédagogiques</span></a>
+<a class="app mspp" href="./mon-suivi-pp/">Mon Suivi PP<span>Suivi opérationnel de la classe</span></a>
 </div>
 <button id="logout" class="secondary">Se déconnecter</button>
 </section>

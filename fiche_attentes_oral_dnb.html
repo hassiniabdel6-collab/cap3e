@@ -670,7 +670,7 @@ function renderSujet() {
       <div class="sujet-tag">🏷 ${s.tag}</div>
     </div>
     ${s.canva ? `<a href="${s.canva}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:#7F77DD;color:#fff;border-radius:8px;font-size:13px;font-weight:500;text-decoration:none;margin-bottom:.75rem">📊 Voir un exemple de présentation →</a>` : ''}
-    <div class="section-title" style="margin-bottom:.5rem">✅ Ce que le jury attend</div>
+    <div class="section-title" style="margin-bottom:.5rem">✅ ${currentSujet === 8 ? 'Pistes de préparation proposées' : 'Ce que le jury attend'}</div>
     <div class="attendu-list">
       ${s.attendus.map(a => `<div class="attendu-item">${a}</div>`).join('')}
     </div>

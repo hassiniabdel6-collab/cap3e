@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ma Boussole orientation · Cap 3e</title>
+<meta name="description" content="Ma feuille de route pour choisir mon orientation après la 3e : les voies, les familles de métiers 2027, les vœux, le rendez-vous avec la PsyEN.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@500;600;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Charte cap3e.fr · relevée sur la page d'accueil (Wix Harmony) */
+:root{
+  --fond:#FEFDF8; --carte:#FFFFFF; --beige:#E6E6DA; --beige2:#F3F2EA; --filet:#D3D8D1;
+  --vert:#1D4431; --vert2:#285541; --texte:#3B513C; --doux:#6B7A6C;
+  --gt:#2F6FB5; --gt-l:#E4EEF8; --pro:#C0653A; --pro-l:#F8E9E0; --cap:#6E8B3D; --cap-l:#EDF2E2;
+  --nouv:#7A5C99; --nouv-l:#F0EAF5; --alerte:#B04A3C; --alerte-l:#F8E6E2; --conf:#A6741F; --conf-l:#FBF1DE;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fond);color:var(--texte);font-family:"Wix Madefor Text","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:16.5px;line-height:1.6}
+h1,h2,h3,h4{font-family:"Wix Madefor Display","Wix Madefor Text","Segoe UI",system-ui,sans-serif;color:var(--vert2);font-weight:700;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em}
+h1{font-size:clamp(1.8rem,4.2vw,2.7rem)}
+h2{font-size:clamp(1.45rem,3vw,1.95rem)}
+h3{font-size:1.18rem}
+a{color:var(--vert);font-weight:600}
+a:hover{color:var(--vert2)}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.lead{font-size:1.1rem;max-width:780px}
+.small{font-size:.88rem;color:var(--doux)}
+.center{text-align:center}
+
+/* En-tête */
+.top{padding-top:34px;padding-bottom:10px;text-align:center}
+.top .kicker svg{flex:none}
+.top .kicker{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--vert);background:var(--beige2);border:1px solid var(--filet);border-radius:999px;padding:5px 14px;font-size:.9rem;margin-bottom:14px}
+.top p{max-width:720px;margin:.3em auto 0;font-size:1.1rem}
+
+/* Onglets façon menu du site */
+.tabs{position:sticky;top:0;z-index:20;background:rgba(254,253,248,.94);backdrop-filter:blur(6px);padding:12px 0;border-bottom:1px solid var(--filet)}
+.tabs .bar{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;background:var(--beige);border-radius:22px;padding:6px}
+.tabs button{border:0;background:transparent;color:var(--texte);padding:9px 15px;border-radius:16px;font-weight:500;font-size:.96rem;line-height:1.25}
+.tabs button:hover{background:rgba(255,255,255,.6)}
+.tabs button.on{background:var(--vert);color:#fff;font-weight:600}
+
+main{padding:26px 0 56px}
+section.tab{display:none}
+section.tab.on{display:block;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Blocs */
+.card{background:var(--carte);border:1px solid var(--filet);border-radius:var(--r);padding:22px 24px;margin:16px 0}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--vert);color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;font-size:.98rem;text-decoration:none}
+.btn:hover{background:var(--vert2);color:#fff}
+.btn.ghost{background:transparent;color:var(--vert);border:1.5px solid var(--vert)}
+.btn.ghost:hover{background:var(--beige2)}
+.btn.sm{padding:8px 15px;font-size:.9rem}
+.note,.ok,.alerte,.conf{border-radius:14px;padding:14px 18px;margin:16px 0;font-size:.97rem}
+.note{background:var(--beige2);border:1px solid var(--filet)}
+.ok{background:var(--cap-l);border:1px solid #CFDDB8}
+.alerte{background:var(--alerte-l);border:1px solid #EBC3BB}
+.conf{background:var(--conf-l);border:1px solid #EED9AE}
+.pill{display:inline-block;font-size:.76rem;font-weight:700;padding:3px 10px;border-radius:999px;vertical-align:middle;letter-spacing:.01em}
+.p-nat{background:var(--gt-l);color:var(--gt)}
+.p-acad{background:var(--beige);color:var(--vert)}
+.p-loc{background:var(--cap-l);color:#4C6627}
+.p-conf{background:var(--conf-l);color:var(--conf)}
+.p-off{background:#E1EEE5;color:var(--vert)}
+.p-new{background:var(--nouv-l);color:var(--nouv)}
+details{border:1px solid var(--filet);border-radius:14px;background:var(--carte);margin:10px 0}
+details>summary{padding:13px 18px;cursor:pointer;font-weight:600;color:var(--vert2);list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"+";display:inline-block;width:1.2em;font-weight:700;color:var(--vert)}
+details[open]>summary::before{content:"–"}
+details>div{padding:0 18px 14px}
+.flow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.flow div{flex:1;min-width:120px;background:var(--beige2);border-radius:12px;padding:10px 12px;font-size:.9rem;text-align:center}
+.flow div b{display:block;color:var(--vert2)}
+input.field,select.field,textarea.field{width:100%;padding:11px 14px;border:1.5px solid var(--filet);border-radius:12px;font:inherit;color:var(--texte);background:#fff}
+input.field:focus,select.field:focus,textarea.field:focus{outline:none;border-color:var(--vert)}
+textarea.field{min-height:78px;resize:vertical}
+label.lab{display:block;font-weight:600;font-size:.92rem;margin:10px 0 4px;color:var(--vert2)}
+footer{border-top:1px solid var(--filet);padding:24px 0 30px;font-size:.88rem;color:var(--doux)}
+footer a{margin-right:12px}
+.print-only{display:none}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .card{padding:18px}
+  .tabs{position:static}
+  .tabs .bar{justify-content:flex-start}
+  .tabs button{padding:7px 11px;font-size:.9rem}
+}
+@media print{
+  @page{margin:1.4cm}
+  body{background:#fff;font-size:11pt}
+  .tabs,.no-print,footer .liens{display:none!important}
+  .card,details{break-inside:avoid;border-color:#bbb}
+  details>div{display:block!important}
+  .print-only{display:block}
+  body[data-print] section.tab{display:none!important}
+  body[data-print] section.tab.print-target{display:block!important}
+  body[data-print] .top{display:none}
+}
+
+/* Feuille de route */
+.prog{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.prog .pct{font-family:"Wix Madefor Display",sans-serif;font-weight:700;font-size:1.8rem;color:var(--vert);min-width:72px}
+.prog .barre{flex:1;min-width:200px;height:12px;background:var(--beige);border-radius:99px;overflow:hidden}
+.prog .barre i{display:block;height:100%;width:0;background:var(--vert);transition:width .4s}
+.phase{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:30px 0 6px}
+.phase h3{font-size:1.3rem;margin:0}
+.phase .quand{color:var(--doux);font-size:.95rem}
+.steps{margin-left:10px;border-left:3px solid var(--beige);padding-left:22px}
+.step{position:relative;background:var(--carte);border:1px solid var(--filet);border-radius:14px;margin:12px 0}
+.step::before{content:"";position:absolute;left:-32px;top:19px;width:15px;height:15px;border-radius:50%;background:var(--fond);border:3px solid var(--filet)}
+.step.done::before{background:var(--vert);border-color:var(--vert)}
+.step.done .t{text-decoration:line-through;text-decoration-color:var(--filet)}
+.step-h{display:flex;align-items:center;gap:12px;padding:13px 16px;cursor:pointer}
+.step-h input{width:20px;height:20px;accent-color:var(--vert);flex:none;cursor:pointer}
+.step-h .t{font-weight:600;flex:1;color:var(--vert2)}
+.step-h .d{font-size:.86rem;color:var(--doux);white-space:nowrap;background:var(--beige2);border-radius:999px;padding:2px 10px}
+.step-h .chev{color:var(--doux);transition:.2s}
+.step.open .chev{transform:rotate(90deg)}
+.step-b{display:none;padding:0 18px 14px 50px;font-size:.96rem}
+.step.open .step-b{display:block}
+.step-b ul{margin:.3em 0;padding-left:1.1em}
+.outil{display:inline-block;background:var(--beige2);border:1px solid var(--filet);border-radius:8px;padding:2px 9px;font-size:.84rem;margin:3px 5px 0 0}
+/* Voies */
+.voie{border:1px solid var(--filet);border-radius:var(--r);overflow:hidden;background:var(--carte)}
+.voie-h{padding:18px 20px;color:#fff}
+.voie-h h3{color:#fff;margin:0;font-size:1.28rem}
+.voie-h p{margin:.3em 0 0;opacity:.95;font-size:.95rem}
+.v-gt .voie-h{background:var(--gt)}.v-pro .voie-h{background:var(--pro)}.v-cap .voie-h{background:var(--cap)}
+.voie-b{padding:16px 20px}
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:1.5px solid var(--filet);background:#fff;border-radius:999px;padding:8px 15px;font-size:.92rem;font-weight:600;color:var(--vert2)}
+.chip:hover{border-color:var(--vert)}
+.chip.on{background:var(--gt);border-color:var(--gt);color:#fff}
+.detail{background:#fff;border:1px solid var(--filet);border-radius:var(--r);padding:18px 20px;min-height:90px}
+/* Familles */
+.fam{border-left:6px solid var(--pro)}
+.fam.agri{border-left-color:var(--cap)}
+.fam.hors{border-left-color:var(--nouv)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tags span{background:var(--pro-l);color:#8A4421;border-radius:8px;padding:3px 10px;font-size:.86rem}
+.fam.agri .tags span{background:var(--cap-l);color:#4C6627}
+.fam.hors .tags span{background:var(--nouv-l);color:var(--nouv)}
+/* Nouveautés */
+.nv{background:var(--carte);border:1px solid var(--filet);border-top:5px solid var(--nouv);border-radius:var(--r);padding:18px 20px}
+.nv.vert{border-top-color:var(--vert)}
+.nv h3{font-size:1.1rem;margin-top:8px}
+/* Outils */
+.tool{display:flex;gap:14px;align-items:flex-start;background:var(--carte);border:1px solid var(--filet);border-radius:var(--r);padding:18px}
+.ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.35rem;flex:none;background:var(--beige2)}
+.tool h3{font-size:1.06rem;margin-bottom:.2em}
+.tool p{margin:.25em 0;font-size:.94rem}
+/* Lycées */
+table.t{width:100%;border-collapse:collapse;font-size:.93rem}
+table.t th{text-align:left;background:var(--beige2);color:var(--vert2);padding:9px 10px;border-bottom:1px solid var(--filet)}
+table.t td{padding:9px 10px;border-bottom:1px solid var(--filet);vertical-align:top}
+.scroll{overflow-x:auto}
+/* Vœux */
+.vform{display:grid;grid-template-columns:1fr 1fr 150px auto;gap:8px;align-items:center}
+ol.vl{list-style:none;padding:0;margin:14px 0;counter-reset:v}
+ol.vl li{counter-increment:v;display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--filet);border-radius:14px;padding:11px 14px;margin:7px 0}
+ol.vl li::before{content:counter(v);font-weight:700;background:var(--vert);color:#fff;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none}
+.tagv{font-size:.76rem;font-weight:700;padding:2px 9px;border-radius:999px}
+ol.vl .mv{margin-left:auto;display:flex;gap:4px}
+ol.vl .mv button{border:1px solid var(--filet);background:#fff;border-radius:8px;width:32px;height:30px}
+.check{list-style:none;padding:0}
+.check li{margin:6px 0}
+.check .y{color:var(--vert);font-weight:700}.check .n{color:var(--alerte);font-weight:700}
+/* Quiz */
+.q{margin:14px 0}
+.q p{font-weight:600;margin:.2em 0 .5em;color:var(--vert2)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{border:1.5px solid var(--filet);background:#fff;border-radius:12px;padding:9px 14px;font-size:.93rem;color:var(--texte)}
+.opts button.on{border-color:var(--vert);background:var(--vert);color:#fff}
+.meter{display:flex;align-items:center;gap:10px;margin:8px 0}
+.meter span{width:170px;font-weight:600}
+.meter div{flex:1;height:12px;border-radius:99px;background:var(--beige);overflow:hidden}
+.meter div i{display:block;height:100%}
+.res{display:none}.res.on{display:block}
+@media (max-width:700px){.vform{grid-template-columns:1fr}.step-h .d{display:none}.meter span{width:120px}.step-b{padding-left:18px}}
+@media print{.step-b{display:block!important}.step-h .chev{display:none}}
+</style>
+</head>
+<body>
+
+<header class="top wrap">
+  <span class="kicker"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="12,4 14.5,12 9.5,12" fill="currentColor"/><polygon points="12,20 14.5,12 9.5,12" fill="currentColor" opacity=".35"/></svg> Orientation · rentrée 2027</span>
+  <h1>Ma Boussole orientation</h1>
+  <p>Ta feuille de route pour choisir ce que tu feras après la 3e : les voies, les métiers, les vœux, et les bons réflexes pour <b>sécuriser</b> ton affectation.</p>
+</header>
+
+<nav class="tabs no-print" aria-label="Rubriques"><div class="wrap"><div class="bar" id="nav">
+  <button data-t="route" class="on">Ma feuille de route</button>
+  <button data-t="voies">Les 3 voies</button>
+  <button data-t="gt">Voie générale et techno</button>
+  <button data-t="pro">Voie pro et métiers</button>
+  <button data-t="local">Près du collège</button>
+  <button data-t="new">Ce qui change</button>
+  <button data-t="outils">Outils et démarches</button>
+  <button data-t="voeux">Mes vœux</button>
+  <button data-t="psy">RDV PsyEN</button>
+  <button data-t="moi">Mes intérêts</button>
+  <button data-t="faq">Questions</button>
+</div></div></nav>
+
+<main class="wrap">
+
+<div class="note no-print"><b>Rien n'est enregistré sur cette page</b> : ni ton nom, ni tes réponses. Pour garder une trace, utilise les boutons « Imprimer ou enregistrer en PDF ».</div>
+
+<!-- FEUILLE DE ROUTE -->
+<section class="tab on" id="route">
+  <h2>Ma feuille de route, étape par étape</h2>
+  <p class="lead">Coche ce que tu as fait et clique sur une étape pour savoir <b>quoi faire</b>, <b>avec qui</b> et <b>avec quel outil</b>.</p>
+  <div class="card prog"><div class="pct" id="pct">0 %</div><div class="barre"><i id="barfill"></i></div><div class="small" id="pcttxt"></div>
+    <button class="btn sm ghost no-print" onclick="imprimer('route')">Imprimer ou enregistrer en PDF</button></div>
+  <div class="note"><b>Les étiquettes :</b>
+    <span class="pill p-nat">National</span> règle valable partout en France ·
+    <span class="pill p-acad">Académie de Versailles</span> propre à notre académie ·
+    <span class="pill p-loc">Collège</span> fixé par ton collège ·
+    <span class="pill p-off">Date officielle</span> publiée ·
+    <span class="pill p-conf">Mois à confirmer</span> le calendrier 2027 n'est pas encore paru : on indique le mois prévu.</div>
+  <div id="timeline"></div>
+  <div class="alerte"><b>À retenir :</b> l'<b>orientation</b> (la voie : 2de GT, 2de pro, CAP) se décide avec le conseil de classe. L'<b>affectation</b> (le lycée précis) dépend ensuite des places. Une décision « 2de GT » ne garantit pas une place dans <i>n'importe quel</i> lycée : c'est pour cela qu'il faut des vœux bien construits.</div>
+</section>
+
+<!-- 3 VOIES -->
+<section class="tab" id="voies">
+  <h2>Après la 3e : trois grandes voies</h2>
+  <p class="lead">Aucune voie n'est « meilleure » qu'une autre. Toutes peuvent mener à des études ou à un métier. La bonne voie est celle qui te correspond : tes goûts, ta façon d'apprendre, ton projet.</p>
+  <div class="grid g3">
+    <div class="voie v-gt"><div class="voie-h"><h3>2de générale et technologique</h3><p>Pour poursuivre des études longues, avec un enseignement surtout théorique.</p></div><div class="voie-b">
+      <div class="flow"><div><b>2de GT</b>tronc commun + options</div><div><b>1re</b>générale ou techno</div><div><b>Terminale</b>bac général ou techno</div></div>
+      <p><b>Ensuite :</b> université, BUT, BTS, classes prépa, écoles…</p>
+      <p class="small">Variantes : la <b>2de STHR</b> (hôtellerie-restauration) et la <b>2de Avenir</b> se demandent à part, dès la 3e.</p>
+      <button class="btn sm ghost" onclick="go('gt')">Voir les spécialités</button></div></div>
+    <div class="voie v-pro"><div class="voie-h"><h3>2de professionnelle</h3><p>Pour apprendre un métier en 3 ans, avec beaucoup de pratique et des stages.</p></div><div class="voie-b">
+      <div class="flow"><div><b>2de pro</b>famille de métiers ou spécialité</div><div><b>1re pro</b>spécialité choisie</div><div><b>Tle pro</b>bac pro</div></div>
+      <p><b>Ensuite :</b> emploi, BTS, formations complémentaires…</p>
+      <p class="small">Environ 22 semaines de stage en entreprise sur les 3 ans ; possible aussi en apprentissage.</p>
+      <button class="btn sm ghost" onclick="go('pro')">Voir les familles de métiers</button></div></div>
+    <div class="voie v-cap"><div class="voie-h"><h3>CAP · au lycée ou en CFA</h3><p>Pour se former vite à un métier précis, en 2 ans en général.</p></div><div class="voie-b">
+      <div class="flow"><div><b>1re année</b>CAP</div><div><b>2e année</b>diplôme</div><div><b>Après</b>emploi ou bac pro</div></div>
+      <ul class="small" style="padding-left:1.1em"><li><b>Au lycée pro</b> (statut scolaire) : vœu dans le service en ligne.</li><li><b>En apprentissage</b> (CFA) : contrat de travail avec un employeur, salaire, alternance.</li></ul></div></div>
+  </div>
+  <details class="card" style="padding:0"><summary>L'apprentissage : ce qu'il faut savoir</summary><div><ul>
+    <li>On signe un <b>contrat d'apprentissage</b> avec un employeur : on est salarié et élève à la fois.</li>
+    <li>Possible pour un CAP ou un bac pro, en principe dès 15 ans si l'on a terminé la 3e (vérifie avec la PsyEN selon ta date de naissance).</li>
+    <li><b>C'est à toi de trouver ton employeur</b> : commence tôt (dès janvier), avec un CV et une lettre.</li>
+    <li>Le vœu « apprentissage » se signale aussi dans le service en ligne, mais il <b>ne donne pas de place sans contrat signé</b>.</li></ul>
+    <div class="ok"><b>Conseil sécurité :</b> si tu vises l'apprentissage, fais <b>aussi</b> des vœux en lycée pro. Si tu trouves un employeur, tu pourras renoncer à ta place.</div></div></details>
+</section>
+
+<!-- GT -->
+<section class="tab" id="gt">
+  <h2>La voie générale et technologique</h2>
+  <p class="lead">La 2de GT est une année pour découvrir. C'est en fin de 2de que l'on choisit entre la voie générale (3 spécialités) et une série technologique.</p>
+  <div class="card"><h3>L'année de 2de GT</h3><ul>
+    <li><b>Pour tous :</b> français, histoire-géo, 2 langues vivantes, maths, physique-chimie, SVT, SES, SNT (sciences numériques et technologie), EMC, EPS.</li>
+    <li><b>Nouveau à la rentrée 2027 :</b> 1 heure par semaine consacrée à l'intelligence artificielle, dans le cours de SNT.</li>
+    <li><b>Options possibles</b> selon le lycée : langue vivante C, latin, arts, EPS, management et gestion, santé et social, biotechnologies, sciences de l'ingénieur, création et culture design…</li></ul></div>
+  <h3 style="margin-top:24px">Les spécialités de la voie générale</h3>
+  <p class="small">En 1re, on en choisit <b>3</b> ; en terminale, on en garde <b>2</b>. Toutes ne sont pas proposées dans tous les lycées. Clique sur une spécialité.</p>
+  <div class="chips" id="specChips"></div>
+  <div class="detail" id="specDetail"><span class="small">Choisis une spécialité pour voir ce qu'on y fait et pour qui elle est faite.</span></div>
+  <h3 style="margin-top:26px">Les séries technologiques</h3>
+  <p class="small">Un enseignement plus concret, par projets, tourné vers un grand domaine.</p>
+  <div class="chips" id="technoChips"></div>
+  <div class="detail" id="technoDetail"><span class="small">Choisis une série technologique.</span></div>
+  <p style="margin-top:16px"><a href="https://www.horizons21.fr" target="_blank" rel="noopener">Horizons 21</a> : un site officiel pour tester des combinaisons de spécialités et voir où elles mènent.</p>
+</section>
+
+<!-- PRO -->
+<section class="tab" id="pro">
+  <h2>La voie professionnelle et les familles de métiers</h2>
+  <p class="lead">En 2de pro, tu choisis <b>soit une famille de métiers</b> (tu découvres plusieurs métiers proches et tu choisis ta spécialité en fin de 2de), <b>soit directement une spécialité</b>.</p>
+  <div class="note"><span class="pill p-off">Liste officielle 2027</span> À la rentrée 2027, il y a <b>13 familles de métiers</b> (arrêté du 16 mars 2026). Les familles « Hôtellerie-restauration » et « Alimentation » disparaissent : la cuisine, le service, la boulangerie ou la boucherie se choisissent désormais <b>directement</b> comme spécialités (voir « Accès direct » plus bas).</div>
+  <input class="field" id="famSearch" placeholder="Cherche un métier ou un mot : cuisine, avion, informatique, coiffure, voiture…">
+  <div class="small" id="famCount" style="margin:8px 2px"></div>
+  <div id="famList"></div>
+  <div class="card"><h3>Après la 2de pro</h3><div class="flow"><div><b>Fin de 2de</b>choix de la spécialité dans la famille</div><div><b>1re pro</b>spécialité + stages</div><div><b>Tle pro</b>insertion ou poursuite d'études</div><div><b>Après le bac pro</b>emploi, BTS…</div></div></div>
+</section>
+
+<!-- LOCAL -->
+<section class="tab" id="local">
+  <h2>Les lycées près du collège</h2>
+  <p class="lead">Quelques repères dans les Hauts-de-Seine. <b>Attention</b> : ce sont les offres de la rentrée 2026, la liste 2027 sera publiée au printemps. Vérifie toujours sur le site du lycée et aux portes ouvertes.</p>
+  <h3>Tes lycées de secteur pour la 2de générale et technologique</h3>
+  <div class="ok">Pour les élèves du collège Guy Môquet, le lycée de secteur est <b>Galilée</b> (Gennevilliers), puis <b>René Auffray</b> et <b>Newton-ENREA</b> (Clichy). En 2de GT, ces lycées sont <b>prioritaires</b> pour toi : garde-les toujours dans tes vœux. <span class="small">Le secteur dépend de l'adresse de ta famille : en cas de doute, le service en ligne Affectation l'indique.</span></div>
+  <div class="scroll card" style="padding:0"><table class="t" id="tGT"></table></div>
+  <h3 style="margin-top:22px">Les autres lycées du bassin</h3>
+  <p class="small">Hors secteur, une place n'est possible qu'avec une demande de dérogation, sans garantie.</p>
+  <div class="scroll card" style="padding:0"><table class="t" id="tGT2"></table></div>
+  <div class="card"><h3>La 2de Avenir</h3><p id="avenirTxt"></p></div>
+  <h3 style="margin-top:22px">Voie professionnelle · lycées publics du 92 par famille</h3>
+  <select class="field" id="famSel" style="max-width:520px"></select>
+  <div id="proList" class="card"></div>
+  <p class="small">Pour toute l'offre (y compris le privé et l'apprentissage) : <a href="https://affectation3e.phm.education.gouv.fr/pna-public" target="_blank" rel="noopener">l'offre de formation après la 3e</a>.</p>
+</section>
+
+<!-- NOUVEAUTÉS -->
+<section class="tab" id="new">
+  <h2>Ce qui change pour ta promotion</h2>
+  <p class="lead">Les règles évoluent souvent. Voici ce qui te concerne pour la rentrée 2027.</p>
+  <div class="grid g2">
+    <div class="nv vert"><span class="pill p-off">Rentrée 2027</span><h3>Nouvelle liste des familles de métiers</h3><p>13 familles en 2de pro. Hôtellerie-restauration et Alimentation sont supprimées : ces métiers se choisissent en spécialité directe. Nouvelles venues : Technicien modeleur, Technicien de scierie, et le bac pro Géomètre.</p></div>
+    <div class="nv vert"><span class="pill p-acad">Académie de Versailles</span><h3>La 2de Avenir</h3><p>Une 2de générale et technologique pour les élèves encore très hésitants : recrutement sur entretien, une journée par semaine de projets et un travail renforcé sur l'orientation. Dans le 92 : lycée René Auffray (Clichy) et lycée Gustave Eiffel (Rueil-Malmaison). Parles-en à la PsyEN.</p></div>
+    <div class="nv"><span class="pill p-new">Plan Avenir</span><h3>Une rencontre parents, élève et professeur principal</h3><p>Prévue pour tous les 3e avant le conseil de classe qui donne l'avis provisoire. Avec la plateforme <b>Avenir(s)</b> de l'Onisep pour garder la trace de ton parcours.</p></div>
+    <div class="nv"><span class="pill p-new">Prépa-seconde</span><h3>Une année pour consolider ses bases</h3><p>Pour des élèves <b>admis en 2de</b> (GT ou pro), sur volontariat, qui veulent une année de consolidation avant d'entrer en 2de.</p></div>
+    <div class="nv"><span class="pill p-off">Brevet 2027</span><h3>Le DNB : à passer, pas à obtenir pour entrer en 2de</h3><p>C'est la décision d'orientation qui compte. Le brevet se calcule à 60 % sur les épreuves finales et 40 % sur le contrôle continu. Écrits : <b>24, 25 et 28 juin 2027</b>.</p></div>
+    <div class="nv"><span class="pill p-new">Nouveau diplôme</span><h3>Le BNMA : les métiers d'art en 3 ans</h3><p>Le brevet national des métiers d'art (niveau bac) : ébénisterie, bijouterie, maroquinerie, horlogerie, et d'autres spécialités à partir de 2027. Places rares, souvent à recrutement national.</p></div>
+    <div class="nv"><span class="pill p-acad">Académie de Versailles</span><h3>PassPRO : un entretien qui peut donner un bonus</h3><p>Pour certaines formations pro très demandées, l'académie organise des entretiens (PassPRO, PassCCD, PassSTL). Un avis favorable donne un <b>bonus</b>, à condition de saisir le vœu à temps. L'inscription se fait <b>par le collège</b>.</p></div>
+  </div>
+</section>
+
+<!-- OUTILS -->
+<section class="tab" id="outils">
+  <h2>Les outils et les démarches</h2>
+  <p class="lead">La plupart des démarches se font <b>en ligne, par tes parents</b>, avec leur compte ÉduConnect. Garde ces liens.</p>
+  <div class="grid g2">
+    <div class="tool"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--vert)"><path d="M7 14a4 4 0 1 1 3.9-5H21v3h-2v3h-3v-3h-5.1A4 4 0 0 1 7 14Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div><h3>ÉduConnect <span class="pill p-nat">National</span></h3><p>La clé d'entrée : un compte <b>par responsable légal</b>. Sans lui, pas de saisie des vœux. À vérifier dès l'automne.</p><a href="https://educonnect.education.gouv.fr" target="_blank" rel="noopener">educonnect.education.gouv.fr</a></div></div>
+    <div class="tool"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--vert)"><path d="M5 3h10l4 4v14H5z M9 11h6 M9 15h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div><h3>Service en ligne Orientation <span class="pill p-nat">National</span></h3><p>Pour saisir les <b>intentions provisoires</b> (hiver) puis les <b>choix définitifs</b> (printemps), et lire les réponses du conseil de classe.</p><a href="https://teleservices.education.gouv.fr" target="_blank" rel="noopener">Scolarité services</a></div></div>
+    <div class="tool"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--vert)"><path d="M3 21h18 M5 21V10l7-5 7 5v11 M10 21v-5h4v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div><h3>Service en ligne Affectation <span class="pill p-nat">National</span></h3><p>Pour consulter l'offre, choisir et <b>classer</b> les lycées et formations, puis lire le résultat fin juin ou début juillet.</p><a href="https://affectation3e.phm.education.gouv.fr/pna-public" target="_blank" rel="noopener">Offre de formation après la 3e</a></div></div>
+    <div class="tool"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--vert)"><path d="M3 7h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z M14 7v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div><h3>PassPRO, PassCCD, PassSTL <span class="pill p-acad">Versailles</span></h3><p>Inscription <b>par le collège</b> à un entretien dans un lycée, prévue de fin janvier à avril (mois à confirmer pour 2027). Prépare-toi : visite le lycée, sache expliquer ton projet.</p><a href="https://www.ac-versailles.fr/passpro" target="_blank" rel="noopener">ac-versailles.fr/passpro</a></div></div>
+    <div class="tool"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--vert)"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18" fill="none" stroke="currentColor" stroke-width="2"/></svg></div><div><h3>Onisep et Avenir(s) <span class="pill p-nat">National</span></h3><p>Fiches métiers et formations, guide « Après la 3e » de l'académie, vidéos.</p><a href="https://www.onisep.fr" target="_blank" rel="noopener">onisep.fr</a></div></div>
+    <div class="tool"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--vert)"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div><h3>Mon orientation en ligne <span class="pill p-nat">National</span></h3><p>Des conseillers répondent par chat, mail ou téléphone, même le soir.</p><a href="https://www.monorientationenligne.fr" target="_blank" rel="noopener">monorientationenligne.fr</a></div></div>
+    <div class="tool"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--vert)"><path d="M3 12l4-4 4 3 4-3 6 5-5 5-3-2-3 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div><div><h3>Apprentissage</h3><p>Pour trouver une offre de contrat ou un CFA.</p><a href="https://labonnealternance.apprentissage.beta.gouv.fr" target="_blank" rel="noopener">La bonne alternance</a></div></div>
+  </div>
+</section>
+
+<!-- VŒUX -->
+<section class="tab" id="voeux">
+  <h2>Mes vœux : mon brouillon</h2>
+  <p class="lead">Entraîne-toi <b>avant</b> la vraie saisie du printemps. Ajoute tes vœux, classe-les, et la Boussole vérifie s'ils sont sécurisés. <i>Ce brouillon n'envoie rien et ne s'enregistre pas : imprime-le pour le montrer à ta famille.</i></p>
+  <div class="card no-print">
+    <div class="vform">
+      <input class="field" id="vForm" placeholder="Formation (ex. 2de GT, 2de pro famille relation client…)">
+      <input class="field" id="vLyc" placeholder="Lycée (ex. Galilée)">
+      <select class="field" id="vType"><option value="gt">2de GT</option><option value="pro">2de pro</option><option value="cap">CAP</option><option value="app">Apprentissage</option></select>
+      <button class="btn" onclick="addVoeu()">Ajouter</button>
+    </div>
+    <label class="small" style="display:block;margin-top:10px"><input type="checkbox" id="vSect"> c'est mon <b>lycée de secteur</b></label>
+    <label class="small" style="display:block"><input type="checkbox" id="vPass"> j'ai passé (ou je passerai) un entretien <b>PassPRO</b> pour ce vœu</label>
+  </div>
+  <ol class="vl" id="vlist"></ol>
+  <div class="card"><h3>Mon contrôle de sécurité</h3><ul class="check" id="vcheck"></ul></div>
+  <div class="note"><b>Les règles d'or</b><ul>
+    <li>Jusqu'à <b>10 vœux</b> dans l'académie : utilise-les. Un seul vœu, c'est risqué.</li>
+    <li>Classe tes vœux <b>par vraie préférence</b> : le 1er = celui que tu veux le plus.</li>
+    <li>En 2de GT : mets <b>toujours</b> tes lycées de secteur : <b>Galilée</b>, puis <b>René Auffray</b> et <b>Newton-ENREA</b>.</li>
+    <li>En voie pro : <b>varie</b> les lycées et, si possible, les spécialités proches.</li>
+    <li>Vœu dans le <b>privé sous contrat</b> : il faut <b>aussi</b> contacter l'établissement.</li></ul></div>
+  <button class="btn ghost no-print" onclick="imprimer('voeux')">Imprimer ou enregistrer en PDF</button>
+</section>
+
+<!-- PSYEN -->
+<section class="tab" id="psy">
+  <h2>Mon rendez-vous avec la PsyEN</h2>
+  <p class="lead">La <b>psychologue de l'Éducation nationale</b> t'aide à réfléchir à ton projet, à mieux te connaître et à trouver des formations. C'est gratuit, confidentiel, et on peut y aller même sans idée précise.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Comment avoir un rendez-vous ?</h3><ul>
+      <li><b>Au collège</b> : demande à ton professeur principal les jours de permanence.</li>
+      <li><b>Au CIO</b> de ton secteur, avec ou sans tes parents, y compris pendant certaines vacances.</li>
+      <li><b>Quand ?</b> Idéalement <b>avant les intentions provisoires</b> de l'hiver, puis une 2e fois avant la saisie des vœux.</li></ul>
+      <div class="ok"><b>Astuce :</b> remplis la fiche, imprime-la ou enregistre-la en PDF, et apporte-la au rendez-vous.</div>
+      <details style="margin-top:12px"><summary>10 questions utiles à poser</summary><div><ol>
+        <li>Quelles formations correspondent à ce que j'aime ?</li><li>Avec mes résultats, quelle voie me met le plus en réussite ?</li><li>Quels lycées proposent cette formation près de chez moi ?</li><li>Est-ce une formation très demandée ? Faut-il un PassPRO ?</li><li>Que se passe-t-il si je change d'avis après la 2de ?</li><li>Combien de vœux faire pour être en sécurité ?</li><li>Apprentissage ou lycée pro : qu'est-ce qui me convient ?</li><li>Quelles études après ce diplôme ?</li><li>Quelles portes ouvertes visiter ?</li><li>La 2de Avenir ou la prépa-seconde, est-ce pour moi ?</li></ol></div></details>
+    </div>
+    <div class="card"><h3>Ma fiche de préparation</h3>
+      <label class="lab">Ce que j'aime faire (à l'école et en dehors)</label><textarea class="field"></textarea>
+      <label class="lab">Les matières où je me sens à l'aise, ou en difficulté</label><textarea class="field"></textarea>
+      <label class="lab">Les métiers ou domaines qui m'attirent (même vaguement)</label><textarea class="field"></textarea>
+      <label class="lab">Ce que j'ai retenu de mon stage de 3e</label><textarea class="field"></textarea>
+      <label class="lab">Mes questions pour la PsyEN</label><textarea class="field" placeholder="Ex. : Quelle différence entre bac pro et CAP ?"></textarea>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap" class="no-print"><button class="btn" onclick="imprimer('psy')">Imprimer ou enregistrer en PDF</button><button class="btn ghost" onclick="viderPsy()">Effacer</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTÉRÊTS -->
+<section class="tab" id="moi">
+  <h2>Mes intérêts : un premier repère</h2>
+  <p class="lead">8 questions pour <b>démarrer la réflexion</b>. Ce n'est pas un test qui décide pour toi : c'est une base de discussion avec ta famille, ton professeur principal et la PsyEN.</p>
+  <div class="card" id="quiz"></div>
+  <div class="card res" id="quizRes"></div>
+</section>
+
+<!-- FAQ -->
+<section class="tab" id="faq">
+  <h2>Les questions qu'on se pose</h2>
+  <details><summary>Quelle différence entre « orientation » et « affectation » ?</summary><div>L'<b>orientation</b>, c'est la voie (2de GT, 2de pro, CAP) : elle est décidée en fin d'année après dialogue avec le conseil de classe. L'<b>affectation</b>, c'est le lycée précis : elle est calculée par Affelnet selon les places disponibles.</div></details>
+  <details><summary>Que se passe-t-il au conseil de classe de l'hiver ?</summary><div>Il donne un <b>avis provisoire</b> sur les intentions saisies par ta famille. Ce n'est pas encore une décision : c'est un signal pour ajuster, travailler ou confirmer ton projet.</div></details>
+  <details><summary>Et au conseil de classe de juin ?</summary><div>Il fait une <b>proposition d'orientation</b>. Si elle correspond à ta demande, elle devient la <b>décision</b>. Sinon, le chef d'établissement reçoit ta famille.</div></details>
+  <details><summary>Ma famille n'est pas d'accord avec la décision. Que faire ?</summary><div>Après le dialogue avec le chef d'établissement, la famille peut faire <b>appel</b> dans un délai très court (quelques jours). Il faut réagir vite : contacte ton professeur principal dès la réception de la proposition.</div></details>
+  <details><summary>Je n'ai pas de lycée fin juin. C'est grave ?</summary><div>Pas de panique, mais il faut agir. D'autres tours d'affectation ont lieu en juillet puis en septembre. Contacte ton collège et le CIO pour formuler de nouveaux vœux.</div></details>
+  <details><summary>Faut-il avoir le brevet pour aller en 2de ?</summary><div>Non. Il faut <b>passer</b> le brevet, mais c'est la <b>décision d'orientation</b> qui permet d'entrer en 2de.</div></details>
+  <details><summary>Je ne sais pas du tout quoi faire. Je fais comment ?</summary><div>C'est normal en 3e ! Commence par « Mes intérêts », va voir la PsyEN, visite des lycées aux portes ouvertes, parle de ton stage avec ton professeur principal. Une 2de GT, la 2de Avenir ou une famille de métiers en 2de pro permettent aussi de choisir <b>progressivement</b>.</div></details>
+  <details><summary>Je veux un lycée hors de mon secteur. C'est possible ?</summary><div>Pour la 2de GT, il faut une <b>demande de dérogation</b>, sans garantie de place. Garde toujours ton lycée de secteur dans tes vœux.</div></details>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  <p class="liens"><b>Sources officielles :</b>
+    <a href="https://www.education.gouv.fr/reussir-au-lycee/l-orientation-en-3e-et-l-affectation-en-lycee-9257" target="_blank" rel="noopener">Ministère</a>
+    <a href="https://www.onisep.fr/la-voie-professionnelle/les-familles-de-metiers" target="_blank" rel="noopener">Onisep · Familles de métiers</a>
+    <a href="https://www.ac-versailles.fr/l-affectation-apres-la-troisieme-121490" target="_blank" rel="noopener">Académie de Versailles · Affectation</a>
+    <a href="https://www.ac-versailles.fr/passpro" target="_blank" rel="noopener">PassPRO</a></p>
+  <p>Informations vérifiées en novembre 2026. Les mois « à confirmer » seront remplacés par les dates officielles dès leur parution. · Cap 3e · © A. Hassini · Collège Guy Môquet · Gennevilliers</p>
+</div></footer>
+
+<script>
+/* Données orientation 2027 · source unique pour les pages cap3e.fr (élèves, familles, PP) et Pilote Orientation 3e.
+ Familles de métiers : arrêté du 16 mars 2026 (liste en vigueur à la rentrée 2027).
+ Offre locale : rentrée 2026 (académie de Versailles), base de travail pour 2027.
+ À mettre à jour au printemps 2027 à la parution du guide académique. */
+var REP_FAM=[
+ {id:'aero',n:'Métiers de l\'aéronautique',specs:['Bac pro Aéronautique option avionique','Bac pro Aéronautique option systèmes','Bac pro Aéronautique option structure','Bac pro Aviation générale'],m:'mécanicien avion, technicien avionique'},
+ {id:'agencement',n:'Métiers de l\'agencement, de la menuiserie et de l\'ameublement',specs:['Bac pro Technicien menuisier agenceur','Bac pro Étude et réalisation d\'agencement','Bac pro Technicien de fabrication bois et matériaux associés'],m:'menuisier, agenceur, poseur'},
+ {id:'beaute',n:'Métiers de la beauté et du bien-être',specs:['Bac pro Esthétique cosmétique parfumerie','Bac pro Métiers de la coiffure'],m:'esthéticien, coiffeur'},
+ {id:'construction',n:'Métiers de la construction durable, du bâtiment et des travaux publics',specs:['Bac pro Travaux publics','Bac pro Technicien du bâtiment : organisation et réalisation du gros œuvre','Bac pro Interventions sur le patrimoine bâti option A maçonnerie','Bac pro Interventions sur le patrimoine bâti option B charpente','Bac pro Interventions sur le patrimoine bâti option C couverture','Bac pro Menuiserie aluminium-verre','Bac pro Aménagement et finition du bâtiment','Bac pro Ouvrages du bâtiment : métallerie'],m:'maçon, peintre, conducteur d\'engins'},
+ {id:'gestion',n:'Métiers de la gestion administrative, du transport et de la logistique',specs:['Bac pro Assistance à la gestion des organisations et de leurs activités (AGOrA)','Bac pro Métiers de la logistique','Bac pro Organisation de transport de marchandises'],m:'assistant de gestion, agent logistique'},
+ {id:'maintenance',n:'Métiers de la maintenance des matériels et des véhicules',specs:['Bac pro Maintenance des matériels option A matériels agricoles','Bac pro Maintenance des matériels option B matériels de construction et de manutention','Bac pro Maintenance des matériels option C matériels d\'espaces verts','Bac pro Maintenance des véhicules option véhicules légers','Bac pro Maintenance des véhicules option véhicules de transport routier','Bac pro Maintenance des véhicules option motocycles'],m:'mécanicien auto, technicien poids lourds, mécanicien engins'},
+ {id:'mer',n:'Métiers de la mer (secteur maritime)',specs:['Bac pro Polyvalent navigant pont/machine','Bac pro Électromécanicien marine','Bac pro Conduite et gestion des entreprises maritimes pêche','Bac pro Conduite et gestion des entreprises maritimes commerce/plaisance professionnelle option voile','Bac pro Conduite et gestion des entreprises maritimes commerce/plaisance professionnelle option yacht'],m:'marin, mécanicien marine'},
+ {id:'mecanique',n:'Métiers de la réalisation d\'ensembles mécaniques et industriels',specs:['Bac pro Technicien en réalisation de produits mécaniques option réalisation et suivi de production','Bac pro Technicien en réalisation de produits mécaniques option réalisation et maintenance des outillages','Bac pro Technicien en chaudronnerie industrielle','Bac pro Technicien modeleur','Bac pro Microtechniques','Bac pro Fonderie','Bac pro Traitements des matériaux'],m:'usineur, chaudronnier, soudeur'},
+ {id:'relation',n:'Métiers de la relation client',specs:['Bac pro Métiers du commerce et de la vente option A animation et gestion de l\'espace commercial','Bac pro Métiers du commerce et de la vente option B prospection-clientèle et valorisation de l\'offre commerciale','Bac pro Métiers de l\'accueil'],m:'vendeur, conseiller clientèle, agent d\'accueil'},
+ {id:'etudes',n:'Métiers des études et de la modélisation numérique du bâtiment',specs:['Bac pro Technicien d\'études du bâtiment option A études et économie','Bac pro Technicien d\'études du bâtiment option B assistant en architecture','Bac pro Géomètre'],m:'dessinateur BIM, métreur, géomètre'},
+ {id:'graphique',n:'Métiers des industries graphiques et de la communication',specs:['Bac pro Réalisation de produits imprimés et plurimédia option A productions graphiques','Bac pro Réalisation de produits imprimés et plurimédia option B productions imprimées','Bac pro Façonnage de produits imprimés, routage'],m:'infographiste, conducteur de presse'},
+ {id:'tne',n:'Métiers des transitions numérique et énergétique',specs:['Bac pro Cybersécurité, informatique et réseaux, électronique (CIEL)','Bac pro Métiers de l\'électricité et de ses environnements connectés (MELEC)','Bac pro Installateur en chauffage, climatisation et énergies renouvelables','Bac pro Maintenance et efficacité énergétique','Bac pro Métiers du froid et des énergies renouvelables'],m:'électricien, technicien réseaux, frigoriste'},
+ {id:'pilotage',n:'Métiers du pilotage et de la maintenance d\'installations automatisées',specs:['Bac pro Pilote de ligne de production','Bac pro Maintenance des systèmes de production connectés','Bac pro Procédés de la chimie, de l\'eau et des papiers-cartons','Bac pro Technicien de scierie'],m:'pilote de ligne, technicien de maintenance, scieur'},
+ {id:'agri_alim',n:'Agricole · Métiers de l\'alimentation-bio-industrie-laboratoire',specs:['Bac pro Production en industries pharmaceutiques, alimentaires et cosmétiques','Bac pro Laboratoire contrôle qualité'],m:'technicien de laboratoire, opérateur de production',agri:1},
+ {id:'agri_nature',n:'Agricole · Métiers de la nature - jardin - paysage - forêt',specs:['Bac pro Aménagements paysagers','Bac pro Forêt','Bac pro Gestion des milieux naturels et de la faune'],m:'paysagiste, jardinier, bûcheron',agri:1},
+ {id:'agri_prod',n:'Agricole · Métiers des productions',specs:['Bac pro Conduite de productions agricoles','Bac pro Productions horticoles'],m:'agriculteur, horticulteur',agri:1},
+ {id:'agri_vente',n:'Agricole · Métiers du conseil vente',specs:['Bac pro Technicien conseil vente en alimentation','Bac pro Technicien conseil vente univers jardinerie','Bac pro Technicien conseil vente en animalerie'],m:'vendeur en jardinerie, conseiller en animalerie',agri:1}
+];
+var REP_HORS=['Bac pro Métiers de la restauration option A métiers du service et de la relation clients','Bac pro Métiers de la restauration option B métiers de la cuisine','Bac pro Boulanger-pâtissier','Bac pro Boucher-charcutier-traiteur','Bac pro Poissonnier-écailler-traiteur','Bac pro Accompagnement, soins et services à la personne','Bac pro Animation – enfance et personnes âgées','Bac pro Métiers de la sécurité','Bac pro Optique-photonique','Bac pro Modélisation et prototypage 3D','Bac pro Photographie','Bac pro Métiers de la couture et de la confection','Bac pro Métiers du cuir','Bac pro Métiers de l\'entretien des textiles','Bac pro Hygiène, propreté, stérilisation','Bac pro Conducteur transport routier de marchandises'];
+var LOCAL_GT=[
+ {b:'Antony',v:'Antony',n:'Descartes',euro:['allemand','italien'],techno:['STMG']},
+ {b:'Antony',v:'Montrouge',n:'Maurice Genevoix',euro:['allemand','espagnol'],arts:['cinéma-audiovisuel','théâtre'],techno:['STMG'],sport:['tennis']},
+ {b:'Antony',v:'Sceaux',n:'Marie Curie',euro:['allemand'],lvc:['hébreu','russe'],part:['BACHIBAC'],arts:['arts plastiques']},
+ {b:'Antony',v:'Sceaux',n:'Lakanal',techno:['STMG']},
+ {b:'Boulogne',v:'Boulogne-Billancourt',n:'Jacques Prévert',euro:['anglais','espagnol'],arts:['cinéma-audiovisuel'],techno:['STMG']},
+ {b:'Boulogne',v:'Boulogne-Billancourt',n:'Simone Veil',euro:['anglais'],opt:['option biotechnologies'],techno:['STL biotechnologies'],sport:['aviron','badminton','basket']},
+ {b:'Boulogne',v:'Boulogne-Billancourt',n:'Étienne-Jules Marey',techno:['ST2S']},
+ {b:'Boulogne',v:'Issy-les-Moulineaux',n:'Eugène Ionesco',euro:['anglais'],lvc:['chinois'],techno:['STI2D (EE, ITEC, SIN)']},
+ {b:'Boulogne',v:'Meudon',n:'Rabelais',euro:['anglais'],arts:['théâtre']},
+ {b:'Boulogne',v:'Sèvres',n:'Jean-Pierre Vernant',euro:['anglais'],lvc:['japonais'],part:['section internationale'],opt:['BT métiers de la musique','création et culture design'],arts:['arts plastiques','cinéma-audiovisuel'],techno:['STMG']},
+ {b:'Boulogne',v:'Saint-Cloud',n:'Alexandre Dumas',euro:['anglais','allemand','espagnol'],lvc:['chinois'],part:['section internationale (espagnol)'],techno:['STMG']},
+ {b:'Boulogne',v:'Saint-Cloud',n:'Santos-Dumont',techno:['STMG (euro anglais et espagnol en 1re)']},
+ {b:'Gennevilliers',v:'Asnières-sur-Seine',n:'Auguste Renoir',euro:['anglais'],lvc:['arabe','chinois'],arts:['musique','théâtre'],techno:['STMG']},
+ {b:'Gennevilliers',v:'Clichy',n:'René Auffray',opt:['2de STHR','2de STHR euro'],techno:['STHR','ST2S'],avenir:true},
+ {b:'Gennevilliers',v:'Clichy',n:'Newton-ENREA',euro:['anglais'],techno:['STI2D (EE, SIN)']},
+ {b:'Gennevilliers',v:'Gennevilliers',n:'Galilée',euro:['anglais'],opt:['option biotechnologies','option sciences et laboratoire'],techno:['STL biotechnologies','STL SPCL','STI2D (AC, EE)','1re STL bio et STI2D en euro anglais'],sport:['rugby mixte']},
+ {b:'Gennevilliers',v:'Villeneuve-la-Garenne',n:'Michel-Ange',euro:['espagnol'],lvc:['arabe'],arts:['arts plastiques','cinéma-audiovisuel'],techno:['STMG']},
+ {b:'Nanterre',v:'Nanterre',n:'Joliot-Curie',euro:['anglais','espagnol'],lvc:['arabe'],part:['section scientifique européenne anglais (tests)'],arts:['théâtre'],techno:['ST2S','STMG']},
+ {b:'Nanterre',v:'Puteaux',n:'L\'Agora',euro:['anglais','allemand'],techno:['STI2D (ITEC, SIN)']},
+ {b:'Nanterre',v:'Rueil-Malmaison',n:'Gustave Eiffel',euro:['anglais'],techno:['STMG'],avenir:true},
+ {b:'Nanterre',v:'Rueil-Malmaison',n:'Richelieu',euro:['allemand'],part:['ABIBAC'],arts:['arts plastiques','théâtre'],techno:['STI2D (AC, EE, ITEC, SIN)']},
+ {b:'Nanterre',v:'Suresnes',n:'Paul Langevin',euro:['anglais','allemand'],lvc:['japonais'],part:['BACHIBAC'],opt:['option biotechnologies','option sciences et laboratoire'],arts:['histoire des arts'],techno:['STL biotechnologies','STL SPCL','STMG']},
+ {b:'Neuilly',v:'Bois-Colombes',n:'Albert Camus',euro:['anglais','allemand'],part:['BACHIBAC','ESABAC'],arts:['arts plastiques','cinéma-audiovisuel'],techno:['STMG']},
+ {b:'Neuilly',v:'Colombes',n:'Guy de Maupassant',euro:['anglais'],lvc:['arabe'],arts:['arts plastiques'],techno:['ST2S','STMG']},
+ {b:'Neuilly',v:'Courbevoie',n:'Lucie Aubrac',euro:['anglais','allemand'],part:['ABIBAC','section internationale'],techno:['STMG (euro espagnol en 1re)']},
+ {b:'Neuilly',v:'Courbevoie',n:'Paul Lapie',euro:['anglais'],part:['section internationale'],arts:['arts plastiques'],techno:['STMG']},
+ {b:'Neuilly',v:'Levallois-Perret',n:'Léonard de Vinci',euro:['anglais'],arts:['théâtre'],techno:['STMG','STI2D (ITEC, SIN)'],sport:['trampoline']},
+ {b:'Neuilly',v:'Neuilly-sur-Seine',n:'La Folie Saint-James',euro:['anglais'],lvc:['hébreu']},
+ {b:'Vanves',v:'Châtenay-Malabry',n:'Missak et Mélinée Manouchian',euro:['anglais'],opt:['option biotechnologies'],techno:['STL biotechnologies','ST2S','STI2D (EE, ITEC, SIN)']},
+ {b:'Vanves',v:'Châtenay-Malabry',n:'Emmanuel Mounier',lvc:['chinois'],arts:['arts plastiques'],techno:['STMG']},
+ {b:'Vanves',v:'Clamart',n:'Jacques Monod',euro:['allemand','espagnol'],techno:['STMG']},
+ {b:'Vanves',v:'Le Plessis-Robinson',n:'Montesquieu',euro:['anglais'],techno:['STMG']},
+ {b:'Vanves',v:'Vanves',n:'Michelet',euro:['allemand'],arts:['arts plastiques']}
+];
+var LOCAL_AVENIR='La 2de Avenir est une 2de générale et technologique pour des élèves encore très hésitants sur leur orientation : recrutement sur entretien, une journée par semaine de projets interdisciplinaires, un travail renforcé sur l\'orientation et la découverte des filières. Dans les Hauts-de-Seine (offre 2026, à confirmer pour 2027) : lycée René Auffray à Clichy et lycée Gustave Eiffel à Rueil-Malmaison (ouverture 2026). Procédure : vœu spécifique, entretiens à partir de la liste communiquée par le SAIO, liste des élèves proposés transmise par le collège avant fin mai, et toujours des vœux de 2de GT dans les lycées de secteur.';
+var LOCAL_PRO={"construction": [["78", "Porcheville", "Antoine Lavoisier"], ["78", "Villiers St Frederic", "Viollet-Le-Duc"], ["91", "Bretigny Sur Orge", "Jean-Pierre Timbaud"], ["91", "Evry Courcouronnes", "Auguste Perret"], ["91", "Massy", "Gustave Eiffel"], ["92", "Montrouge", "Jean Monnet"], ["95", "Cormeilles En Parisis", "Le Corbusier"], ["95", "Ermont", "Ferdinand Buisson"]], "gestion": [["78", "Conflans Ste Honorine", "Simone Weil"], ["78", "Les Mureaux", "Vaucanson"], ["78", "Limay", "Condorcet"], ["78", "Mantes La Ville", "Camille Claudel"], ["78", "Maurepas", "Dumont D'Urville"], ["78", "Poissy", "Adrienne Bolland"], ["78", "Rambouillet", "Louis Bascan"], ["78", "Sartrouville", "Jules Verne"], ["78", "St Germain En Laye", "Jean-Baptiste Poquelin"], ["78", "Versailles", "Jacques Prevert"], ["91", "Arpajon", "Paul Belmondo"], ["91", "Cerny", "Alexandre Denis"], ["91", "Corbeil Essonnes", "Robert Doisneau"], ["91", "Etampes", "Geoffroy-Saint-Hilaire"], ["91", "Juvisy Sur Orge", "Jean Monnet"], ["91", "Les Ulis", "L'Essouriau"], ["91", "Longjumeau", "Jean Perrin"], ["91", "Massy", "Parc De Vilgenis"], ["91", "Mennecy", "Marie Laurencin"], ["91", "Morangis", "Marguerite Yourcenar"], ["91", "Savigny Sur Orge", "Gaspard Monge"], ["91", "Ste Genevieve Des Bois", "Paul Langevin"], ["91", "Yerres", "Louis Armand"], ["92", "Asnieres Sur Seine", "De Prony"], ["92", "Bois Colombes", "Daniel Balavoine"], ["92", "Boulogne Billancourt", "Etienne-Jules Marey"], ["92", "Clichy", "Rene Auffray"], ["92", "Courbevoie", "Paul Painleve"], ["92", "La Garenne Colombes", "La Tournelle"], ["92", "Levallois Perret", "Leonard De Vinci"], ["92", "Montrouge", "Jean Monnet"], ["92", "Rueil Malmaison", "Gustave Eiffel"], ["92", "Sceaux", "Florian"], ["92", "St Cloud", "Santos Dumont"], ["92", "Vanves", "Louis Dardenne"], ["92", "Villeneuve La Garenne", "Charles Petiet"], ["95", "Argenteuil", "Georges Braque"], ["95", "Arnouville", "Virginia Henderson"], ["95", "Beaumont Sur Oise", "Evariste Galois"], ["95", "Chars", "Du Vexin"], ["95", "Enghien Les Bains", "Gustave Monod"], ["95", "Ermont", "Gustave Eiffel"], ["95", "Garges Les Gonesse", "Arthur Rimbaud"], ["95", "Goussainville", "Romain Rolland"], ["95", "Jouy Le Moutier", "De L’Hautil"], ["95", "Montmorency", "Turgot"], ["95", "Montsoult", "Jean Mermoz"], ["95", "Osny", "Paul-Emile Victor"], ["95", "Sarcelles", "Jean-Jacques Rousseau"], ["95", "St Ouen L’Aumone", "Edmond Rostand"], ["95", "St Ouen L’Aumone", "Chateau D Epluches"], ["95", "Taverny", "Louis Jouvet"]], "relation": [["78", "Conflans Ste Honorine", "Simone Weil"], ["78", "La Celle St Cloud", "Pierre Corneille"], ["78", "La Queue Les Yvelines", "Jean Monnet"], ["78", "Les Mureaux", "Vaucanson"], ["78", "Limay", "Condorcet"], ["78", "Mantes La Ville", "Camille Claudel"], ["78", "Poissy", "Adrienne Bolland"], ["78", "Sartrouville", "Jules Verne"], ["78", "St Cyr L’Ecole", "Jean Perrin"], ["78", "St Germain En Laye", "Jean-Baptiste Poquelin"], ["78", "Trappes", "Henri Matisse"], ["78", "Versailles", "Jacques Prevert"], ["91", "Arpajon", "Paul Belmondo"], ["91", "Corbeil Essonnes", "Robert Doisneau"], ["91", "Dourdan", "Nikola Tesla"], ["91", "Draveil", "Nadar"], ["91", "Etampes", "Nelson-Mandela"], ["91", "Evry Courcouronnes", "Charles Baudelaire"], ["91", "Juvisy Sur Orge", "Jean Monnet"], ["91", "Longjumeau", "Jean Perrin"], ["91", "Morangis", "Marguerite Yourcenar"], ["91", "Palaiseau", "Henri Poincare"], ["91", "Ris Orangis", "Pierre Mendes France"], ["91", "Ste Genevieve Des Bois", "Paul Langevin"], ["91", "Yerres", "Louis Armand"], ["92", "Antony", "Theodore Monod"], ["92", "Asnieres Sur Seine", "De Prony"], ["92", "Bois Colombes", "Daniel Balavoine"], ["92", "Courbevoie", "Paul Painleve"], ["92", "La Garenne Colombes", "La Tournelle"], ["92", "Meudon", "De L’Observatoire"], ["92", "Nanterre", "Louise Michel"], ["92", "Puteaux", "Voilin"], ["92", "Rueil Malmaison", "Gustave Eiffel"], ["92", "Sceaux", "Florian"], ["92", "St Cloud", "Santos Dumont"], ["92", "Vanves", "Louis Dardenne"], ["92", "Villeneuve La Garenne", "Charles Petiet"], ["95", "Beaumont Sur Oise", "Evariste Galois"], ["95", "Bezons", "Paulette Nardal"], ["95", "Chars", "Du Vexin"], ["95", "Domont", "George Sand"], ["95", "Eaubonne", "Louis Armand"], ["95", "Ermont", "Ferdinand Buisson"], ["95", "Fosses", "Charles Baudelaire"], ["95", "Garges Les Gonesse", "Arthur Rimbaud"], ["95", "Goussainville", "Romain Rolland"], ["95", "Jouy Le Moutier", "De L’Hautil"], ["95", "Montmorency", "Turgot"], ["95", "Montsoult", "Jean Mermoz"], ["95", "St Ouen L’Aumone", "Edmond Rostand"]], "aero": [["91", "Cerny", "Alexandre Denis"]], "graphique": [["92", "Colombes", "Claude Garamont"]], "hotellerie": [["78", "Guyancourt", "D'Hotellerie Et De Tourisme"], ["78", "Mantes La Ville", "Camille Claudel"], ["78", "Rambouillet", "Louis Bascan"], ["91", "Etiolles", "Hotelier Chateau Des Coudraies"], ["92", "Antony", "Theodore Monod"], ["92", "Clichy", "Rene Auffray"], ["92", "Meudon", "De L’Observatoire"], ["92", "St Cloud", "Santos Dumont"], ["95", "Eragny Sur Oise", "Auguste Escoffier"], ["95", "Bezons", "Paulette Nardal"]], "alimentation": [["78", "Guyancourt", "D'Hotellerie Et De Tourisme"], ["91", "Etiolles", "Hotelier Chateau Des Coudraies"], ["92", "Meudon", "De L’Observatoire"], ["95", "Eragny Sur Oise", "Auguste Escoffier"]], "etudes": [["78", "Villiers St Frederic", "Viollet-Le-Duc"], ["91", "Bretigny Sur Orge", "Jean-Pierre Timbaud"], ["91", "Evry Courcouronnes", "Auguste Perret"], ["91", "Massy", "Gustave Eiffel"], ["92", "Asnieres Sur Seine", "De Prony"], ["92", "Montrouge", "Jean Monnet"], ["95", "Cormeilles En Parisis", "Le Corbusier"], ["95", "Ermont", "Ferdinand Buisson"]], "beaute": [["78", "Magnanville", "Leopold Sedar Senghor"], ["91", "Evry Courcouronnes", "Charles Baudelaire"], ["92", "Neuilly Sur Seine", "Vassily Kandinsky"], ["92", "Sceaux", "Florian"], ["95", "Argenteuil", "Fernand Et Nadia Leger"]], "pilotage": [["78", "Rambouillet", "Louis Bascan"], ["78", "Porcheville", "Antoine Lavoisier"], ["78", "Trappes", "Louis Bleriot"], ["78", "Mantes La Jolie", "Jean Rostand"], ["78", "Saint Germain En Laye", "Leonard De Vinci"], ["78", "Sartrouville", "Jules Verne"], ["91", "Arpajon", "Paul Belmondo"], ["91", "Athis Mons", "Clement Ader"], ["91", "Dourdan", "Nikola Tesla"], ["91", "Draveil", "Nadar"], ["91", "Etampes", "Nelson-Mandela"], ["91", "Les Ulis", "L'Essouriau"], ["91", "Longjumeau", "Jean Perrin"], ["92", "Bagneux", "Leonard De Vinci"], ["95", "Chars", "Du Vexin"], ["95", "Cergy", "Jules Verne"], ["95", "Eaubonne", "Louis Armand"]], "agencement": [["78", "Le Chesnay Rocquencourt", "Jean Moulin"], ["78", "Villiers Saint Frederic", "Viollet-Le-Duc"], ["91", "Evry Courcouronnes", "Auguste Perret"], ["91", "Massy", "Gustave Eiffel"], ["92", "Asnieres Sur Seine", "De Prony"], ["92", "Suresnes", "Louis Bleriot"], ["95", "Cormeilles En Parisis", "Le Corbusier"], ["95", "Villiers Le Bel", "Pierre Mendes"]], "mecanique": [["78", "Conflans Sainte Honorine", "Simone Weil"], ["78", "La Celle Saint Cloud", "Lucien Rene Duchesne"], ["78", "Montigny Le Bretonneux", "Emilie De Breteuil"], ["78", "Rambouillet", "Louis Bascan"], ["78", "Versailles", "Jules Ferry"], ["91", "Bretigny Sur Orge", "Jean-Pierre Timbaud"], ["91", "Corbeil Essonnes", "Robert Doisneau"], ["91", "Evry Courcouronnes", "Georges Brassens"], ["91", "Longjumeau", "Jean Perrin"], ["91", "Massy", "Parc De Vilgenis"], ["91", "Quincy Sous Senart", "Les Freres Moreau"], ["92", "Levallois Perret", "Leonard De Vinci"], ["92", "Malakoff", "Louis Girard"], ["95", "Argenteuil", "Jean Jaures"], ["95", "Cergy", "Jules Verne"], ["95", "Enghien Les Bains", "Gustave Monod"], ["95", "Goussainville", "Romain Rolland"], ["95", "Sarcelles", "Maryse Conde"]], "tne": [["78", "Conflans Sainte Honorine", "Simone Weil"], ["78", "Le Chesnay Rocquencourt", "Jean Moulin"], ["78", "Les Mureaux", "Vaucanson"], ["78", "Mantes La Jolie", "Jean Rostand"], ["78", "Poissy", "Adrienne Bolland"], ["78", "Porcheville", "Antoine Lavoisier"], ["78", "Rambouillet", "Louis Bascan"], ["78", "Saint Germain En Laye", "Leonard De Vinci"], ["78", "Sartrouville", "Jules Verne"], ["78", "Trappes", "Louis Bleriot"], ["78", "Versailles", "Jules Ferry"], ["78", "Villiers Saint Frederic", "Viollet-Le-Duc"], ["78", "Montigny Le Bretonneux", "Emilie De Breteuil"], ["91", "Arpajon", "Paul Belmondo"], ["91", "Athis Mons", "Clement Ader"], ["91", "Corbeil Essonnes", "Robert Doisneau"], ["91", "Dourdan", "Nikola Tesla"], ["91", "Draveil", "Nadar"], ["91", "Etampes", "Nelson Mandela"], ["91", "Evry Courcouronnes", "Auguste Perret"], ["91", "Evry Courcouronnes", "Georges Brassens"], ["91", "Les Ulis", "L’Essouriau"], ["91", "Longjumeau", "Jean Perrin"], ["91", "Massy", "Gustave Eiffel"], ["91", "Massy", "Parc De Vilgenis"], ["91", "Morsang Sur Orge", "Andre-Marie Ampere"], ["91", "Quincy Sous Senart", "Les Freres Moreau"], ["91", "Ris Orangis", "Pierre Mendes"], ["91", "Saint Michel Sur Orge", "Leonard"], ["92", "Bagneux", "Leonard De Vinci"], ["92", "Chatenay Malabry", "M. Et M. Manouchian"], ["92", "Clichy", "Newton-Enrea"], ["92", "Colombes", "Anatole France"], ["92", "La Garenne Colombes", "La Tournelle"], ["92", "Malakoff", "Louis Girard"], ["92", "Meudon", "De L’Observatoire"], ["92", "Nanterre", "Claude Chappe"], ["92", "Suresnes", "Louis Bleriot"], ["95", "Argenteuil", "Jean Jaures"], ["95", "Beaumont Sur Oise", "Evariste Galois"], ["95", "Chars", "Du Vexin"], ["95", "Cormeilles En Parisis", "Le Corbusier"], ["95", "Ermont", "Gustave Eiffel"], ["95", "Eragny", "Auguste Escoffier"], ["95", "Enghien Les Bain", "Gustave Monod"], ["95", "Goussainville", "Romain Rolland"], ["95", "Montsoult", "Jean Mermoz"], ["95", "Saint Ouen L’Aumone", "Jean Perrin"], ["95", "Sarcelles", "Maryse Conde"], ["95", "Taverny", "Louis Jouvet"], ["95", "Villiers Le Bel", "Pierre Mendes France"]], "maintenance": [["78", "Conflans Sainte Honorine", "Simone Weil"], ["78", "La Celle Saint Cloud", "Lucien-Rene Duchesne"], ["78", "Mantes La Jolie", "Jean Rostand"], ["78", "Porcheville", "Antoine Lavoisier"], ["91", "Cerny", "Alexandre Denis"], ["91", "Dourdan", "Nikola Tesla"], ["91", "Quincy Sous Senart", "Les Freres Moreau"], ["91", "Savigny Sur Orge", "Gaspard Monge"], ["92", "Malakoff", "Louis Girard"], ["92", "Nanterre", "Claude Chappe"], ["92", "Villeneuve La Garenne", "Charles Petiet"], ["95", "Garges Les Gonesse", "Arthur Rimbaud"], ["95", "Saint Ouen L’Aumone", "Chateau D’Epluches"]]};
+var LOCAL_SRC='Offre de la rentrée 2026 (académie de Versailles, guide Affelnet-lycée, fiches 17, 19 et 20), base de travail pour 2027 : l\'offre 2027 sera publiée au printemps 2027, à vérifier avant tout conseil.';
+
+(function(){
+'use strict';
+/* Aucune donnée n'est enregistrée : pas de localStorage, pas de cookie, rien n'est envoyé. */
+var S={done:{},voeux:[]};
+var nav=document.getElementById('nav');
+function go(id){document.querySelectorAll('section.tab').forEach(function(s){s.classList.toggle('on',s.id===id)});nav.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.t===id)});window.scrollTo({top:0,behavior:'smooth'});try{history.replaceState(null,'','#'+id)}catch(e){}}
+window.go=go;
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(b)go(b.dataset.t)});
+if(location.hash&&document.getElementById(location.hash.slice(1)))go(location.hash.slice(1));
+window.imprimer=function(id){document.body.dataset.print=id;document.getElementById(id).classList.add('print-target');window.print();setTimeout(function(){delete document.body.dataset.print;document.getElementById(id).classList.remove('print-target')},400)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function norm(s){return String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
+
+/* Feuille de route */
+var P={nat:'<span class="pill p-nat">National</span>',acad:'<span class="pill p-acad">Académie de Versailles</span>',loc:'<span class="pill p-loc">Collège</span>',conf:'<span class="pill p-conf">Mois à confirmer</span>',off:'<span class="pill p-off">Date officielle</span>'};
+var O=function(t){return '<span class="outil">'+t+'</span>'};
+var ROUTE=[
+ {phase:'Automne · Je construis mon projet',quand:'septembre → décembre',steps:[
+  {id:'s1',t:'Je fais le point sur moi',d:'sept.-oct.',tags:[P.loc],b:'<p>Ce que j\'aime, ce que je réussis, comment j\'apprends le mieux.</p><ul><li>Faire l\'onglet <b>« Mes intérêts »</b>.</li><li>En parler en heure de vie de classe avec mon professeur principal.</li></ul>'+O('Ma Boussole')+O('Avenir(s)')},
+  {id:'s2',t:'Je vérifie l\'ÉduConnect de mes parents',d:'octobre',tags:[P.nat],b:'<p>Chaque responsable légal doit pouvoir se connecter. Sans ce compte, impossible de saisir les vœux. Un problème ? Le secrétariat du collège.</p>'+O('ÉduConnect')},
+  {id:'s3',t:'Je découvre les 3 voies et des métiers',d:'oct.-nov.',tags:[P.nat],b:'<ul><li>Lire « Les 3 voies », « Voie générale et techno » et « Voie pro ».</li><li>Explorer 3 métiers sur l\'Onisep et noter ce qui me plaît.</li></ul>'+O('Onisep')+O('Guide « Après la 3e »')},
+  {id:'s4',t:'Je prends rendez-vous avec la PsyEN',d:'nov.-janv.',tags:[P.loc],b:'<p>Rendez-vous individuel, au collège ou au CIO. Je prépare ma fiche (onglet « RDV PsyEN »).</p>'+O('Fiche de préparation')},
+  {id:'s5',t:'Je fais mon stage d\'observation et j\'en tire des leçons',d:'selon le collège',tags:[P.loc],b:'<p>Le stage aide à confirmer ou à écarter une piste. Je note ce que j\'ai appris sur moi.</p>'+O('Carnet de stage')},
+  {id:'s6',t:'Je repère les portes ouvertes',d:'déc. → avril',tags:[P.acad],b:'<p>Noter 2 ou 3 lycées à visiter (GT et/ou pro) et préparer 3 questions à poser sur place.</p>'+O('Sites des lycées')},
+  {id:'s7',t:'Mes parents saisissent mes intentions provisoires',d:'déc. → janv.',tags:[P.nat,P.conf],b:'<p>Dans le service en ligne Orientation : une ou plusieurs voies (2de GT, 2de pro, CAP), y compris l\'apprentissage. La date limite exacte est donnée par le collège.</p>'+O('Service en ligne Orientation')+O('ÉduConnect')},
+  {id:'s8',t:'Rencontre parents, élève et professeur principal',d:'avant le conseil',tags:[P.nat,P.loc],b:'<p>Prévue pour tous les 3e. On fait le point sur les résultats et le projet.</p>'+O('RDV parents · cap3e.fr')}]},
+ {phase:'Hiver · L\'avis provisoire',quand:'janvier → février',steps:[
+  {id:'a1',t:'Le conseil de classe donne un avis provisoire',d:'janv.-févr.',tags:[P.loc],b:'<p>Il répond à chaque intention. Ce n\'est <b>pas encore une décision</b>.</p><ul><li>Avis favorable : je consolide.</li><li>Avis réservé : je travaille, j\'en parle, j\'envisage une autre piste.</li></ul>'},
+  {id:'a2',t:'J\'en discute avec ma famille et mon professeur principal',d:'février',tags:[P.loc],b:'<p>Si l\'avis ne correspond pas à mon souhait, on cherche ensemble ce qui peut évoluer d\'ici juin.</p>'}]},
+ {phase:'Printemps · Je précise et je sécurise',quand:'février → mai',steps:[
+  {id:'b1',t:'Je m\'inscris à un entretien PassPRO (si besoin)',d:'fin janv. → avril',tags:[P.acad,P.conf],b:'<p>Seulement pour certaines formations pro très demandées. L\'inscription se fait <b>par le collège</b> ; les entretiens ont lieu de février à mai.</p>'+O('PassPRO')},
+  {id:'b2',t:'Je visite des lycées et je fais un mini-stage si possible',d:'févr. → avril',tags:[P.acad],b:'<p>Voir les locaux, parler aux élèves et aux professeurs : ça change tout pour classer ses vœux.</p>'},
+  {id:'b3',t:'Si apprentissage : je cherche un employeur',d:'dès janvier',tags:[P.nat],b:'<p>CV, lettre, candidatures. Je fais aussi des vœux en lycée pro pour être en sécurité.</p>'+O('La bonne alternance')},
+  {id:'b4',t:'Je prépare mon brouillon de vœux',d:'avril',tags:[P.loc],b:'<p>Onglet « Mes vœux » : jusqu\'à 10 vœux dans l\'académie, classés, avec mon lycée de secteur.</p>'},
+  {id:'b5',t:'Mes parents saisissent les choix définitifs et les vœux',d:'mai',tags:[P.nat,P.conf],b:'<p><b>Deux choses à faire :</b></p><ul><li>la <b>voie</b> définitive (service en ligne Orientation) ;</li><li>les <b>lycées et formations</b> classés (service en ligne Affectation).</li></ul>'+O('Service en ligne Orientation')+O('Service en ligne Affectation')}]},
+ {phase:'Juin · La décision et le brevet',quand:'juin',steps:[
+  {id:'c1',t:'Conseil de classe : proposition d\'orientation',d:'début juin',tags:[P.loc],b:'<p>Si la proposition correspond à ma demande, elle devient <b>décision</b>. Sinon : rencontre avec le chef d\'établissement, puis appel possible dans un délai très court.</p>'},
+  {id:'c2',t:'Je passe le brevet : oral puis écrits',d:'juin',tags:[P.off],b:'<p>L\'oral est organisé par le collège (date donnée par ton professeur principal). Les écrits ont lieu les <b>24, 25 et 28 juin 2027</b>.</p>'},
+  {id:'c3',t:'Je consulte mon résultat d\'affectation',d:'fin juin',tags:[P.nat,P.conf],b:'<p>Dans le service en ligne Affectation, fin juin ou tout début juillet.</p>'+O('Service en ligne Affectation')}]},
+ {phase:'Été · Je m\'inscris au lycée',quand:'juillet → septembre',steps:[
+  {id:'d1',t:'Mes parents m\'inscrivent au lycée dans les délais',d:'début juillet',tags:[P.nat],b:'<p>En ligne ou sur place selon le lycée. <b>Sans inscription, la place peut être perdue.</b></p>'},
+  {id:'d2',t:'Pas d\'affectation ? Je réagis tout de suite',d:'juillet → sept.',tags:[P.acad],b:'<p>Contacter le collège et le CIO, formuler de nouveaux vœux pour les tours suivants (juillet, septembre).</p>'}]}];
+function renderRoute(){var tl=document.getElementById('timeline');tl.innerHTML='';
+  ROUTE.forEach(function(ph){tl.insertAdjacentHTML('beforeend','<div class="phase"><h3>'+ph.phase+'</h3><span class="quand">'+ph.quand+'</span></div>');var box=document.createElement('div');box.className='steps';
+    ph.steps.forEach(function(s){var el=document.createElement('div');el.className='step'+(S.done[s.id]?' done':'');
+      el.innerHTML='<div class="step-h"><input type="checkbox" aria-label="Étape faite"'+(S.done[s.id]?' checked':'')+'><span class="t">'+s.t+'</span><span class="d">'+s.d+'</span><span class="chev">›</span></div><div class="step-b"><div style="margin-bottom:6px">'+s.tags.join(' ')+'</div>'+s.b+'</div>';
+      var cb=el.querySelector('input');cb.addEventListener('click',function(e){e.stopPropagation();S.done[s.id]=cb.checked;el.classList.toggle('done',cb.checked);prog()});
+      el.querySelector('.step-h').addEventListener('click',function(){el.classList.toggle('open')});box.appendChild(el)});tl.appendChild(box)});prog()}
+function prog(){var all=[];ROUTE.forEach(function(p){all=all.concat(p.steps)});var n=all.filter(function(s){return S.done[s.id]}).length,p=Math.round(n/all.length*100);
+  document.getElementById('pct').textContent=p+' %';document.getElementById('barfill').style.width=p+'%';document.getElementById('pcttxt').textContent=n+' étape'+(n>1?'s':'')+' faite'+(n>1?'s':'')+' sur '+all.length}
+renderRoute();
+
+/* Spécialités et séries */
+var SPEC=[['Mathématiques','Raisonnement, calcul, algèbre, probabilités, algorithmique.','Pour qui aime chercher, démontrer, résoudre. Très utile pour les sciences, l\'économie, l\'informatique.'],['Physique-chimie','Matière, énergie, ondes, réactions chimiques, expériences.','Pour les curieux des phénomènes naturels. Vers la santé, l\'ingénierie, la recherche.'],['SVT','Le vivant, le corps humain, la Terre, l\'environnement.','Vers les métiers de la santé, de l\'environnement, de l\'agronomie.'],['SES','Sciences économiques et sociales : marché, emploi, société.','Pour comprendre le monde actuel. Vers commerce, droit, gestion, sciences sociales.'],['HGGSP','Histoire-géo, géopolitique et sciences politiques.','Pour qui suit l\'actualité internationale. Vers journalisme, droit, sciences politiques.'],['HLP','Humanités, littérature et philosophie.','Pour qui aime lire, débattre, écrire. Vers lettres, enseignement, communication.'],['LLCER','Langues, littératures et cultures étrangères (anglais, espagnol…).','Pour approfondir une langue et sa culture. Vers commerce international, traduction, tourisme.'],['LLCA','Littérature, langues et cultures de l\'Antiquité (latin, grec).','Pour les passionnés d\'Antiquité, souvent après le latin au collège.'],['NSI','Numérique et sciences informatiques : programmation, données, réseaux.','Pour qui aime coder. Vers informatique, cybersécurité, IA.'],['Sciences de l\'ingénieur','Conception d\'objets techniques, modélisation, prototypes.','Pour qui aime concevoir et construire. Vers écoles d\'ingénieurs, BUT, BTS.'],['Arts','Arts plastiques, cinéma-audiovisuel, danse, musique, théâtre…','Pour les créatifs. Vers écoles d\'art, design, métiers de la culture.'],['EPPCS','Éducation physique, pratiques et culture sportives.','Vers STAPS, métiers du sport et de la santé.'],['Biologie-écologie','Vivant, écosystèmes, agronomie (en lycée agricole).','Vers agriculture, environnement, métiers animaliers.']];
+var TECHNO=[['STMG','Management et gestion','Entreprise, marketing, ressources humaines, finance. Vers BTS, BUT, écoles de commerce.'],['STI2D','Industrie et développement durable','Énergie, matériaux, numérique, architecture. Vers BTS, BUT, écoles d\'ingénieurs.'],['ST2S','Santé et social','Santé, action sociale, biologie humaine. Vers le paramédical et le social.'],['STL','Laboratoire','Biotechnologies ou sciences physiques et chimiques en laboratoire. Vers BTS, BUT, analyses.'],['STD2A','Design et arts appliqués','Design graphique, d\'objet, de mode, d\'espace. Vers DN MADE, écoles d\'art.'],['STHR','Hôtellerie et restauration','Commence dès la 2de STHR, à demander en 3e. Vers le management en hôtellerie-restauration.'],['STAV','Agronomie et vivant','En lycée agricole : agriculture, environnement, aménagement.'],['S2TMD','Théâtre, musique et danse','Pour élèves inscrits au conservatoire.']];
+function chips(id,arr,detId,fmt){var c=document.getElementById(id);arr.forEach(function(x){var b=document.createElement('button');b.className='chip';b.textContent=x[0];b.onclick=function(){c.querySelectorAll('.chip').forEach(function(z){z.classList.remove('on')});b.classList.add('on');document.getElementById(detId).innerHTML=fmt(x)};c.appendChild(b)})}
+chips('specChips',SPEC,'specDetail',function(x){return '<h3 style="color:var(--gt)">'+x[0]+'</h3><p><b>On y étudie :</b> '+x[1]+'</p><p><b>Pour qui ?</b> '+x[2]+'</p>'});
+chips('technoChips',TECHNO,'technoDetail',function(x){return '<h3 style="color:var(--gt)">Bac '+x[0]+' · '+x[1]+'</h3><p>'+x[2]+'</p>'});
+
+/* Familles de métiers 2027 */
+var clean=function(s){return s.replace(/^Bac pro /,'')};
+var FAM=REP_FAM.map(function(f){return {n:f.n.replace(/^Agricole · /,''),s:f.specs.map(clean),m:f.m.split(/,\s*/),agri:f.agri}});
+var HORS={n:'Accès direct dès la 2de pro (hors familles)',s:REP_HORS.map(clean),m:['cuisinier','serveur','boulanger','aide-soignant (après formation)','animateur','agent de sécurité','opticien','photographe','couturier'],hors:1};
+function renderFam(q){q=q||'';var list=document.getElementById('famList');list.innerHTML='';var k=norm(q.trim()),c=0;
+  FAM.concat([HORS]).forEach(function(f){var txt=norm(f.n+' '+f.s.join(' ')+' '+f.m.join(' '));if(k&&txt.indexOf(k)<0)return;c++;
+    var d=document.createElement('details');d.className='fam'+(f.agri?' agri':'')+(f.hors?' hors':'');if(k)d.open=true;
+    d.innerHTML='<summary>'+esc(f.n)+(f.agri?' <span class="pill p-loc">lycée agricole</span>':'')+(f.hors?' <span class="pill p-new">spécialité directe</span>':'')+'</summary><div><p style="margin:.2em 0"><b>Spécialités de bac pro :</b></p><ul style="margin:.2em 0 .6em;padding-left:1.1em">'+f.s.map(function(x){return '<li>'+esc(x)+' <a class="small" href="https://www.onisep.fr/recherche?text='+encodeURIComponent('bac pro '+x)+'" target="_blank" rel="noopener">fiche Onisep</a></li>'}).join('')+'</ul><p style="margin:.2em 0"><b>Exemples de métiers :</b></p><div class="tags">'+f.m.map(function(x){return '<span>'+esc(x)+'</span>'}).join('')+'</div></div>';
+    list.appendChild(d)});
+  document.getElementById('famCount').textContent=k?(c+' résultat'+(c>1?'s':'')+' pour « '+q+' »'):(FAM.filter(function(f){return !f.agri}).length+' familles de l\'Éducation nationale · '+FAM.filter(function(f){return f.agri}).length+' familles en lycée agricole · spécialités en accès direct');
+  if(!c)list.innerHTML='<p class="small">Aucun résultat. Essaie un autre mot, ou cherche sur onisep.fr.</p>'}
+document.getElementById('famSearch').addEventListener('input',function(e){renderFam(e.target.value)});renderFam();
+
+/* Près du collège */
+var SECTEUR=['Galilée','René Auffray','Newton-ENREA'];
+function gtRows(L,rang){return '<thead><tr>'+(rang?'<th>Ordre</th>':'')+'<th>Lycée</th><th>Sections et options particulières</th><th>Séries technologiques</th></tr></thead><tbody>'+L.map(function(l,i){return '<tr>'+(rang?'<td><b>'+(i+1)+'</b></td>':'')+'<td><b>'+esc(l.n)+'</b><br><span class="small">'+esc(l.v)+(l.avenir?' · 2de Avenir':'')+'</span></td><td class="small">'+esc([].concat((l.euro||[]).map(function(x){return 'section européenne '+x}),l.lvc||[],l.part||[],l.opt||[],l.arts||[],(l.sport||[]).map(function(x){return 'section sportive '+x})).join(', ')||'—')+'</td><td class="small">'+esc((l.techno||[]).join(', ')||'—')+'</td></tr>'}).join('')+'</tbody>'}
+document.getElementById('tGT').innerHTML=gtRows(SECTEUR.map(function(n){return LOCAL_GT.filter(function(l){return l.n===n})[0]}).filter(Boolean),true);
+document.getElementById('tGT2').innerHTML=gtRows(LOCAL_GT.filter(function(l){return l.b==='Gennevilliers'&&SECTEUR.indexOf(l.n)<0}),false);
+document.getElementById('avenirTxt').textContent=LOCAL_AVENIR;
+var FAMLAB={};REP_FAM.forEach(function(f){FAMLAB[f.id]=f.n.replace(/^Agricole · /,'')});FAMLAB.hotellerie='Restauration (ex-famille hôtellerie-restauration)';FAMLAB.alimentation='Boulangerie, boucherie (ex-famille alimentation)';
+var sel=document.getElementById('famSel');sel.innerHTML=Object.keys(LOCAL_PRO).filter(function(k){return LOCAL_PRO[k].some(function(x){return x[0]==='92'})}).map(function(k){return '<option value="'+k+'">'+esc(FAMLAB[k]||k)+'</option>'}).join('');
+function renderPro(){var L=(LOCAL_PRO[sel.value]||[]).filter(function(x){return x[0]==='92'});document.getElementById('proList').innerHTML=L.length?'<ul style="margin:0;padding-left:1.1em">'+L.map(function(x){return '<li><b>'+esc(x[2])+'</b> · '+esc(x[1])+'</li>'}).join('')+'</ul>':'<p class="small">Aucun lycée public repéré dans le 92 pour cette famille.</p>'}
+sel.addEventListener('change',renderPro);renderPro();
+
+/* Vœux */
+var TL={gt:['2de GT','var(--gt-l)','var(--gt)'],pro:['2de pro','var(--pro-l)','#8A4421'],cap:['CAP','var(--cap-l)','#4C6627'],app:['Apprentissage','var(--nouv-l)','var(--nouv)']};
+window.addVoeu=function(){var f=document.getElementById('vForm'),l=document.getElementById('vLyc');if(!f.value.trim()){f.focus();return}if(S.voeux.length>=15)return;
+  S.voeux.push({f:f.value.trim(),l:l.value.trim(),t:document.getElementById('vType').value,sect:document.getElementById('vSect').checked,pass:document.getElementById('vPass').checked});
+  f.value='';l.value='';document.getElementById('vSect').checked=false;document.getElementById('vPass').checked=false;renderV()};
+window.mv=function(i,d){var j=i+d;if(j<0||j>=S.voeux.length)return;var x=S.voeux[i];S.voeux[i]=S.voeux[j];S.voeux[j]=x;renderV()};
+window.del=function(i){S.voeux.splice(i,1);renderV()};
+function renderV(){var ol=document.getElementById('vlist');ol.innerHTML='';
+  S.voeux.forEach(function(v,i){var t=TL[v.t];ol.insertAdjacentHTML('beforeend','<li><div><b>'+esc(v.f)+'</b>'+(v.l?' · '+esc(v.l):'')+'<br><span class="tagv" style="background:'+t[1]+';color:'+t[2]+'">'+t[0]+'</span> '+(v.sect?'<span class="tagv" style="background:var(--beige);color:var(--vert)">secteur</span> ':'')+(v.pass?'<span class="tagv" style="background:var(--beige);color:var(--vert)">PassPRO</span>':'')+'</div><div class="mv no-print"><button onclick="mv('+i+',-1)" aria-label="Monter">▲</button><button onclick="mv('+i+',1)" aria-label="Descendre">▼</button><button onclick="del('+i+')" aria-label="Supprimer">✕</button></div></li>')});
+  if(!S.voeux.length)ol.innerHTML='<p class="small">Aucun vœu pour l\'instant. Ajoute ton premier vœu ci-dessus.</p>';check()}
+function check(){var v=S.voeux,n=v.length,gt=v.filter(function(x){return x.t==='gt'}),pro=v.filter(function(x){return x.t==='pro'||x.t==='cap'}),app=v.filter(function(x){return x.t==='app'});
+  var lyc={};v.forEach(function(x){if(x.l)lyc[norm(x.l)]=1});var nl=Object.keys(lyc).length,R=[];
+  var add=function(ok,txt){R.push('<li><span class="'+(ok?'y':'n')+'">'+(ok?'✓':'!')+'</span> '+txt+'</li>')};
+  add(n>=3,n>=3?'Tu as '+n+' vœux : bonne base.':'Tu as '+n+' vœu(x). Vise au moins 3 à 5 vœux, et jusqu\'à 10.');
+  add(n<=10,n<=10?'Tu restes dans la limite de 10 vœux de l\'académie.':'Plus de 10 vœux : dans l\'académie, c\'est 10 maximum.');
+  if(gt.length)add(gt.some(function(x){return x.sect}),gt.some(function(x){return x.sect})?'Ton lycée de secteur est bien dans tes vœux 2de GT.':'Tu demandes une 2de GT : ajoute ton <b>lycée de secteur</b>, il est prioritaire pour toi.');
+  if(pro.length)add(nl>=2,nl>=2?'Tes vœux portent sur plusieurs lycées : c\'est plus sûr.':'Voie pro ou CAP : varie les lycées (et si possible les spécialités proches).');
+  if(app.length)add(pro.length>0||gt.length>0,(pro.length||gt.length)?'Apprentissage + vœux en lycée : tu as un plan B.':'Apprentissage seul = risqué sans contrat signé. Ajoute des vœux en lycée.');
+  if(v.some(function(x){return x.pass}))R.push('<li><span class="y">→</span> Vœu PassPRO : saisis-le <b>avant la date limite</b> pour garder le bonus.</li>');
+  if(n)R.push('<li><span class="y">→</span> Ton vœu n°1 est « '+esc(v[0].f)+' ». Est-ce vraiment celui que tu veux le plus ?</li>');
+  document.getElementById('vcheck').innerHTML=n?R.join(''):'<li class="small">Ajoute des vœux pour lancer le contrôle.</li>'}
+renderV();
+window.viderPsy=function(){document.querySelectorAll('#psy textarea').forEach(function(t){t.value=''})};
+
+/* Quiz */
+var Q=[['Pour apprendre, je préfère…',[['lire, écouter, réfléchir','gt'],['faire, manipuler, essayer','pro'],['un peu des deux','both']]],['Les études longues (3 ans de lycée puis plusieurs années après)…',[['ça me motive','gt'],['je préfère entrer vite dans un métier','pro'],['je ne sais pas encore','both']]],['Pendant mon stage, ce qui m\'a plu, c\'est…',[['comprendre l\'organisation, analyser','gt'],['les gestes du métier, le concret','pro'],['le contact avec les gens','both']]],['J\'ai déjà une idée de métier…',[['non, je veux garder des portes ouvertes','gt'],['oui, assez précise','pro'],['plutôt un domaine','both']]],['Travailler en entreprise dès 15-16 ans (stages longs, apprentissage)…',[['pas tout de suite','gt'],['oui, ça me plaît','pro'],['pourquoi pas','both']]],['En classe, mes résultats sont plutôt…',[['réguliers dans la plupart des matières','gt'],['meilleurs quand c\'est concret','pro'],['variables selon les matières','both']]],['Ce qui compte le plus pour moi…',[['découvrir beaucoup de choses','gt'],['être utile rapidement, gagner en autonomie','pro'],['trouver ce qui me plaît vraiment','both']]],['Rédiger, argumenter, faire des exposés…',[['j\'aime bien','gt'],['je préfère montrer ce que je sais faire','pro'],['ça dépend du sujet','both']]]];
+var ans={};
+(function(){var z=document.getElementById('quiz');z.innerHTML=Q.map(function(q,i){return '<div class="q"><p>'+(i+1)+'. '+q[0]+'</p><div class="opts">'+q[1].map(function(o){return '<button data-q="'+i+'" data-v="'+o[1]+'">'+o[0]+'</button>'}).join('')+'</div></div>'}).join('')+'<button class="btn" style="margin-top:12px" id="bRes">Voir mon repère</button>';
+  z.querySelectorAll('.opts button').forEach(function(b){b.onclick=function(){b.parentNode.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');ans[b.dataset.q]=b.dataset.v}});
+  document.getElementById('bRes').onclick=function(){var k=Object.keys(ans).length,r=document.getElementById('quizRes');r.classList.add('on');
+    if(k<Q.length){r.innerHTML='<p>Réponds aux '+Q.length+' questions (il en reste '+(Q.length-k)+').</p>';return}
+    var g=0,p=0;Object.keys(ans).forEach(function(i){var v=ans[i];if(v==='gt')g+=2;else if(v==='pro')p+=2;else{g++;p++}});var pg=Math.round(g/(g+p)*100),pp=100-pg,msg;
+    if(pg>=62)msg='Tes réponses penchent vers la <b>voie générale et technologique</b>. Regarde aussi les séries technologiques, plus concrètes.';
+    else if(pp>=62)msg='Tes réponses penchent vers la <b>voie professionnelle</b> (2de pro ou CAP). Explore les familles de métiers et pense aux portes ouvertes.';
+    else msg='Tes réponses sont <b>équilibrées</b>. C\'est fréquent ! Une 2de GT, la 2de Avenir ou une famille de métiers permettent de choisir progressivement. La PsyEN peut t\'aider à trancher.';
+    r.innerHTML='<h3>Ton repère</h3><div class="meter"><span>Voie GT</span><div><i style="width:'+pg+'%;background:var(--gt)"></i></div><b>'+pg+' %</b></div><div class="meter"><span>Voie pro ou CAP</span><div><i style="width:'+pp+'%;background:var(--pro)"></i></div><b>'+pp+' %</b></div><p>'+msg+'</p><p class="small">Ce repère ne remplace ni l\'avis du conseil de classe, ni l\'échange avec la PsyEN et ta famille. Note-le dans ta fiche PsyEN.</p>'}})();
+})();
+</script>
+</body>
+</html>

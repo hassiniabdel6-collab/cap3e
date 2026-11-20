@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'orientation de mon enfant après la 3e · Cap 3e</title>
+<meta name="description" content="Guide pour les familles : ce que vous devez faire et quand, pour l'orientation de votre enfant après la 3e (rentrée 2027).">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@500;600;700&family=Wix+Madefor+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Charte cap3e.fr · relevée sur la page d'accueil (Wix Harmony) */
+:root{
+  --fond:#FEFDF8; --carte:#FFFFFF; --beige:#E6E6DA; --beige2:#F3F2EA; --filet:#D3D8D1;
+  --vert:#1D4431; --vert2:#285541; --texte:#3B513C; --doux:#6B7A6C;
+  --gt:#2F6FB5; --gt-l:#E4EEF8; --pro:#C0653A; --pro-l:#F8E9E0; --cap:#6E8B3D; --cap-l:#EDF2E2;
+  --nouv:#7A5C99; --nouv-l:#F0EAF5; --alerte:#B04A3C; --alerte-l:#F8E6E2; --conf:#A6741F; --conf-l:#FBF1DE;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fond);color:var(--texte);font-family:"Wix Madefor Text","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:16.5px;line-height:1.6}
+h1,h2,h3,h4{font-family:"Wix Madefor Display","Wix Madefor Text","Segoe UI",system-ui,sans-serif;color:var(--vert2);font-weight:700;line-height:1.2;margin:0 0 .45em;letter-spacing:-.01em}
+h1{font-size:clamp(1.8rem,4.2vw,2.7rem)}
+h2{font-size:clamp(1.45rem,3vw,1.95rem)}
+h3{font-size:1.18rem}
+a{color:var(--vert);font-weight:600}
+a:hover{color:var(--vert2)}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.lead{font-size:1.1rem;max-width:780px}
+.small{font-size:.88rem;color:var(--doux)}
+.center{text-align:center}
+
+/* En-tête */
+.top{padding-top:34px;padding-bottom:10px;text-align:center}
+.top .kicker svg{flex:none}
+.top .kicker{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--vert);background:var(--beige2);border:1px solid var(--filet);border-radius:999px;padding:5px 14px;font-size:.9rem;margin-bottom:14px}
+.top p{max-width:720px;margin:.3em auto 0;font-size:1.1rem}
+
+/* Onglets façon menu du site */
+.tabs{position:sticky;top:0;z-index:20;background:rgba(254,253,248,.94);backdrop-filter:blur(6px);padding:12px 0;border-bottom:1px solid var(--filet)}
+.tabs .bar{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;background:var(--beige);border-radius:22px;padding:6px}
+.tabs button{border:0;background:transparent;color:var(--texte);padding:9px 15px;border-radius:16px;font-weight:500;font-size:.96rem;line-height:1.25}
+.tabs button:hover{background:rgba(255,255,255,.6)}
+.tabs button.on{background:var(--vert);color:#fff;font-weight:600}
+
+main{padding:26px 0 56px}
+section.tab{display:none}
+section.tab.on{display:block;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* Blocs */
+.card{background:var(--carte);border:1px solid var(--filet);border-radius:var(--r);padding:22px 24px;margin:16px 0}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;background:var(--vert);color:#fff;border-radius:999px;padding:12px 22px;font-weight:600;font-size:.98rem;text-decoration:none}
+.btn:hover{background:var(--vert2);color:#fff}
+.btn.ghost{background:transparent;color:var(--vert);border:1.5px solid var(--vert)}
+.btn.ghost:hover{background:var(--beige2)}
+.btn.sm{padding:8px 15px;font-size:.9rem}
+.note,.ok,.alerte,.conf{border-radius:14px;padding:14px 18px;margin:16px 0;font-size:.97rem}
+.note{background:var(--beige2);border:1px solid var(--filet)}
+.ok{background:var(--cap-l);border:1px solid #CFDDB8}
+.alerte{background:var(--alerte-l);border:1px solid #EBC3BB}
+.conf{background:var(--conf-l);border:1px solid #EED9AE}
+.pill{display:inline-block;font-size:.76rem;font-weight:700;padding:3px 10px;border-radius:999px;vertical-align:middle;letter-spacing:.01em}
+.p-nat{background:var(--gt-l);color:var(--gt)}
+.p-acad{background:var(--beige);color:var(--vert)}
+.p-loc{background:var(--cap-l);color:#4C6627}
+.p-conf{background:var(--conf-l);color:var(--conf)}
+.p-off{background:#E1EEE5;color:var(--vert)}
+.p-new{background:var(--nouv-l);color:var(--nouv)}
+details{border:1px solid var(--filet);border-radius:14px;background:var(--carte);margin:10px 0}
+details>summary{padding:13px 18px;cursor:pointer;font-weight:600;color:var(--vert2);list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"+";display:inline-block;width:1.2em;font-weight:700;color:var(--vert)}
+details[open]>summary::before{content:"–"}
+details>div{padding:0 18px 14px}
+.flow{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.flow div{flex:1;min-width:120px;background:var(--beige2);border-radius:12px;padding:10px 12px;font-size:.9rem;text-align:center}
+.flow div b{display:block;color:var(--vert2)}
+input.field,select.field,textarea.field{width:100%;padding:11px 14px;border:1.5px solid var(--filet);border-radius:12px;font:inherit;color:var(--texte);background:#fff}
+input.field:focus,select.field:focus,textarea.field:focus{outline:none;border-color:var(--vert)}
+textarea.field{min-height:78px;resize:vertical}
+label.lab{display:block;font-weight:600;font-size:.92rem;margin:10px 0 4px;color:var(--vert2)}
+footer{border-top:1px solid var(--filet);padding:24px 0 30px;font-size:.88rem;color:var(--doux)}
+footer a{margin-right:12px}
+.print-only{display:none}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .card{padding:18px}
+  .tabs{position:static}
+  .tabs .bar{justify-content:flex-start}
+  .tabs button{padding:7px 11px;font-size:.9rem}
+}
+@media print{
+  @page{margin:1.4cm}
+  body{background:#fff;font-size:11pt}
+  .tabs,.no-print,footer .liens{display:none!important}
+  .card,details{break-inside:avoid;border-color:#bbb}
+  details>div{display:block!important}
+  .print-only{display:block}
+  body[data-print] section.tab{display:none!important}
+  body[data-print] section.tab.print-target{display:block!important}
+  body[data-print] .top{display:none}
+}
+
+.essentiel{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:18px 0}
+.essentiel div{background:var(--carte);border:1px solid var(--filet);border-radius:var(--r);padding:18px}
+.essentiel b.n{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--vert);color:#fff;font-size:1.1rem;margin-bottom:8px}
+.cal{list-style:none;padding:0;margin:12px 0}
+.cal li{display:grid;grid-template-columns:170px 1fr;gap:16px;background:var(--carte);border:1px solid var(--filet);border-radius:16px;padding:14px 18px;margin:10px 0;align-items:start}
+.cal li.vous{border-left:6px solid var(--vert)}
+.cal .mois{font-family:"Wix Madefor Display",sans-serif;font-weight:700;color:var(--vert2);font-size:1.02rem}
+.cal .qui{display:inline-block;font-size:.76rem;font-weight:700;border-radius:999px;padding:2px 9px;margin:4px 6px 0 0}
+.q-vous{background:var(--vert);color:#fff}.q-ecole{background:var(--beige);color:var(--vert)}.q-enfant{background:var(--gt-l);color:var(--gt)}
+.voie3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.voie3 div{border-radius:var(--r);padding:18px;color:#fff}
+.voie3 h3{color:#fff;margin-bottom:.3em}
+.etapes{counter-reset:e;list-style:none;padding:0}
+.etapes li{counter-increment:e;position:relative;padding:4px 0 10px 46px}
+.etapes li::before{content:counter(e);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;background:var(--beige);color:var(--vert);font-weight:700;display:grid;place-items:center}
+.lex{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.lex div{background:var(--carte);border:1px solid var(--filet);border-radius:14px;padding:14px 16px}
+.lex b{color:var(--vert2)}
+.ligne{border-bottom:1px solid var(--filet);height:30px}
+.fiche label.lab{margin-top:14px}
+@media (max-width:640px){.cal li{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+
+<header class="top wrap">
+  <span class="kicker"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="12,4 14.5,12 9.5,12" fill="currentColor"/><polygon points="12,20 14.5,12 9.5,12" fill="currentColor" opacity=".35"/></svg> Espace familles · rentrée 2027</span>
+  <h1>L'orientation de mon enfant après la 3e</h1>
+  <p>Ce que vous avez à faire, et quand. Ce qui se décide, et par qui. Les bons réflexes pour que votre enfant ait une place au lycée en septembre.</p>
+</header>
+
+<nav class="tabs no-print" aria-label="Rubriques"><div class="wrap"><div class="bar" id="nav">
+  <button data-t="essentiel" class="on">L'essentiel</button>
+  <button data-t="calendrier">Le calendrier</button>
+  <button data-t="educonnect">ÉduConnect</button>
+  <button data-t="voies">Les voies</button>
+  <button data-t="voeux">Les vœux</button>
+  <button data-t="apres">Après les résultats</button>
+  <button data-t="accompagner">Accompagner son enfant</button>
+  <button data-t="mots">Les mots à connaître</button>
+  <button data-t="contacts">Qui contacter</button>
+</div></div></nav>
+
+<main class="wrap">
+
+<section class="tab on" id="essentiel">
+  <h2>L'essentiel en une minute</h2>
+  <div class="essentiel">
+    <div><b class="n">1</b><h3>Votre compte ÉduConnect</h3><p>Toutes les démarches se font en ligne avec <b>votre</b> compte de responsable légal. Vérifiez dès maintenant qu'il fonctionne.</p></div>
+    <div><b class="n">2</b><h3>Deux saisies dans l'année</h3><p><b>En hiver</b> : les intentions provisoires. <b>Au printemps</b> : le choix définitif de la voie et les vœux de lycées, classés.</p></div>
+    <div><b class="n">3</b><h3>Plusieurs vœux, pas un seul</h3><p>Jusqu'à 10 vœux dans l'académie. En 2de générale, gardez les lycées de secteur : Galilée, puis René Auffray et Newton-ENREA. En voie pro, variez les lycées.</p></div>
+    <div><b class="n">4</b><h3>L'inscription en juillet</h3><p>Une fois le lycée connu, il faut <b>inscrire</b> votre enfant dans les délais. Sinon, la place peut être perdue.</p></div>
+  </div>
+  <div class="alerte"><b>Orientation ou affectation ?</b> L'<b>orientation</b>, c'est la voie (2de générale et technologique, 2de professionnelle, CAP) : elle est décidée en juin avec le conseil de classe. L'<b>affectation</b>, c'est le lycée : elle dépend des vœux et des places disponibles.</div>
+  <div class="note"><b>Cette page n'enregistre rien</b> et ne demande aucune information sur votre enfant. La fiche « Notre point en famille » (rubrique « Accompagner son enfant ») s'imprime ou s'enregistre en PDF.</div>
+</section>
+
+<section class="tab" id="calendrier">
+  <h2>Le calendrier de l'année</h2>
+  <p class="lead">Les <b>dates exactes 2027</b> ne sont pas encore publiées : nous indiquons le mois prévu. Le collège vous communiquera chaque date limite. Les étapes où <b>vous</b> agissez sont marquées en vert.</p>
+  <p><span class="pill p-off">Date officielle</span> publiée · <span class="pill p-conf">Mois à confirmer</span> d'après le calendrier habituel · <span class="pill p-acad">Conseillé</span> le bon moment pour le faire</p>
+  <ul class="cal" id="cal"></ul>
+  <button class="btn ghost no-print" onclick="imprimer('calendrier')">Imprimer ou enregistrer en PDF</button>
+</section>
+
+<section class="tab" id="educonnect">
+  <h2>ÉduConnect : la clé de toutes les démarches</h2>
+  <p class="lead">Chaque responsable légal a son propre compte. Il sert à saisir les intentions, les choix définitifs, les vœux, et à lire les réponses du conseil de classe et le résultat d'affectation.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Pour vérifier votre compte</h3><ol class="etapes">
+      <li>Allez sur <a href="https://educonnect.education.gouv.fr" target="_blank" rel="noopener">educonnect.education.gouv.fr</a>.</li>
+      <li>Connectez-vous avec votre identifiant (souvent prénom.nom suivi d'un chiffre) et votre mot de passe.</li>
+      <li>Si vous avez oublié : utilisez « Identifiant oublié » ou « Mot de passe oublié », avec le numéro de téléphone portable donné au collège.</li>
+      <li>Vous pouvez aussi vous connecter avec <b>FranceConnect</b> (compte impots.gouv, Ameli…).</li></ol></div>
+    <div class="card"><h3>En cas de difficulté</h3><ul>
+      <li>Le <b>secrétariat du collège</b> peut vous redonner vos identifiants.</li>
+      <li>Votre numéro de portable a changé ? Signalez-le au collège.</li>
+      <li>Pas d'ordinateur ou pas d'Internet ? Demandez la <b>fiche papier</b> au professeur principal : vous ne serez pas pénalisé.</li></ul>
+      <div class="ok"><b>À faire dès l'automne</b> : on évite ainsi la panique de la dernière semaine de saisie.</div></div>
+  </div>
+</section>
+
+<section class="tab" id="voies">
+  <h2>Les trois voies après la 3e</h2>
+  <p class="lead">Aucune voie n'est « meilleure » qu'une autre : toutes peuvent mener à un métier ou à des études supérieures.</p>
+  <div class="voie3">
+    <div style="background:var(--gt)"><h3>2de générale et technologique</h3><p>3 ans jusqu'au bac général ou technologique, puis des études supérieures (université, BTS, BUT, écoles). Variantes : 2de STHR (hôtellerie-restauration) et 2de Avenir pour les élèves hésitants.</p></div>
+    <div style="background:var(--pro)"><h3>2de professionnelle</h3><p>3 ans jusqu'au bac pro, avec des stages en entreprise. On choisit une famille de métiers ou directement une spécialité. Ensuite : emploi ou BTS.</p></div>
+    <div style="background:var(--cap)"><h3>CAP</h3><p>En 2 ans, pour apprendre un métier précis, au lycée professionnel ou en apprentissage (contrat avec un employeur, salaire).</p></div>
+  </div>
+  <div class="note"><b>Rentrée 2027 :</b> la liste des familles de métiers change (13 familles). La cuisine, le service en salle, la boulangerie ou la boucherie se choisissent désormais directement comme spécialités. Votre enfant trouvera le détail sur sa page « Ma Boussole ».</div>
+  <details class="card" style="padding:0"><summary>L'apprentissage : ce que les familles doivent savoir</summary><div><ul>
+    <li>Votre enfant devient <b>salarié</b> : il signe un contrat avec un employeur, reçoit un salaire et alterne entre l'entreprise et le CFA.</li>
+    <li><b>C'est à la famille et à l'élève de trouver l'employeur</b> : commencez dès janvier.</li>
+    <li>Sans contrat signé, pas de place : faites <b>aussi</b> des vœux en lycée professionnel, par sécurité.</li></ul></div></details>
+</section>
+
+<section class="tab" id="voeux">
+  <h2>Les vœux : bien les construire</h2>
+  <p class="lead">Au printemps, vous saisissez dans le service en ligne Affectation les <b>formations et lycées</b> souhaités, <b>classés par ordre de préférence</b>.</p>
+  <div class="grid g2">
+    <div class="card"><h3>Les règles d'or</h3><ul>
+      <li>Jusqu'à <b>10 vœux</b> dans l'académie : un seul vœu, c'est risqué.</li>
+      <li>Classez par <b>vraie préférence</b> : le 1er vœu est celui que votre enfant veut le plus.</li>
+      <li>Pour une 2de générale : gardez <b>toujours</b> les <b>lycées de secteur</b>, prioritaires pour votre enfant. Pour les élèves du collège Guy Môquet : <b>Galilée</b> (Gennevilliers), puis <b>René Auffray</b> et <b>Newton-ENREA</b> (Clichy).</li>
+      <li>En voie professionnelle, il n'y a pas de secteur : les places dépendent des résultats. <b>Variez</b> les lycées.</li>
+      <li>Un lycée <b>privé sous contrat</b> ? Contactez-le directement en plus du vœu.</li>
+      <li>Respectez la date limite : après, seul le collège peut modifier, pendant peu de temps.</li></ul></div>
+    <div class="card"><h3>Les procédures particulières</h3><ul>
+      <li><b>PassPRO</b> : pour certaines formations professionnelles très demandées, un entretien dans le lycée peut donner un bonus. L'inscription se fait <b>par le collège</b>, de fin janvier à avril environ.</li>
+      <li><b>Sections et options</b> (section européenne, sportive, internationale, certains arts) : dossier ou tests, avec un calendrier à part.</li>
+      <li><b>2de Avenir</b> : une 2de générale pour élèves hésitants, sur entretien. Dans le 92 : lycée René Auffray (Clichy) et lycée Gustave Eiffel (Rueil-Malmaison).</li>
+      <li><b>Hors de son secteur</b> : demande de dérogation, sans garantie.</li></ul></div>
+  </div>
+  <div class="ok">Après la saisie, une <b>fiche récapitulative</b> de vos vœux vous est remise : relisez-la et signez-la.</div>
+</section>
+
+<section class="tab" id="apres">
+  <h2>Après les résultats</h2>
+  <div class="grid g2">
+    <div class="card"><h3>Votre enfant a un lycée</h3><ol class="etapes">
+      <li>Fin juin ou début juillet : le résultat d'affectation s'affiche dans le service en ligne.</li>
+      <li>Vous <b>inscrivez</b> votre enfant au lycée, en ligne ou sur place, <b>dans les délais</b> indiqués par le lycée (souvent la première semaine de juillet).</li>
+      <li>Gardez les documents demandés à portée de main : bulletins, justificatif de domicile, photo.</li></ol>
+      <div class="alerte"><b>Sans inscription dans les délais, la place peut être donnée à un autre élève.</b></div></div>
+    <div class="card"><h3>Votre enfant n'a pas de lycée</h3><ol class="etapes">
+      <li>Pas de panique, mais réagissez <b>tout de suite</b>.</li>
+      <li>Contactez le collège (professeur principal, direction) et le CIO.</li>
+      <li>De nouveaux vœux sont possibles pour les tours suivants, en juillet puis en septembre, sur les places restées libres.</li></ol></div>
+    <div class="card"><h3>Vous n'êtes pas d'accord avec la décision d'orientation</h3><p>En juin, si la proposition du conseil de classe ne correspond pas à votre demande, le chef d'établissement vous reçoit. Si le désaccord persiste, vous pouvez faire <b>appel</b> dans un délai de quelques jours seulement. Contactez le professeur principal dès réception de la proposition.</p></div>
+    <div class="card"><h3>Et le brevet ?</h3><p>Il faut le <b>passer</b>, mais il n'est pas nécessaire de l'<b>obtenir</b> pour entrer en 2de : c'est la décision d'orientation qui compte. Écrits les <b>24, 25 et 28 juin 2027</b> <span class="pill p-off">Date officielle</span>.</p></div>
+  </div>
+</section>
+
+<section class="tab" id="accompagner">
+  <h2>Accompagner son enfant</h2>
+  <p class="lead">Votre rôle n'est pas de choisir à sa place, mais de l'aider à <b>réfléchir</b>, à <b>s'informer</b> et à <b>respecter les étapes</b>.</p>
+  <div class="grid g2">
+    <div class="card"><h3>5 questions à poser à votre enfant</h3><ol>
+      <li>Qu'est-ce que tu aimes faire, à l'école et en dehors ?</li>
+      <li>Dans quelles matières te sens-tu à l'aise ?</li>
+      <li>Qu'as-tu retenu de ton stage de 3e ?</li>
+      <li>Tu préfères apprendre en lisant et en réfléchissant, ou en faisant ?</li>
+      <li>Quel lycée aimerais-tu visiter aux portes ouvertes ?</li></ol>
+      <div class="ok">Votre enfant peut aussi faire le quiz « Mes intérêts » sur sa page <b>Ma Boussole</b> et vous montrer le résultat.</div></div>
+    <div class="card"><h3>Les bons réflexes</h3><ul>
+      <li>Visitez un ou deux lycées aux <b>portes ouvertes</b> (de décembre à avril).</li>
+      <li>Venez à la <b>rencontre parents, élève et professeur principal</b> de l'hiver.</li>
+      <li>Encouragez un rendez-vous avec la <b>PsyEN</b> (psychologue de l'Éducation nationale) : gratuit et confidentiel.</li>
+      <li>Lisez les réponses du conseil de classe et parlez-en avec votre enfant.</li>
+      <li>Notez les dates limites que vous transmet le collège.</li></ul></div>
+  </div>
+  <div class="card fiche" id="fiche"><h3>Notre point en famille</h3>
+    <p class="small no-print">À remplir ensemble, puis à imprimer ou enregistrer en PDF. Rien n'est enregistré sur ce site.</p>
+    <label class="lab">Ce qui plaît à notre enfant, ce qu'il réussit</label><textarea class="field"></textarea>
+    <label class="lab">Les voies ou métiers envisagés</label><textarea class="field"></textarea>
+    <label class="lab">Les lycées que nous voulons visiter</label><textarea class="field"></textarea>
+    <label class="lab">Nos questions pour le professeur principal ou la PsyEN</label><textarea class="field"></textarea>
+    <label class="lab">Nos dates limites à retenir</label><textarea class="field"></textarea>
+    <div class="row no-print" style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><button class="btn" onclick="imprimer('accompagner')">Imprimer ou enregistrer en PDF</button><button class="btn ghost" onclick="viderFiche()">Effacer</button></div>
+  </div>
+</section>
+
+<section class="tab" id="mots">
+  <h2>Les mots à connaître</h2>
+  <div class="lex" id="lex"></div>
+</section>
+
+<section class="tab" id="contacts">
+  <h2>Qui contacter ?</h2>
+  <div class="grid g2">
+    <div class="card"><h3>Au collège</h3><ul>
+      <li><b>Le professeur principal</b> : votre premier interlocuteur pour le projet et les démarches.</li>
+      <li><b>La PsyEN</b> : rendez-vous à demander au professeur principal ou à la vie scolaire.</li>
+      <li><b>Le secrétariat</b> : identifiants ÉduConnect, changement de numéro de téléphone.</li>
+      <li><b>La direction</b> : en cas de désaccord avec la proposition d'orientation.</li></ul>
+      <p><a class="btn sm" href="https://hassiniofficiel.wixsite.com/cap-3e/rendez-vous-parents-professeur-principal" target="_blank" rel="noopener">Prendre rendez-vous avec le professeur principal</a></p></div>
+    <div class="card"><h3>En dehors du collège</h3><ul>
+      <li><b>Le CIO</b> (centre d'information et d'orientation) : entretiens avec une PsyEN, y compris pendant certaines vacances.</li>
+      <li><a href="https://www.monorientationenligne.fr" target="_blank" rel="noopener">Mon orientation en ligne</a> : des conseillers de l'Onisep répondent par chat, mail ou téléphone.</li>
+      <li><a href="https://www.onisep.fr" target="_blank" rel="noopener">Onisep</a> : formations, métiers, guide « Après la 3e » de l'académie.</li>
+      <li><a href="https://affectation3e.phm.education.gouv.fr/pna-public" target="_blank" rel="noopener">L'offre de formation après la 3e</a> : tous les lycées et formations.</li></ul></div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">
+  <p class="liens"><b>Sources officielles :</b>
+    <a href="https://www.education.gouv.fr/reussir-au-lycee/l-orientation-en-3e-et-l-affectation-en-lycee-9257" target="_blank" rel="noopener">Ministère</a>
+    <a href="https://www.ac-versailles.fr/l-affectation-apres-la-troisieme-121490" target="_blank" rel="noopener">Académie de Versailles · Affectation</a>
+    <a href="https://www.onisep.fr" target="_blank" rel="noopener">Onisep</a></p>
+  <p>Informations vérifiées en novembre 2026. Les mois « à confirmer » seront remplacés par les dates officielles dès leur parution. · Cap 3e · © A. Hassini · Collège Guy Môquet · Gennevilliers</p>
+</div></footer>
+
+<script>
+(function(){
+'use strict';
+/* Aucune donnée n'est enregistrée : pas de localStorage, pas de cookie, rien n'est envoyé. */
+var nav=document.getElementById('nav');
+function go(id){document.querySelectorAll('section.tab').forEach(function(s){s.classList.toggle('on',s.id===id)});nav.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.t===id)});window.scrollTo({top:0,behavior:'smooth'});try{history.replaceState(null,'','#'+id)}catch(e){}}
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(b)go(b.dataset.t)});
+if(location.hash&&document.getElementById(location.hash.slice(1)))go(location.hash.slice(1));
+window.imprimer=function(id){document.body.dataset.print=id;document.getElementById(id).classList.add('print-target');window.print();setTimeout(function(){delete document.body.dataset.print;document.getElementById(id).classList.remove('print-target')},400)};
+window.viderFiche=function(){document.querySelectorAll('#fiche textarea').forEach(function(t){t.value=''})};
+var Q={vous:'<span class="qui q-vous">Vous</span>',ecole:'<span class="qui q-ecole">Le collège</span>',enfant:'<span class="qui q-enfant">Votre enfant</span>'};
+var C=function(o){return o===1?'<span class="pill p-off">Date officielle</span>':o===2?'<span class="pill p-acad">Conseillé</span>':'<span class="pill p-conf">Mois à confirmer</span>'};
+var CAL=[
+ ['Octobre – novembre',2,'Vérifier votre compte ÉduConnect','Chaque responsable légal teste son identifiant et son mot de passe.',[Q.vous],1],
+ ['Novembre – janvier',2,'Rendez-vous avec la PsyEN','Votre enfant peut demander un entretien, au collège ou au CIO.',[Q.enfant]],
+ ['Décembre – janvier',0,'Saisir les intentions provisoires','Dans le service en ligne Orientation : une ou plusieurs voies envisagées (2de générale et technologique, 2de pro, CAP, apprentissage).',[Q.vous],1],
+ ['Décembre – avril',2,'Portes ouvertes des lycées','Visiter un ou deux lycées avec votre enfant.',[Q.vous,Q.enfant],1],
+ ['Avant le conseil de classe',0,'Rencontre parents, élève et professeur principal','Un temps d\'échange prévu pour tous les élèves de 3e.',[Q.vous,Q.enfant,Q.ecole],1],
+ ['Janvier – février',0,'Avis provisoire du conseil de classe','À lire dans le service en ligne. Ce n\'est pas encore une décision.',[Q.ecole]],
+ ['Fin janvier – avril',0,'Inscriptions PassPRO (si besoin)','Pour certaines formations pro : l\'inscription à l\'entretien se fait par le collège.',[Q.ecole,Q.enfant]],
+ ['Mai',0,'Saisir les choix définitifs et les vœux de lycées','Deux saisies : la voie (service en ligne Orientation) et les lycées classés (service en ligne Affectation). Puis signer la fiche récapitulative.',[Q.vous],1],
+ ['Début juin',0,'Proposition d\'orientation du conseil de classe','Si elle correspond à votre demande, elle devient décision. Sinon, rendez-vous avec le chef d\'établissement ; appel possible sous quelques jours.',[Q.ecole,Q.vous]],
+ ['24, 25 et 28 juin 2027',1,'Épreuves écrites du brevet','L\'oral a lieu avant, à une date fixée par le collège.',[Q.enfant]],
+ ['Fin juin – début juillet',0,'Résultat d\'affectation','À consulter dans le service en ligne Affectation.',[Q.vous]],
+ ['Début juillet',0,'Inscrire votre enfant au lycée','Dans les délais du lycée, en ligne ou sur place. Sans inscription, la place peut être perdue.',[Q.vous],1],
+ ['Juillet puis septembre',0,'Tours suivants si pas d\'affectation','Contacter le collège et le CIO pour formuler de nouveaux vœux.',[Q.vous,Q.ecole]]];
+document.getElementById('cal').innerHTML=CAL.map(function(x){return '<li class="'+(x[5]?'vous':'')+'"><div><div class="mois">'+x[0]+'</div>'+C(x[1])+'</div><div><b>'+x[2]+'</b><br>'+x[3]+'<br>'+x[4].join('')+'</div></li>'}).join('');
+var LEX=[['Orientation','La voie choisie après la 3e (2de générale et technologique, 2de professionnelle, CAP). Décidée en juin avec le conseil de classe.'],['Affectation','Le lycée précis où votre enfant aura une place. Calculée selon les vœux et les places disponibles.'],['Affelnet','Le logiciel qui calcule les affectations à partir des vœux saisis.'],['Intentions provisoires','Les voies envisagées, saisies en hiver. Le conseil de classe y répond par un avis provisoire.'],['Lycée de secteur','Les lycées prioritaires pour une 2de générale, selon votre adresse. Pour les élèves du collège Guy Môquet : Galilée, puis René Auffray et Newton-ENREA.'],['Dérogation','Demande pour un lycée général hors secteur. Sans garantie de place.'],['Famille de métiers','En 2de pro, un groupe de métiers proches : on choisit la spécialité en fin de 2de.'],['PassPRO','Entretien d\'information dans un lycée pro, pour certaines formations. Un avis favorable donne un bonus.'],['PsyEN','Psychologue de l\'Éducation nationale, spécialiste de l\'orientation. Gratuit et confidentiel.'],['CIO','Centre d\'information et d\'orientation, où l\'on rencontre une PsyEN.'],['ÉduConnect','Le compte qui donne accès à toutes les démarches en ligne.'],['Apprentissage','Formation avec un contrat de travail : l\'élève est salarié et alterne entreprise et CFA.'],['CFA','Centre de formation d\'apprentis.'],['Appel','Recours possible, sous quelques jours, si vous n\'êtes pas d\'accord avec la décision d\'orientation.']];
+document.getElementById('lex').innerHTML=LEX.map(function(x){return '<div><b>'+x[0]+'</b><br>'+x[1]+'</div>'}).join('');
+})();
+</script>
+</body>
+</html>

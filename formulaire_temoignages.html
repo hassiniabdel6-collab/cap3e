@@ -230,7 +230,7 @@
     <div class="success-box">
       <div class="success-icon">🎉</div>
       <div class="success-title">Merci pour ton témoignage !</div>
-      <div class="success-sub">Ton témoignage a bien été reçu. Dans l'attente de sa validation, il sera relu et publié prochainement sur la page Témoignages de Cap 3e.<br><br>Ton parcours va inspirer les élèves de 3e de Guy Môquet — merci de contribuer à ce beau projet.<br><br>Des questions ? Écris à <strong>hassinicap3e@gmail.com</strong></div>
+      <div class="success-sub">Ton témoignage a bien été reçu. Dans l'attente de sa validation, il sera relu et publié prochainement sur la page Témoignages de Cap 3e.<br><br>Ton parcours va inspirer les élèves de 3e de Guy Môquet — merci de contribuer à ce beau projet.<br><br>Des questions ? Écris à <strong>contact@cap3e.fr</strong></div>
     </div>
   </div>
 
@@ -336,10 +336,10 @@ async function submit(){
       document.getElementById('prog').style.width='100%';
     } else {
       const d=await res.json();
-      alert('Erreur lors de l\'envoi. Réessaie ou écris à hassinicap3e@gmail.com\n'+(d.errors?d.errors.map(e=>e.message).join(', '):''));
+      alert('Erreur lors de l\'envoi. Réessaie ou écris à contact@cap3e.fr\n'+(d.errors?d.errors.map(e=>e.message).join(', '):''));
     }
   } catch(e){
-    alert('Problème de connexion. Vérifie ta connexion internet et réessaie, ou écris directement à hassinicap3e@gmail.com');
+    alert('Problème de connexion. Vérifie ta connexion internet et réessaie, ou écris directement à contact@cap3e.fr');
   }
 }
 </script>

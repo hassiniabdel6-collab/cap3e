@@ -105,7 +105,7 @@
     <span style="font-size:28px;flex-shrink:0">🎓</span>
     <div>
       <div class="fiche-title">Le Diplôme National du Brevet (DNB)</div>
-      <span class="fiche-date">📅 25 – 26 juin 2026</span>
+      <span class="fiche-date">📅 Écrits : 24, 25 et 28 juin 2027 · Oral : 16 juin 2027</span>
     </div>
   </div>
 
@@ -114,7 +114,8 @@
     <div class="col-header"><span>Épreuve</span><span style="text-align:center">Coef.</span><span style="text-align:center">Durée</span></div>
     <div class="epreuve-row hl"><div><div class="epreuve-name">Français</div><div class="epreuve-detail">Compréhension, grammaire, dictée, rédaction</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">3h</div></div>
     <div class="epreuve-row hl"><div><div class="epreuve-name">Mathématiques</div><div class="epreuve-detail">Exercices, raisonnement, algorithmique</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">2h</div></div>
-    <div class="epreuve-row"><div><div class="epreuve-name">Histoire-Géographie + EMC</div><div class="epreuve-detail">Analyse de docs, repères, valeurs citoyennes</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">2h</div></div>
+    <div class="epreuve-row"><div><div class="epreuve-name">Histoire-Géographie</div><div class="epreuve-detail">Analyse de documents, repères, développement construit</div></div><div class="epreuve-coef">×1,5</div><div class="epreuve-duree" rowspan="2">2h<br><small>avec l'EMC</small></div></div>
+    <div class="epreuve-row"><div><div class="epreuve-name">EMC</div><div class="epreuve-detail">Enseignement moral et civique, valeurs citoyennes</div></div><div class="epreuve-coef">×0,5</div><div class="epreuve-duree"></div></div>
     <div class="epreuve-row"><div><div class="epreuve-name">Sciences (2 sur 3)</div><div class="epreuve-detail">SVT, Physique-Chimie ou Technologie</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">1h</div></div>
     <div class="epreuve-row hl"><div><div class="epreuve-name">Oral — soutenance de projet</div><div class="epreuve-detail">5 min exposé + 10 min entretien avec le jury</div></div><div class="epreuve-coef">×2</div><div class="epreuve-duree">15 min</div></div>
   </div>
@@ -122,14 +123,15 @@
   <div class="recap-grid">
     <div class="recap-card green"><div class="recap-val">60%</div><div class="recap-label">Épreuves finales</div></div>
     <div class="recap-card"><div class="recap-val">40%</div><div class="recap-label">Contrôle continu</div></div>
-    <div class="recap-card green"><div class="recap-val">10/20</div><div class="recap-label">Moyenne requise</div></div>
+    <div class="recap-card green"><div class="recap-val">10/20</div><div class="recap-label">Moyenne requise · mentions à 12, 14, 16 et 18</div></div>
   </div>
 
   <div class="section">
     <div class="section-title">🧮 Simule ta note du brevet</div>
     <div class="sim-row"><span class="sim-label">Français</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-fr" oninput="calc()"><span class="sim-coef">× 2</span></div>
     <div class="sim-row"><span class="sim-label">Mathématiques</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-ma" oninput="calc()"><span class="sim-coef">× 2</span></div>
-    <div class="sim-row"><span class="sim-label">Histoire-Géo</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-hi" oninput="calc()"><span class="sim-coef">× 2</span></div>
+    <div class="sim-row"><span class="sim-label">Histoire-Géo</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-hi" oninput="calc()"><span class="sim-coef">× 1,5</span></div>
+    <div class="sim-row"><span class="sim-label">EMC</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-em" oninput="calc()"><span class="sim-coef">× 0,5</span></div>
     <div class="sim-row"><span class="sim-label">Sciences</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-sc" oninput="calc()"><span class="sim-coef">× 2</span></div>
     <div class="sim-row"><span class="sim-label">Oral</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-or" oninput="calc()"><span class="sim-coef">× 2</span></div>
     <div class="sim-row"><span class="sim-label">Contrôle continu</span><input class="sim-input" type="number" min="0" max="20" step="0.5" placeholder="—" id="s-cc" oninput="calc()"><span class="sim-coef">moyenne annuelle</span></div>
@@ -140,18 +142,16 @@
     <div class="section-title">🎤 Mon sujet d'oral — je choisis</div>
     <div style="font-size:12px;color:var(--text2);margin-bottom:.75rem">Clique sur le sujet qui t'inspire le plus</div>
     <div class="oral-grid">
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 1</div><div class="oral-text">En quoi la prolifération des fake news a changé notre manière de nous informer ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 1</div><div class="oral-text">Comment distinguer une information d&#39;une « fake news » ?</div></div>
       <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 2</div><div class="oral-text">En quoi les sciences peuvent-elles aider à résoudre une enquête criminelle ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 3</div><div class="oral-text">Quels sont les apports de l'Antiquité au fil des siècles ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 4</div><div class="oral-text">En quoi les arts et la société s'influencent-ils mutuellement ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 5</div><div class="oral-text">Le sport nous rend-il meilleur ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 6</div><div class="oral-text">En quoi mon histoire m'a-t-elle aidé à affiner mes choix d'orientation ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 7</div><div class="oral-text">Quel est l'impact de mon hygiène de vie sur ma santé ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 8</div><div class="oral-text">Lutter contre les discriminations : l'égalité homme-femme est-elle acquise ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 9</div><div class="oral-text">Dans quelles mesures ma pratique artistique m'a-t-elle permis de consolider mes compétences scolaires ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 10</div><div class="oral-text">Le greenwashing : une réponse adaptée aux enjeux environnementaux ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 11</div><div class="oral-text">L'intelligence artificielle est-elle au service de l'humanité ?</div></div>
-      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 12</div><div class="oral-text">En quoi l'avenir est-il une source d'inspiration ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 3</div><div class="oral-text">En quoi les arts et la société s&#39;influencent-ils mutuellement ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 4</div><div class="oral-text">Le sport nous rend-il meilleur ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 5 · individuel uniquement</div><div class="oral-text">En quoi mon histoire m&#39;a-t-elle aidé à affiner mes choix d&#39;orientation ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 6</div><div class="oral-text">Quel est l&#39;impact de mon hygiène de vie sur ma santé ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 7</div><div class="oral-text">Lutter contre les discriminations : l&#39;égalité homme-femme est-elle acquise ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 8</div><div class="oral-text">Le greenwashing : un mal nécessaire ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet 9</div><div class="oral-text">Comment l&#39;utilisation excessive des écrans peut-elle impacter le rendement scolaire ?</div></div>
+      <div class="oral-item" onclick="sel(this)"><div class="oral-num">Sujet libre</div><div class="oral-text">À faire valider par le professeur principal. Ce que le jury attend pour chaque sujet : <a href="fiche_attentes_oral_dnb.html">fiche des attentes de l&#39;oral</a>.</div></div>
     </div>
     <span class="write-label">Mon sujet choisi et pourquoi</span>
     <textarea rows="2" placeholder="Ce sujet me parle parce que…"></textarea>
@@ -194,21 +194,21 @@
 
 <script>
 function calc(){
-  const ids=['s-fr','s-ma','s-hi','s-sc','s-or'];
-  const vals=ids.map(id=>{const v=parseFloat(document.getElementById(id).value);return isNaN(v)?null:v});
-  const cc=parseFloat(document.getElementById('s-cc').value);
-  const filled=vals.filter(v=>v!==null);
-  const res=document.getElementById('sim-result');
-  if(filled.length<2&&isNaN(cc)){res.style.display='none';return;}
+  // Barème DNB 2027 : épreuves finales 60 % (français 2, maths 2, histoire-géo 1,5, EMC 0,5, sciences 2, oral 2), contrôle continu 40 %.
+  const E=[['s-fr',2],['s-ma',2],['s-hi',1.5],['s-em',0.5],['s-sc',2],['s-or',2]];
   let tot=0,coef=0;
-  vals.forEach(v=>{if(v!==null){tot+=v*2;coef+=2;}});
-  if(!isNaN(cc)){tot+=cc*8;coef+=8;}
-  const moy=tot/coef;
+  E.forEach(([id,c])=>{const v=parseFloat(document.getElementById(id).value);if(!isNaN(v)){tot+=v*c;coef+=c;}});
+  const cc=parseFloat(document.getElementById('s-cc').value);
+  const res=document.getElementById('sim-result');
+  if(coef<4&&isNaN(cc)){res.style.display='none';return;}
+  let moy;
+  if(coef>0&&!isNaN(cc))moy=0.6*(tot/coef)+0.4*cc;else if(coef>0)moy=tot/coef;else moy=cc;
   res.style.display='flex';
   const pass=moy>=10;
   res.className='sim-result '+(pass?'pass':'fail');
-  document.getElementById('sim-val').textContent=moy.toFixed(1)+'/20';
-  document.getElementById('sim-msg').textContent=pass?'Brevet obtenu si cette moyenne est confirmée !':'En dessous de 10/20 — encore un effort !';
+  document.getElementById('sim-val').textContent=moy.toFixed(2).replace('.',',')+'/20';
+  const m=moy>=18?'mention très bien avec félicitations':moy>=16?'mention très bien':moy>=14?'mention bien':moy>=12?'mention assez bien':'';
+  document.getElementById('sim-msg').textContent=pass?('Brevet obtenu'+(m?', '+m:'')+' si cette moyenne est confirmée !'):'En dessous de 10/20 — encore un effort !';
 }
 function sel(el){document.querySelectorAll('.oral-item').forEach(o=>o.classList.remove('sel'));el.classList.add('sel');}
 function upd(){
